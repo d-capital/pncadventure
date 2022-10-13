@@ -5,11 +5,11 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour {
 
 	public Dialogue dialogue;
-	public Animator? plumberAnimator;
+	//public Animator plumberAnimator;
 
     void Start()
     {
-        plumberAnimator.SetBool("isHappy", false);
+		//dialogue.name = npcName; for the future, may be it will be better from tech design perspective
     }
 
 	public void TriggerDialogue (string dialogueActor)
@@ -28,9 +28,9 @@ public class DialogueTrigger : MonoBehaviour {
 	{
 		FindObjectOfType<DialogueManager>().Answer(dialogue, dialogueActor, incomingResponseIndex);
 	}
-	public void changePlumberAnimationToHappy()
-	{
-		plumberAnimator.SetBool("isHappy", true);
-	}
+	//public void changePlumberAnimationToHappy()
+	//{
+	//	plumberAnimator.SetBool("isHappy", true);
+	//}
 
 }

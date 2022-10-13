@@ -224,7 +224,7 @@ public class DialogueManager : MonoBehaviour
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasVodka = false;
                     //TODO: remove Vodka from inventory
                     RemoveItemFromSlotWithoutDropping("VodkaItem");
-                    GameObject.FindGameObjectWithTag("Plumber").GetComponent<DialogueTrigger>().changePlumberAnimationToHappy();
+                    GameObject.FindGameObjectWithTag("Plumber").GetComponent<PlumberScript>().changePlumberAnimationToHappy();
                     lvl1stateCalculator(currDialogueActor, dialogue);
                 }
                 else if (curResponseTracker == 0)
