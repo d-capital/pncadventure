@@ -255,6 +255,7 @@ public class DialogueManager : MonoBehaviour
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasScrewKey = false;
                     //remove screwkey from inventory
                     RemoveItemFromSlotWithoutDropping("ScrewKeyItem");
+                    GameObject.FindGameObjectWithTag("OldWoman").GetComponent<OldWomanScript>().changeOldWomanAnimationToSleeping();
                     EndDialogue();
                 }
             }
