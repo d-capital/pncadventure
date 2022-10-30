@@ -26,6 +26,11 @@ TagManager:
   - ConfirmationOvelray
   - ResumBtnMainMenu
   - NewGameBtn
+  - plumberSit
+  - corridorAgainstWc
+  - corridorAgainstPlumberSit
+  - wcInside
+  - Treadmill
   layers:
   - Default
   - TransparentFX

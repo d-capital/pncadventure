@@ -246,6 +246,7 @@ public class DialogueManager : MonoBehaviour
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasScrewKey = false;
                     //remove screwkey from inventory
                     RemoveItemFromSlotWithoutDropping("ScrewKeyItem");
+                    GameObject.FindGameObjectWithTag("Plumber").GetComponent<PlumberScript>().plumberFixesTreadmill();
                     EndDialogue();
                 }
                 else if (curResponseTracker == 2)
@@ -255,8 +256,10 @@ public class DialogueManager : MonoBehaviour
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasScrewKey = false;
                     //remove screwkey from inventory
                     RemoveItemFromSlotWithoutDropping("ScrewKeyItem");
-                    GameObject.FindGameObjectWithTag("OldWoman").GetComponent<OldWomanScript>().changeOldWomanAnimationToSleeping();
                     EndDialogue();
+                    GameObject.FindGameObjectWithTag("Plumber").GetComponent<PlumberScript>().plumberFixesWindow();
+                    GameObject.FindGameObjectWithTag("OldWoman").GetComponent<OldWomanScript>().changeOldWomanAnimationToSleeping();
+                    
                 }
             }
             else if (lvl1State == "noScrewKey")
@@ -282,6 +285,8 @@ public class DialogueManager : MonoBehaviour
                     //remove screwkey from inventory
                     RemoveItemFromSlotWithoutDropping("ScrewKeyItem");
                     EndDialogue();
+                    GameObject.FindGameObjectWithTag("Plumber").GetComponent<PlumberScript>().plumberFixesWindow();
+                    GameObject.FindGameObjectWithTag("OldWoman").GetComponent<OldWomanScript>().changeOldWomanAnimationToSleeping();
                 }
             }
             else if (lvl1State == "smthingFixed")

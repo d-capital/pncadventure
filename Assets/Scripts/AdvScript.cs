@@ -138,10 +138,15 @@ public class AdvScript : MonoBehaviour
                 }
                 else if(hit.collider.gameObject.tag == "Plumber")
                 {
-                    currentDialoguePartner = hit.collider.gameObject.tag;
-                    ShowDialogueBox();
-                    plumberDialogue = GameObject.FindGameObjectWithTag("Plumber").GetComponent<DialogueTrigger>();
-                    plumberDialogue.TriggerDialoguePlumber("Plumber");
+                    var plumberScript = GameObject.FindGameObjectWithTag("Plumber").GetComponent<PlumberScript>();
+                    if(!plumberScript.isScriptActive)
+                    {
+                        currentDialoguePartner = hit.collider.gameObject.tag;
+                        ShowDialogueBox();
+                        plumberDialogue = GameObject.FindGameObjectWithTag("Plumber").GetComponent<DialogueTrigger>();
+                        plumberDialogue.TriggerDialoguePlumber("Plumber");
+                    }
+
                 }
                 else if(hit.collider.gameObject.tag == "Hunk" || hit.collider.gameObject.tag == "Hunk2" || hit.collider.gameObject.tag == "Hunk3")
                 {
