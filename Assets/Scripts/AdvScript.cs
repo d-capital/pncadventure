@@ -264,14 +264,7 @@ public class AdvScript : MonoBehaviour
             }
         }
     }
-    /*public void NextAnswer()
-    {
-        MapDialogueTrigger(currentDialoguePartner).NextAnswer();
-    }
-    public void PreviosAnswer()
-    {
-        MapDialogueTrigger(currentDialoguePartner).PreviosAnswer();
-    }*/
+
     public void Answer(int incomingResponseIndex)
     {
         MapDialogueTrigger(currentDialoguePartner).Answer(currentDialoguePartner, incomingResponseIndex);
@@ -336,7 +329,33 @@ public class AdvScript : MonoBehaviour
 
     public DialogueTrigger MapDialogueTrigger(string currentDialoguePartner)
     {
-        currentDialogueTrigger = GameObject.FindGameObjectWithTag(currentDialoguePartner).GetComponent<DialogueTrigger>();
+        try
+        {
+            currentDialogueTrigger = GameObject.FindGameObjectWithTag(currentDialoguePartner).GetComponent<DialogueTrigger>();
+        }
+        catch (UnityException)
+        {
+            if(currentDialoguePartner == "cardsMan")
+            {
+                currentDialogueTrigger = GameObject.FindObjectOfType<cardsManScript>().GetComponent<DialogueTrigger>();
+            }
+            else if(currentDialoguePartner == "fatMan")
+            {
+                currentDialogueTrigger = GameObject.FindObjectOfType<fatManScript>().GetComponent<DialogueTrigger>();
+            }
+            else if (currentDialoguePartner == "milf")
+            {
+                currentDialogueTrigger = GameObject.FindObjectOfType<milfScript>().GetComponent<DialogueTrigger>();
+            }
+            else if (currentDialoguePartner == "milfBed")
+            {
+                //currentDialogueTrigger = GameObject.FindObjectOfType<milfBedScript>().GetComponent<DialogueTrigger>();
+            }
+            else if (currentDialoguePartner == "cardsManBed")
+            {
+                //currentDialogueTrigger = GameObject.FindObjectOfType<cardsManBedScript>().GetComponent<DialogueTrigger>();
+            }
+        }
         return currentDialogueTrigger;
     }
     public void LoadNextLevel(PlayerData playerData)

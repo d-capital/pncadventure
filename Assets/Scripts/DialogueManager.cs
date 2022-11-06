@@ -338,21 +338,95 @@ public class DialogueManager : MonoBehaviour
                 {
                     if (curResponseTracker == 0)
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().helpedOldWoman = true;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().talkedToOldWoman = true;
-                        GameObject.FindGameObjectWithTag("Bags").SetActive(false);
-
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().talkedToCardsMan = true;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wonCardsMan = true;
                     }
                     else if (curResponseTracker == 1)
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().talkedToOldWoman = true;
                         EndDialogue();
                     }
+                }
+                else if(lvl2State == "won1stTime")
+                {
+                    if(curResponseTracker == 0)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().lostToCardsMan1stTime = true;
+                    }
+                    else if (curResponseTracker == 1)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rejectedToPlay2ndTime = true;
+                    }
+                }
+                else if (lvl2State == "lost2ndTime")
+                {
+                    if(curResponseTracker == 0)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rejectedToPlay3rdTime = true;
+                    }
+                    else if(curResponseTracker == 1)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().lostToCardsMan2ndTime = true;
+                    }
+                }
+                else if (lvl2State == "gameOver")
+                {
+                    EndDialogue();
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ReloadLevel();
+                    
+                }
+                else if (lvl2State == "rejectedAfter2ndPlay")
+                {
+                    EndDialogue();
+                }
+                else if (lvl2State == "rejectedAfter1stPlay")
+                {
+                    EndDialogue();
                 }
             }
             else if(currDialogueActor == "fatMan")
             {
-                //
+                if(lvl2State == "initialNoMoney")
+                {
+                    if(curResponseTracker == 0)
+                    {
+                        EndDialogue();
+                    }
+                }
+                else if(lvl2State == "initialHasMoney")
+                {
+                    if(curResponseTracker == 0)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().boughtPirogi = true;
+                    }
+                    else if (curResponseTracker == 1)
+                    {
+                        EndDialogue();
+                    }
+                }
+                else if (lvl2State == "cardsManCought")
+                {
+
+                }
+                else if (lvl2State == "1stRiddleSolved")
+                {
+
+                }
+                else if (lvl2State == "1stRiddleLost")
+                {
+
+                }
+                else if (lvl2State == "2ndRiddleSolved")
+                {
+
+                }
+                else if(lvl2State == "hint")
+                {
+
+                }
+                else if(lvl2State == "boughtPirogiOrSharedWithYoy")
+                {
+                    
+                }
             }
             else if(currDialogueActor == "milf")
             {
@@ -600,7 +674,7 @@ public class DialogueManager : MonoBehaviour
                 && lostToCardsMan1stTime == true && lostToCardsMan2ndTime == true
                 && rejectedToPlay2ndTime == false && rejectedToPlay3rdTime == false)
             {
-                lvl2State = "lostToCardsMan2ndTime";
+                lvl2State = "gameOver";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl1State);
                 // game over [0]
             }
