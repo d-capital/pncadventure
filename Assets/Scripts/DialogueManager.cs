@@ -36,6 +36,7 @@ public class DialogueManager : MonoBehaviour
     public int clickedOnHunks;
     public bool informedHunksTreadmillIsFixed;
     private string lvl1State;
+    private string lvl2State;
     
     //Lines and Answers model
     [System.Serializable]
@@ -71,8 +72,17 @@ public class DialogueManager : MonoBehaviour
         currDialogueActor = dialogueActor;
         curResponseTracker = 0;
         nameText.text = dialogue.name;
-        //nameText2.text = dialogue.name; 
-        lvl1stateCalculator(currDialogueActor,dialogue);
+        //nameText2.text = dialogue.name;
+        var currentLevel = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().GetCurrentLevel();
+        if(currentLevel == "Level 1")
+        {
+            lvl1stateCalculator(currDialogueActor,dialogue);
+        }
+        else if(currentLevel == "Level 2")
+        {
+            lvl2stateCalculator(currDialogueActor, dialogue);
+        }
+        
     }
     public void StartDialogueWithOldWomansBed(Dialogue dialogue, string dialogueActor)
     {
@@ -93,257 +103,272 @@ public class DialogueManager : MonoBehaviour
         lvl1stateCalculator(currDialogueActor,dialogue);
     }
 
-    /*public void PreviosAnswer (Dialogue dialogue)
-    {
-        Debug.Log("Current Length of the responses array " + dialogue.playerResponses.Count);
-        Debug.Log("Current Response Index " + curResponseTracker);
-        futResponseTracker = curResponseTracker - 1;
-        if(curResponseTracker > 0 && futResponseTracker <= dialogue.playerResponses.Count - 1)
-        {
-            curResponseTracker = futResponseTracker;
-            Debug.Log("Future Response Index " + curResponseTracker);
-            FindObjectOfType<DialogueManager>().response.text = dialogue.playerResponses[curResponseTracker];
-        }
-
-    }
-    public void NextAnswer (Dialogue dialogue)
-    {
-        
-        Debug.Log("Current Length of the responses array " + dialogue.playerResponses.Count);
-        Debug.Log("Current Response Index " + curResponseTracker);
-        futResponseTracker = curResponseTracker + 1;
-        if(curResponseTracker >= 0 && futResponseTracker <= dialogue.playerResponses.Count - 1)
-        {
-            curResponseTracker = futResponseTracker;
-            Debug.Log("Future Response Index " + curResponseTracker);
-            FindObjectOfType<DialogueManager>().response.text = dialogue.playerResponses[curResponseTracker];
-        }
-
-    }*/
-
     public void Answer(Dialogue dialogue, string dialogueActor, int incomingResponseIndex)
     { 
-        //TODO: Get curResponseTracker from the index of the prefab
         curResponseTracker = incomingResponseIndex;
-        if (currDialogueActor == "OldWoman")
+        var currentLevel = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().GetCurrentLevel();
+        if(currentLevel == "Level 1")
         {
-            lvl1stateCalculator(currDialogueActor, dialogue);
-            if (lvl1State == "babkaInitial")
+            if (currDialogueActor == "OldWoman")
             {
-                if (curResponseTracker == 0)
+                lvl1stateCalculator(currDialogueActor, dialogue);
+                if (lvl1State == "babkaInitial")
                 {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().helpedOldWoman = true;
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().talkedToOldWoman = true;
-                    GameObject.FindGameObjectWithTag("Bags").SetActive(false);
+                    if (curResponseTracker == 0)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().helpedOldWoman = true;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().talkedToOldWoman = true;
+                        GameObject.FindGameObjectWithTag("Bags").SetActive(false);
 
+                    }
+                    else if (curResponseTracker == 1)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().talkedToOldWoman = true;
+                        EndDialogue();
+                    }
                 }
-                else if (curResponseTracker == 1)
+                if (lvl1State == "babkaWantsToGiveVodka")
                 {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().talkedToOldWoman = true;
-                    EndDialogue();
-                }
-            }
-            if (lvl1State == "babkaWantsToGiveVodka")
-            {
-                if (curResponseTracker == 0)
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasVodka = true;
-                    //add vodka to inventory
-                    var inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
-                    GameObject vodkaButton = Resources.Load<GameObject>("VodkaButton");
+                    if (curResponseTracker == 0)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasVodka = true;
+                        //add vodka to inventory
+                        var inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+                        GameObject vodkaButton = Resources.Load<GameObject>("VodkaButton");
 
-                    for (int i = 0; i < inventory.slots.Length; i++)
-                        {
-                            if (inventory.isFull[i] == false)
+                        for (int i = 0; i < inventory.slots.Length; i++)
                             {
-                                //Add item to inventory
-                                inventory.isFull[i] = true;
-                                Instantiate(vodkaButton, inventory.slots[i].transform, false);
-                                //Destroy(gameObject);
-                                break;
+                                if (inventory.isFull[i] == false)
+                                {
+                                    //Add item to inventory
+                                    inventory.isFull[i] = true;
+                                    Instantiate(vodkaButton, inventory.slots[i].transform, false);
+                                    //Destroy(gameObject);
+                                    break;
+                                }
                             }
-                        }
-                    EndDialogue();
+                        EndDialogue();
+                    }
                 }
-            }
-            if (lvl1State == "babkeDuet")
-            {
-                if (curResponseTracker == 0)
+                if (lvl1State == "babkeDuet")
                 {
-                    EndDialogue();
+                    if (curResponseTracker == 0)
+                    {
+                        EndDialogue();
+                    }
                 }
-            }
-            if (lvl1State == "babkaSpit")
-            {
-                if (curResponseTracker == 0)
+                if (lvl1State == "babkaSpit")
                 {
-                    EndDialogue();
+                    if (curResponseTracker == 0)
+                    {
+                        EndDialogue();
+                    }
                 }
-            }
 
-        }
-        else if (currDialogueActor == "OldWomansBed")
-        {
-            lvl1stateCalculator(currDialogueActor, dialogue);
-            if (lvl1State == "victory")
-            {
-                PlayerData playerData = new PlayerData();
-                playerData.carma = "good";
-                playerData.enterCutSceneShown = true;
-                playerData.currentLevelIndex = 3;
-                GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
             }
-            else if (lvl1State == "defeat")
+            else if (currDialogueActor == "OldWomansBed")
             {
-                GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ReloadLevel();
-            }
-            else if (lvl1State == "warn")
-            {
-                EndDialogue();
-            }
-            else if (lvl1State == "helpReminder")
-            {
-                EndDialogue();
-            }
-        }
-        else if (currDialogueActor == "Plumber")
-        {
-            lvl1stateCalculator(currDialogueActor, dialogue);
-            if (lvl1State == "bezVochilyNenado")
-            {
-                if (curResponseTracker == 0)
-                {
-                    EndDialogue();
-                }
-            }
-            else if(lvl1State == "giveVodka")
-            {
-                if (curResponseTracker == 1)
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().vodkaGivenToPlumber = true;
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasVodka = false;
-                    //TODO: remove Vodka from inventory
-                    RemoveItemFromSlotWithoutDropping("VodkaItem");
-                    GameObject.FindGameObjectWithTag("Plumber").GetComponent<PlumberScript>().changePlumberAnimationToHappy();
-                    lvl1stateCalculator(currDialogueActor, dialogue);
-                }
-                else if (curResponseTracker == 0)
-                {
-                    EndDialogue();
-                }
-            }
-            else if(lvl1State == "fix")
-            {
-                if (curResponseTracker == 0)
-                {
-                    //show option to leave[0]
-                    EndDialogue();
-                }
-                else if (curResponseTracker == 1)
-                {
-                    //option to ask to fix treadMill[1]
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().treadmillFixed = true;
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasScrewKey = false;
-                    //remove screwkey from inventory
-                    RemoveItemFromSlotWithoutDropping("ScrewKeyItem");
-                    GameObject.FindGameObjectWithTag("Plumber").GetComponent<PlumberScript>().plumberFixesTreadmill();
-                    EndDialogue();
-                }
-                else if (curResponseTracker == 2)
-                {
-                    //option to close window [2]
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().windowClosed = true;
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasScrewKey = false;
-                    //remove screwkey from inventory
-                    RemoveItemFromSlotWithoutDropping("ScrewKeyItem");
-                    EndDialogue();
-                    GameObject.FindGameObjectWithTag("Plumber").GetComponent<PlumberScript>().plumberFixesWindow();
-                    GameObject.FindGameObjectWithTag("OldWoman").GetComponent<OldWomanScript>().changeOldWomanAnimationToSleeping();
-                    
-                }
-            }
-            else if (lvl1State == "noScrewKey")
-            {
-                if (curResponseTracker == 0)
-                {
-                    //set dialogue line plumber has no screw key
-                    //TimeoutCorutine();
-                    EndDialogue();
-                }
-            }
-            else if (lvl1State == "fixWindowOnly")
-            {
-                if (curResponseTracker == 0)
-                {
-                    TimeoutCorutine();
-                    EndDialogue();                    
-                }
-                else if (curResponseTracker == 1)
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().windowClosed = true;
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasScrewKey = false;
-                    //remove screwkey from inventory
-                    RemoveItemFromSlotWithoutDropping("ScrewKeyItem");
-                    EndDialogue();
-                    GameObject.FindGameObjectWithTag("Plumber").GetComponent<PlumberScript>().plumberFixesWindow();
-                    GameObject.FindGameObjectWithTag("OldWoman").GetComponent<OldWomanScript>().changeOldWomanAnimationToSleeping();
-                }
-            }
-            else if (lvl1State == "smthingFixed")
-            {
-                if (curResponseTracker == 0)
-                {
-                    EndDialogue();
-                }
-            }
-        }
-        else if (currDialogueActor == "Hunk" || currDialogueActor == "Hunk2" || currDialogueActor == "Hunk3")
-        {
-            if(lvl1State == "hunksInitial")
-            {
-                if(curResponseTracker == 0)
-                {
-                    EndDialogue();
-                }
-            }
-            else if (lvl1State == "plumberGood")
-            {
-                if(curResponseTracker == 0)
-                {
-                    EndDialogue();
-                }
-                else if(curResponseTracker == 1)
-                {
-                    treadmillFixed = true;
-                }
-            }
-            else if (lvl1State == "warn")
-            {
-                if(curResponseTracker == 0)
-                {
-                    EndDialogue();
-                }
-            }
-            else if (lvl1State == "defeat")
-            {
-                if(curResponseTracker == 0)
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ReloadLevel();
-                }
-            }
-            else if (lvl1State == "victory")
-            {
-                if(curResponseTracker == 0)
+                lvl1stateCalculator(currDialogueActor, dialogue);
+                if (lvl1State == "victory")
                 {
                     PlayerData playerData = new PlayerData();
-                    playerData.carma = "bad";
+                    playerData.carma = "good";
                     playerData.enterCutSceneShown = true;
                     playerData.currentLevelIndex = 3;
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
                 }
+                else if (lvl1State == "defeat")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ReloadLevel();
+                }
+                else if (lvl1State == "warn")
+                {
+                    EndDialogue();
+                }
+                else if (lvl1State == "helpReminder")
+                {
+                    EndDialogue();
+                }
             }
+            else if (currDialogueActor == "Plumber")
+            {
+                lvl1stateCalculator(currDialogueActor, dialogue);
+                if (lvl1State == "bezVochilyNenado")
+                {
+                    if (curResponseTracker == 0)
+                    {
+                        EndDialogue();
+                    }
+                }
+                else if(lvl1State == "giveVodka")
+                {
+                    if (curResponseTracker == 1)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().vodkaGivenToPlumber = true;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasVodka = false;
+                        //TODO: remove Vodka from inventory
+                        RemoveItemFromSlotWithoutDropping("VodkaItem");
+                        GameObject.FindGameObjectWithTag("Plumber").GetComponent<PlumberScript>().changePlumberAnimationToHappy();
+                        lvl1stateCalculator(currDialogueActor, dialogue);
+                    }
+                    else if (curResponseTracker == 0)
+                    {
+                        EndDialogue();
+                    }
+                }
+                else if(lvl1State == "fix")
+                {
+                    if (curResponseTracker == 0)
+                    {
+                        //show option to leave[0]
+                        EndDialogue();
+                    }
+                    else if (curResponseTracker == 1)
+                    {
+                        //option to ask to fix treadMill[1]
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().treadmillFixed = true;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasScrewKey = false;
+                        //remove screwkey from inventory
+                        RemoveItemFromSlotWithoutDropping("ScrewKeyItem");
+                        GameObject.FindGameObjectWithTag("Plumber").GetComponent<PlumberScript>().plumberFixesTreadmill();
+                        EndDialogue();
+                    }
+                    else if (curResponseTracker == 2)
+                    {
+                        //option to close window [2]
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().windowClosed = true;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasScrewKey = false;
+                        //remove screwkey from inventory
+                        RemoveItemFromSlotWithoutDropping("ScrewKeyItem");
+                        EndDialogue();
+                        GameObject.FindGameObjectWithTag("Plumber").GetComponent<PlumberScript>().plumberFixesWindow();
+                        GameObject.FindGameObjectWithTag("OldWoman").GetComponent<OldWomanScript>().changeOldWomanAnimationToSleeping();
+                        
+                    }
+                }
+                else if (lvl1State == "noScrewKey")
+                {
+                    if (curResponseTracker == 0)
+                    {
+                        //set dialogue line plumber has no screw key
+                        //TimeoutCorutine();
+                        EndDialogue();
+                    }
+                }
+                else if (lvl1State == "fixWindowOnly")
+                {
+                    if (curResponseTracker == 0)
+                    {
+                        TimeoutCorutine();
+                        EndDialogue();                    
+                    }
+                    else if (curResponseTracker == 1)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().windowClosed = true;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasScrewKey = false;
+                        //remove screwkey from inventory
+                        RemoveItemFromSlotWithoutDropping("ScrewKeyItem");
+                        EndDialogue();
+                        GameObject.FindGameObjectWithTag("Plumber").GetComponent<PlumberScript>().plumberFixesWindow();
+                        GameObject.FindGameObjectWithTag("OldWoman").GetComponent<OldWomanScript>().changeOldWomanAnimationToSleeping();
+                    }
+                }
+                else if (lvl1State == "smthingFixed")
+                {
+                    if (curResponseTracker == 0)
+                    {
+                        EndDialogue();
+                    }
+                }
+            }
+            else if (currDialogueActor == "Hunk" || currDialogueActor == "Hunk2" || currDialogueActor == "Hunk3")
+            {
+                if(lvl1State == "hunksInitial")
+                {
+                    if(curResponseTracker == 0)
+                    {
+                        EndDialogue();
+                    }
+                }
+                else if (lvl1State == "plumberGood")
+                {
+                    if(curResponseTracker == 0)
+                    {
+                        EndDialogue();
+                    }
+                    else if(curResponseTracker == 1)
+                    {
+                        treadmillFixed = true;
+                    }
+                }
+                else if (lvl1State == "warn")
+                {
+                    if(curResponseTracker == 0)
+                    {
+                        EndDialogue();
+                    }
+                }
+                else if (lvl1State == "defeat")
+                {
+                    if(curResponseTracker == 0)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ReloadLevel();
+                    }
+                }
+                else if (lvl1State == "victory")
+                {
+                    if(curResponseTracker == 0)
+                    {
+                        PlayerData playerData = new PlayerData();
+                        playerData.carma = "bad";
+                        playerData.enterCutSceneShown = true;
+                        playerData.currentLevelIndex = 3;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
+                    }
+                }
+            }
+            lvl1stateCalculator(currDialogueActor, dialogue);
         }
-        lvl1stateCalculator(currDialogueActor, dialogue);
+        else if(currentLevel == "Level 2")
+        {
+            if (currDialogueActor == "cardsMan")
+            {
+                lvl2stateCalculator(currDialogueActor, dialogue);
+                if (lvl2State == "initial")
+                {
+                    if (curResponseTracker == 0)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().helpedOldWoman = true;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().talkedToOldWoman = true;
+                        GameObject.FindGameObjectWithTag("Bags").SetActive(false);
+
+                    }
+                    else if (curResponseTracker == 1)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().talkedToOldWoman = true;
+                        EndDialogue();
+                    }
+                }
+            }
+            else if(currDialogueActor == "fatMan")
+            {
+                //
+            }
+            else if(currDialogueActor == "milf")
+            {
+                //
+            }
+            else if(currDialogueActor == "emergencyButton")
+            {
+                //
+            }
+            else if(currDialogueActor == "cardsManBed")
+            {
+                //
+            }
+            else if(currDialogueActor == "milfBed")
+            lvl2stateCalculator(currDialogueActor, dialogue);
+        }
         curResponseTracker = 0;
     }
     void EndDialogue()
@@ -501,6 +526,308 @@ public class DialogueManager : MonoBehaviour
                 lvl1State = "victory";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl1State);
             }
+        }
+    }
+    void lvl2stateCalculator (string currDialogueActor, Dialogue dialogue)
+    {
+        //----cardsMan---//
+        bool talkedToCardsMan = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().talkedToCardsMan;
+        bool wonCardsMan = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wonCardsMan;
+        bool lostToCardsMan1stTime = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().lostToCardsMan1stTime;
+        bool lostToCardsMan2ndTime = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().lostToCardsMan2ndTime;
+        bool rejectedToPlay2ndTime = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rejectedToPlay2ndTime;
+        bool rejectedToPlay3rdTime = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rejectedToPlay3rdTime;
+        //----fatMan---//
+        bool hasMoney = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasMoney;
+        bool boughtPirogi = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().boughtPirogi;
+        bool is1stRiddleSolved = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().is1stRiddleSolved;
+        bool is1stRiddleAttempted = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().is1stRiddleAttempted;
+        bool is2ndRiddleAttempted = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().is2ndRiddleAttempted;
+        bool is2ndRiddleSolved = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().is2ndRiddleSolved;
+        bool wasHintHelpful = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wasHintHelpful;
+        bool sharedPirogyWithYou = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().sharedPirogyWithYou;
+
+        //----milf---//
+        bool milfRightAnswer1 = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfRightAnswer1;
+        bool milfRightAnswer2 = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfRightAnswer2;
+        bool milfRightAnswer3 = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfRightAnswer3;
+        bool milfAttempt1Done = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt1Done;
+        bool milfAttempt2Done = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt2Done;
+        bool milfAttempt3Done = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt3Done;
+
+        //----emergencyButton---//
+        bool isButtonFixed = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonFixed;
+        bool isButtonPushed = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed;
+        bool wasCrimeReported = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wasCrimeReported;
+        bool wireInTopSpot = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInTopSpot;
+        bool wireInBottomSpot = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInBottomSpot;
+        bool wireInMiddleSpot = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot;
+        //----------------------//
+        ClearLinesAnswers(dialogue);
+        //calc the state on the 2nd level
+        string path = Application.dataPath;
+        string pathToDialogue = path + "/StreamingAssets/DialogueStorage/"+currDialogueActor+".json";
+        var jsonString = System.IO.File.ReadAllText(pathToDialogue);
+        LinesAnswersList characterLinesAnswers =  JsonConvert.DeserializeObject<LinesAnswersList>(jsonString);
+        if (currDialogueActor == "cardsMan")
+        {
+            if (talkedToCardsMan == false)
+            {
+                lvl2State = "initial";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                // play [0]
+                // quit [1]
+            }
+            else if (talkedToCardsMan == true && wonCardsMan == true 
+                && lostToCardsMan1stTime == false && lostToCardsMan2ndTime == false
+                && rejectedToPlay2ndTime == false && rejectedToPlay3rdTime == false)
+            {
+                lvl2State = "won1stTime";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                // play 2nd time [0]
+                // quit [1]
+            }
+            else if (talkedToCardsMan == true && wonCardsMan == true 
+                && lostToCardsMan1stTime == true && lostToCardsMan2ndTime == false
+                && rejectedToPlay2ndTime == false && rejectedToPlay3rdTime == false)
+            {
+                lvl2State = "lost2ndTime";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                // quit [0]
+                // play 3rd time [1]
+            }
+            else if (talkedToCardsMan == true && wonCardsMan == true 
+                && lostToCardsMan1stTime == true && lostToCardsMan2ndTime == true
+                && rejectedToPlay2ndTime == false && rejectedToPlay3rdTime == false)
+            {
+                lvl2State = "lostToCardsMan2ndTime";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl1State);
+                // game over [0]
+            }
+            else if (talkedToCardsMan == true && wonCardsMan == true 
+                && lostToCardsMan1stTime == false && lostToCardsMan2ndTime == false
+                && rejectedToPlay2ndTime == true && rejectedToPlay3rdTime == false)
+            {
+                lvl2State = "rejectedAfter1stPlay";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl1State);
+                // quite [0]
+            }
+            else if (talkedToCardsMan == true && wonCardsMan == true 
+                && lostToCardsMan1stTime == false && lostToCardsMan2ndTime == false
+                && rejectedToPlay2ndTime == false && rejectedToPlay3rdTime == true)
+            {
+                lvl2State = "rejectedAfter2ndPlay";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl1State);
+                // quite [0]
+            }
+        }
+        else if(currDialogueActor == "fatMan")
+        {
+            if(!hasMoney && !boughtPirogi && !wasCrimeReported && !is1stRiddleSolved && !is1stRiddleAttempted 
+                && !is2ndRiddleSolved && !is2ndRiddleAttempted && !wasHintHelpful && !sharedPirogyWithYou)
+            {
+                lvl2State = "initialNoMoney";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                // quit [0]
+            }
+            else if(hasMoney && !boughtPirogi && !wasCrimeReported && !is1stRiddleSolved && !is1stRiddleAttempted  
+                && !is2ndRiddleSolved && !is2ndRiddleAttempted && !wasHintHelpful && !sharedPirogyWithYou)
+            {
+                lvl2State = "initialHasMoney";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                // buy [0]
+                // quit [1]
+            }
+            else if((!hasMoney && boughtPirogi && !wasCrimeReported && !is1stRiddleSolved && !is1stRiddleAttempted
+                && !is2ndRiddleSolved && !is2ndRiddleAttempted && !wasHintHelpful && !sharedPirogyWithYou) ||(sharedPirogyWithYou))
+            {
+                lvl2State = "boughtPirogiOrSharedWithYoy";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                // quit [0]
+            }
+            else if(!hasMoney && !boughtPirogi && wasCrimeReported && !is1stRiddleSolved && !is1stRiddleAttempted
+                && !is2ndRiddleSolved && !is2ndRiddleAttempted && !wasHintHelpful && !sharedPirogyWithYou)
+            {
+                lvl2State = "cardsManCought";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                // wrong [0]
+                // wrong [1]
+                // right [2]
+                // wrong [3]
+                // quit [4]
+            }
+            else if(!hasMoney && !boughtPirogi && wasCrimeReported && is1stRiddleSolved && is1stRiddleAttempted
+                && !is2ndRiddleSolved && !is2ndRiddleAttempted && !wasHintHelpful && !sharedPirogyWithYou)
+            {
+                lvl2State = "1stRiddleSolved";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                // accept and quit [0]
+            }
+            else if(!hasMoney && !boughtPirogi && wasCrimeReported && !is1stRiddleSolved && is1stRiddleAttempted
+                && !is2ndRiddleSolved && !is2ndRiddleAttempted && !wasHintHelpful && !sharedPirogyWithYou)
+            {
+                lvl2State = "1stRiddleLost";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                // wrong [0]
+                // wrong [1]
+                // right [2]
+                // wrong [3]
+                // quit [4]
+            }
+            else if(!hasMoney && !boughtPirogi && wasCrimeReported && !is1stRiddleSolved && is1stRiddleAttempted
+                && is2ndRiddleSolved && is2ndRiddleAttempted && !wasHintHelpful && !sharedPirogyWithYou)
+            {
+                lvl2State = "2ndRiddleSolved";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                // accept and quit [0]
+            }
+            else if(!hasMoney && !boughtPirogi && wasCrimeReported && !is1stRiddleSolved && is1stRiddleAttempted
+                && !is2ndRiddleSolved && is2ndRiddleAttempted && !wasHintHelpful && !sharedPirogyWithYou)
+            {
+                lvl2State = "hint";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                // right [0]
+                // wrong [1]
+                // quit [2]
+            }
+            else if(!hasMoney && !boughtPirogi && wasCrimeReported && !is1stRiddleSolved && is1stRiddleAttempted
+                && !is2ndRiddleSolved && is2ndRiddleAttempted && wasHintHelpful && !sharedPirogyWithYou)
+            {
+                lvl2State = "2ndRiddleSolved";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                // quit [0]
+            }
+        }
+        else if(currDialogueActor == "milf")
+        {
+            if(!milfAttempt1Done && !milfRightAnswer1 
+                && !milfAttempt2Done && !milfRightAnswer2 
+                && !milfAttempt3Done && !milfRightAnswer3)
+            {
+                lvl2State = "initial";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                // wrong [0]
+                // wrong [1]
+                // quit [2]
+                // right [3]
+            }
+            else if(milfAttempt1Done && !milfRightAnswer1 
+                && !milfAttempt2Done && !milfRightAnswer2 
+                && !milfAttempt3Done && !milfRightAnswer3)
+            {
+                lvl2State = "failedInitial";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                //quit [0]
+                milfAttempt1Done = false; //or do it in answer function
+            }
+            else if(milfAttempt1Done && milfRightAnswer1 
+                && !milfAttempt2Done && !milfRightAnswer2 
+                && !milfAttempt3Done && !milfRightAnswer3)
+            {
+                lvl2State = "Step1";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                //wrong [0]
+                //wrong [1]
+                //right [2]
+                //quit [3]
+            }
+            else if(milfAttempt1Done && milfRightAnswer1 
+                && milfAttempt2Done && !milfRightAnswer2 
+                && !milfAttempt3Done && !milfRightAnswer3)
+            {
+                lvl2State = "Step1Failed";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                //quit [0]
+                milfAttempt2Done = false; //or in the answer function
+            }
+            else if(milfAttempt1Done && milfRightAnswer1 
+                && milfAttempt2Done && milfRightAnswer2 
+                && !milfAttempt3Done && !milfRightAnswer3)
+            {
+                lvl2State = "Step1Passed";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                //wrong [0]
+                //wrong [1]
+                //right [3]
+                //quit [4]
+            }
+            else if(milfAttempt1Done && milfRightAnswer1 
+                && milfAttempt2Done && milfRightAnswer2 
+                && milfAttempt3Done && !milfRightAnswer3)
+            {
+                lvl2State = "Step2Failed";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                //quit [0]
+                milfAttempt3Done = false; // or in the asnwer function
+            }
+            else if(milfAttempt1Done && milfRightAnswer1 
+                && milfAttempt2Done && milfRightAnswer2 
+                && milfAttempt3Done && milfRightAnswer3)
+            {
+                lvl2State = "Step2Passed";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                //quit [0]
+            }
+        }
+        else if(currDialogueActor == "emergencyButton")
+        {
+            if(!isButtonFixed && !isButtonPushed && !wasCrimeReported && !wireInTopSpot && !wireInMiddleSpot && !wireInBottomSpot)
+            {
+                lvl2State = "initial";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                //wrong [0]
+                //right [1]
+                //wrong [2]
+                //push button [3]
+                //quit [0]
+            }
+            else if((!isButtonFixed && !isButtonPushed && !wasCrimeReported && (wireInTopSpot || wireInMiddleSpot || wireInBottomSpot))
+                ||(!isButtonFixed && isButtonPushed && !wasCrimeReported && (wireInTopSpot && wireInBottomSpot)))
+            {
+                lvl2State = "nothingHappens";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                //wrong [0]
+                //right [1]
+                //wrong [2]
+                //push button [3]
+                // quit [0]
+                isButtonPushed = false;//or in the answer function
+            }
+            else if(isButtonFixed && !isButtonPushed && !wasCrimeReported && !wireInTopSpot && wireInMiddleSpot && !wireInBottomSpot)
+            {
+                lvl2State = "fixedButton";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                //push button [0]
+                // quit [1]
+            }
+            else if(isButtonFixed && isButtonPushed && !wasCrimeReported && !wireInTopSpot && wireInMiddleSpot && !wireInBottomSpot)
+            {
+                lvl2State = "call";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                //report [0]
+                // quit [1]
+            }
+            else if(isButtonFixed && isButtonPushed && wasCrimeReported && !wireInTopSpot && wireInMiddleSpot && !wireInBottomSpot)
+            {
+                lvl2State = "answeredLeutenant";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                //report [0]
+                // quit [1]
+            }
+            else
+            {
+                lvl2State = "allDone";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+                // quit [0]
+            }
+        }
+        else if(currDialogueActor == "cardsManBed")
+        {
+            //
+        }
+        else if(currDialogueActor == "milfBed")
+        {
+            //
         }
     }
 

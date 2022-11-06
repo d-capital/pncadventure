@@ -21,7 +21,7 @@ public class AdvScript : MonoBehaviour
     public bool isMoving;
 
     public bool key = false;
-
+    //--------Level 1 Attributes--------//
     public bool helpedOldWoman = false;
     public bool talkedToOldWoman = false;
     public bool windowClosed = false;
@@ -34,19 +34,59 @@ public class AdvScript : MonoBehaviour
     public int clicksOnOldWomanBed = 0;
     public int clickedOnHunks = 0;
     public bool dialougeBoxOpen = false;
-
     public bool informedHunksTreadmillIsFixed = false;
+    //--------Level 2 Attributes-------------------------------//
+    //--------cardsMan-----------------//
+    public bool talkedToCardsMan = false;
+    public bool wonCardsMan = false;
+    public bool lostToCardsMan1stTime = false;
+    public bool lostToCardsMan2ndTime = false;
+    public bool rejectedToPlay2ndTime = false;
+    public bool rejectedToPlay3rdTime = false;
+    //---------fatMan------------------//
+    public bool hasMoney = false;
+    public bool boughtPirogi = false;
+    public bool is1stRiddleSolved = false;
+    public bool is1stRiddleAttempted = false;
+    public bool is2ndRiddleSolved = false;
+    public bool is2ndRiddleAttempted = false;
+    public bool wasHintHelpful = false;
+    public bool sharedPirogyWithYou = false;
 
+    //---------milf--------------------//
+    public bool milfRightAnswer1 = false;
+    public bool milfAttempt1Done = false;
+    public bool milfRightAnswer2 = false;
+    public bool milfAttempt2Done = false;
+    public bool milfRightAnswer3 = false;
+    public bool milfAttempt3Done = false;
+
+    //---------emergencyButton---------//
+    public bool isButtonFixed = false;
+    public bool isButtonPushed = false;
+    public bool wasCrimeReported = false;
+    public bool wireInTopSpot = false;
+    public bool wireInBottomSpot = false;
+    public bool wireInMiddleSpot = false;
+    //--------------------------------------------------------//
     IList dialogBoxesSearchResults;
-
+    DialogueBoxHandler dialogueBox;
     DialogueTrigger currentDialogueTrigger;
+    //-----------------Dialogues Level 1-------------//
     DialogueTrigger oldWomanDialogue;
     DialogueTrigger oldWomanBedDialogue;
     DialogueTrigger plumberDialogue;
     DialogueTrigger hunkDialogue;
     DialogueTrigger hunk1Dialogue;
     DialogueTrigger hunk2Dialogue;
-    DialogueBoxHandler dialogueBox;
+    //-----------------------------------------------//
+
+    //-----------------Dialogues Level 2-------------//
+    DialogueTrigger cardsManDialogue;
+    DialogueTrigger fatManDialogue;
+    DialogueTrigger milfDialogue;
+    DialogueTrigger emergencyButtonDialogue;
+    //----------------------------------------------//
 
     public string currentDialoguePartner;
 
@@ -58,7 +98,7 @@ public class AdvScript : MonoBehaviour
     // Use this for initialization if something needs to be defined before the game starts
     void Start()
     {
-        
+        GetCurrentLevel();
     }
 
     // Update is called once per frame
@@ -185,6 +225,38 @@ public class AdvScript : MonoBehaviour
                     }
                     
                 }
+                //----------------Level 2 interactions------------------------//
+                else if(hit.collider.gameObject.GetComponent<cardsManScript>())
+                {
+                    currentDialoguePartner = "cardsMan";
+                    cardsManDialogue = hit.collider.gameObject.GetComponent<DialogueTrigger>();
+                    ShowDialogueBox();
+                    cardsManDialogue.TriggerDialogue(currentDialoguePartner);
+                }
+                else if(hit.collider.gameObject.GetComponent<fatManScript>())
+                {
+                    print("found fatMan");
+                    currentDialoguePartner = "fatMan";
+                    fatManDialogue = hit.collider.gameObject.GetComponent<DialogueTrigger>();
+                    ShowDialogueBox();
+                    fatManDialogue.TriggerDialogue(currentDialoguePartner);
+                }
+                else if(hit.collider.gameObject.GetComponent<milfScript>())
+                {
+                    print("found milf");
+                    currentDialoguePartner = "milf";
+                    milfDialogue = hit.collider.gameObject.GetComponent<DialogueTrigger>();
+                    ShowDialogueBox();
+                    milfDialogue.TriggerDialogue(currentDialoguePartner);
+                }
+                else if(hit.collider.gameObject.GetComponent<emergencyButtonScript>())
+                {
+                    print("found emergencyButton");
+                    currentDialoguePartner = "emergencyButton";
+                    emergencyButtonDialogue = hit.collider.gameObject.GetComponent<DialogueTrigger>();
+                    ShowDialogueBox();
+                    emergencyButtonDialogue.TriggerDialogue(currentDialoguePartner);
+                }
             }
             else
             {
@@ -275,6 +347,12 @@ public class AdvScript : MonoBehaviour
     public void ReloadLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public string GetCurrentLevel()
+    {
+        string currentLevel = SceneManager.GetActiveScene().name;
+        print(currentLevel);
+        return currentLevel;
     }
 
 }
