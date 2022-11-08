@@ -362,6 +362,7 @@ public class DialogueManager : MonoBehaviour
                     if(curResponseTracker == 0)
                     {
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rejectedToPlay3rdTime = true;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().lostToCardsMan2ndTime = true;
                     }
                     else if(curResponseTracker == 1)
                     {
@@ -376,6 +377,8 @@ public class DialogueManager : MonoBehaviour
                 }
                 else if (lvl2State == "rejectedAfter2ndPlay")
                 {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rejectedToPlay3rdTime = false;
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().lostToCardsMan2ndTime = false;
                     EndDialogue();
                 }
                 else if (lvl2State == "rejectedAfter1stPlay")
@@ -405,27 +408,69 @@ public class DialogueManager : MonoBehaviour
                 }
                 else if (lvl2State == "cardsManCought")
                 {
-
+                    if(curResponseTracker == 0 
+                        || curResponseTracker == 1
+                        || curResponseTracker == 3)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().is1stRiddleAttempted = true;
+                    }
+                    else if (curResponseTracker == 2)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().is1stRiddleAttempted = true;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().is1stRiddleSolved = true;
+                    }
+                    else if (curResponseTracker == 4)
+                    {
+                        EndDialogue();
+                    }
                 }
                 else if (lvl2State == "1stRiddleSolved")
                 {
-
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().sharedPirogyWithYou = true;
+                    EndDialogue();
                 }
                 else if (lvl2State == "1stRiddleLost")
                 {
+                    if(curResponseTracker == 0 
+                        || curResponseTracker == 1
+                        || curResponseTracker == 3)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().is2ndRiddleAttempted = true;
+                    }
+                    else if (curResponseTracker == 2)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().is2ndRiddleSolved = true;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().is2ndRiddleAttempted = true;
+                    }
+                    else if (curResponseTracker == 4)
+                    {
+                        EndDialogue();
+                    }
 
                 }
                 else if (lvl2State == "2ndRiddleSolved")
                 {
-
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().sharedPirogyWithYou = true;
+                    EndDialogue();
                 }
                 else if(lvl2State == "hint")
                 {
-
+                    if(curResponseTracker == 0)
+                    {
+                        //nothing happens here because fatMan gives player another try
+                    }
+                    else if(curResponseTracker == 1)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wasHintHelpful = true;
+                    }
+                    else if(curResponseTracker == 0)
+                    {
+                        EndDialogue();
+                    }
                 }
                 else if(lvl2State == "boughtPirogiOrSharedWithYoy")
                 {
-                    
+                    EndDialogue();
                 }
             }
             else if(currDialogueActor == "milf")
@@ -441,6 +486,9 @@ public class DialogueManager : MonoBehaviour
                 //
             }
             else if(currDialogueActor == "milfBed")
+            {
+                //
+            }
             lvl2stateCalculator(currDialogueActor, dialogue);
         }
         curResponseTracker = 0;
@@ -675,7 +723,7 @@ public class DialogueManager : MonoBehaviour
                 && rejectedToPlay2ndTime == false && rejectedToPlay3rdTime == false)
             {
                 lvl2State = "gameOver";
-                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl1State);
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
                 // game over [0]
             }
             else if (talkedToCardsMan == true && wonCardsMan == true 
@@ -683,15 +731,15 @@ public class DialogueManager : MonoBehaviour
                 && rejectedToPlay2ndTime == true && rejectedToPlay3rdTime == false)
             {
                 lvl2State = "rejectedAfter1stPlay";
-                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl1State);
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
                 // quite [0]
             }
             else if (talkedToCardsMan == true && wonCardsMan == true 
-                && lostToCardsMan1stTime == false && lostToCardsMan2ndTime == false
+                && lostToCardsMan1stTime == true && lostToCardsMan2ndTime == true
                 && rejectedToPlay2ndTime == false && rejectedToPlay3rdTime == true)
             {
                 lvl2State = "rejectedAfter2ndPlay";
-                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl1State);
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
                 // quite [0]
             }
         }
@@ -748,9 +796,12 @@ public class DialogueManager : MonoBehaviour
                 // wrong [3]
                 // quit [4]
             }
-            else if(!hasMoney && !boughtPirogi && wasCrimeReported && !is1stRiddleSolved && is1stRiddleAttempted
-                && is2ndRiddleSolved && is2ndRiddleAttempted && !wasHintHelpful && !sharedPirogyWithYou)
+            else if((!hasMoney && !boughtPirogi && wasCrimeReported && !is1stRiddleSolved && is1stRiddleAttempted
+                && is2ndRiddleSolved && is2ndRiddleAttempted && !wasHintHelpful && !sharedPirogyWithYou) 
+                || (!hasMoney && !boughtPirogi && wasCrimeReported && !is1stRiddleSolved && is1stRiddleAttempted
+                && !is2ndRiddleSolved && is2ndRiddleAttempted && wasHintHelpful && !sharedPirogyWithYou))
             {
+                //either solved from 1st attempt or after a hint
                 lvl2State = "2ndRiddleSolved";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
                 // accept and quit [0]
@@ -763,13 +814,6 @@ public class DialogueManager : MonoBehaviour
                 // right [0]
                 // wrong [1]
                 // quit [2]
-            }
-            else if(!hasMoney && !boughtPirogi && wasCrimeReported && !is1stRiddleSolved && is1stRiddleAttempted
-                && !is2ndRiddleSolved && is2ndRiddleAttempted && wasHintHelpful && !sharedPirogyWithYou)
-            {
-                lvl2State = "2ndRiddleSolved";
-                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
-                // quit [0]
             }
         }
         else if(currDialogueActor == "milf")
