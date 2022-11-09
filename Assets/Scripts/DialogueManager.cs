@@ -475,7 +475,70 @@ public class DialogueManager : MonoBehaviour
             }
             else if(currDialogueActor == "milf")
             {
-                //
+                if (lvl2State == "initial")
+                {
+                    if (curResponseTracker == 0 || curResponseTracker == 1)
+                    {
+                        //wrong option
+                    }
+                    else if (curResponseTracker == 2)
+                    {
+                        EndDialogue();
+                    }
+                    else if (curResponseTracker == 3)
+                    {
+                        //right option
+                    }
+                }
+                else if (lvl2State == "failedInitial")
+                {
+                    //milfAttempt1Done = false;
+                }
+                else if (lvl2State == "Step1")
+                {
+                    if (curResponseTracker == 0 || curResponseTracker == 1)
+                    {
+                        //wrong option
+                    }
+                    else if (curResponseTracker == 2)
+                    {
+                        //right option
+                    }
+                    else if (curResponseTracker == 3)
+                    {
+                        EndDialogue();
+                    }
+                }
+                else if (lvl2State == "Step1Failed")
+                {
+                    //milfAttempt2Done = false;
+                    EndDialogue();
+                }
+                else if (lvl2State == "Step1Passed")
+                {
+                    if (curResponseTracker == 0 || curResponseTracker == 1)
+                    {
+                        //wrong option
+                    }
+                    else if (curResponseTracker == 2)
+                    {
+                        //right option
+                    }
+                    else if (curResponseTracker == 3)
+                    {
+                        EndDialogue();
+                    }
+                }
+                else if (lvl2State == "Step2Failed")
+                {
+                    //milfAttempt3Done = false;
+                    EndDialogue();
+                }
+                else if (lvl2State == "Step2Passed")
+                {
+                    //dono if there is something to set
+                    EndDialogue();
+                }
             }
             else if(currDialogueActor == "emergencyButton")
             {
