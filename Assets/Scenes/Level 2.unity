@@ -3186,6 +3186,7 @@ GameObject:
   - component: {fileID: 791596238}
   - component: {fileID: 791596237}
   - component: {fileID: 791596239}
+  - component: {fileID: 791596240}
   m_Layer: 0
   m_Name: cardsManBed
   m_TagString: Untagged
@@ -3277,7 +3278,32 @@ MonoBehaviour:
     sentences: []
     playerResponses: []
   NpcObject: {fileID: 791596236}
-  npcAnimator: {fileID: 0}
+--- !u!61 &791596240
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791596236}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.3174094, y: 1.0042319}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6.84, y: 5.09}
+    newSize: {x: 6.84, y: 5.09}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.0477505, y: 3.0815363}
+  m_EdgeRadius: 0
 --- !u!1 &946044191
 GameObject:
   m_ObjectHideFlags: 0
@@ -6314,6 +6340,7 @@ GameObject:
   - component: {fileID: 1958585525}
   - component: {fileID: 1958585524}
   - component: {fileID: 1958585523}
+  - component: {fileID: 1958585526}
   m_Layer: 0
   m_Name: milfBed
   m_TagString: Untagged
@@ -6405,6 +6432,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -3.18}
+--- !u!61 &1958585526
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958585522}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.34674978, y: 0.47761208}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6.84, y: 5.09}
+    newSize: {x: 6.84, y: 5.09}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.2878113, y: 1.908682}
+  m_EdgeRadius: 0
 --- !u!1 &1989479683
 GameObject:
   m_ObjectHideFlags: 0
