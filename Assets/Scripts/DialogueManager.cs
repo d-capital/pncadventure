@@ -480,6 +480,7 @@ public class DialogueManager : MonoBehaviour
                     if (curResponseTracker == 0 || curResponseTracker == 1)
                     {
                         //wrong option
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt1Done = true;
                     }
                     else if (curResponseTracker == 2)
                     {
@@ -488,21 +489,29 @@ public class DialogueManager : MonoBehaviour
                     else if (curResponseTracker == 3)
                     {
                         //right option
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt1Done = true;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfRightAnswer1 = true;
+
                     }
                 }
                 else if (lvl2State == "failedInitial")
                 {
-                    //milfAttempt1Done = false;
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt1Done = false;
+                    EndDialogue();
                 }
                 else if (lvl2State == "Step1")
                 {
                     if (curResponseTracker == 0 || curResponseTracker == 1)
                     {
                         //wrong option
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt2Done = true;
                     }
                     else if (curResponseTracker == 2)
                     {
                         //right option
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt2Done = true;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfRightAnswer2 = true;
+
                     }
                     else if (curResponseTracker == 3)
                     {
@@ -511,7 +520,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 else if (lvl2State == "Step1Failed")
                 {
-                    //milfAttempt2Done = false;
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt2Done = false;
                     EndDialogue();
                 }
                 else if (lvl2State == "Step1Passed")
@@ -519,10 +528,13 @@ public class DialogueManager : MonoBehaviour
                     if (curResponseTracker == 0 || curResponseTracker == 1)
                     {
                         //wrong option
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt3Done = true;
                     }
                     else if (curResponseTracker == 2)
                     {
                         //right option
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt3Done = true;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfRightAnswer3 = true;
                     }
                     else if (curResponseTracker == 3)
                     {
@@ -531,7 +543,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 else if (lvl2State == "Step2Failed")
                 {
-                    //milfAttempt3Done = false;
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt3Done = false;
                     EndDialogue();
                 }
                 else if (lvl2State == "Step2Passed")
@@ -542,15 +554,111 @@ public class DialogueManager : MonoBehaviour
             }
             else if(currDialogueActor == "emergencyButton")
             {
-                //
+                if (lvl2State == "initial")
+                {
+                    if (curResponseTracker == 0)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInTopSpot = true;
+                        string newInfoText = "Провод в верхнем пазе";
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
+                    }
+                    else if (curResponseTracker == 1)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot = true;
+                        string newInfoText = "Провод в среднем пазе";
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
+                    }
+                    else if (curResponseTracker == 2)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInBottomSpot = true;
+                        string newInfoText = "Провод в нижнем пазе";
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
+                    }
+                    else if (curResponseTracker == 3)
+                    {
+                        if (GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonFixed = true;
+                            // >> "fixedButton"
+                        }
+                        else
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = true;
+                            // >> "nothingHappens"
+                        }
+                    }
+                    else if (curResponseTracker == 4)
+                    {
+                        EndDialogue();
+                    }
+                    //wrong [0] >> change position
+                    //right [1] >> change position
+                    //wrong [2] >> change position
+                    //push button [3] "nothingHappens" or "fixedButton"
+                    //quit [0]
+                }
+                else if (lvl2State == "nothingHappens")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = false;
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInTopSpot = false;
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot = false;
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInBottomSpot = false;
+                    //return back to "initial" [0]
+                }
+                else if (lvl2State == "fixedButton")
+                {
+                    if (curResponseTracker == 0)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = true;
+                    }
+                    else if (curResponseTracker == 1)
+                    {
+                        EndDialogue();
+                    }
+                    //click button [0] >> "call"
+                    //quit [1]
+                }
+                else if (lvl2State == "call")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wasCrimeReported = true;
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().allDone = true;
+                    //report [0] >> "answerLeutenant"
+                    EndDialogue();
+                }
+                else if (lvl2State == "allDone")
+                {
+                    EndDialogue();
+                }
             }
             else if(currDialogueActor == "cardsManBed")
             {
-                //
+                if (lvl2State == "hungry")
+                {
+                    EndDialogue();
+                }
+                else if (lvl2State == "win")
+                {
+                    PlayerData playerData = new PlayerData();
+                    playerData.carma = "bad";
+                    playerData.enterCutSceneShown = true;
+                    playerData.currentLevelIndex = 4;
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
+                }
             }
             else if(currDialogueActor == "milfBed")
             {
-                //
+                if (lvl2State == "hungry")
+                {
+                    EndDialogue();
+                }
+                else if (lvl2State == "win")
+                {
+                    PlayerData playerData = new PlayerData();
+                    playerData.carma = "good";
+                    playerData.enterCutSceneShown = true;
+                    playerData.currentLevelIndex = 4;
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
+                }
             }
             lvl2stateCalculator(currDialogueActor, dialogue);
         }
@@ -747,6 +855,7 @@ public class DialogueManager : MonoBehaviour
         bool wireInTopSpot = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInTopSpot;
         bool wireInBottomSpot = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInBottomSpot;
         bool wireInMiddleSpot = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot;
+        bool allDone = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().allDone;
         //----------------------//
         ClearLinesAnswers(dialogue);
         //calc the state on the 2nd level
@@ -962,8 +1071,7 @@ public class DialogueManager : MonoBehaviour
                 //push button [3]
                 //quit [0]
             }
-            else if((!isButtonFixed && !isButtonPushed && !wasCrimeReported && (wireInTopSpot || wireInMiddleSpot || wireInBottomSpot))
-                ||(!isButtonFixed && isButtonPushed && !wasCrimeReported && (wireInTopSpot && wireInBottomSpot)))
+            else if(!isButtonFixed && isButtonPushed && !wasCrimeReported && (wireInTopSpot || wireInBottomSpot))
             {
                 lvl2State = "nothingHappens";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
@@ -972,7 +1080,6 @@ public class DialogueManager : MonoBehaviour
                 //wrong [2]
                 //push button [3]
                 // quit [0]
-                isButtonPushed = false;//or in the answer function
             }
             else if(isButtonFixed && !isButtonPushed && !wasCrimeReported && !wireInTopSpot && wireInMiddleSpot && !wireInBottomSpot)
             {
@@ -995,7 +1102,7 @@ public class DialogueManager : MonoBehaviour
                 //report [0]
                 // quit [1]
             }
-            else
+            else if (allDone)
             {
                 lvl2State = "allDone";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
@@ -1004,11 +1111,29 @@ public class DialogueManager : MonoBehaviour
         }
         else if(currDialogueActor == "cardsManBed")
         {
-            //
+            if ((wasCrimeReported && !boughtPirogi) || (wasCrimeReported && !sharedPirogyWithYou))
+            {
+                lvl2State = "hungry";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+            }
+            else if ((wasCrimeReported && boughtPirogi) || (wasCrimeReported && sharedPirogyWithYou))
+            {
+                lvl2State = "win";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+            }
         }
         else if(currDialogueActor == "milfBed")
         {
-            //
+            if ((milfRightAnswer3 && !boughtPirogi) || (milfRightAnswer3 && !sharedPirogyWithYou))
+            {
+                lvl2State = "hungry";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+            }
+            else if ((milfRightAnswer3 && boughtPirogi) || (milfRightAnswer3 && sharedPirogyWithYou))
+            {
+                lvl2State = "win";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+            }
         }
     }
 

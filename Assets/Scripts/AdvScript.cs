@@ -68,6 +68,7 @@ public class AdvScript : MonoBehaviour
     public bool wireInTopSpot = false;
     public bool wireInBottomSpot = false;
     public bool wireInMiddleSpot = false;
+    public bool allDone = false;
     //--------------------------------------------------------//
     IList dialogBoxesSearchResults;
     DialogueBoxHandler dialogueBox;
@@ -86,6 +87,8 @@ public class AdvScript : MonoBehaviour
     DialogueTrigger fatManDialogue;
     DialogueTrigger milfDialogue;
     DialogueTrigger emergencyButtonDialogue;
+    DialogueTrigger cardsManBedDialogue;
+    DialogueTrigger milfBedDialogue;
     //----------------------------------------------//
 
     public string currentDialoguePartner;
@@ -257,6 +260,20 @@ public class AdvScript : MonoBehaviour
                     ShowDialogueBox();
                     emergencyButtonDialogue.TriggerDialogue(currentDialoguePartner);
                 }
+                else if (hit.collider.gameObject.GetComponent<cardsManBedScript>())
+                {
+                    currentDialoguePartner = "cardsManBed";
+                    cardsManBedDialogue = hit.collider.gameObject.GetComponent<DialogueTrigger>();
+                    ShowDialogueBox();
+                    cardsManBedDialogue.TriggerDialogue(currentDialoguePartner);
+                }
+                else if (hit.collider.gameObject.GetComponent<milfBedScript>())
+                {
+                    currentDialoguePartner = "milfBed";
+                    milfBedDialogue = hit.collider.gameObject.GetComponent<DialogueTrigger>();
+                    ShowDialogueBox();
+                    milfBedDialogue.TriggerDialogue(currentDialoguePartner);
+                }
             }
             else
             {
@@ -349,11 +366,11 @@ public class AdvScript : MonoBehaviour
             }
             else if (currentDialoguePartner == "milfBed")
             {
-                //currentDialogueTrigger = GameObject.FindObjectOfType<milfBedScript>().GetComponent<DialogueTrigger>();
+                currentDialogueTrigger = GameObject.FindObjectOfType<milfBedScript>().GetComponent<DialogueTrigger>();
             }
             else if (currentDialoguePartner == "cardsManBed")
             {
-                //currentDialogueTrigger = GameObject.FindObjectOfType<cardsManBedScript>().GetComponent<DialogueTrigger>();
+                currentDialogueTrigger = GameObject.FindObjectOfType<cardsManBedScript>().GetComponent<DialogueTrigger>();
             }
         }
         return currentDialogueTrigger;
