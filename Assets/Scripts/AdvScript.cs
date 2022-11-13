@@ -262,17 +262,23 @@ public class AdvScript : MonoBehaviour
                 }
                 else if (hit.collider.gameObject.GetComponent<cardsManBedScript>())
                 {
-                    currentDialoguePartner = "cardsManBed";
-                    cardsManBedDialogue = hit.collider.gameObject.GetComponent<DialogueTrigger>();
-                    ShowDialogueBox();
-                    cardsManBedDialogue.TriggerDialogue(currentDialoguePartner);
+                    if (wasCrimeReported)
+                    {
+                        currentDialoguePartner = "cardsManBed";
+                        cardsManBedDialogue = hit.collider.gameObject.GetComponent<DialogueTrigger>();
+                        ShowDialogueBox();
+                        cardsManBedDialogue.TriggerDialogue(currentDialoguePartner);
+                    }
                 }
                 else if (hit.collider.gameObject.GetComponent<milfBedScript>())
                 {
-                    currentDialoguePartner = "milfBed";
-                    milfBedDialogue = hit.collider.gameObject.GetComponent<DialogueTrigger>();
-                    ShowDialogueBox();
-                    milfBedDialogue.TriggerDialogue(currentDialoguePartner);
+                    if (milfRightAnswer3)
+                    {
+                        currentDialoguePartner = "milfBed";
+                        milfBedDialogue = hit.collider.gameObject.GetComponent<DialogueTrigger>();
+                        ShowDialogueBox();
+                        milfBedDialogue.TriggerDialogue(currentDialoguePartner);
+                    }
                 }
             }
             else
@@ -371,6 +377,10 @@ public class AdvScript : MonoBehaviour
             else if (currentDialoguePartner == "cardsManBed")
             {
                 currentDialogueTrigger = GameObject.FindObjectOfType<cardsManBedScript>().GetComponent<DialogueTrigger>();
+            }
+            else if (currentDialoguePartner == "emergencyButton")
+            {
+                currentDialogueTrigger = GameObject.FindObjectOfType<emergencyButtonScript>().GetComponent<DialogueTrigger>();
             }
         }
         return currentDialogueTrigger;
