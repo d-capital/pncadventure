@@ -83,6 +83,7 @@ public class AdvScript : MonoBehaviour
     //-----------------------------------------------//
 
     //-----------------Dialogues Level 2-------------//
+    DialogueTrigger semenDialogue;
     DialogueTrigger cardsManDialogue;
     DialogueTrigger fatManDialogue;
     DialogueTrigger milfDialogue;
@@ -96,6 +97,8 @@ public class AdvScript : MonoBehaviour
     public Animator animator;
     public AudioSource collectSound;
 
+    public bool introShown = false;
+
     //public TextMeshProUGUI newInfoText;
 
     // Use this for initialization if something needs to be defined before the game starts
@@ -104,9 +107,50 @@ public class AdvScript : MonoBehaviour
         GetCurrentLevel();
     }
 
+    void OnLevelFinishedLoading()
+    {
+        if (GetCurrentLevel() == "Level 1")
+        {
+            ShowDialogueBox();
+            currentDialoguePartner = "SemenLvl1Intro";
+            semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
+            semenDialogue.TriggerDialogue("SemenLvl1Intro");
+        }
+        else if (GetCurrentLevel() == "Level 2")
+        {
+            ShowDialogueBox();
+            currentDialoguePartner = "SemenLvl2Intro";
+            semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
+            semenDialogue.TriggerDialogue("SemenLvl2Intro");
+        }
+    }
+    public void ShowOutro()
+    {
+        if (GetCurrentLevel() == "Level 1")
+        {
+            ShowDialogueBox();
+            currentDialoguePartner = "SemenLvl1Outro";
+            semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
+            semenDialogue.TriggerDialogue("SemenLvl1Outro");
+        }
+        else if (GetCurrentLevel() == "Level 2")
+        {
+            ShowDialogueBox();
+            currentDialoguePartner = "SemenLvl2Outro";
+            semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
+            semenDialogue.TriggerDialogue("SemenLvl2Outro");
+        }
+    }
+
+
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeSinceLevelLoad > 0.5 && introShown == false)
+        {
+            OnLevelFinishedLoading();
+            introShown = true;
+        }
         if (Input.GetMouseButtonDown(0))
         {
 
@@ -381,6 +425,14 @@ public class AdvScript : MonoBehaviour
             else if (currentDialoguePartner == "emergencyButton")
             {
                 currentDialogueTrigger = GameObject.FindObjectOfType<emergencyButtonScript>().GetComponent<DialogueTrigger>();
+            }
+            else if (currentDialoguePartner == "SemenLvl2Intro")
+            {
+                currentDialogueTrigger = GameObject.Find("Player").GetComponent<DialogueTrigger>();
+            }
+            else if (currentDialoguePartner == "SemenLvl1Intro")
+            {
+                currentDialogueTrigger = GameObject.Find("Player").GetComponent<DialogueTrigger>();
             }
         }
         return currentDialogueTrigger;

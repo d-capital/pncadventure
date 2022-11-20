@@ -37,7 +37,9 @@ public class DialogueManager : MonoBehaviour
     public bool informedHunksTreadmillIsFixed;
     private string lvl1State;
     private string lvl2State;
-    
+
+    PlayerData playerData = new PlayerData();
+
     //Lines and Answers model
     [System.Serializable]
     public class LinesAnswer
@@ -171,11 +173,11 @@ public class DialogueManager : MonoBehaviour
                 lvl1stateCalculator(currDialogueActor, dialogue);
                 if (lvl1State == "victory")
                 {
-                    PlayerData playerData = new PlayerData();
                     playerData.carma = "good";
                     playerData.enterCutSceneShown = true;
                     playerData.currentLevelIndex = 3;
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
+                    EndDialogue();
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
                 }
                 else if (lvl1State == "defeat")
                 {
@@ -319,13 +321,21 @@ public class DialogueManager : MonoBehaviour
                 {
                     if(curResponseTracker == 0)
                     {
-                        PlayerData playerData = new PlayerData();
                         playerData.carma = "bad";
                         playerData.enterCutSceneShown = true;
                         playerData.currentLevelIndex = 3;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
+                        EndDialogue();
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
                     }
                 }
+            }
+            else if (currDialogueActor == "SemenLvl1Intro")
+            {
+                EndDialogue();
+            }
+            else if (currDialogueActor == "SemenLvl1Outro")
+            {
+                GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
             }
             lvl1stateCalculator(currDialogueActor, dialogue);
         }
@@ -699,11 +709,12 @@ public class DialogueManager : MonoBehaviour
                 }
                 else if (lvl2State == "win")
                 {
-                    PlayerData playerData = new PlayerData();
                     playerData.carma = "bad";
                     playerData.enterCutSceneShown = true;
                     playerData.currentLevelIndex = 4;
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
+                    EndDialogue();
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
+                    //GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
                 }
             }
             else if(currDialogueActor == "milfBed")
@@ -714,12 +725,21 @@ public class DialogueManager : MonoBehaviour
                 }
                 else if (lvl2State == "win")
                 {
-                    PlayerData playerData = new PlayerData();
                     playerData.carma = "good";
                     playerData.enterCutSceneShown = true;
                     playerData.currentLevelIndex = 4;
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
+                    EndDialogue();
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
+                    //GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
                 }
+            }
+            else if(currDialogueActor == "SemenLvl2Intro")
+            {
+                EndDialogue();
+            }
+            else if (currDialogueActor == "SemenLvl2Outro")
+            {
+                GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
             }
             lvl2stateCalculator(currDialogueActor, dialogue);
         }
@@ -880,6 +900,16 @@ public class DialogueManager : MonoBehaviour
                 lvl1State = "victory";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl1State);
             }
+        }
+        else if (currDialogueActor == "SemenLvl1Intro")
+        {
+            lvl2State = "intro";
+            SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+        }
+        else if (currDialogueActor == "SemenLvl1Outro")
+        {
+            lvl2State = "outro";
+            SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
         }
     }
     void lvl2stateCalculator (string currDialogueActor, Dialogue dialogue)
@@ -1129,7 +1159,7 @@ public class DialogueManager : MonoBehaviour
                 //push button [3]
                 //quit [0]
             }
-            else if (!isButtonFixed && isButtonPushed && !wasCrimeReported && (wireInTopSpot || wireInBottomSpot ) && !wireInMiddleSpot)
+            else if (!isButtonFixed && isButtonPushed && !wasCrimeReported && (wireInTopSpot || wireInBottomSpot) && !wireInMiddleSpot)
             {
                 lvl2State = "nothingHappens";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
@@ -1144,21 +1174,21 @@ public class DialogueManager : MonoBehaviour
                 lvl2State = "onTheRightWay";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
             }
-            else if(isButtonFixed && !isButtonPushed && !wasCrimeReported && !wireInTopSpot && wireInMiddleSpot && !wireInBottomSpot)
+            else if (isButtonFixed && !isButtonPushed && !wasCrimeReported && !wireInTopSpot && wireInMiddleSpot && !wireInBottomSpot)
             {
                 lvl2State = "fixedButton";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
                 //push button [0]
                 // quit [1]
             }
-            else if(isButtonFixed && isButtonPushed && !wasCrimeReported && !wireInTopSpot && wireInMiddleSpot && !wireInBottomSpot)
+            else if (isButtonFixed && isButtonPushed && !wasCrimeReported && !wireInTopSpot && wireInMiddleSpot && !wireInBottomSpot)
             {
                 lvl2State = "call";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
                 //report [0]
                 // quit [1]
             }
-            else if(isButtonFixed && isButtonPushed && wasCrimeReported && !wireInTopSpot && wireInMiddleSpot && !wireInBottomSpot && !allDone)
+            else if (isButtonFixed && isButtonPushed && wasCrimeReported && !wireInTopSpot && wireInMiddleSpot && !wireInBottomSpot && !allDone)
             {
                 lvl2State = "answeredLeutenant";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
@@ -1172,7 +1202,7 @@ public class DialogueManager : MonoBehaviour
                 // quit [0]
             }
         }
-        else if(currDialogueActor == "cardsManBed")
+        else if (currDialogueActor == "cardsManBed")
         {
             if ((wasCrimeReported && boughtPirogi) || (wasCrimeReported && sharedPirogyWithYou))
             {
@@ -1185,19 +1215,29 @@ public class DialogueManager : MonoBehaviour
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
             }
         }
-        else if(currDialogueActor == "milfBed")
+        else if (currDialogueActor == "milfBed")
         {
             if (milfRightAnswer3 && (boughtPirogi || sharedPirogyWithYou))
             {
                 lvl2State = "win";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
             }
-            else 
+            else
             {
                 lvl2State = "hungry";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
             }
 
+        }
+        else if (currDialogueActor == "SemenLvl2Intro")
+        {
+            lvl2State = "intro";
+            SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+        }
+        else if (currDialogueActor == "SemenLvl2Outro")
+        {
+            lvl2State = "outro";
+            SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
         }
     }
 
