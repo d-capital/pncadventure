@@ -135,20 +135,7 @@ public class DialogueManager : MonoBehaviour
                     {
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasVodka = true;
                         //add vodka to inventory
-                        var inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
-                        GameObject vodkaButton = Resources.Load<GameObject>("VodkaButton");
-
-                        for (int i = 0; i < inventory.slots.Length; i++)
-                            {
-                                if (inventory.isFull[i] == false)
-                                {
-                                    //Add item to inventory
-                                    inventory.isFull[i] = true;
-                                    Instantiate(vodkaButton, inventory.slots[i].transform, false);
-                                    //Destroy(gameObject);
-                                    break;
-                                }
-                            }
+                        GetItemToInventory("VodkaButton");
                         EndDialogue();
                     }
                 }
@@ -350,6 +337,7 @@ public class DialogueManager : MonoBehaviour
                     {
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().talkedToCardsMan = true;
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wonCardsMan = true;
+                        GetItemToInventory("CoinsButton");
                     }
                     else if (curResponseTracker == 1)
                     {
@@ -361,6 +349,7 @@ public class DialogueManager : MonoBehaviour
                     if(curResponseTracker == 0)
                     {
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().lostToCardsMan1stTime = true;
+                        RemoveItemFromSlotWithoutDropping("CoinsItem");
                     }
                     else if (curResponseTracker == 1)
                     {
@@ -412,6 +401,7 @@ public class DialogueManager : MonoBehaviour
                     {
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().boughtPirogi = true;
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasMoney = false;
+                        RemoveItemFromSlotWithoutDropping("CoinsItem");
                         EndDialogue();
                     }
                     else if (curResponseTracker == 1)
@@ -1288,4 +1278,20 @@ public class DialogueManager : MonoBehaviour
             }
         }
     }
+    public void GetItemToInventory(string itemObjectName)
+    {
+        var inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        GameObject itemButton = Resources.Load<GameObject>(itemObjectName);
+        for (int i = 0; i < inventory.slots.Length; i++)
+        {
+            if (inventory.isFull[i] == false)
+            {
+                //Add item to inventory
+                inventory.isFull[i] = true;
+                Instantiate(itemButton, inventory.slots[i].transform, false);
+                break;
+            }
+        }
+    }
+    
 }

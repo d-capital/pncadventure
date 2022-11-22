@@ -198,6 +198,20 @@ public class AdvScript : MonoBehaviour
                     collectSound.Play();
                     // save the number of the objects of the same type
                 }
+                else if (hit.collider.gameObject.tag == "coins")
+                {
+                    // key was hit, hide the key, save it's state to the object
+                    hit.collider.gameObject.SetActive(false);
+                    var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
+                    collectibleItem.onClick();
+                    //newInfoText.ClearMesh();
+                    string newInfoText = "Копейка рубль бережет!";
+                    ShowInfoText(newInfoText);
+                    //key = true;
+                    //hasScrewKey = true;
+                    collectSound.Play();
+                    // save the number of the objects of the same type
+                }
                 else if (hit.collider.gameObject.tag == "OldWoman")
                 {
                     //start the dialogue only if the player is close enough:
