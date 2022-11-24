@@ -1020,7 +1020,7 @@ public class DialogueManager : MonoBehaviour
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
                 // quit [0]
             }
-            else if (!hasMoney && !boughtPirogi && wasCrimeReported && !is1stRiddleSolved && !is1stRiddleAttempted
+            else if (wasCrimeReported && !is1stRiddleSolved && !is1stRiddleAttempted
                 && !is2ndRiddleSolved && !is2ndRiddleAttempted && !wasHintHelpful && !sharedPirogyWithYou)
             {
                 lvl2State = "cardsManCought";
@@ -1031,14 +1031,14 @@ public class DialogueManager : MonoBehaviour
                 // wrong [3]
                 // quit [4]
             }
-            else if (!hasMoney && !boughtPirogi && wasCrimeReported && is1stRiddleSolved && is1stRiddleAttempted
+            else if (wasCrimeReported && is1stRiddleSolved && is1stRiddleAttempted
                 && !is2ndRiddleSolved && !is2ndRiddleAttempted && !wasHintHelpful && !sharedPirogyWithYou)
             {
                 lvl2State = "1stRiddleSolved";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
                 // accept and quit [0]
             }
-            else if (!hasMoney && !boughtPirogi && wasCrimeReported && !is1stRiddleSolved && is1stRiddleAttempted
+            else if (wasCrimeReported && !is1stRiddleSolved && is1stRiddleAttempted
                 && !is2ndRiddleSolved && !is2ndRiddleAttempted && !wasHintHelpful && !sharedPirogyWithYou)
             {
                 lvl2State = "1stRiddleLost";
@@ -1056,7 +1056,7 @@ public class DialogueManager : MonoBehaviour
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
                 // accept and quit [0]
             }
-            else if (!hasMoney && !boughtPirogi && wasCrimeReported && !is1stRiddleSolved && is1stRiddleAttempted
+            else if (wasCrimeReported && !is1stRiddleSolved && is1stRiddleAttempted
                 && !is2ndRiddleSolved && is2ndRiddleAttempted && !wasHintHelpful && !sharedPirogyWithYou)
             {
                 lvl2State = "hint";
