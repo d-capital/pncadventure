@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7895430150643951677}
   - component: {fileID: 7229605935932290275}
   - component: {fileID: -5338937372376688912}
+  - component: {fileID: -7162504710209829084}
   m_Layer: 0
   m_Name: ScrewKeyButton
   m_TagString: ScrewKeyInventory
@@ -136,3 +137,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 2388728756568129747, guid: af55a4913e8cb054aa827b4859f7fb6f, type: 3}
   itemType: ScrewKeyItem
+--- !u!225 &-7162504710209829084
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8118877398612109822}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

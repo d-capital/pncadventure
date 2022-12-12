@@ -70,6 +70,31 @@ public class AdvScript : MonoBehaviour
     public bool wireInMiddleSpot = false;
     public bool allDone = false;
     //--------------------------------------------------------//
+
+    //--------Level 3 Attributes-------------------------------//
+    //-------Shaman-----------------------//
+    public bool initialSuccess = false;
+    public bool initialFailed = false;
+    public bool secondSuccess = false;
+    public bool secondFailed = false;
+    public bool potionGiven = false;
+    //-------meMom------------------------//
+    public bool shahtarsHigh = false;
+    public bool informedMeMomShahtarsAreHigh = false;
+    public bool gotBathItems = false;
+    //-------Shahtars---------------------//
+    public bool shahtarInitialFailed = false;
+    public bool timeForRound2 = false;
+    public bool failedRound2 = false;
+    public bool timeForRound3 = false;
+    public bool gotCrowbar = false;
+    public bool shahtarsGotPotion = false;
+    //-------shahtarsBed------------------//
+    public bool fuckedOff1 = false;
+    //-------toiletDoor-------------------//
+    //-------sink-------------------------//
+
+    //--------------------------------------------------------//
     IList dialogBoxesSearchResults;
     DialogueBoxHandler dialogueBox;
     DialogueTrigger currentDialogueTrigger;
@@ -90,6 +115,13 @@ public class AdvScript : MonoBehaviour
     DialogueTrigger emergencyButtonDialogue;
     DialogueTrigger cardsManBedDialogue;
     DialogueTrigger milfBedDialogue;
+    //----------------------------------------------//
+    
+    //-----------------Dialogues Level 3-------------//
+    DialogueTrigger shamanDialogue;
+    DialogueTrigger meMomDialogue;
+    DialogueTrigger shatarDialogue;
+    DialogueTrigger shahtarBedDialogue;
     //----------------------------------------------//
 
     public string currentDialoguePartner;
@@ -123,6 +155,13 @@ public class AdvScript : MonoBehaviour
             semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
             semenDialogue.TriggerDialogue("SemenLvl2Intro");
         }
+        else if (GetCurrentLevel() == "Level 3")
+        {
+            ShowDialogueBox();
+            currentDialoguePartner = "SemenLvl3Intro";
+            semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
+            semenDialogue.TriggerDialogue("SemenLvl3Intro");    
+        }
     }
     public void ShowOutro()
     {
@@ -137,6 +176,13 @@ public class AdvScript : MonoBehaviour
         {
             ShowDialogueBox();
             currentDialoguePartner = "SemenLvl2Outro";
+            semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
+            semenDialogue.TriggerDialogue("SemenLvl2Outro");
+        }
+        else if (GetCurrentLevel() == "Level 2")
+        {
+            ShowDialogueBox();
+            currentDialoguePartner = "SemenLvl3Outro";
             semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
             semenDialogue.TriggerDialogue("SemenLvl2Outro");
         }
@@ -338,6 +384,77 @@ public class AdvScript : MonoBehaviour
                         milfBedDialogue.TriggerDialogue(currentDialoguePartner);
                     }
                 }
+                //----------------Level 3 interactions------------------------//
+                else if (hit.collider.gameObject.GetComponent<shamanScript>())
+                {
+                    currentDialoguePartner = "Shaman";
+                    shamanDialogue = hit.collider.gameObject.GetComponent<DialogueTrigger>();
+                    ShowDialogueBox();
+                    shamanDialogue.TriggerDialogue(currentDialoguePartner);
+                }
+                else if (hit.collider.gameObject.GetComponent<meMomScript>())
+                {
+                    currentDialoguePartner = "meMom";
+                    meMomDialogue = hit.collider.gameObject.GetComponent<DialogueTrigger>();
+                    ShowDialogueBox();
+                    meMomDialogue.TriggerDialogue(currentDialoguePartner);
+                }
+                else if (hit.collider.gameObject.GetComponent<shahtarScript>())
+                {
+                    currentDialoguePartner = "Shahtar";
+                    shatarDialogue = hit.collider.gameObject.GetComponent<DialogueTrigger>();
+                    ShowDialogueBox();
+                    shatarDialogue.TriggerDialogue(currentDialoguePartner);
+                }
+                else if (hit.collider.gameObject.GetComponent<shahtarBedScript>())
+                {
+                    if (shahtarsHigh)
+                    {
+                        currentDialoguePartner = "shahtarBed";
+                        shahtarBedDialogue = hit.collider.gameObject.GetComponent<DialogueTrigger>();
+                        ShowDialogueBox();
+                        shahtarBedDialogue.TriggerDialogue(currentDialoguePartner);
+                    }
+                }
+                else if (hit.collider.gameObject.GetComponent<toiletDoor>())
+                {
+                    //show hint
+                    string newInfoText;
+                    if (!gotCrowbar)
+                    {
+                        newInfoText = "Замок закрыт, чтобы открыть, нужен инструмент или отмычка.";
+                        ShowInfoText(newInfoText);
+                    }
+                    else
+                    {
+                        newInfoText = "Надо посмотреть, есть ли у меня что-то, что откроет эту дверь";
+                        ShowInfoText(newInfoText);
+                    }
+                }
+                else if (hit.collider.gameObject.GetComponent<sink>())
+                {
+                    //show hint
+                    string newInfoText;
+                    if (!gotBathItems)
+                    {
+                        newInfoText = "Просто водой не умыться, я уже знатно запаршивел.";
+                        ShowInfoText(newInfoText);
+                    }
+                    else
+                    {
+                        newInfoText = "Надо достать зубную щетку, мыло ...";
+                        ShowInfoText(newInfoText);
+                    }
+                }
+                else if (hit.collider.gameObject.tag == "aspirin")
+                {
+                    hit.collider.gameObject.SetActive(false);
+                    var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
+                    collectibleItem.onClick();
+                    string newInfoText = "О, это мне пригодится в будущем!";
+                    ShowInfoText(newInfoText);
+                    collectSound.Play();
+                }
             }
             else
             {
@@ -352,15 +469,6 @@ public class AdvScript : MonoBehaviour
     }
     public void ShowDialogueBox()
     {
-        //GameObject canvasObj = GameObject.FindGameObjectWithTag("Canvas");
-        //Transform[] trs = canvasObj.GetComponentsInChildren<Transform>(true);
-        //foreach(Transform t in trs)
-        //{
-          //  if(t.tag == "DialogueBox")
-            //{
-              //  t.gameObject.SetActive(true);
-            //}
-        //}
         dialogBoxesSearchResults = Resources.FindObjectsOfTypeAll<DialogueBoxHandler>();
         foreach (DialogueBoxHandler i in dialogBoxesSearchResults)
         {
@@ -447,6 +555,27 @@ public class AdvScript : MonoBehaviour
             else if (currentDialoguePartner == "SemenLvl1Intro")
             {
                 currentDialogueTrigger = GameObject.Find("Player").GetComponent<DialogueTrigger>();
+            }
+            //LVL3
+            else if (currentDialoguePartner == "SemenLvl3Intro")
+            {
+                currentDialogueTrigger = GameObject.Find("Player").GetComponent<DialogueTrigger>();
+            }
+            else if (currentDialoguePartner == "meMom")
+            {
+                currentDialogueTrigger = GameObject.FindObjectOfType<meMomScript>().GetComponent<DialogueTrigger>();
+            }
+            else if (currentDialoguePartner == "Shaman")
+            {
+                currentDialogueTrigger = GameObject.FindObjectOfType<shamanScript>().GetComponent<DialogueTrigger>();
+            }
+            else if (currentDialoguePartner == "shahtarBed")
+            {
+                currentDialogueTrigger = GameObject.FindObjectOfType<shahtarBedScript>().GetComponent<DialogueTrigger>();
+            }
+            else if (currentDialoguePartner == "Shahtar")
+            {
+                currentDialogueTrigger = GameObject.FindObjectOfType<shahtarScript>().GetComponent<DialogueTrigger>();
             }
         }
         return currentDialogueTrigger;

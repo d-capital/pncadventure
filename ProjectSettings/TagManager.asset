@@ -32,6 +32,7 @@ TagManager:
   - wcInside
   - Treadmill
   - coins
+  - aspirin
   layers:
   - Default
   - TransparentFX

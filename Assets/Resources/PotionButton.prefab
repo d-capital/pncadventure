@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 7771511320935747339}
   - component: {fileID: 5346846904411523696}
   - component: {fileID: 2363873864344876302}
-  - component: {fileID: -8664091007263460023}
+  - component: {fileID: 7280641339060126231}
   m_Layer: 0
-  m_Name: CoinsButton
+  m_Name: PotionButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3676a0b185daeb54fb257f700ba7ead4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 50a1bfbd8fd43c144ad2aa2183af3b19, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -135,9 +135,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bdc1fa478148a24e8053c13124b979f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 3831526946249293474, guid: fd4dd2b6c5d98a54f8583dc699ffe362, type: 3}
-  itemType: CoinsItem
---- !u!225 &-8664091007263460023
+  item: {fileID: 7109672189545423399, guid: e710e1359cc0a7f4ca544585cc3955a4, type: 3}
+  itemType: PotionItem
+--- !u!225 &7280641339060126231
 CanvasGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

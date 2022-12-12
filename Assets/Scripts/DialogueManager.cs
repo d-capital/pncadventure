@@ -37,6 +37,7 @@ public class DialogueManager : MonoBehaviour
     public bool informedHunksTreadmillIsFixed;
     private string lvl1State;
     private string lvl2State;
+    private string lvl3State;
 
     PlayerData playerData = new PlayerData();
 
@@ -84,7 +85,11 @@ public class DialogueManager : MonoBehaviour
         {
             lvl2stateCalculator(currDialogueActor, dialogue);
         }
-        
+        else if (currentLevel == "Level 3")
+        {
+            lvl3stateCalculator(currDialogueActor, dialogue);
+        }
+
     }
     public void StartDialogueWithOldWomansBed(Dialogue dialogue, string dialogueActor)
     {
@@ -701,7 +706,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     playerData.carma = "bad";
                     playerData.enterCutSceneShown = true;
-                    playerData.currentLevelIndex = 4;
+                    playerData.currentLevelIndex = 5;
                     EndDialogue();
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
                     //GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
@@ -717,7 +722,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     playerData.carma = "good";
                     playerData.enterCutSceneShown = true;
-                    playerData.currentLevelIndex = 4;
+                    playerData.currentLevelIndex = 5;
                     EndDialogue();
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
                     //GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
@@ -732,6 +737,175 @@ public class DialogueManager : MonoBehaviour
                 GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
             }
             lvl2stateCalculator(currDialogueActor, dialogue);
+        }
+        else if(currentLevel == "Level 3")
+        {
+            if (currDialogueActor == "SemenLvl3Intro")
+            {
+                EndDialogue();
+            }
+            else if (currDialogueActor == "SemenLvl3Outro")
+            {
+                GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
+            }
+            else if (currDialogueActor == "Shaman")
+            {
+                if (lvl3State == "initial")
+                {
+                    if(curResponseTracker == 0 || curResponseTracker == 1)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().initialFailed = true;
+                    }
+                    else if ( curResponseTracker == 2)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().initialSuccess = true;
+                    }
+                }
+                else if (lvl3State == "initialFailed")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().initialFailed = false;
+                    EndDialogue();
+                }
+                else if (lvl3State == "initialSuccess")
+                {
+                    if (curResponseTracker == 0 || curResponseTracker == 1)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().secondFailed = true;
+                    }
+                    else if(curResponseTracker == 2)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().secondSuccess = true;
+                    }
+                }
+                else if (lvl3State == "2ndFailed")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().secondFailed = false;
+                    EndDialogue();
+                }
+                else if (lvl3State == "2ndSuccess")
+                {
+                    EndDialogue();
+                    //get potion into inventory;
+                    GetItemToInventory("PotionButton");
+                }
+                else if (lvl3State == "shamanNirvana")
+                {
+                    EndDialogue();
+                }
+            }
+            else if (currDialogueActor == "meMom")
+            {
+                if (lvl3State == "shahtarsAmok")
+                {
+                    EndDialogue();
+                }
+                else if (lvl3State == "shahtarsHigh")
+                {
+                    if (curResponseTracker == 0)
+                    {
+                        EndDialogue();
+                    }
+                    else if (curResponseTracker == 1)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().informedMeMomShahtarsAreHigh = true;
+                    }
+                }
+                else if(lvl3State == "meMomThankfull")
+                {
+                    GetItemToInventory("BathItemsButton");
+                    EndDialogue();
+                }
+                else if(lvl3State == "leaveMeMomAlone")
+                {
+                    EndDialogue();
+                }
+            }
+            else if (currDialogueActor == "Shahtar")
+            {
+                if(lvl3State == "initial")
+                {
+                    if (curResponseTracker == 0)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().initialFailed = true;
+                    }
+                    else if (curResponseTracker == 1)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().timeForRound2 = true;
+                    }
+                    else if (curResponseTracker == 2)
+                    {
+                        EndDialogue();
+                    }
+                }
+                else if(lvl3State == "initialFailed")
+                {
+                    EndDialogue();
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().initialFailed = false;
+                }
+                else if(lvl3State == "roundTwo")
+                {
+                    if(curResponseTracker == 0)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().failedRound2 = true;
+                    }
+                    else if (curResponseTracker == 1)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().timeForRound3 = true;
+                    }
+                    else if(curResponseTracker == 2)
+                    {
+                        EndDialogue();
+                    }
+                }
+                else if(lvl3State == "roundTwoFailed")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ReloadLevel();
+                }
+                else if(lvl3State == "roundThree")
+                {
+                    GetItemToInventory("crowBarButton");
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotCrowbar = true;
+
+                }
+                else if(lvl3State == "happyShahtars")
+                {
+                    EndDialogue();
+                }
+                else if(lvl3State == "semenGotPotion")
+                {
+                    RemoveItemFromSlotWithoutDropping("PotionItem");
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().shahtarsGotPotion = true;
+                }
+                else if(lvl3State == "semenGavePotionToShahtars")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().shahtarsHigh = true;
+                    EndDialogue();
+                }
+                else if(lvl3State == "shahtarsHigh")
+                {
+                    EndDialogue();
+                }
+            }
+            else if (currDialogueActor == "shahtarsBed")
+            {
+                if (lvl3State == "fuckOff1")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().fuckedOff1 = true;
+                }
+                else if (lvl3State == "fuckOff2")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ReloadLevel();
+                }
+                else if(lvl3State == "success")
+                {
+                    playerData.carma = "good";
+                    playerData.enterCutSceneShown = true;
+                    playerData.currentLevelIndex = 7;
+                    EndDialogue();
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
+                }
+            }
+            lvl3stateCalculator(currDialogueActor, dialogue);
         }
         curResponseTracker = 0;
     }
@@ -1231,6 +1405,169 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    void lvl3stateCalculator(string currDialogueActor, Dialogue dialogue)
+    {
+        //----Shaman---//
+        bool initialSuccess = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().initialSuccess;
+        bool initialFailed = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().initialFailed;
+        bool secondSuccess = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().secondSuccess;
+        bool secondFailed = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().secondFailed;
+        bool potionGiven = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().potionGiven;
+        //----meMom----//
+        bool shahtarsHigh = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().shahtarsHigh;
+        bool informedMeMomShahtarsAreHigh = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().informedMeMomShahtarsAreHigh;
+        bool gotBathItems = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotBathItems;
+        //----Shahtar-----//
+        bool shahtarInitialFailed = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().shahtarInitialFailed;
+        bool timeForRound2 = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().timeForRound2;
+        bool failedRound2 = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().failedRound2;
+        bool timeForRound3 = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().timeForRound3;
+        bool gotCrowbar = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotCrowbar;
+        bool shahtarsGotPotion = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().shahtarsGotPotion;
+        //-------shahtarsBed------------------//
+        bool fuckedOff1 = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().fuckedOff1;
+        ClearLinesAnswers(dialogue);
+        //calc the state on the 2nd level
+        string path = Application.dataPath;
+        string pathToDialogue = path + "/StreamingAssets/DialogueStorage/" + currDialogueActor + ".json";
+        var jsonString = System.IO.File.ReadAllText(pathToDialogue);
+        LinesAnswersList characterLinesAnswers = JsonConvert.DeserializeObject<LinesAnswersList>(jsonString);
+        if (currDialogueActor == "SemenLvl3Intro")
+        {
+            lvl2State = "intro";
+            SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+        }
+        else if (currDialogueActor == "SemenLvl3Outro")
+        {
+            lvl2State = "outro";
+            SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+        }
+        else if (currDialogueActor == "Shaman") 
+        {
+            if (!initialSuccess && !initialFailed)
+            {
+                lvl3State = "initial";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+            }
+            else if (!initialSuccess & initialFailed)
+            {
+                lvl3State = "initialFailed";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+            }
+            else if (initialSuccess && !secondFailed && !secondSuccess)
+            {
+                lvl3State = "initialSuccess";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+            }
+            else if (initialSuccess && secondFailed)
+            {
+                lvl3State = "2ndFailed";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+            }
+            else if (initialSuccess && secondSuccess && !potionGiven)
+            {
+                lvl3State = "2ndSuccess";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+            }
+            else if (initialSuccess && secondSuccess && potionGiven)
+            {
+                lvl3State = "shamanNirvana";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+            }
+        }
+        else if (currDialogueActor == "meMom")
+        {
+            if (!shahtarsHigh)
+            {
+                lvl3State = "shahtarsAmok";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+            }
+            else if (shahtarsHigh && !informedMeMomShahtarsAreHigh)
+            {
+                lvl3State = "shahtarsHigh";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+            }
+            else if (shahtarsHigh && informedMeMomShahtarsAreHigh && !gotBathItems)
+            {
+                lvl3State = "meMomThankfull";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+            }
+            else if (shahtarsHigh && informedMeMomShahtarsAreHigh && gotBathItems)
+            {
+                lvl3State = "leaveMeMomAlone";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+            }
+        }
+        else if(currDialogueActor == "Shahtar")
+        {
+            if (!shahtarInitialFailed && !timeForRound2)
+            {
+                lvl3State = "initial";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+            }
+            else if (shahtarInitialFailed)
+            {
+                lvl3State = "initialFailed";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+            }
+            else if (timeForRound2 && !timeForRound3)
+            {
+                lvl3State = "roundTwo";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+            }
+            else if (failedRound2)
+            {
+                lvl3State = "roundTwoFailed";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+            }
+            else if (timeForRound3 && !gotCrowbar)
+            {
+                lvl3State = "roundThree";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+            }
+            else if (!potionGiven && gotCrowbar)
+            {
+                lvl3State = "happyShahtars";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+            }
+            else if (potionGiven && gotCrowbar)
+            {
+                lvl3State = "semenGotPotion";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+            }
+            else if (shahtarsGotPotion)
+            {
+                lvl3State = "semenGavePotionToShahtars";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+            }
+            else if (shahtarsHigh)
+            {
+                lvl3State = "shahtarsHigh";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+            }
+        }
+        else if (currDialogueActor == "shahtarsBed")
+        {
+            if (!shahtarsHigh)
+            {
+                if (!fuckedOff1)
+                {
+                    lvl3State = "fuckOff1";
+                    SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+                }
+                else if (fuckedOff1)
+                {
+                    lvl3State = "fuckOff2";
+                    SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+                }
+            }
+            else
+            {
+                lvl3State = "success";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+            }
+        }
+    }
     void SetNewLinesAnswers(Dialogue dialogue, LinesAnswersList linesAnswersList, string lvl1State)
     {
         LinesAnswer lineResponse = linesAnswersList.LinesAnswers.Find(l => l.name == lvl1State);

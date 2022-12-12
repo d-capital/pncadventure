@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 
 public class Slot : MonoBehaviour
 {
     private Inventory inventory;
     public int i;
+
     public void DropItem()
     {
         foreach(Transform child in transform)
