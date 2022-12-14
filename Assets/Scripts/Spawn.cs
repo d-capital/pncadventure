@@ -10,7 +10,7 @@ public class Spawn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
     private Transform player;
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
-    private Vector3 initObjectPos;
+    public Vector3 initObjectPos;
     
 
     private void Awake()
@@ -25,6 +25,11 @@ public class Spawn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
     public void OnBeginDrag(PointerEventData eventData)
     {
         Debug.Log("OnBeginDrag");
+        var DroppableItems = GameObject.FindGameObjectsWithTag("droppable");
+        foreach (var i in DroppableItems)
+        {
+            i.layer = 3;
+        }
         canvasGroup.alpha = .6f;
         canvasGroup.blocksRaycasts = false;
         initObjectPos = rectTransform.position;
@@ -33,27 +38,33 @@ public class Spawn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
     {
         //all exceptions shold go here
         //TODO: throws exception cause toilet door is not there yet on lvl1
-        try
-        {
-            Vector3 toiletDoor = GameObject.FindObjectOfType<toiletDoor>().transform.position;
-            Vector3 sink = GameObject.FindObjectOfType<sink>().transform.position;
-            if (rectTransform.position != toiletDoor && rectTransform.position != sink)
-            {
-                eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = initObjectPos;
-            }
-        }
-        catch
-        {
-            Debug.Log("no target objects");
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = initObjectPos;
-            Debug.Log("OnEndDrag");
-            canvasGroup.alpha = 1f;
-            canvasGroup.blocksRaycasts = true;
-        }
         Debug.Log("OnEndDrag");
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
+        var DroppableItems = GameObject.FindGameObjectsWithTag("droppable");
+        foreach (var i in DroppableItems)
+        {
+            i.layer = 3;
+        }
+        returnObjectIfNeeded();
     }
+
+    public void returnObjectIfNeeded()
+    {
+        StartCoroutine(checkIfObjectWasAppliedToTargetWithDelay());
+    }
+
+    IEnumerator checkIfObjectWasAppliedToTargetWithDelay()
+    {
+        yield return new WaitForSeconds(1.0f);
+        bool toiletDoorReceivedCrowbar = GameObject.FindObjectOfType<toiletDoor>().GetComponent<toiletDoor>().objectReceived;
+        bool sinkReceivedBathItems = GameObject.FindObjectOfType<sink>().GetComponent<sink>().objectReceived;
+        if (!toiletDoorReceivedCrowbar || !sinkReceivedBathItems)
+        {
+            rectTransform.anchoredPosition = initObjectPos;
+        }
+    }
+
     public void OnDrag(PointerEventData eventData)
     {
         Debug.Log("OnDrag");

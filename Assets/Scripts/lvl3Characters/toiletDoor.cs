@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class toiletDoor : MonoBehaviour, IDropHandler
 {
 
-
+    public bool objectReceived = false;
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("OnDrop");
@@ -14,10 +14,15 @@ public class toiletDoor : MonoBehaviour, IDropHandler
         {
             if (eventData.pointerDrag.GetComponent<Spawn>().item.name == "crowBar")
             {
+                objectReceived = true;
                 OpenDoor();
                 GameObject.Destroy(eventData.pointerDrag);
                 //show message
                 //set bool variable
+            }
+            else
+            {
+                eventData.pointerDrag.gameObject.transform.position = eventData.pointerDrag.gameObject.GetComponent<Spawn>().initObjectPos;
             }
         }
     }

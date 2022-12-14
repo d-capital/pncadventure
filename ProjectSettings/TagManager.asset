@@ -33,11 +33,12 @@ TagManager:
   - Treadmill
   - coins
   - aspirin
+  - droppable
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Droppable
   - Water
   - UI
   - 

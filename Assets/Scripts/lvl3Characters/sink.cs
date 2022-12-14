@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class sink : MonoBehaviour, IDropHandler
 {
 
-
+    public bool objectReceived = false;
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("OnDrop");
@@ -14,9 +14,14 @@ public class sink : MonoBehaviour, IDropHandler
         {
             if (eventData.pointerDrag.GetComponent<Spawn>().item.name == "bathItems")
             {
+                objectReceived = true;
                 GameObject.Destroy(eventData.pointerDrag);
                 //show message
                 //set bool variable
+            }
+            else
+            {
+                eventData.pointerDrag.gameObject.transform.position = eventData.pointerDrag.gameObject.GetComponent<Spawn>().initObjectPos;
             }
         }
     }
