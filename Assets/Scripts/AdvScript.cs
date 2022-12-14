@@ -91,6 +91,7 @@ public class AdvScript : MonoBehaviour
     public bool shahtarsGotPotion = false;
     //-------shahtarsBed------------------//
     public bool fuckedOff1 = false;
+    public bool bathed = false;
     //-------toiletDoor-------------------//
     //-------sink-------------------------//
 
@@ -179,12 +180,12 @@ public class AdvScript : MonoBehaviour
             semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
             semenDialogue.TriggerDialogue("SemenLvl2Outro");
         }
-        else if (GetCurrentLevel() == "Level 2")
+        else if (GetCurrentLevel() == "Level 3")
         {
             ShowDialogueBox();
             currentDialoguePartner = "SemenLvl3Outro";
             semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
-            semenDialogue.TriggerDialogue("SemenLvl2Outro");
+            semenDialogue.TriggerDialogue("SemenLvl3Outro");
         }
     }
 
@@ -408,7 +409,7 @@ public class AdvScript : MonoBehaviour
                 }
                 else if (hit.collider.gameObject.GetComponent<shahtarBedScript>())
                 {
-                    if (shahtarsHigh)
+                    if (gotCrowbar)
                     {
                         currentDialoguePartner = "shahtarBed";
                         shahtarBedDialogue = hit.collider.gameObject.GetComponent<DialogueTrigger>();

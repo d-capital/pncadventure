@@ -786,6 +786,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     EndDialogue();
                     //get potion into inventory;
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().potionGiven = true;
                     GetItemToInventory("PotionButton");
                 }
                 else if (lvl3State == "shamanNirvana")
@@ -826,7 +827,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     if (curResponseTracker == 0)
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().initialFailed = true;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().shahtarInitialFailed = true;
                     }
                     else if (curResponseTracker == 1)
                     {
@@ -840,7 +841,7 @@ public class DialogueManager : MonoBehaviour
                 else if(lvl3State == "initialFailed")
                 {
                     EndDialogue();
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().initialFailed = false;
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().shahtarInitialFailed = false;
                 }
                 else if(lvl3State == "roundTwo")
                 {
@@ -886,11 +887,12 @@ public class DialogueManager : MonoBehaviour
                     EndDialogue();
                 }
             }
-            else if (currDialogueActor == "shahtarsBed")
+            else if (currDialogueActor == "shahtarBed")
             {
                 if (lvl3State == "fuckOff1")
                 {
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().fuckedOff1 = true;
+                    EndDialogue();
                 }
                 else if (lvl3State == "fuckOff2")
                 {
@@ -903,6 +905,10 @@ public class DialogueManager : MonoBehaviour
                     playerData.currentLevelIndex = 7;
                     EndDialogue();
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
+                }
+                else if (lvl3State == "notBathed")
+                {
+                    EndDialogue();
                 }
             }
             lvl3stateCalculator(currDialogueActor, dialogue);
@@ -1426,6 +1432,7 @@ public class DialogueManager : MonoBehaviour
         bool shahtarsGotPotion = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().shahtarsGotPotion;
         //-------shahtarsBed------------------//
         bool fuckedOff1 = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().fuckedOff1;
+        bool bathed = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().bathed;
         ClearLinesAnswers(dialogue);
         //calc the state on the 2nd level
         string path = Application.dataPath;
@@ -1510,7 +1517,7 @@ public class DialogueManager : MonoBehaviour
                 lvl3State = "initialFailed";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
             }
-            else if (timeForRound2 && !timeForRound3)
+            else if (timeForRound2 && !failedRound2 && !timeForRound3)
             {
                 lvl3State = "roundTwo";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
@@ -1525,17 +1532,17 @@ public class DialogueManager : MonoBehaviour
                 lvl3State = "roundThree";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
             }
-            else if (!potionGiven && gotCrowbar)
+            else if (!potionGiven && gotCrowbar && !shahtarsGotPotion)
             {
                 lvl3State = "happyShahtars";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
             }
-            else if (potionGiven && gotCrowbar)
+            else if (potionGiven && gotCrowbar && !shahtarsGotPotion)
             {
                 lvl3State = "semenGotPotion";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
             }
-            else if (shahtarsGotPotion)
+            else if (shahtarsGotPotion && !shahtarsHigh)
             {
                 lvl3State = "semenGavePotionToShahtars";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
@@ -1546,24 +1553,26 @@ public class DialogueManager : MonoBehaviour
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
             }
         }
-        else if (currDialogueActor == "shahtarsBed")
+        else if (currDialogueActor == "shahtarBed")
         {
-            if (!shahtarsHigh)
+            if (!shahtarsHigh && !fuckedOff1)
             {
-                if (!fuckedOff1)
-                {
-                    lvl3State = "fuckOff1";
-                    SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
-                }
-                else if (fuckedOff1)
-                {
-                    lvl3State = "fuckOff2";
-                    SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
-                }
+                lvl3State = "fuckOff1";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
             }
-            else
+            else if (!shahtarsHigh && fuckedOff1)
+            {
+                lvl3State = "fuckOff2";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+            }
+            else if(shahtarsHigh && bathed)
             {
                 lvl3State = "success";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+            }
+            else if (shahtarsHigh && !bathed)
+            {
+                lvl3State = "notBathed";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
             }
         }
