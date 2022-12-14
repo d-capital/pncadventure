@@ -44,7 +44,7 @@ public class Spawn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
         var DroppableItems = GameObject.FindGameObjectsWithTag("droppable");
         foreach (var i in DroppableItems)
         {
-            i.layer = 3;
+            i.layer = 0;
         }
         returnObjectIfNeeded();
     }
