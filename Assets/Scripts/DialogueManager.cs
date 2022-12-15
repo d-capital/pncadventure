@@ -167,7 +167,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     playerData.carma = "good";
                     playerData.enterCutSceneShown = true;
-                    playerData.currentLevelIndex = 3;
+                    playerData.currentLevelIndex = 4;
                     EndDialogue();
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
                 }
@@ -315,7 +315,7 @@ public class DialogueManager : MonoBehaviour
                     {
                         playerData.carma = "bad";
                         playerData.enterCutSceneShown = true;
-                        playerData.currentLevelIndex = 3;
+                        playerData.currentLevelIndex = 4;
                         EndDialogue();
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
                     }
@@ -706,7 +706,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     playerData.carma = "bad";
                     playerData.enterCutSceneShown = true;
-                    playerData.currentLevelIndex = 5;
+                    playerData.currentLevelIndex = 6;
                     EndDialogue();
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
                     //GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
@@ -722,7 +722,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     playerData.carma = "good";
                     playerData.enterCutSceneShown = true;
-                    playerData.currentLevelIndex = 5;
+                    playerData.currentLevelIndex = 6;
                     EndDialogue();
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
                     //GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
@@ -902,7 +902,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     playerData.carma = "good";
                     playerData.enterCutSceneShown = true;
-                    playerData.currentLevelIndex = 7;
+                    playerData.currentLevelIndex = 8;
                     EndDialogue();
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
                 }

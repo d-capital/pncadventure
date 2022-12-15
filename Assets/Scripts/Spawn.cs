@@ -57,8 +57,26 @@ public class Spawn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
     IEnumerator checkIfObjectWasAppliedToTargetWithDelay()
     {
         yield return new WaitForSeconds(1.0f);
-        bool toiletDoorReceivedCrowbar = GameObject.FindObjectOfType<toiletDoor>().GetComponent<toiletDoor>().objectReceived;
-        bool sinkReceivedBathItems = GameObject.FindObjectOfType<sink>().GetComponent<sink>().objectReceived;
+        toiletDoor toiletDoor = GameObject.FindObjectOfType<toiletDoor>();
+        sink sink = GameObject.FindObjectOfType<sink>();
+        bool toiletDoorReceivedCrowbar;
+        bool sinkReceivedBathItems;
+        if (toiletDoor != null)
+        {
+            toiletDoorReceivedCrowbar = GameObject.FindObjectOfType<toiletDoor>().GetComponent<toiletDoor>().objectReceived;
+        }
+        else
+        {
+           toiletDoorReceivedCrowbar = false;
+        }
+        if (sink != null)
+        {
+            sinkReceivedBathItems = GameObject.FindObjectOfType<sink>().GetComponent<sink>().objectReceived;
+        }
+        else
+        {
+            sinkReceivedBathItems = false;
+        }
         if (!toiletDoorReceivedCrowbar || !sinkReceivedBathItems)
         {
             rectTransform.anchoredPosition = initObjectPos;

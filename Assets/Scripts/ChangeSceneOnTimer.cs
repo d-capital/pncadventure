@@ -15,11 +15,6 @@ public class ChangeSceneOnTimer : MonoBehaviour
         if(changeTime <= 0 || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space))
         {
             SceneManager.LoadScene(sceneName);
-            PlayerData playerData = new PlayerData();
-            playerData.carma = "good";
-            playerData.enterCutSceneShown = true;
-            playerData.currentLevelIndex = 2;
-            SaveSystem.SavePlayer(playerData);
         }
         
     }

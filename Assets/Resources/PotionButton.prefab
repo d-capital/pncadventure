@@ -38,8 +38,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000052452, y: -0.0000052452}
-  m_SizeDelta: {x: 86.1032, y: 86.1032}
+  m_AnchoredPosition: {x: -0.00000095367, y: 0}
+  m_SizeDelta: {x: 56.3229, y: 61.1992}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7779650246362293179
 CanvasRenderer:
@@ -137,6 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 7109672189545423399, guid: e710e1359cc0a7f4ca544585cc3955a4, type: 3}
   itemType: PotionItem
+  initObjectPos: {x: 0, y: 0, z: 0}
 --- !u!225 &7280641339060126231
 CanvasGroup:
   m_ObjectHideFlags: 0

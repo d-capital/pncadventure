@@ -16,6 +16,15 @@ public class sink : MonoBehaviour, IDropHandler
             {
                 objectReceived = true;
                 GameObject.Destroy(eventData.pointerDrag);
+                AdvScript PlayerObject = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>();
+                PlayerObject.bathed = true;
+                string InfoText = "Умытым быть гораздо лучше";
+                PlayerObject.ShowInfoText(InfoText);
+                var DroppableItems = GameObject.FindGameObjectsWithTag("droppable");
+                foreach (var i in DroppableItems)
+                {
+                    i.layer = 0;
+                }
                 //show message
                 //set bool variable
             }

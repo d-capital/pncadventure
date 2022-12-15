@@ -456,6 +456,24 @@ public class AdvScript : MonoBehaviour
                     ShowInfoText(newInfoText);
                     collectSound.Play();
                 }
+                else if (hit.collider.gameObject.name.Contains("crowBar"))
+                {
+                    hit.collider.gameObject.SetActive(false);
+                    var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
+                    collectibleItem.onClick();
+                    string newInfoText = "Проснитесь, мистер Семен.";
+                    ShowInfoText(newInfoText);
+                    collectSound.Play();
+                }
+                else if (hit.collider.gameObject.name.Contains("potion"))
+                {
+                    hit.collider.gameObject.SetActive(false);
+                    var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
+                    collectibleItem.onClick();
+                    string newInfoText = "Какое же оно фиолетовое.";
+                    ShowInfoText(newInfoText);
+                    collectSound.Play();
+                }
             }
             else
             {

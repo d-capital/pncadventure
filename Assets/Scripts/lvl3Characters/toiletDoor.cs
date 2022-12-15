@@ -17,6 +17,11 @@ public class toiletDoor : MonoBehaviour, IDropHandler
                 objectReceived = true;
                 OpenDoor();
                 GameObject.Destroy(eventData.pointerDrag);
+                var DroppableItems = GameObject.FindGameObjectsWithTag("droppable");
+                foreach (var i in DroppableItems)
+                {
+                    i.layer = 0;
+                }
                 //show message
                 //set bool variable
             }
