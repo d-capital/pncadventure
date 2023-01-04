@@ -125,6 +125,14 @@ public class AdvScript : MonoBehaviour
     DialogueTrigger shahtarBedDialogue;
     //----------------------------------------------//
 
+    //-----------------Dialogues Level 4-------------//
+    DialogueTrigger majorDialogue;
+    DialogueTrigger majorGirlDialogue;
+    DialogueTrigger grandMasterDialogue;
+    DialogueTrigger hunterDialogue;
+    DialogueTrigger cabCrewDialogue;
+    //----------------------------------------------//
+
     public string currentDialoguePartner;
 
     public Animator animator;
@@ -471,6 +479,60 @@ public class AdvScript : MonoBehaviour
                     var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
                     collectibleItem.onClick();
                     string newInfoText = "Какое же оно фиолетовое.";
+                    ShowInfoText(newInfoText);
+                    collectSound.Play();
+                }
+                //----------------Level 4 interactions------------------------//
+                else if (hit.collider.gameObject.GetComponent<majorScript>())
+                {
+                    currentDialoguePartner = "Major";
+                    majorDialogue = hit.collider.gameObject.GetComponent<DialogueTrigger>();
+                    ShowDialogueBox();
+                    majorDialogue.TriggerDialogue(currentDialoguePartner);
+                }
+                else if (hit.collider.gameObject.GetComponent<majorGirlScript>())
+                {
+                    currentDialoguePartner = "MajorGirl";
+                    majorGirlDialogue = hit.collider.gameObject.GetComponent<DialogueTrigger>();
+                    ShowDialogueBox();
+                    majorGirlDialogue.TriggerDialogue(currentDialoguePartner);
+                }
+                else if (hit.collider.gameObject.GetComponent<hunterScript>())
+                {
+                    currentDialoguePartner = "Hunter";
+                    hunterDialogue = hit.collider.gameObject.GetComponent<DialogueTrigger>();
+                    ShowDialogueBox();
+                    hunterDialogue.TriggerDialogue(currentDialoguePartner);
+                }
+                else if (hit.collider.gameObject.GetComponent<grandMasterScript>())
+                {
+                    currentDialoguePartner = "GrandMaster";
+                    grandMasterDialogue = hit.collider.gameObject.GetComponent<DialogueTrigger>();
+                    ShowDialogueBox();
+                    grandMasterDialogue.TriggerDialogue(currentDialoguePartner);
+                }
+                else if (hit.collider.gameObject.GetComponent<cabCrewScript>())
+                {
+                    currentDialoguePartner = "CabCrew";
+                    cabCrewDialogue = hit.collider.gameObject.GetComponent<DialogueTrigger>();
+                    ShowDialogueBox();
+                    cabCrewDialogue.TriggerDialogue(currentDialoguePartner);
+                }
+                else if (hit.collider.gameObject.name.Contains("bojaryshnik"))
+                {
+                    hit.collider.gameObject.SetActive(false);
+                    var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
+                    collectibleItem.onClick();
+                    string newInfoText = "Пригодится, наверное";
+                    ShowInfoText(newInfoText);
+                    collectSound.Play();
+                }
+                else if (hit.collider.gameObject.name.Contains("glass"))
+                {
+                    hit.collider.gameObject.SetActive(false);
+                    var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
+                    collectibleItem.onClick();
+                    string newInfoText = "Граненый!";
                     ShowInfoText(newInfoText);
                     collectSound.Play();
                 }
