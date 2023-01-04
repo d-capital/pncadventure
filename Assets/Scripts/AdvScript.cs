@@ -171,6 +171,13 @@ public class AdvScript : MonoBehaviour
             semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
             semenDialogue.TriggerDialogue("SemenLvl3Intro");    
         }
+        else if (GetCurrentLevel() == "Level 4")
+        {
+            ShowDialogueBox();
+            currentDialoguePartner = "SemenLvl4Intro";
+            semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
+            semenDialogue.TriggerDialogue("SemenLvl4Intro");
+        }
     }
     public void ShowOutro()
     {
@@ -657,6 +664,31 @@ public class AdvScript : MonoBehaviour
             else if (currentDialoguePartner == "Shahtar")
             {
                 currentDialogueTrigger = GameObject.FindObjectOfType<shahtarScript>().GetComponent<DialogueTrigger>();
+            }
+            //LVL4
+            else if (currentDialoguePartner == "SemenLvl4Intro")
+            {
+                currentDialogueTrigger = GameObject.Find("Player").GetComponent<DialogueTrigger>();
+            }
+            else if (currentDialoguePartner == "Major")
+            {
+                currentDialogueTrigger = GameObject.FindObjectOfType<majorScript>().GetComponent<DialogueTrigger>();
+            }
+            else if (currentDialoguePartner == "MajorGirl")
+            {
+                currentDialogueTrigger = GameObject.FindObjectOfType<majorGirlScript>().GetComponent<DialogueTrigger>();
+            }
+            else if (currentDialoguePartner == "Hunter")
+            {
+                currentDialogueTrigger = GameObject.FindObjectOfType<hunterScript>().GetComponent<DialogueTrigger>();
+            }
+            else if (currentDialoguePartner == "GrandMaster")
+            {
+                currentDialogueTrigger = GameObject.FindObjectOfType<grandMasterScript>().GetComponent<DialogueTrigger>();
+            }
+            else if (currentDialoguePartner == "CabCrew")
+            {
+                currentDialogueTrigger = GameObject.FindObjectOfType<cabCrewScript>().GetComponent<DialogueTrigger>();
             }
         }
         return currentDialogueTrigger;
