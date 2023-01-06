@@ -92,8 +92,24 @@ public class AdvScript : MonoBehaviour
     //-------shahtarsBed------------------//
     public bool fuckedOff1 = false;
     public bool bathed = false;
-    //-------toiletDoor-------------------//
-    //-------sink-------------------------//
+    //--------------------------------------------------------//
+
+    //--------Level 4 Attributes-------------------------------//
+    //-------Major----------------------------//
+    public bool majorGirlHasShuba = false;
+    public bool gotQuestFromMajor = false;
+    //-------MajorGirl------------------------//
+    public bool wrongAnswer = false;
+    public bool girlReasked = false;
+    public bool girlAskedForShuba = false;
+    public bool rightAnswer = false;
+    public bool gotShubaFromHunter = false;
+    public bool majorInformed = false;
+    //-------Hunter---------------------------//
+    public bool firstTalk = false;
+    public bool hasAspirin = false; // need a way to indentify the state of inventory
+    //-------GrandMaster----------------------//
+
 
     //--------------------------------------------------------//
     IList dialogBoxesSearchResults;

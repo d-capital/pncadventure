@@ -38,6 +38,7 @@ public class DialogueManager : MonoBehaviour
     private string lvl1State;
     private string lvl2State;
     private string lvl3State;
+    private string lvl4State;
 
     PlayerData playerData = new PlayerData();
 
@@ -88,6 +89,10 @@ public class DialogueManager : MonoBehaviour
         else if (currentLevel == "Level 3")
         {
             lvl3stateCalculator(currDialogueActor, dialogue);
+        }
+        else if (currentLevel == "Level 4")
+        {
+            lvl4stateCalculator(currDialogueActor, dialogue);
         }
 
     }
@@ -913,6 +918,91 @@ public class DialogueManager : MonoBehaviour
             }
             lvl3stateCalculator(currDialogueActor, dialogue);
         }
+        else if (currentLevel == "Level 4")
+        {
+            if (currDialogueActor == "SemenLvl4Intro")
+            {
+                EndDialogue();
+            }
+            else if (currDialogueActor == "Major")
+            {
+                if(lvl4State == "initial")
+                {
+                    EndDialogue();
+                }
+                else if(lvl4State == "majorGirlHasShuba")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotQuestFromMajor = true;
+                    EndDialogue();
+                }
+            }
+            else if (currDialogueActor == "MajorGirl")
+            {
+                if(lvl4State == "initial")
+                {
+                    if(curResponseTracker == 0 || curResponseTracker == 1 || curResponseTracker == 3)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wrongAnswer = true;
+                    }
+                    else if (curResponseTracker == 2)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rightAnswer = true;
+                    }
+                }
+                else if(lvl4State == "wrongAnswer")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wrongAnswer = false;
+                    EndDialogue();
+                }
+                else if (lvl4State == "rightAnswer")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().girlAskedForShuba = true;
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().girlReasked = true;
+                    EndDialogue();
+                }
+                else if (lvl4State == "shubaFromBeginning")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().majorGirlHasShuba = true;
+                    EndDialogue();
+                }
+                else if (lvl4State == "noShuba")
+                {
+                    EndDialogue();
+                }
+                else if (lvl4State == "readyToGiveShuba")
+                {
+                    if (curResponseTracker == 0)
+                    {
+                        EndDialogue();
+                    }
+                    else if (curResponseTracker == 1)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().majorGirlHasShuba = true;
+                    }
+                }
+                else if (lvl4State == "shubaGiven")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().majorInformed = true;
+                    EndDialogue();
+                }
+                else if (lvl4State == "majorInformed")
+                {
+                    EndDialogue();
+                }
+            }
+            else if (currDialogueActor == "Hunter")
+            {
+
+            }
+            else if (currDialogueActor == "GrandMaster")
+            {
+
+            }
+            else if (currDialogueActor == "CabCrew")
+            {
+
+            }
+        }
         curResponseTracker = 0;
     }
     void EndDialogue()
@@ -1577,6 +1667,109 @@ public class DialogueManager : MonoBehaviour
             }
         }
     }
+
+    void lvl4stateCalculator(string currDialogueActor, Dialogue dialogue)
+    {
+        //----Major---//
+        bool majorGirlHasShuba = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().majorGirlHasShuba;
+        bool gotQuestFromMajor = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotQuestFromMajor;
+        //----MajorGirl----//
+        bool wrongAnswer = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wrongAnswer;
+        bool rightAnswer = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rightAnswer;
+        bool girlReasked = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().girlReasked;
+        bool girlAskedForShuba = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().girlAskedForShuba;
+        bool gotShubaFromHunter = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotShubaFromHunter;
+        bool majorInformed = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().majorInformed;
+        //----Hunter-----//
+        bool firstTalk = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().firstTalk;
+        bool hasAspirin = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasAspirin;
+        //-------GrandMaster------------------//
+
+        //-------CabCrew---------------------//
+
+        //----------------------------------//
+        ClearLinesAnswers(dialogue);
+        //calc the state on the 2nd level
+        string path = Application.dataPath;
+        string pathToDialogue = path + "/StreamingAssets/DialogueStorage/" + currDialogueActor + ".json";
+        var jsonString = System.IO.File.ReadAllText(pathToDialogue);
+        LinesAnswersList characterLinesAnswers = JsonConvert.DeserializeObject<LinesAnswersList>(jsonString);
+        if (currDialogueActor == "SemenLvl4Intro")
+        {
+            lvl4State = "intro";
+            SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+        }
+        else if (currDialogueActor == "Major")
+        {
+            if (!majorGirlHasShuba)
+            {
+                lvl4State = "initial";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (majorGirlHasShuba)
+            {
+                lvl4State = "majorGirlHasShuba";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+        }
+        else if (currDialogueActor == "MajorGirl")
+        {
+            if (!rightAnswer && !wrongAnswer)
+            {
+                lvl4State = "initial";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (!rightAnswer && wrongAnswer)
+            {
+                lvl4State = "wrongAnswer";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (rightAnswer && !gotShubaFromHunter && girlAskedForShuba && !girlReasked)
+            {
+                lvl4State = "rightAnswer";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (rightAnswer && !gotShubaFromHunter && girlAskedForShuba && girlReasked)
+            {
+                lvl4State = "noShuba";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (rightAnswer && gotShubaFromHunter && !majorGirlHasShuba && girlAskedForShuba)
+            {
+                lvl4State = "readyToGiveShuba";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (rightAnswer && gotShubaFromHunter && !majorGirlHasShuba && !girlAskedForShuba)
+            {
+                lvl4State = "shubaFromBeginning";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (rightAnswer && gotShubaFromHunter && majorGirlHasShuba && !majorInformed)
+            {
+                lvl4State = "shubaGiven";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (rightAnswer && gotShubaFromHunter && majorGirlHasShuba && majorInformed)
+            {
+                lvl4State = "majorInformed";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+        }
+        else if (currDialogueActor == "Hunter")
+        {
+
+        }
+        else if (currDialogueActor == "GrandMaster")
+        {
+
+        }
+        else if (currDialogueActor == "CabCrew")
+        {
+
+        }
+
+    }
+
     void SetNewLinesAnswers(Dialogue dialogue, LinesAnswersList linesAnswersList, string lvl1State)
     {
         LinesAnswer lineResponse = linesAnswersList.LinesAnswers.Find(l => l.name == lvl1State);
