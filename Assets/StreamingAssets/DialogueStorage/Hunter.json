@@ -69,6 +69,17 @@
             ]
         },
         {
+            "name":"noTeaAfterAsk",
+            "line":"Ну что, принес?",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Еще нет"
+                }
+            ]
+        },
+        {
             "name":"hunterWantsToGiveShuba",
             "line":"Ура, это то, что мне нужно. Возьми эту шубку эту за труды.",
             "responses":
@@ -91,7 +102,7 @@
             ]
         },
         {
-            "name":"hunterDrinksTea",
+            "name":"hunterDrinksTeaOrGotAspirin",
             "line":"Ээээх! Мохнатый ... хмель! На душистый мн-ээ ... или пушистый ...  как же там было... ",
             "responses":
             [

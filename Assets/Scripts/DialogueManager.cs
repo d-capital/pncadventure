@@ -992,7 +992,68 @@ public class DialogueManager : MonoBehaviour
             }
             else if (currDialogueActor == "Hunter")
             {
-
+                if (lvl4State == "initial")
+                {
+                    if (curResponseTracker == 0)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().firstTalk = false;
+                    }
+                }
+                else if (lvl4State == "initialWithAspirin")
+                {
+                    if(curResponseTracker == 0)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().firstTalk = false;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().aspirinGivenToHunter = true;
+                    }
+                    else if(curResponseTracker == 1)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().firstTalk = false;
+                    }
+                }
+                else if (lvl4State == "asksForTeaNoTea")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hunterReasksTea = true;
+                    EndDialogue();
+                }
+                else if (lvl4State == "asksForTeaHasTea")
+                {
+                    if (curResponseTracker == 0)
+                    {
+                        EndDialogue();
+                    }
+                    else if (curResponseTracker == 1)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().teaGivenToHunter = true;
+                    }
+                }
+                else if (lvl4State == "semenGotTea")
+                {
+                    if (curResponseTracker == 0)
+                    {
+                        EndDialogue();
+                    }
+                    else if (curResponseTracker == 1)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().teaGivenToHunter = true;
+                    }
+                }
+                else if (lvl4State == "noTeaAfterAsk")
+                {
+                    EndDialogue();
+                }
+                else if (lvl4State == "hunterWantsToGiveShuba")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotShubaFromHunter = true;
+                }
+                else if (lvl4State == "hunterWantsToGiveShubaAfterAspirin")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotShubaFromHunter = true;
+                }
+                else if (lvl4State == "hunterDrinksTeaOrGotAspirin")
+                {
+                    EndDialogue();
+                }
             }
             else if (currDialogueActor == "GrandMaster")
             {
@@ -1683,6 +1744,11 @@ public class DialogueManager : MonoBehaviour
         //----Hunter-----//
         bool firstTalk = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().firstTalk;
         bool hasAspirin = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasAspirin;
+        bool hunterAsksForTea = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hunterAsksForTea;
+        bool hasTea = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasTea;
+        bool hunterReasksTea = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hunterReasksTea;
+        bool teaGivenToHunter = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().teaGivenToHunter;
+        bool aspirinGivenToHunter = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().aspirinGivenToHunter;
         //-------GrandMaster------------------//
 
         //-------CabCrew---------------------//
@@ -1757,7 +1823,51 @@ public class DialogueManager : MonoBehaviour
         }
         else if (currDialogueActor == "Hunter")
         {
-
+            if(firstTalk && !hasAspirin)
+            {
+                lvl4State = "initial";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (firstTalk && hasAspirin)
+            {
+                lvl4State = "initialWithAspirin";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (!firstTalk && !hasTea && hunterAsksForTea && !hunterReasksTea)
+            {
+                lvl4State = "asksForTeaNoTea";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (!firstTalk && hasTea && hunterAsksForTea && !hunterReasksTea)
+            {
+                lvl4State = "asksForTeaHasTea";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (hunterReasksTea && hasTea)
+            {
+                lvl4State = "semenGotTea";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (hunterReasksTea && !hasTea)
+            {
+                lvl4State = "noTeaAfterAsk";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (teaGivenToHunter)
+            {
+                lvl4State = "hunterWantsToGiveShuba";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (aspirinGivenToHunter)
+            {
+                lvl4State = "hunterWantsToGiveShubaAfterAspirin";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (gotShubaFromHunter)
+            {
+                lvl4State = "hunterDrinksTeaOrGotAspirin";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
         }
         else if (currDialogueActor == "GrandMaster")
         {

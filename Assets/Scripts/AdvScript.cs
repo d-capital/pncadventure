@@ -106,8 +106,14 @@ public class AdvScript : MonoBehaviour
     public bool gotShubaFromHunter = false;
     public bool majorInformed = false;
     //-------Hunter---------------------------//
-    public bool firstTalk = false;
+    public bool firstTalk = true;
+    public bool hunterAsksForTea = false;
     public bool hasAspirin = false; // need a way to indentify the state of inventory
+    public bool hasTea = false; // need a way to indentify the state of inventory
+    public bool hunterReasksTea = false;
+    public bool teaGivenToHunter = false;
+    public bool aspirinGivenToHunter = false;
+
     //-------GrandMaster----------------------//
 
 
