@@ -115,8 +115,16 @@ public class AdvScript : MonoBehaviour
     public bool aspirinGivenToHunter = false;
 
     //-------GrandMaster----------------------//
-
-
+    public bool grandmasterAsksForTea = false;
+    public bool chessAnswerOne = false;
+    public bool chessAnswerTwo = false;
+    public bool chessAnswerThree = false;
+    public bool grandMasterThanked = false;
+    public bool chessWrongAnswer = false;
+    //-------CabCrew----------------------//
+    public bool semenAskedForPayment = false;
+    public bool rightPaymentRecipient = false;
+    public bool wrongRecipient = false;
     //--------------------------------------------------------//
     IList dialogBoxesSearchResults;
     DialogueBoxHandler dialogueBox;

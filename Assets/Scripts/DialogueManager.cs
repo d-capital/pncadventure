@@ -1036,6 +1036,7 @@ public class DialogueManager : MonoBehaviour
                     else if (curResponseTracker == 1)
                     {
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().teaGivenToHunter = true;
+                        //remove tea from inventory
                     }
                 }
                 else if (lvl4State == "noTeaAfterAsk")
@@ -1057,10 +1058,106 @@ public class DialogueManager : MonoBehaviour
             }
             else if (currDialogueActor == "GrandMaster")
             {
-
+                if (lvl4State == "initial")
+                {
+                    if (curResponseTracker == 0 || curResponseTracker == 2 || curResponseTracker == 3)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessWrongAnswer = true;
+                        EndDialogue();
+                    }
+                    else if (curResponseTracker == 1 )
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessAnswerOne = true;
+                    }
+                }
+                else if (lvl4State == "2ndQuestion")
+                {
+                    if (curResponseTracker == 0 || curResponseTracker == 2 || curResponseTracker == 3 || curResponseTracker == 4)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessWrongAnswer = true;
+                        EndDialogue();
+                    }
+                    else if (curResponseTracker == 1)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessAnswerTwo = true;
+                    }
+                }
+                else if (lvl4State == "3rdQuestion")
+                {
+                    if (curResponseTracker == 0 || curResponseTracker == 1 || curResponseTracker == 2 || curResponseTracker == 4)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessWrongAnswer = true;
+                        EndDialogue();
+                    }
+                    else if (curResponseTracker == 3)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessAnswerThree = true;
+                    }
+                }
+                else if (lvl4State == "thankYou")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().grandMasterThanked = true;
+                    EndDialogue();
+                }
+                else if (lvl4State == "afterTalkingWithMajorNoTea")
+                {
+                    EndDialogue();
+                }
+                else if (lvl4State == "afterTalkingWithMajorHasTea")
+                {
+                    EndDialogue();
+                    //remove chai from inventory
+                    //StartCutScene
+                }
+                else if (lvl4State == "hasntTalkedWithMajor")
+                {
+                    EndDialogue();
+                }
+                else if (lvl4State == "answeredWrong")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessWrongAnswer = false;
+                    EndDialogue();
+                }
             }
             else if (currDialogueActor == "CabCrew")
             {
+                if(lvl4State == "initial")
+                {
+                    if (curResponseTracker == 0)
+                    {
+                        EndDialogue();
+                    }
+                    else if (curResponseTracker == 1)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().semenAskedForPayment = true;
+                    }
+                }
+                else if (lvl4State == "initialNoGlassNoTask")
+                {
+                    EndDialogue();
+                }
+                else if (lvl4State == "asksForPayment")
+                {
+                    if (curResponseTracker == 0 || curResponseTracker == 3 || curResponseTracker == 4 || curResponseTracker == 5)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wrongRecipient = true;
+                    }
+                    else if (curResponseTracker == 1 || curResponseTracker == 2)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rightPaymentRecipient = true;
+                    }
+                }
+                else if (lvl4State == "wrongAnswer")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().semenAskedForPayment = false;
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wrongRecipient = false;
+                    EndDialogue();
+                }
+                else if (lvl4State == "rightAnswer")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasTea = true;
+                    EndDialogue();
+                }
 
             }
         }
@@ -1750,10 +1847,17 @@ public class DialogueManager : MonoBehaviour
         bool teaGivenToHunter = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().teaGivenToHunter;
         bool aspirinGivenToHunter = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().aspirinGivenToHunter;
         //-------GrandMaster------------------//
-
+        bool grandmasterAsksForTea = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().grandmasterAsksForTea;
+        bool chessAnswerOne = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessAnswerOne;
+        bool chessAnswerTwo = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessAnswerTwo;
+        bool chessAnswerThree = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessAnswerThree;
+        bool grandMasterThanked = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().grandMasterThanked;
+        bool chessWrongAnswer = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessWrongAnswer;
         //-------CabCrew---------------------//
-
-        //----------------------------------//
+        bool semenAskedForPayment = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().semenAskedForPayment;
+        bool rightPaymentRecipient = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rightPaymentRecipient;
+        bool wrongRecipient = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wrongRecipient;
+         //----------------------------------//
         ClearLinesAnswers(dialogue);
         //calc the state on the 2nd level
         string path = Application.dataPath;
@@ -1871,11 +1975,74 @@ public class DialogueManager : MonoBehaviour
         }
         else if (currDialogueActor == "GrandMaster")
         {
-
+            if (!chessAnswerOne)
+            {
+                lvl4State = "initial";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (chessAnswerOne && !chessAnswerTwo && !chessAnswerThree && !grandMasterThanked)
+            {
+                lvl4State = "2ndQuestion";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (chessAnswerOne && chessAnswerTwo && !chessAnswerThree && !grandMasterThanked)
+            {
+                lvl4State = "3rdQuestion";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (chessAnswerOne && chessAnswerTwo && chessAnswerThree && !grandMasterThanked)
+            {
+                lvl4State = "thankYou";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (chessAnswerOne && chessAnswerTwo && chessAnswerThree && grandMasterThanked && !hasTea && gotQuestFromMajor)
+            {
+                lvl4State = "afterTalkingWithMajorNoTea";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (chessAnswerOne && chessAnswerTwo && chessAnswerThree && grandMasterThanked && hasTea && gotQuestFromMajor)
+            {
+                lvl4State = "afterTalkingWithMajorHasTea";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (chessAnswerOne && chessAnswerTwo && chessAnswerThree && grandMasterThanked && !gotQuestFromMajor)
+            {
+                lvl4State = "hasntTalkedWithMajor";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (chessWrongAnswer)
+            {
+                lvl4State = "answeredWrong";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
         }
         else if (currDialogueActor == "CabCrew")
         {
-
+            if (hunterAsksForTea || grandmasterAsksForTea)
+            {
+                lvl4State = "initial";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if(!hunterAsksForTea && !grandmasterAsksForTea)
+            {
+                lvl4State = "initialNoGlassNoTask";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (semenAskedForPayment)
+            {
+                lvl4State = "asksForPayment";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (wrongRecipient)
+            {
+                lvl4State = "wrongAnswer";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (rightPaymentRecipient)
+            {
+                lvl4State = "rightAnswer";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
         }
 
     }
