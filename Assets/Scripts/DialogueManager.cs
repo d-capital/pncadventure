@@ -908,6 +908,19 @@ public class DialogueManager : MonoBehaviour
                     playerData.carma = "good";
                     playerData.enterCutSceneShown = true;
                     playerData.currentLevelIndex = 8;
+                    Spawn[] InventoryItems = GameObject.FindObjectsOfType<Spawn>();
+                    List<bool> hasAspirin = new List<bool>();
+                    foreach (Spawn i in InventoryItems)
+                    {
+                        if (i.itemType == "aspirinItem")
+                        {
+                            hasAspirin.Add(true);
+                        }
+                    }
+                    if (hasAspirin.Count > 0)
+                    {
+                        playerData.hasAspirin = true;
+                    }
                     EndDialogue();
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
                 }

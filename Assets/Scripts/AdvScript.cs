@@ -180,6 +180,11 @@ public class AdvScript : MonoBehaviour
 
     void OnLevelFinishedLoading()
     {
+        PlayerData playerData = SaveSystem.LoadPlayer();
+        if (playerData.hasAspirin)
+        {
+            GameObject.FindObjectOfType<DialogueManager>().GetComponent<DialogueManager>().GetItemToInventory("aspirinButton");
+        }
         if (GetCurrentLevel() == "Level 1")
         {
             ShowDialogueBox();
@@ -208,6 +213,7 @@ public class AdvScript : MonoBehaviour
             semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
             semenDialogue.TriggerDialogue("SemenLvl4Intro");
         }
+
     }
     public void ShowOutro()
     {
