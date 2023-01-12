@@ -908,16 +908,7 @@ public class DialogueManager : MonoBehaviour
                     playerData.carma = "good";
                     playerData.enterCutSceneShown = true;
                     playerData.currentLevelIndex = 8;
-                    Spawn[] InventoryItems = GameObject.FindObjectsOfType<Spawn>();
-                    List<bool> hasAspirin = new List<bool>();
-                    foreach (Spawn i in InventoryItems)
-                    {
-                        if (i.itemType == "aspirinItem")
-                        {
-                            hasAspirin.Add(true);
-                        }
-                    }
-                    if (hasAspirin.Count > 0)
+                    if (hasItemInInventory("aspirinItem"))
                     {
                         playerData.hasAspirin = true;
                     }
@@ -976,6 +967,7 @@ public class DialogueManager : MonoBehaviour
                 else if (lvl4State == "shubaFromBeginning")
                 {
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().majorGirlHasShuba = true;
+                    RemoveItemFromSlotWithoutDropping("shubaItem");
                     EndDialogue();
                 }
                 else if (lvl4State == "noShuba")
@@ -990,6 +982,7 @@ public class DialogueManager : MonoBehaviour
                     }
                     else if (curResponseTracker == 1)
                     {
+                        RemoveItemFromSlotWithoutDropping("shubaItem");
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().majorGirlHasShuba = true;
                     }
                 }
@@ -1018,10 +1011,12 @@ public class DialogueManager : MonoBehaviour
                     {
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().firstTalk = false;
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().aspirinGivenToHunter = true;
+                        RemoveItemFromSlotWithoutDropping("aspirinItem");
                     }
                     else if(curResponseTracker == 1)
                     {
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().firstTalk = false;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hunterAsksForTea = true;
                     }
                 }
                 else if (lvl4State == "asksForTeaNoTea")
@@ -1049,6 +1044,7 @@ public class DialogueManager : MonoBehaviour
                     else if (curResponseTracker == 1)
                     {
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().teaGivenToHunter = true;
+                        RemoveItemFromSlotWithoutDropping("glassOfTeaItem");
                         //remove tea from inventory
                     }
                 }
@@ -1058,10 +1054,12 @@ public class DialogueManager : MonoBehaviour
                 }
                 else if (lvl4State == "hunterWantsToGiveShuba")
                 {
+                    GetItemToInventory("shubaButton");
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotShubaFromHunter = true;
                 }
                 else if (lvl4State == "hunterWantsToGiveShubaAfterAspirin")
                 {
+                    GetItemToInventory("shubaButton");
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotShubaFromHunter = true;
                 }
                 else if (lvl4State == "hunterDrinksTeaOrGotAspirin")
@@ -1116,11 +1114,75 @@ public class DialogueManager : MonoBehaviour
                 {
                     EndDialogue();
                 }
-                else if (lvl4State == "afterTalkingWithMajorHasTea")
+                else if (lvl4State == "afterTalkingWithMajorHasTeaNoBoyaryshnikTea")
                 {
-                    EndDialogue();
-                    //remove chai from inventory
-                    //StartCutScene
+                    if(curResponseTracker == 0)
+                    {
+                        //chai
+                        playerData.currentLevelIndex = 9;
+                        playerData.enterCutSceneShown = true;
+                        playerData.hasAspirin = hasItemInInventory("aspirinItem");
+                        playerData.carma = "good";
+                        RemoveItemFromSlotWithoutDropping("glassOfTeaItem");
+                        //I am just guessing the level indext now, it might be wrong, assume that 9 is a good ending,
+                        // 10 is common ending and 11 is bad ending:
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 9);
+                    }
+                    else if (curResponseTracker == 1)
+                    {
+                        EndDialogue();
+                    }
+                }
+                else if (lvl4State == "afterTalkingWithMajorHasTeaHasBoyaryshnikTea")
+                {
+                    if (curResponseTracker == 0)
+                    {
+                        //chai
+                        playerData.currentLevelIndex = 9;
+                        playerData.enterCutSceneShown = true;
+                        playerData.hasAspirin = hasItemInInventory("aspirinItem");
+                        playerData.carma = "good";
+                        RemoveItemFromSlotWithoutDropping("glassOfTeaItem");
+                        //I am just guessing the level indext now, it might be wrong, assume that 9 is a good ending,
+                        // 10 is common ending and 11 is bad ending:
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 9);
+                    }
+                    else if (curResponseTracker == 1)
+                    {
+                        //boyaryshnik
+                        playerData.currentLevelIndex = 11;
+                        playerData.enterCutSceneShown = true;
+                        playerData.hasAspirin = hasItemInInventory("aspirinItem");
+                        playerData.carma = "bad";
+                        RemoveItemFromSlotWithoutDropping("glassOfBoyaryshnikItem");
+                        //I am just guessing the level indext now, it might be wrong, assume that 9 is a good ending,
+                        // 10 is common ending and 11 is bad ending:
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 11);
+                    }
+                    else if (curResponseTracker == 2)
+                    {
+                        EndDialogue();
+                    }
+                }
+                else if (lvl4State == "afterTalkingWithMajorNoTeaHasBoyaryshnikTea")
+                {
+                    if(curResponseTracker == 0)
+                    {
+                        //boyaryshnik
+                        playerData.currentLevelIndex = 11;
+                        playerData.enterCutSceneShown = true;
+                        playerData.hasAspirin = hasItemInInventory("aspirinItem");
+                        playerData.carma = "bad";
+                        RemoveItemFromSlotWithoutDropping("glassOfBoyaryshnikItem");
+                        //I am just guessing the level indext now, it might be wrong, assume that 9 is a good ending,
+                        // 10 is common ending and 11 is bad ending:
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 11);
+
+                    }
+                    else if (curResponseTracker == 1)
+                    {
+                        EndDialogue();
+                    }
                 }
                 else if (lvl4State == "hasntTalkedWithMajor")
                 {
@@ -1169,10 +1231,13 @@ public class DialogueManager : MonoBehaviour
                 else if (lvl4State == "rightAnswer")
                 {
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasTea = true;
+                    RemoveItemFromSlotWithoutDropping("glassItem");
+                    GetItemToInventory("glassOfTeaButton");
                     EndDialogue();
                 }
 
             }
+            lvl4stateCalculator(dialogueActor, dialogue);
         }
         curResponseTracker = 0;
     }
@@ -1853,9 +1918,9 @@ public class DialogueManager : MonoBehaviour
         bool majorInformed = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().majorInformed;
         //----Hunter-----//
         bool firstTalk = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().firstTalk;
-        bool hasAspirin = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasAspirin;
+        bool hasAspirin = hasItemInInventory("aspirinItem");
         bool hunterAsksForTea = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hunterAsksForTea;
-        bool hasTea = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasTea;
+        bool hasTea = hasItemInInventory("glassOfTeaItem");
         bool hunterReasksTea = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hunterReasksTea;
         bool teaGivenToHunter = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().teaGivenToHunter;
         bool aspirinGivenToHunter = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().aspirinGivenToHunter;
@@ -1866,11 +1931,14 @@ public class DialogueManager : MonoBehaviour
         bool chessAnswerThree = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessAnswerThree;
         bool grandMasterThanked = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().grandMasterThanked;
         bool chessWrongAnswer = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessWrongAnswer;
+        bool hasBoyaryshnikTea = hasItemInInventory("glassOfBoyaryshnikItem");
+        bool hasShuba = hasItemInInventory("shubaItem");
         //-------CabCrew---------------------//
         bool semenAskedForPayment = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().semenAskedForPayment;
         bool rightPaymentRecipient = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rightPaymentRecipient;
         bool wrongRecipient = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wrongRecipient;
-         //----------------------------------//
+        bool hasGlass = hasItemInInventory("glassItem");
+        //----------------------------------//
         ClearLinesAnswers(dialogue);
         //calc the state on the 2nd level
         string path = Application.dataPath;
@@ -1907,27 +1975,27 @@ public class DialogueManager : MonoBehaviour
                 lvl4State = "wrongAnswer";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
             }
-            else if (rightAnswer && !gotShubaFromHunter && girlAskedForShuba && !girlReasked)
+            else if (rightAnswer && !gotShubaFromHunter && !hasShuba && girlAskedForShuba && !girlReasked)
             {
                 lvl4State = "rightAnswer";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
             }
-            else if (rightAnswer && !gotShubaFromHunter && girlAskedForShuba && girlReasked)
+            else if (rightAnswer && !gotShubaFromHunter && !hasShuba && girlAskedForShuba && girlReasked)
             {
                 lvl4State = "noShuba";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
             }
-            else if (rightAnswer && gotShubaFromHunter && !majorGirlHasShuba && girlAskedForShuba)
+            else if (rightAnswer && gotShubaFromHunter && hasShuba && !majorGirlHasShuba && girlAskedForShuba)
             {
                 lvl4State = "readyToGiveShuba";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
             }
-            else if (rightAnswer && gotShubaFromHunter && !majorGirlHasShuba && !girlAskedForShuba)
+            else if (rightAnswer && gotShubaFromHunter && hasShuba && !majorGirlHasShuba && !girlAskedForShuba)
             {
                 lvl4State = "shubaFromBeginning";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
             }
-            else if (rightAnswer && gotShubaFromHunter && majorGirlHasShuba && !majorInformed)
+            else if (rightAnswer && gotShubaFromHunter && !hasShuba && majorGirlHasShuba && !majorInformed)
             {
                 lvl4State = "shubaGiven";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
@@ -2013,9 +2081,22 @@ public class DialogueManager : MonoBehaviour
                 lvl4State = "afterTalkingWithMajorNoTea";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
             }
-            else if (chessAnswerOne && chessAnswerTwo && chessAnswerThree && grandMasterThanked && hasTea && gotQuestFromMajor)
+            else if (chessAnswerOne && chessAnswerTwo && chessAnswerThree && grandMasterThanked 
+                && hasTea && !hasBoyaryshnikTea && gotQuestFromMajor)
             {
-                lvl4State = "afterTalkingWithMajorHasTea";
+                lvl4State = "afterTalkingWithMajorHasTeaNoBoyaryshnikTea";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (chessAnswerOne && chessAnswerTwo && chessAnswerThree && grandMasterThanked
+                && hasTea && hasBoyaryshnikTea && gotQuestFromMajor)
+            {
+                lvl4State = "afterTalkingWithMajorHasTeaHasBoyaryshnikTea";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (chessAnswerOne && chessAnswerTwo && chessAnswerThree && grandMasterThanked
+                && !hasTea && hasBoyaryshnikTea && gotQuestFromMajor)
+            {
+                lvl4State = "afterTalkingWithMajorNoTeaHasBoyaryshnikTea";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
             }
             else if (chessAnswerOne && chessAnswerTwo && chessAnswerThree && grandMasterThanked && !gotQuestFromMajor)
@@ -2031,7 +2112,7 @@ public class DialogueManager : MonoBehaviour
         }
         else if (currDialogueActor == "CabCrew")
         {
-            if (hunterAsksForTea || grandmasterAsksForTea)
+            if ((hunterAsksForTea || grandmasterAsksForTea) && hasGlass && !semenAskedForPayment)
             {
                 lvl4State = "initial";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
@@ -2041,7 +2122,7 @@ public class DialogueManager : MonoBehaviour
                 lvl4State = "initialNoGlassNoTask";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
             }
-            else if (semenAskedForPayment)
+            else if (semenAskedForPayment && !wrongRecipient && !rightPaymentRecipient)
             {
                 lvl4State = "asksForPayment";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
@@ -2121,6 +2202,19 @@ public class DialogueManager : MonoBehaviour
                 break;
             }
         }
+    }
+    public bool hasItemInInventory(string itemObjectName)
+    {
+        var inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        List<bool> hasItem = new List<bool>();
+        for (int i = 0; i < inventory.slots.Length; i++)
+        {
+            if (inventory.slots[i].gameObject.GetComponentInChildren<Spawn>()?.itemType == itemObjectName)
+            {
+                hasItem.Add(true);
+            }
+        }
+        return hasItem.Count > 0;
     }
     
 }

@@ -561,7 +561,7 @@ public class AdvScript : MonoBehaviour
                     ShowDialogueBox();
                     cabCrewDialogue.TriggerDialogue(currentDialoguePartner);
                 }
-                else if (hit.collider.gameObject.name.Contains("bojaryshnik"))
+                else if (hit.collider.gameObject.name.Contains("boyaryshnik"))
                 {
                     hit.collider.gameObject.SetActive(false);
                     var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
@@ -734,6 +734,13 @@ public class AdvScript : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); 
         SaveSystem.SavePlayer(playerData);
     }
+
+    public void LoadDistinctLevel(PlayerData playerData, int lvlIndex)
+    {
+        SceneManager.LoadScene(lvlIndex);
+        SaveSystem.SavePlayer(playerData);
+    }
+
     public void ReloadLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

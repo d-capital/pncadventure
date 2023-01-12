@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Spawn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class Spawn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
 {
     public GameObject item;
     public string itemType;
@@ -11,7 +11,8 @@ public class Spawn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
     public Vector3 initObjectPos;
-    
+    public bool objectReceived = false;
+
 
     private void Awake()
     {
@@ -67,7 +68,7 @@ public class Spawn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
         }
         else
         {
-           toiletDoorReceivedCrowbar = false;
+            toiletDoorReceivedCrowbar = false;
         }
         if (sink != null)
         {
@@ -91,7 +92,7 @@ public class Spawn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
     public void SpawnDroppedItem()
     {
         var playerObj = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().player;
-        Vector3 playerPos = new Vector3 (playerObj.transform.position.x + 3, playerObj.transform.position.y);
+        Vector3 playerPos = new Vector3(playerObj.transform.position.x + 3, playerObj.transform.position.y);
         Debug.Log(playerPos);
         Instantiate(item, playerPos, Quaternion.identity);
     }
@@ -104,6 +105,30 @@ public class Spawn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        Debug.Log("OnDrop");
+        if (eventData.pointerDrag != null)
+        {
+            if (itemType == "glassOfTeaItem" && eventData.pointerDrag.GetComponent<Spawn>().item.name.Contains("boyaryshnik"))
+            {
+                objectReceived = true;
+                GameObject.Destroy(eventData.pointerDrag);
+                GameObject.FindObjectOfType<DialogueManager>().GetComponent<DialogueManager>().RemoveItemFromSlotWithoutDropping("glassOfTeaItem");
+                GameObject.FindObjectOfType<DialogueManager>().GetComponent<DialogueManager>().GetItemToInventory("glassOfBoyaryshnikButton");
+                var DroppableItems = GameObject.FindGameObjectsWithTag("droppable");
+                foreach (var i in DroppableItems)
+                {
+                    i.layer = 0;
+                }
+            }
+            else
+            {
+                eventData.pointerDrag.gameObject.transform.position = eventData.pointerDrag.gameObject.GetComponent<Spawn>().initObjectPos;
+            }
+        }
     }
 }
