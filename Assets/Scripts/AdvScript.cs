@@ -579,6 +579,15 @@ public class AdvScript : MonoBehaviour
                     ShowInfoText(newInfoText);
                     collectSound.Play();
                 }
+                else if (hit.collider.gameObject.name.Contains("shuba"))
+                {
+                    hit.collider.gameObject.SetActive(false);
+                    var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
+                    collectibleItem.onClick();
+                    string newInfoText = "Надеюсь мне за нее никто не предъявит.";
+                    ShowInfoText(newInfoText);
+                    collectSound.Play();
+                }
             }
             else
             {
