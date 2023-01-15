@@ -82,6 +82,7 @@ public class AdvScript : MonoBehaviour
     public bool shahtarsHigh = false;
     public bool informedMeMomShahtarsAreHigh = false;
     public bool gotBathItems = false;
+    public bool semenTalkedToMeMom = false;
     //-------Shahtars---------------------//
     public bool shahtarInitialFailed = false;
     public bool timeForRound2 = false;

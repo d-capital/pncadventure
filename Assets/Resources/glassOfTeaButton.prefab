@@ -93,6 +93,7 @@ MonoBehaviour:
   item: {fileID: 8525542053778477760, guid: 6e47e9698b45c0941a31231ca4976dfe, type: 3}
   itemType: glassOfTeaItem
   initObjectPos: {x: 0, y: 0, z: 0}
+  objectReceived: 0
 --- !u!225 &2743620872491558343
 CanvasGroup:
   m_ObjectHideFlags: 0

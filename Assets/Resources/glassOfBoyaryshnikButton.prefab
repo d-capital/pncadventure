@@ -37,8 +37,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000011444, y: 0}
-  m_SizeDelta: {x: 220.65, y: 218.8332}
+  m_AnchoredPosition: {x: 15, y: -0.0000038147}
+  m_SizeDelta: {x: 108.64, y: 113.4415}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7615581739951023834
 CanvasRenderer:
@@ -93,6 +93,7 @@ MonoBehaviour:
   item: {fileID: 8525542053778477760, guid: ff0b2a50e3b4a5c4fa125dc4b40c5510, type: 3}
   itemType: glassOfBoyaryshnikItem
   initObjectPos: {x: 0, y: 0, z: 0}
+  objectReceived: 0
 --- !u!225 &2743620872491558343
 CanvasGroup:
   m_ObjectHideFlags: 0

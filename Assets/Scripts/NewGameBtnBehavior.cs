@@ -24,7 +24,6 @@ public class NewGameBtnBehavior : MonoBehaviour
         else
         {
             PlayerData playerData1 = new PlayerData();
-            playerData1.carma = "good";
             playerData1.currentLevelIndex = 1;
             playerData1.enterCutSceneShown = false;
             SaveSystem.SavePlayer(playerData1);

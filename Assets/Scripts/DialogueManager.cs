@@ -40,7 +40,7 @@ public class DialogueManager : MonoBehaviour
     private string lvl3State;
     private string lvl4State;
 
-    PlayerData playerData = new PlayerData();
+    PlayerData playerData = new PlayerData ();
 
     //Lines and Answers model
     [System.Serializable]
@@ -67,7 +67,7 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //sentences = new Queue<string>();
+        playerData = SaveSystem.LoadPlayer();
     }
     //Old Woman
     public void StartDialogue (Dialogue dialogue, string dialogueActor)
@@ -170,7 +170,7 @@ public class DialogueManager : MonoBehaviour
                 lvl1stateCalculator(currDialogueActor, dialogue);
                 if (lvl1State == "victory")
                 {
-                    playerData.carma = "good";
+                    playerData.helpedOldWoman = true;
                     playerData.enterCutSceneShown = true;
                     playerData.currentLevelIndex = 4;
                     EndDialogue();
@@ -205,7 +205,6 @@ public class DialogueManager : MonoBehaviour
                     {
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().vodkaGivenToPlumber = true;
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasVodka = false;
-                        //TODO: remove Vodka from inventory
                         RemoveItemFromSlotWithoutDropping("VodkaItem");
                         GameObject.FindGameObjectWithTag("Plumber").GetComponent<PlumberScript>().changePlumberAnimationToHappy();
                         lvl1stateCalculator(currDialogueActor, dialogue);
@@ -318,7 +317,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     if(curResponseTracker == 0)
                     {
-                        playerData.carma = "bad";
+                        playerData.helpedOldWoman = false;
                         playerData.enterCutSceneShown = true;
                         playerData.currentLevelIndex = 4;
                         EndDialogue();
@@ -709,7 +708,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 else if (lvl2State == "win")
                 {
-                    playerData.carma = "bad";
+                    playerData.cardsManNotCaught = false;
                     playerData.enterCutSceneShown = true;
                     playerData.currentLevelIndex = 6;
                     EndDialogue();
@@ -725,7 +724,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 else if (lvl2State == "win")
                 {
-                    playerData.carma = "good";
+                    playerData.cardsManNotCaught = true;
                     playerData.enterCutSceneShown = true;
                     playerData.currentLevelIndex = 6;
                     EndDialogue();
@@ -766,6 +765,13 @@ public class DialogueManager : MonoBehaviour
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().initialSuccess = true;
                     }
                 }
+                else if (lvl3State == "initialNoMeMomAsk")
+                {
+                    if (curResponseTracker == 0 || curResponseTracker == 1)
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().initialFailed = true;
+                    }
+                }
                 else if (lvl3State == "initialFailed")
                 {
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().initialFailed = false;
@@ -803,6 +809,7 @@ public class DialogueManager : MonoBehaviour
             {
                 if (lvl3State == "shahtarsAmok")
                 {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().semenTalkedToMeMom = true;
                     EndDialogue();
                 }
                 else if (lvl3State == "shahtarsHigh")
@@ -905,7 +912,6 @@ public class DialogueManager : MonoBehaviour
                 }
                 else if(lvl3State == "success")
                 {
-                    playerData.carma = "good";
                     playerData.enterCutSceneShown = true;
                     playerData.currentLevelIndex = 8;
                     if (hasItemInInventory("aspirinItem"))
@@ -937,6 +943,10 @@ public class DialogueManager : MonoBehaviour
                 else if(lvl4State == "majorGirlHasShuba")
                 {
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotQuestFromMajor = true;
+                    EndDialogue();
+                }
+                else if (lvl4State == "majorReasksAboutQuest")
+                {
                     EndDialogue();
                 }
             }
@@ -1003,6 +1013,7 @@ public class DialogueManager : MonoBehaviour
                     if (curResponseTracker == 0)
                     {
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().firstTalk = false;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hunterAsksForTea = true;
                     }
                 }
                 else if (lvl4State == "initialWithAspirin")
@@ -1134,11 +1145,9 @@ public class DialogueManager : MonoBehaviour
                         playerData.currentLevelIndex = 9;
                         playerData.enterCutSceneShown = true;
                         playerData.hasAspirin = hasItemInInventory("aspirinItem");
-                        playerData.carma = "good";
+                        playerData.grandMasterSideChosen = true;
                         RemoveItemFromSlotWithoutDropping("glassOfTeaItem");
-                        //I am just guessing the level indext now, it might be wrong, assume that 9 is a good ending,
-                        // 10 is common ending and 11 is bad ending:
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 9);
+                        ResolveEnding(playerData);
                     }
                     else if (curResponseTracker == 1)
                     {
@@ -1153,11 +1162,9 @@ public class DialogueManager : MonoBehaviour
                         playerData.currentLevelIndex = 9;
                         playerData.enterCutSceneShown = true;
                         playerData.hasAspirin = hasItemInInventory("aspirinItem");
-                        playerData.carma = "good";
+                        playerData.grandMasterSideChosen = true;
                         RemoveItemFromSlotWithoutDropping("glassOfTeaItem");
-                        //I am just guessing the level indext now, it might be wrong, assume that 9 is a good ending,
-                        // 10 is common ending and 11 is bad ending:
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 9);
+                        ResolveEnding(playerData);
                     }
                     else if (curResponseTracker == 1)
                     {
@@ -1165,11 +1172,9 @@ public class DialogueManager : MonoBehaviour
                         playerData.currentLevelIndex = 11;
                         playerData.enterCutSceneShown = true;
                         playerData.hasAspirin = hasItemInInventory("aspirinItem");
-                        playerData.carma = "bad";
+                        playerData.grandMasterSideChosen = false;
                         RemoveItemFromSlotWithoutDropping("glassOfBoyaryshnikItem");
-                        //I am just guessing the level indext now, it might be wrong, assume that 9 is a good ending,
-                        // 10 is common ending and 11 is bad ending:
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 11);
+                        ResolveEnding(playerData);
                     }
                     else if (curResponseTracker == 2)
                     {
@@ -1184,11 +1189,9 @@ public class DialogueManager : MonoBehaviour
                         playerData.currentLevelIndex = 11;
                         playerData.enterCutSceneShown = true;
                         playerData.hasAspirin = hasItemInInventory("aspirinItem");
-                        playerData.carma = "bad";
+                        playerData.grandMasterSideChosen = false;
                         RemoveItemFromSlotWithoutDropping("glassOfBoyaryshnikItem");
-                        //I am just guessing the level indext now, it might be wrong, assume that 9 is a good ending,
-                        // 10 is common ending and 11 is bad ending:
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 11);
+                        ResolveEnding(playerData);
 
                     }
                     else if (curResponseTracker == 1)
@@ -1763,6 +1766,7 @@ public class DialogueManager : MonoBehaviour
         bool shahtarsHigh = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().shahtarsHigh;
         bool informedMeMomShahtarsAreHigh = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().informedMeMomShahtarsAreHigh;
         bool gotBathItems = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotBathItems;
+        bool semenTalkedToMeMom = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().semenTalkedToMeMom;
         //----Shahtar-----//
         bool shahtarInitialFailed = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().shahtarInitialFailed;
         bool timeForRound2 = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().timeForRound2;
@@ -1791,9 +1795,14 @@ public class DialogueManager : MonoBehaviour
         }
         else if (currDialogueActor == "Shaman") 
         {
-            if (!initialSuccess && !initialFailed)
+            if (!initialSuccess && !initialFailed && semenTalkedToMeMom)
             {
                 lvl3State = "initial";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
+            }
+            else if (!initialSuccess && !initialFailed && !semenTalkedToMeMom)
+            {
+                lvl3State = "initialNoMeMomAsk";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
             }
             else if (!initialSuccess & initialFailed)
@@ -1971,9 +1980,14 @@ public class DialogueManager : MonoBehaviour
                 lvl4State = "initial";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
             }
-            else if (majorGirlHasShuba)
+            else if (majorGirlHasShuba && !gotQuestFromMajor)
             {
                 lvl4State = "majorGirlHasShuba";
+                SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
+            }
+            else if (majorGirlHasShuba && gotQuestFromMajor)
+            {
+                lvl4State = "majorReasksAboutQuest";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
             }
         }
@@ -2221,6 +2235,23 @@ public class DialogueManager : MonoBehaviour
             }
         }
     }
+
+    public void CraftItemInSlot(string itemObjectName, int slotNumber)
+    {
+        var inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        GameObject itemButton = Resources.Load<GameObject>(itemObjectName);
+        for (int i = 0; i < inventory.slots.Length; i++)
+        {
+            if (inventory.slots[i].gameObject.GetComponent<Slot>().i == slotNumber)
+            {
+                //Add item to inventory
+                inventory.isFull[i] = true;
+                Instantiate(itemButton, inventory.slots[i].transform, false);
+                break;
+            }
+        }
+    }
+
     public bool hasItemInInventory(string itemObjectName)
     {
         var inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
@@ -2233,6 +2264,24 @@ public class DialogueManager : MonoBehaviour
             }
         }
         return hasItem.Count > 0;
+    }
+
+    public void ResolveEnding(PlayerData playerData)
+    {
+        List<bool> EndingConditions = new List<bool> {playerData.grandMasterSideChosen, playerData.helpedOldWoman, playerData.cardsManNotCaught};
+        List<bool> countOfTrueEndingConditions = EndingConditions.FindAll(x => x == true);
+        if (countOfTrueEndingConditions.Count == 3)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 9);//good
+        }
+        else if (countOfTrueEndingConditions.Count == 2)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 10);//common
+        }
+        else if (countOfTrueEndingConditions.Count < 2)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 11);//bad
+        }
     }
     
 }

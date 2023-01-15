@@ -22,6 +22,17 @@
                     "response":"Хорошо"
                 }
             ]
+        },
+        {
+            "name":"majorReasksAboutQuest",
+            "line":"Ну как там этот венки?",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Я работаю над этим"
+                }
+            ]
         }
     ]
 }

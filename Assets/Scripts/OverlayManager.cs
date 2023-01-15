@@ -25,7 +25,6 @@ public class OverlayManager : MonoBehaviour
     {
         PlayerData playerData = new PlayerData();
         SceneManager.LoadScene("Cut Scene 1");
-        playerData.carma = "good";
         playerData.currentLevelIndex = 1;
         playerData.enterCutSceneShown = false;
         SaveSystem.SavePlayer(playerData);

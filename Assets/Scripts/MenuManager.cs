@@ -30,7 +30,6 @@ public class MenuManager : MonoBehaviour
         else
         {
             SceneManager.LoadScene("Cut Scene 1");
-            playerData.carma = "good";
             playerData.currentLevelIndex = 1;
             playerData.enterCutSceneShown = false;
             SaveSystem.SavePlayer(playerData);

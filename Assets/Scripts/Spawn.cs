@@ -115,10 +115,11 @@ public class Spawn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
         {
             if (itemType == "glassOfTeaItem" && eventData.pointerDrag.GetComponent<Spawn>().item.name.Contains("boyaryshnik"))
             {
+                int slotNumber = gameObject.GetComponentInParent<Slot>().GetComponent<Slot>().i;
                 objectReceived = true;
                 GameObject.Destroy(eventData.pointerDrag);
                 GameObject.FindObjectOfType<DialogueManager>().GetComponent<DialogueManager>().RemoveItemFromSlotWithoutDropping("glassOfTeaItem");
-                GameObject.FindObjectOfType<DialogueManager>().GetComponent<DialogueManager>().GetItemToInventory("glassOfBoyaryshnikButton");
+                GameObject.FindObjectOfType<DialogueManager>().GetComponent<DialogueManager>().CraftItemInSlot("glassOfBoyaryshnikButton", slotNumber);
                 var DroppableItems = GameObject.FindGameObjectsWithTag("droppable");
                 foreach (var i in DroppableItems)
                 {

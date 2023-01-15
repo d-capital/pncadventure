@@ -32,6 +32,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level 4.unity
     guid: 2f8b91df856e84a4ea3d46cc07cd7413
+  - enabled: 1
+    path: Assets/Scenes/ToBossFight.unity
+    guid: 690522a2f320e824e9530a2c7fad358a
+  - enabled: 1
+    path: Assets/Scenes/CommonEnding.unity
+    guid: 057c382606fb5054d9f4c8ba84cfcc32
+  - enabled: 1
+    path: Assets/Scenes/BadEnding.unity
+    guid: b5b82421a58570c40b819cefa10c26b1
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
