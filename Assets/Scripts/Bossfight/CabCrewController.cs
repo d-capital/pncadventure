@@ -7,19 +7,27 @@ public class CabCrewController : MonoBehaviour
     public Rigidbody2D rb;
     public Weapon weapon;
     public int stamina = 30;
+    public float fireRate;
+    private float nextFire;
+    public float coolDownRate;
 
 
     // Update is called once per frame
     void Update()
     {
-        if (stamina > 5)
+        if (stamina > 5 && Time.time > nextFire)
         {
-            StartCoroutine(waitForNextBottleToFire());
-        }
-        else 
+            nextFire = Time.time + fireRate;
+            fireNextBottle();
+        } 
+        else
         {
-            StartCoroutine(waitUntilStaminaRegenerates());
+            if(Time.time > coolDownRate)
+            {
+                stamina = 30;
+            }
         }
+
     }
 
     private void FixedUpdate()
@@ -30,16 +38,12 @@ public class CabCrewController : MonoBehaviour
         rb.rotation = aimAngel;
     }
 
-    IEnumerator waitForNextBottleToFire()
+    void fireNextBottle()
     {
-        yield return new WaitForSeconds(10.0f);
+
         stamina = stamina - 5;
-        weapon.Fire();
+        weapon.Fire(stamina);
+
     }
 
-    IEnumerator waitUntilStaminaRegenerates()
-    {
-        yield return new WaitForSeconds(10.0f);
-        stamina = 50;
-    }
 }

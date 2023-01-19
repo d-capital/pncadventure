@@ -2557,6 +2557,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   rb: {fileID: 1659971879}
+  health: 100
+  mousePos: {x: 0, y: 0, z: 0}
+  mainCamera: {fileID: 103034592}
+  mousePosWorld: {x: 0, y: 0, z: 0}
+  mousePosWorld2D: {x: 0, y: 0}
+  slideDirection: {x: 0, y: 0, z: 0}
 --- !u!61 &1659971878
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2602,7 +2608,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!1 &1719669335
 GameObject:
@@ -3227,6 +3233,8 @@ MonoBehaviour:
   rb: {fileID: 2080364006}
   weapon: {fileID: 1159949527}
   stamina: 30
+  fireRate: 2
+  coolDownRate: 10
 --- !u!1 &2095118445
 GameObject:
   m_ObjectHideFlags: 0
