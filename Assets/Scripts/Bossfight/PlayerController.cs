@@ -30,15 +30,12 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        //state = State.Normal;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //float moveX = Input.GetAxisRaw("Horizontal");
-        //float moveY = Input.GetAxisRaw("Vertical");
-        //moveDirection = new Vector2(moveX, moveY).normalized;
         switch (state)
         {
             case State.Normal:
@@ -54,46 +51,23 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
-        if (isDashButtonDown)
-        {
-            rb.velocity = new Vector2(moveDirection.x * moveSpeed*2, moveDirection.y * moveSpeed*2);
-            isDashButtonDown = false;
-        }
+        mousePos = Input.mousePosition;
+        mousePosWorld = mainCamera.ScreenToWorldPoint(mousePos);
+        rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
+        Vector3 aimDirection = mousePosWorld - transform.position;
+        float aimAngel = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
+        rb.rotation = aimAngel;
     }
 
     private void HandleMovement()
     {
-        float moveX = 0f;
-        float moveY = 0f;
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-        {
-            moveY = +1f;
-        }
-        else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-        {
-            moveY = -1f;
-        }
-        else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-        {
-            moveX = -1f;
-        }
-        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            moveX = +1f;
-        }
-        
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
         moveDirection = new Vector2(moveX, moveY).normalized;
-        
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-          //  HandelDodgeRoll();
-            //HandleDodgeRollSliding();
-        //}
 
     }
 
-    
+
     private void HandelDodgeRoll()
     {
         if (Input.GetMouseButtonDown(1))
@@ -101,16 +75,17 @@ public class PlayerController : MonoBehaviour
             state = State.DodgeRollSliding;
             mousePos = Input.mousePosition;
             mousePosWorld = mainCamera.ScreenToWorldPoint(mousePos);
-            slideDirection = (mousePosWorld - transform.position).normalized;
-            slideSpeed = 70f;
+            mousePosWorld2D = new Vector2(mousePosWorld.x, mousePosWorld.y);
+            slideDirection = (mousePosWorld2D - new Vector2(transform.position.x, transform.position.y)).normalized;
+            slideSpeed = 40f;
         }
     }
     private void HandleDodgeRollSliding()
     {
-        transform.position += slideDirection * slideSpeed * Time.deltaTime;
+        transform.position += slideDirection * slideSpeed * Time.fixedDeltaTime;
 
-        slideSpeed -= slideSpeed * 5f * Time.deltaTime;
-        if  (slideSpeed < 5f)
+        slideSpeed -= slideSpeed * 5f * Time.fixedDeltaTime;
+        if  (slideSpeed < 1f)
         {
             state = State.Normal;
         }
