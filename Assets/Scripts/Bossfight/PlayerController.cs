@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     public Vector2 mousePosWorld2D;
     public Vector3 slideDirection;
 
+    public HealthBarControll HealthBar;
+
     private State state;
     private enum State
     {
@@ -36,7 +38,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //state = State.Normal;
+        HealthBar.SetMaxHealth(health);
     }
 
     // Update is called once per frame

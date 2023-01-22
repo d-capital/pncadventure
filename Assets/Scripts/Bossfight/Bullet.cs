@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
             if (target.GetComponent<PlayerController>().health > 0)
             {
                 target.GetComponent<PlayerController>().health -= 10;
+                target.GetComponent<PlayerController>().HealthBar.SetHealth(target.GetComponent<PlayerController>().health);
             }
             else
             {

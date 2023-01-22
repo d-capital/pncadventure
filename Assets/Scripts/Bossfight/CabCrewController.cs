@@ -12,6 +12,9 @@ public class CabCrewController : MonoBehaviour
     private float nextFire;
     public float coolDownRate;
 
+    public string Name = "опнбндмхжю";
+
+    public HealthBarControll HealthBar;
 
     // Update is called once per frame
     void Update()
