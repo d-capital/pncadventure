@@ -8,6 +8,12 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
     public int health = 100;
+    public int stamina = 50;
+    
+    public Weapon weapon;
+    public float fireRate;
+    private float nextFire;
+    public float coolDownRate;
 
     private Vector2 moveDirection;
     private Vector2 mousePosition;
@@ -36,17 +42,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         switch (state)
         {
             case State.Normal:
                 HandleMovement();
                 HandelDodgeRoll();
+                HandleFire();
                 break;
             case State.DodgeRollSliding:
                 HandleDodgeRollSliding();
                 break;
         }
-        HandleMovement();
+        //HandleMovement();
+        
     }
 
     private void FixedUpdate()
@@ -90,8 +99,21 @@ public class PlayerController : MonoBehaviour
             state = State.Normal;
         }
     }
+
+    private void HandleFire()
+    {
+        if (Input.GetMouseButtonDown(0) && gameObject.GetComponentInChildren<Weapon>() != null)
+        {
+                Fire();
+        }
+    }
     public void ReloadLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    void Fire()
+    {
+        weapon.Fire(stamina);
     }
 }

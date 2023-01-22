@@ -7,6 +7,7 @@ public class CabCrewController : MonoBehaviour
     public Rigidbody2D rb;
     public Weapon weapon;
     public int stamina = 30;
+    public int health = 60;
     public float fireRate;
     private float nextFire;
     public float coolDownRate;
