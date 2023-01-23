@@ -114,6 +114,12 @@ public class PlayerController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void LoadDistinctLevel(PlayerData playerData, int lvlIndex)
+    {
+        SceneManager.LoadScene(lvlIndex);
+        SaveSystem.SavePlayer(playerData);
+    }
+
     void Fire()
     {
         weapon.Fire(stamina);
