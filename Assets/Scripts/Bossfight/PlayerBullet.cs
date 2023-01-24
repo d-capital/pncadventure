@@ -28,18 +28,23 @@ public class PlayerBullet : MonoBehaviour
                 HideEnemyHealthBar();
             }
         }
-        //if (target.name == "Major")
-        //{
-          //  if (target.GetComponent<MajorController>().health > 0)
-            //{
-              //  target.GetComponent<MajorController>().health -= 10;
-            //}
-            //else
-            //{
-              //  Destroy(target.GetComponent<MajorController>().gameObject);
-            //}
-        //}
-        if (target.name == "chair")
+        else if (target.name == "Major")
+        {
+            ShowEnemyHealthBar();
+            target.GetComponent<MajorControll>().HealthBar.ResetNameAndHealth(
+                target.GetComponent<MajorControll>().health,
+                target.GetComponent<MajorControll>().Name);
+            if (target.GetComponent<MajorControll>().health > 0)
+            {
+                target.GetComponent<MajorControll>().health -= 10;
+            }
+            else
+            {
+                Destroy(target.GetComponent<MajorControll>().gameObject);
+                HideEnemyHealthBar();
+            }
+        }
+        else if (target.name == "chair")
         {
             ShowEnemyHealthBar();
             target.GetComponent<ChairControll>().HealthBar.ResetNameAndHealth(
