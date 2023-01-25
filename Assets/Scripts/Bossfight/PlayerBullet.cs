@@ -41,8 +41,9 @@ public class PlayerBullet : MonoBehaviour
             }
             else
             {
-                Destroy(target.GetComponent<MajorControll>().gameObject);
-                HideEnemyHealthBar();
+                //Destroy(target.GetComponent<MajorControll>().gameObject);
+                //HideEnemyHealthBar();
+                target.GetComponent<MajorControll>().health = 100;
             }
         }
         else if (target.name == "chair")
