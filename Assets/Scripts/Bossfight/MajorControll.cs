@@ -7,7 +7,7 @@ public class MajorControll : MonoBehaviour
     public Rigidbody2D rb;
     public Weapon weapon;
     public int stamina = 30;
-    public int health = 60;
+    public int health = 100;
     public float fireRate;
     private float nextFire;
     public float coolDownRate;
@@ -19,19 +19,21 @@ public class MajorControll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (stamina > 5 && Time.time > nextFire)
+        if (GameObject.FindObjectOfType<PlayerController>().GetComponent<PlayerController>().isCabCrewDead == true)
         {
-            nextFire = Time.time + fireRate;
-            fireNextBottle();
-        }
-        else
-        {
-            if (Time.time > coolDownRate)
+            if (stamina > 5 && Time.time > nextFire)
             {
-                stamina = 30;
+                nextFire = Time.time + fireRate;
+                fireNextBottle();
+            }
+            else
+            {
+                if (Time.time > coolDownRate)
+                {
+                    stamina = 30;
+                }
             }
         }
-
     }
 
     private void FixedUpdate()

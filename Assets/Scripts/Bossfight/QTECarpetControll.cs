@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class QTECarpetControll : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void Update()
     {
-        if(collision.collider.gameObject.name == "Player")
+        Vector3 playerPos = GameObject.FindObjectOfType<PlayerController>().transform.position;
+        if (playerPos.y >= transform.position.y)
         {
+            ActivateQte();
+        } 
+    }
+
+    private void ActivateQte()
+    {
+
             QTEController[] qteControllers = Resources.FindObjectsOfTypeAll<QTEController>();
             foreach (QTEController i in qteControllers)
             {
                 i.gameObject.SetActive(true);
             }
-        }
-
     }
 }

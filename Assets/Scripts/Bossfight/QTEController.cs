@@ -18,9 +18,12 @@ public class QTEController : MonoBehaviour
     {
         if (timeStart > 0 && !Input.GetKeyDown(KeyCode.H))
         {
-            Time.timeScale = 0.7f;
+            Time.timeScale = 0.5f;
             timeStart -= Time.deltaTime;
             timer.text = Mathf.Round(timeStart).ToString();
+            GameObject.FindObjectOfType<PlayerController>().GetComponent<PlayerController>().rb.constraints 
+                = RigidbodyConstraints2D.FreezeAll;
+            GameObject.FindObjectOfType<PlayerController>().GetComponent<PlayerController>().isQteActive = true;
         }
         else if (timeStart > 0 && Input.GetKeyDown(KeyCode.H))
         {
@@ -29,12 +32,18 @@ public class QTEController : MonoBehaviour
             PlayerData playerData = SaveSystem.LoadPlayer();
             playerData.currentLevelIndex = 12;
             GameObject.FindObjectOfType<PlayerController>().GetComponent<PlayerController>().LoadDistinctLevel(playerData,0);
+            GameObject.FindObjectOfType<PlayerController>().GetComponent<PlayerController>().rb.constraints
+                = RigidbodyConstraints2D.None;
+            GameObject.FindObjectOfType<PlayerController>().GetComponent<PlayerController>().isQteActive = false;
         }
         else
         {
             Time.timeScale = 1f;
             gameObject.SetActive(false);
             GameObject.FindObjectOfType<PlayerController>().GetComponent<PlayerController>().ReloadLevel();
+            GameObject.FindObjectOfType<PlayerController>().GetComponent<PlayerController>().rb.constraints
+                = RigidbodyConstraints2D.None;
+            GameObject.FindObjectOfType<PlayerController>().GetComponent<PlayerController>().isQteActive = false;
         }
 
     }

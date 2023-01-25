@@ -12,13 +12,10 @@ public class PlayerController : MonoBehaviour
     
     public Weapon weapon;
     public float fireRate;
-    private float nextFire;
     public float coolDownRate;
 
     private Vector2 moveDirection;
-    private Vector2 mousePosition;
     private bool isDashButtonDown;
-    private float slideSpeed;
 
     public Vector3 mousePos;
     public Camera mainCamera;
@@ -28,12 +25,9 @@ public class PlayerController : MonoBehaviour
 
     public HealthBarControll HealthBar;
 
-    private State state;
-    private enum State
-    {
-        Normal,
-        DodgeRollSliding
-    }
+    public bool isCabCrewDead = false;
+
+    public bool isQteActive = false;
 
     // Start is called before the first frame update
     void Start()
@@ -45,18 +39,9 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        switch (state)
-        {
-            case State.Normal:
-                HandleMovement();
-                HandelDodgeRoll();
-                HandleFire();
-                break;
-            case State.DodgeRollSliding:
-                HandleDodgeRollSliding();
-                break;
-        }
-        //HandleMovement();
+        HandleMovement();
+        HandleFire();
+        HandleDash();
         
     }
 
@@ -65,9 +50,18 @@ public class PlayerController : MonoBehaviour
         mousePos = Input.mousePosition;
         mousePosWorld = mainCamera.ScreenToWorldPoint(mousePos);
         rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
-        Vector3 aimDirection = mousePosWorld - transform.position;
-        float aimAngel = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
-        rb.rotation = aimAngel;
+        if (!isQteActive)
+        {
+            Vector3 aimDirection = mousePosWorld - transform.position;
+            float aimAngel = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
+            rb.rotation = aimAngel;
+        }
+        if (isDashButtonDown)
+        {
+            float dashAmount = 4f;
+            rb.MovePosition(new Vector2(transform.position.x, transform.position.y) + moveDirection * dashAmount);
+            isDashButtonDown = false;
+        }
     }
 
     private void HandleMovement()
@@ -79,26 +73,11 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void HandelDodgeRoll()
+    private void HandleDash()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            state = State.DodgeRollSliding;
-            mousePos = Input.mousePosition;
-            mousePosWorld = mainCamera.ScreenToWorldPoint(mousePos);
-            mousePosWorld2D = new Vector2(mousePosWorld.x, mousePosWorld.y);
-            slideDirection = (mousePosWorld2D - new Vector2(transform.position.x, transform.position.y)).normalized;
-            slideSpeed = 40f;
-        }
-    }
-    private void HandleDodgeRollSliding()
-    {
-        transform.position += slideDirection * slideSpeed * Time.fixedDeltaTime;
-
-        slideSpeed -= slideSpeed * 5f * Time.fixedDeltaTime;
-        if  (slideSpeed < 1f)
-        {
-            state = State.Normal;
+            isDashButtonDown = true;
         }
     }
 

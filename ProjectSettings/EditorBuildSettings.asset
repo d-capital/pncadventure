@@ -41,6 +41,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BadEnding.unity
     guid: b5b82421a58570c40b819cefa10c26b1
+  - enabled: 1
+    path: Assets/Scenes/Bossfight.unity
+    guid: 364d554076b50a045a812070e9622157
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000

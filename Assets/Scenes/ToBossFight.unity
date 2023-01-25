@@ -577,7 +577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTime: 4.1167
-  sceneName: Main Menu
+  sceneName: Bossfight
 --- !u!4 &1161913259
 Transform:
   m_ObjectHideFlags: 0
