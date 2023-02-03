@@ -526,6 +526,15 @@ public class AdvScript : MonoBehaviour
                     ShowInfoText(newInfoText);
                     collectSound.Play();
                 }
+                else if (hit.collider.gameObject.name.Contains("bathItems"))
+                {
+                    hit.collider.gameObject.SetActive(false);
+                    var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
+                    collectibleItem.onClick();
+                    string newInfoText = "Свежее полотенце, мм, как пахнет!";
+                    ShowInfoText(newInfoText);
+                    collectSound.Play();
+                }
                 //----------------Level 4 interactions------------------------//
                 else if (hit.collider.gameObject.GetComponent<majorScript>())
                 {
@@ -599,7 +608,10 @@ public class AdvScript : MonoBehaviour
 
     public void Answer(int incomingResponseIndex)
     {
-        MapDialogueTrigger(currentDialoguePartner).Answer(currentDialoguePartner, incomingResponseIndex);
+        if (!PauseMenu.isGamePaused)
+        {
+            MapDialogueTrigger(currentDialoguePartner).Answer(currentDialoguePartner, incomingResponseIndex);
+        }
     }
     public void ShowDialogueBox()
     {

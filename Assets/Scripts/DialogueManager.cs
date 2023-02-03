@@ -826,6 +826,7 @@ public class DialogueManager : MonoBehaviour
                 else if(lvl3State == "meMomThankfull")
                 {
                     GetItemToInventory("BathItemsButton");
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotBathItems = true;
                     EndDialogue();
                 }
                 else if(lvl3State == "leaveMeMomAlone")

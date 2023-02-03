@@ -34,6 +34,8 @@ public class Spawn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
         canvasGroup.alpha = .6f;
         canvasGroup.blocksRaycasts = false;
         initObjectPos = rectTransform.position;
+        gameObject.GetComponentInParent<Slot>().gameObject.GetComponent<Canvas>().overrideSorting = true;
+        gameObject.GetComponentInParent<Slot>().gameObject.GetComponent<Canvas>().sortingOrder = 20;
     }
     public void OnEndDrag(PointerEventData eventData)
     {
@@ -48,6 +50,7 @@ public class Spawn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
             i.layer = 0;
         }
         returnObjectIfNeeded();
+        gameObject.GetComponentInParent<Slot>().gameObject.GetComponent<Canvas>().overrideSorting = false;
     }
 
     public void returnObjectIfNeeded()
@@ -125,6 +128,7 @@ public class Spawn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
                 {
                     i.layer = 0;
                 }
+                eventData.pointerDrag.GetComponentInParent<Slot>().gameObject.GetComponent<Canvas>().overrideSorting = false;
             }
             else
             {
