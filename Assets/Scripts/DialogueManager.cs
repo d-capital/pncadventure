@@ -72,6 +72,7 @@ public class DialogueManager : MonoBehaviour
     //Old Woman
     public void StartDialogue (Dialogue dialogue, string dialogueActor)
     {
+        BlockTasksAndInventory();
         ClearLinesAnswers(dialogue);
         currDialogueActor = dialogueActor;
         curResponseTracker = 0;
@@ -174,6 +175,7 @@ public class DialogueManager : MonoBehaviour
                     playerData.enterCutSceneShown = true;
                     playerData.currentLevelIndex = 4;
                     EndDialogue();
+                    completeTask(0);
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
                 }
                 else if (lvl1State == "defeat")
@@ -328,6 +330,7 @@ public class DialogueManager : MonoBehaviour
             else if (currDialogueActor == "SemenLvl1Intro")
             {
                 EndDialogue();
+                indicateThereAreUnredTasks();
             }
             else if (currDialogueActor == "SemenLvl1Outro")
             {
@@ -412,6 +415,7 @@ public class DialogueManager : MonoBehaviour
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasMoney = false;
                         RemoveItemFromSlotWithoutDropping("CoinsItem");
                         EndDialogue();
+                        completeTask(0);
                     }
                     else if (curResponseTracker == 1)
                     {
@@ -440,6 +444,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().sharedPirogyWithYou = true;
                     EndDialogue();
+                    completeTask(0);
                 }
                 else if (lvl2State == "1stRiddleLost")
                 {
@@ -464,6 +469,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().sharedPirogyWithYou = true;
                     EndDialogue();
+                    completeTask(0);
                 }
                 else if(lvl2State == "hint")
                 {
@@ -712,6 +718,7 @@ public class DialogueManager : MonoBehaviour
                     playerData.enterCutSceneShown = true;
                     playerData.currentLevelIndex = 6;
                     EndDialogue();
+                    completeTask(1);
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
                     //GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
                 }
@@ -728,6 +735,7 @@ public class DialogueManager : MonoBehaviour
                     playerData.enterCutSceneShown = true;
                     playerData.currentLevelIndex = 6;
                     EndDialogue();
+                    completeTask(1);
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
                     //GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
                 }
@@ -735,6 +743,7 @@ public class DialogueManager : MonoBehaviour
             else if(currDialogueActor == "SemenLvl2Intro")
             {
                 EndDialogue();
+                indicateThereAreUnredTasks();
             }
             else if (currDialogueActor == "SemenLvl2Outro")
             {
@@ -747,6 +756,7 @@ public class DialogueManager : MonoBehaviour
             if (currDialogueActor == "SemenLvl3Intro")
             {
                 EndDialogue();
+                indicateThereAreUnredTasks();
             }
             else if (currDialogueActor == "SemenLvl3Outro")
             {
@@ -920,6 +930,7 @@ public class DialogueManager : MonoBehaviour
                         playerData.hasAspirin = true;
                     }
                     EndDialogue();
+                    completeTask(1);
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
                 }
                 else if (lvl3State == "notBathed")
@@ -934,6 +945,7 @@ public class DialogueManager : MonoBehaviour
             if (currDialogueActor == "SemenLvl4Intro")
             {
                 EndDialogue();
+                indicateThereAreUnredTasks();
             }
             else if (currDialogueActor == "Major")
             {
@@ -1147,6 +1159,7 @@ public class DialogueManager : MonoBehaviour
                         playerData.enterCutSceneShown = true;
                         playerData.hasAspirin = hasItemInInventory("aspirinItem");
                         playerData.grandMasterSideChosen = true;
+                        completeTask(0);
                         RemoveItemFromSlotWithoutDropping("glassOfTeaItem");
                         ResolveEnding(playerData);
                     }
@@ -1164,6 +1177,7 @@ public class DialogueManager : MonoBehaviour
                         playerData.enterCutSceneShown = true;
                         playerData.hasAspirin = hasItemInInventory("aspirinItem");
                         playerData.grandMasterSideChosen = true;
+                        completeTask(0);
                         RemoveItemFromSlotWithoutDropping("glassOfTeaItem");
                         ResolveEnding(playerData);
                     }
@@ -1174,6 +1188,7 @@ public class DialogueManager : MonoBehaviour
                         playerData.enterCutSceneShown = true;
                         playerData.hasAspirin = hasItemInInventory("aspirinItem");
                         playerData.grandMasterSideChosen = false;
+                        completeTask(0);
                         RemoveItemFromSlotWithoutDropping("glassOfBoyaryshnikItem");
                         ResolveEnding(playerData);
                     }
@@ -1191,6 +1206,7 @@ public class DialogueManager : MonoBehaviour
                         playerData.enterCutSceneShown = true;
                         playerData.hasAspirin = hasItemInInventory("aspirinItem");
                         playerData.grandMasterSideChosen = false;
+                        completeTask(0);
                         RemoveItemFromSlotWithoutDropping("glassOfBoyaryshnikItem");
                         ResolveEnding(playerData);
 
@@ -1264,6 +1280,7 @@ public class DialogueManager : MonoBehaviour
         Debug.Log("End of conversation");
         GameObject.FindObjectOfType<DialogueBoxHandler>().GetComponent<DialogueBoxHandler>().CloseDialogueBox();
         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().dialougeBoxOpen = false;
+        UnblockTasksAndInventory();
     }
 
     void lvl1stateCalculator (string currDialogueActor, Dialogue dialogue)
@@ -2284,5 +2301,44 @@ public class DialogueManager : MonoBehaviour
             GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 11);//bad
         }
     }
+
+    public void indicateThereAreUnredTasks()
+    {
+        newIconControll[] newIcons = Resources.FindObjectsOfTypeAll<newIconControll>();
+        foreach (newIconControll b in newIcons)
+        {
+            b.indicateThereAreUnredTasks();
+        }
+    }
+
+    public void completeTask (int taskId)
+    {
+        TaskBar[] taskBars = Resources.FindObjectsOfTypeAll<TaskBar>();
+        foreach(TaskBar i  in taskBars)
+        {
+            i.CompleteExistingTask(taskId);
+        }
+        string newInfoText = "Задание выполнено!";
+        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
+    }
     
+    public void BlockTasksAndInventory()
+    {
+        if (GameObject.FindObjectOfType<InventoryUI>().isOpened)
+        {
+            GameObject.FindObjectOfType<InventoryUI>().OpenCloseInventory();
+        }
+        GameObject.FindObjectOfType<InventoryUI>().canOpenInventory = false;
+        if (GameObject.FindObjectOfType<TasksButton>().areTasksOpen)
+        {
+            GameObject.FindObjectOfType<TaskBar>().CloseTaskList();
+        }
+        GameObject.FindObjectOfType<TasksButton>().canOpenTaskList = false;
+    }
+
+    public void UnblockTasksAndInventory()
+    {
+        GameObject.FindObjectOfType<InventoryUI>().canOpenInventory = true;
+        GameObject.FindObjectOfType<TasksButton>().canOpenTaskList = true;
+    }
 }

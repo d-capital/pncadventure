@@ -25,6 +25,7 @@ public class sink : MonoBehaviour, IDropHandler
                 {
                     i.layer = 0;
                 }
+                GameObject.FindObjectOfType<DialogueManager>().completeTask(0);
                 //show message
                 //set bool variable
             }

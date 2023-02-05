@@ -14,23 +14,39 @@ public class DialogueTrigger : MonoBehaviour {
 
 	public void TriggerDialogue (string dialogueActor)
 	{
-		FindObjectOfType<DialogueManager>().StartDialogue(dialogue, dialogueActor);
+        if (CanTriggerDialogue())
+        {
+			GameObject.FindObjectOfType<TasksButton>().BlockInventory();
+			FindObjectOfType<DialogueManager>().StartDialogue(dialogue, dialogueActor);
+		}
 	}
 	public void TriggerDialogueOldWomansBed(string dialogueActor)
 	{
-		FindObjectOfType<DialogueManager>().StartDialogueWithOldWomansBed(dialogue, dialogueActor);
+		if (CanTriggerDialogue())
+		{
+			GameObject.FindObjectOfType<TasksButton>().BlockInventory();
+			FindObjectOfType<DialogueManager>().StartDialogueWithOldWomansBed(dialogue, dialogueActor);
+		}
 	}
 	public void TriggerDialoguePlumber(string dialogueActor)
 	{
-		FindObjectOfType<DialogueManager>().StartDialogueWithPlumber(dialogue, dialogueActor);
+		if (CanTriggerDialogue())
+		{
+			GameObject.FindObjectOfType<TasksButton>().BlockInventory();
+			FindObjectOfType<DialogueManager>().StartDialogueWithPlumber(dialogue, dialogueActor);
+		}
 	}
 	public void Answer(string dialogueActor, int incomingResponseIndex)
 	{
 		FindObjectOfType<DialogueManager>().Answer(dialogue, dialogueActor, incomingResponseIndex);
 	}
-	//public void changePlumberAnimationToHappy()
-	//{
-	//	plumberAnimator.SetBool("isHappy", true);
-	//}
+	
+	public bool CanTriggerDialogue()
+    {
+		bool CanTriggerDialogue = !GameObject.FindObjectOfType<PauseMenu>().isGamePaused
+			&& GameObject.FindObjectOfType<TasksButton>().areTasksOpen == false;
+		return CanTriggerDialogue;
+    }
+
 
 }

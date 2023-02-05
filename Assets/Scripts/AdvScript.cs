@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using TMPro;
+using Unity.UI;
 
 public class AdvScript : MonoBehaviour
 {
@@ -261,7 +262,9 @@ public class AdvScript : MonoBehaviour
             hit = Physics2D.Raycast(mousePosWorld2D, Vector2.zero);
 
             // check if hit has a collider
-            if (hit.collider != null && !EventSystem.current.IsPointerOverGameObject() && PauseMenu.isGamePaused == false)
+            if (hit.collider != null && !EventSystem.current.IsPointerOverGameObject() 
+                && (GameObject.FindObjectOfType<PauseMenu>().isGamePaused == false 
+                && GameObject.FindObjectOfType<TasksButton>().areTasksOpen == false))
             {
                 print("Clicked on the object with the name: " + hit.collider.gameObject.tag);
                 if(hit.collider.gameObject.tag == "ScrewKey")
@@ -608,7 +611,7 @@ public class AdvScript : MonoBehaviour
 
     public void Answer(int incomingResponseIndex)
     {
-        if (!PauseMenu.isGamePaused)
+        if (!GameObject.FindObjectOfType<PauseMenu>().isGamePaused)
         {
             MapDialogueTrigger(currentDialoguePartner).Answer(currentDialoguePartner, incomingResponseIndex);
         }
