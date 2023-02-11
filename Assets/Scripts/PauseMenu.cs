@@ -34,7 +34,11 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isGamePaused = false;
-        GameObject.FindObjectOfType<DialogueManager>().UnblockTasksAndInventory();
+        string currentLevel = GameObject.FindObjectOfType<AdvScript>().GetComponent<AdvScript>().GetCurrentLevel();
+        if (currentLevel != "Bossfight")
+        {
+            GameObject.FindObjectOfType<DialogueManager>().UnblockTasksAndInventory();
+        }
     }
 
     void Pause()
@@ -42,7 +46,11 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         isGamePaused = true;
-        GameObject.FindObjectOfType<DialogueManager>().BlockTasksAndInventory();
+        string currentLevel = GameObject.FindObjectOfType<AdvScript>().GetComponent<AdvScript>().GetCurrentLevel();
+        if(currentLevel != "Bossfight")
+        {
+            GameObject.FindObjectOfType<DialogueManager>().BlockTasksAndInventory();
+        }   
     }
     public void QuitGame()
     {

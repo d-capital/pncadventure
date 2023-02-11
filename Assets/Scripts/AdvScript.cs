@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
-using TMPro;
-using Unity.UI;
 
 public class AdvScript : MonoBehaviour
 {
@@ -20,6 +18,8 @@ public class AdvScript : MonoBehaviour
     public Vector2 targetPos;
     public float speed;
     public bool isMoving;
+
+    public bool xScaleWasChanged = false;
 
     public bool key = false;
     //--------Level 1 Attributes--------//
@@ -653,15 +653,25 @@ public class AdvScript : MonoBehaviour
 
     void CheckSpriteFlip()
     {
-        if(player.transform.position.x > targetPos.x)
+        if(player.transform.position.x > targetPos.x && !xScaleWasChanged)
         {
             //turn left
-            player.GetComponent<SpriteRenderer>().flipX = true;
+            //player.GetComponent<SpriteRenderer>().flipX = true;
+            player.transform.localScale = new Vector3(
+                player.transform.localScale.x * -1f,
+                player.transform.localScale.y,
+                player.transform.localScale.z);
+            xScaleWasChanged = true;
         }
-        else
+        else if (player.transform.position.x < targetPos.x && xScaleWasChanged)
         {
             //turn right
-            player.GetComponent<SpriteRenderer>().flipX = false;
+            //player.GetComponent<SpriteRenderer>().flipX = false;
+            player.transform.localScale = new Vector3(
+                player.transform.localScale.x * -1f,
+                player.transform.localScale.y,
+                player.transform.localScale.z);
+            xScaleWasChanged = false;
         }
     }
 
