@@ -28,7 +28,9 @@ public class PlumberScript : DialogueTrigger
     Vector2 treadmill;
 
     public bool isOnTarget;
-    
+
+    public bool xScaleWasChanged = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -119,6 +121,7 @@ public class PlumberScript : DialogueTrigger
                         {
                             targetPos = corridorNearSit;
                             NpcObject.GetComponent<SpriteRenderer>().flipX = false;
+                            FlipCharacter();
                             currentMission = "goBackToCorridorNearSit";
                             isMoving = true;
                         }
@@ -127,6 +130,7 @@ public class PlumberScript : DialogueTrigger
                         {
                             targetPos = plumberSit;
                             NpcObject.GetComponent<SpriteRenderer>().flipX = true;
+                            //CheckSpriteFlip();
                             currentMission = "goBackToPlumberSit";
                             isMoving = true;
                         }
@@ -185,6 +189,7 @@ public class PlumberScript : DialogueTrigger
                         && currentMission == "goBackToCorridorNearSit")
                         {
                             NpcObject.GetComponent<SpriteRenderer>().flipX = false;
+                            FlipCharacter();
                             targetPos = corridorNearSit;
                             isMoving = true;
                         }
@@ -193,6 +198,7 @@ public class PlumberScript : DialogueTrigger
                         {
                             NpcObject.GetComponent<SpriteRenderer>().flipX = true;
                             targetPos = plumberSit;
+                            //FlipCharacter();
                             isMoving = true;
                             currentMission = "sitDown";
                         }
@@ -313,7 +319,7 @@ public class PlumberScript : DialogueTrigger
     }
     
 
-    void CheckSpriteFlip()
+    /*void CheckSpriteFlip()
     {
         if(NpcObject.transform.position.x > targetPos.x)
         {
@@ -325,5 +331,37 @@ public class PlumberScript : DialogueTrigger
             //turn right
             NpcObject.GetComponent<SpriteRenderer>().flipX = false;
         }
+    }*/
+
+    void CheckSpriteFlip()
+    {
+        if (gameObject.transform.position.x > targetPos.x && !xScaleWasChanged)
+        {
+            //turn left
+            //player.GetComponent<SpriteRenderer>().flipX = true;
+            gameObject.transform.localScale = new Vector3(
+                gameObject.transform.localScale.x * -1f,
+                gameObject.transform.localScale.y,
+                gameObject.transform.localScale.z);
+            xScaleWasChanged = true;
+        }
+        else if (gameObject.transform.position.x < targetPos.x && xScaleWasChanged)
+        {
+            //turn right
+            //player.GetComponent<SpriteRenderer>().flipX = false;
+            gameObject.transform.localScale = new Vector3(
+                gameObject.transform.localScale.x * -1f,
+                gameObject.transform.localScale.y,
+                gameObject.transform.localScale.z);
+            xScaleWasChanged = false;
+        }
+    }
+
+    void FlipCharacter()
+    {
+        gameObject.transform.localScale = new Vector3(
+            gameObject.transform.localScale.x * -1f,
+            gameObject.transform.localScale.y,
+            gameObject.transform.localScale.z);
     }
 }
