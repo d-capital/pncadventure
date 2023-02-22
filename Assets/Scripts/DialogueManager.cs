@@ -810,6 +810,7 @@ public class DialogueManager : MonoBehaviour
                     EndDialogue();
                     //get potion into inventory;
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().potionGiven = true;
+                    GameObject.FindObjectOfType<shamanScript>().GetComponent<shamanScript>().npcAnimator.SetBool("gavePotion", true);
                     GetItemToInventory("PotionButton");
                 }
                 else if (lvl3State == "shamanNirvana")
