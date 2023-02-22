@@ -573,6 +573,8 @@ public class DialogueManager : MonoBehaviour
                 {
                     //dono if there is something to set
                     EndDialogue();
+                    GameObject.FindObjectOfType<milfScript>().GetComponent<milfScript>().MilfGoesToRestourant();
+
                 }
             }
             else if(currDialogueActor == "emergencyButton")

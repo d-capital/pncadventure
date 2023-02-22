@@ -34,6 +34,8 @@ TagManager:
   - coins
   - aspirin
   - droppable
+  - nextCar
+  - corridorNearMilfSit
   layers:
   - Default
   - TransparentFX

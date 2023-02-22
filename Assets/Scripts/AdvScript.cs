@@ -407,10 +407,14 @@ public class AdvScript : MonoBehaviour
                 else if(hit.collider.gameObject.GetComponent<milfScript>())
                 {
                     print("found milf");
-                    currentDialoguePartner = "milf";
-                    milfDialogue = hit.collider.gameObject.GetComponent<DialogueTrigger>();
-                    ShowDialogueBox();
-                    milfDialogue.TriggerDialogue(currentDialoguePartner);
+                    var milfScript = GameObject.FindObjectOfType<milfScript>().GetComponent<milfScript>();
+                    if (!milfScript.isScriptActive)
+                    {
+                        currentDialoguePartner = "milf";
+                        milfDialogue = hit.collider.gameObject.GetComponent<DialogueTrigger>();
+                        ShowDialogueBox();
+                        milfDialogue.TriggerDialogue(currentDialoguePartner);
+                    }
                 }
                 else if(hit.collider.gameObject.GetComponent<emergencyButtonScript>())
                 {
