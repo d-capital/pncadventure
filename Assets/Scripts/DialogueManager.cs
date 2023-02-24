@@ -840,6 +840,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     GetItemToInventory("BathItemsButton");
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotBathItems = true;
+                    GameObject.FindObjectOfType<meMomScript>().GetComponent<meMomScript>().npcAnimator.SetBool("isHappy", true);
                     EndDialogue();
                 }
                 else if(lvl3State == "leaveMeMomAlone")
