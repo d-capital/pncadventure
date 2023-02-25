@@ -907,6 +907,11 @@ public class DialogueManager : MonoBehaviour
                 else if(lvl3State == "semenGavePotionToShahtars")
                 {
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().shahtarsHigh = true;
+                    shahtarScript[] shahtars = GameObject.FindObjectsOfType<shahtarScript>();
+                    foreach(shahtarScript shahtar in shahtars)
+                    {
+                        shahtar.GetComponent<shahtarScript>().npcAnimator.SetBool("isDrunk", true);
+                    }
                     EndDialogue();
                 }
                 else if(lvl3State == "shahtarsHigh")
