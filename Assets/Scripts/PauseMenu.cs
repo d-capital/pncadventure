@@ -34,7 +34,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isGamePaused = false;
-        string currentLevel = GameObject.FindObjectOfType<AdvScript>().GetComponent<AdvScript>().GetCurrentLevel();
+        string currentLevel = GetCurrentLevel();
         if (currentLevel != "Bossfight")
         {
             GameObject.FindObjectOfType<DialogueManager>().UnblockTasksAndInventory();
@@ -46,8 +46,8 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         isGamePaused = true;
-        string currentLevel = GameObject.FindObjectOfType<AdvScript>().GetComponent<AdvScript>().GetCurrentLevel();
-        if(currentLevel != "Bossfight")
+        string currentLevel = GetCurrentLevel();
+        if (currentLevel != "Bossfight")
         {
             GameObject.FindObjectOfType<DialogueManager>().BlockTasksAndInventory();
         }   
@@ -64,6 +64,14 @@ public class PauseMenu : MonoBehaviour
        Time.timeScale = 1f;
        SceneManager.LoadScene(0);
        isGamePaused = false;
+    }
+
+    public string GetCurrentLevel()
+    {
+        AdvScript[] advScripts = Resources.FindObjectsOfTypeAll<AdvScript>();
+        string currentLevel = advScripts[0].GetComponent<AdvScript>().GetCurrentLevel();
+
+        return currentLevel;
     }
 
 }
