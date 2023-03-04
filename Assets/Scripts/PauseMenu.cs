@@ -68,8 +68,8 @@ public class PauseMenu : MonoBehaviour
 
     public string GetCurrentLevel()
     {
-        AdvScript[] advScripts = Resources.FindObjectsOfTypeAll<AdvScript>();
-        string currentLevel = advScripts[0].GetComponent<AdvScript>().GetCurrentLevel();
+        
+        string currentLevel = SceneManager.GetActiveScene().name;
 
         return currentLevel;
     }

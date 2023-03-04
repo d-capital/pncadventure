@@ -16,10 +16,12 @@ public class Bullet : MonoBehaviour
             {
                 target.GetComponent<PlayerController>().health -= 10;
                 target.GetComponent<PlayerController>().HealthBar.SetHealth(target.GetComponent<PlayerController>().health);
+                target.GetComponent<PlayerController>().rb.angularVelocity = 0;
             }
             else
             {
                 target.GetComponent<PlayerController>().ReloadLevel();
+                target.GetComponent<PlayerController>().rb.angularVelocity = 0;
             }
         }
     }

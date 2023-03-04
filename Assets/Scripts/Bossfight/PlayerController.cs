@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public int health = 100;
     public int stamina = 50;
-    
+
     public Weapon weapon;
     public float fireRate;
     public float coolDownRate;
@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
 
     public bool isQteActive = false;
 
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +44,8 @@ public class PlayerController : MonoBehaviour
         HandleMovement();
         HandleFire();
         HandleDash();
-        
+        rb.angularVelocity = 0;
+
     }
 
     private void FixedUpdate()
@@ -55,6 +58,10 @@ public class PlayerController : MonoBehaviour
             Vector3 aimDirection = mousePosWorld - transform.position;
             float aimAngel = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
             rb.rotation = aimAngel;
+            if (!isMoving())
+            {
+                animator.SetBool("isMoving", false);
+            }
         }
         if (isDashButtonDown)
         {
@@ -69,6 +76,10 @@ public class PlayerController : MonoBehaviour
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
         moveDirection = new Vector2(moveX, moveY).normalized;
+        if (isMoving())
+        {
+            animator.SetBool("isMoving", true);
+        }
 
     }
 
@@ -102,5 +113,17 @@ public class PlayerController : MonoBehaviour
     void Fire()
     {
         weapon.Fire(stamina);
+    }
+
+    bool isMoving()
+    {
+        return Input.GetKey(KeyCode.W)
+            || Input.GetKey(KeyCode.A)
+            || Input.GetKey(KeyCode.S)
+            || Input.GetKey(KeyCode.D)
+            || Input.GetKey(KeyCode.UpArrow)
+            || Input.GetKey(KeyCode.DownArrow)
+            || Input.GetKey(KeyCode.LeftArrow)
+            || Input.GetKey(KeyCode.RightArrow);
     }
 }

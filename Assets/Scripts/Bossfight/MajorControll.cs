@@ -19,7 +19,8 @@ public class MajorControll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameObject.FindObjectOfType<PlayerController>().GetComponent<PlayerController>().isCabCrewDead == true)
+        if (GameObject.FindObjectOfType<PlayerController>().GetComponent<PlayerController>().isCabCrewDead == true 
+            && GameObject.FindObjectOfType<PlayerController>().GetComponent<PlayerController>().isQteActive != true)
         {
             if (stamina > 5 && Time.time > nextFire)
             {
