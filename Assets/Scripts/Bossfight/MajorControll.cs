@@ -11,6 +11,7 @@ public class MajorControll : MonoBehaviour
     public float fireRate;
     private float nextFire;
     public float coolDownRate;
+    public Animator npcAnimator;
 
     public string Name = "Ìýð";
 
@@ -25,7 +26,7 @@ public class MajorControll : MonoBehaviour
             if (stamina > 5 && Time.time > nextFire)
             {
                 nextFire = Time.time + fireRate;
-                fireNextBottle();
+                npcAnimator.SetBool("hasToThrow", true);
             }
             else
             {
@@ -49,7 +50,8 @@ public class MajorControll : MonoBehaviour
     {
 
         stamina = stamina - 5;
-        weapon.Fire(stamina);
+        weapon.Fire(stamina); 
+        npcAnimator.SetBool("hasToThrow", false);
 
     }
 

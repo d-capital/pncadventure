@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 2201011066771237063}
   - component: {fileID: 2201011066771237062}
   - component: {fileID: 2201011066771237064}
+  - component: {fileID: 7011721261062178083}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Bullet 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2201011066771237059}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.61, y: 16.49, z: 0}
-  m_LocalScale: {x: 0.4703845, y: 0.5287457, z: 0.61898816}
+  m_LocalPosition: {x: -0.6913, y: 16.1425, z: 0}
+  m_LocalScale: {x: 0.9864286, y: 0.97943044, z: 1.6792504}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,8 +76,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_SortingOrder: 6
+  m_Sprite: {fileID: 21300000, guid: bcd2d0db3e33c47498a2a3f1eebd3d44, type: 3}
   m_Color: {r: 0.8773585, g: 0.7415347, b: 0.21023493, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,9 +101,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.07013517}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.45099255
 --- !u!50 &2201011066771237062
 Rigidbody2D:
   serializedVersion: 4
@@ -136,3 +137,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 201075f2e208933459c9e36c24f9dccf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &7011721261062178083
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2201011066771237059}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b1fb7a358d8699c43b27d4e59a1c8b18, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

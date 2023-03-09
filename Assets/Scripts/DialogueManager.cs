@@ -1090,12 +1090,14 @@ public class DialogueManager : MonoBehaviour
                     GetItemToInventory("shubaButton");
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotShubaFromHunter = true;
                     EndDialogue();
+                    GameObject.FindObjectOfType<hunterScript>().npcAnimator.SetBool("isHunterHappy", true);
                 }
                 else if (lvl4State == "hunterWantsToGiveShubaAfterAspirin")
                 {
                     GetItemToInventory("shubaButton");
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotShubaFromHunter = true;
                     EndDialogue();
+                    GameObject.FindObjectOfType<hunterScript>().npcAnimator.SetBool("isHunterHappy", true);
                 }
                 else if (lvl4State == "hunterDrinksTeaOrGotAspirin")
                 {
@@ -1169,6 +1171,7 @@ public class DialogueManager : MonoBehaviour
                         playerData.hasAspirin = hasItemInInventory("aspirinItem");
                         playerData.grandMasterSideChosen = true;
                         completeTask(0);
+                        GameObject.FindObjectOfType<hunterScript>().npcAnimator.SetBool("drunkTea", true);
                         RemoveItemFromSlotWithoutDropping("glassOfTeaItem");
                         ResolveEnding(playerData);
                     }
@@ -1186,6 +1189,7 @@ public class DialogueManager : MonoBehaviour
                         playerData.enterCutSceneShown = true;
                         playerData.hasAspirin = hasItemInInventory("aspirinItem");
                         playerData.grandMasterSideChosen = true;
+                        GameObject.FindObjectOfType<hunterScript>().npcAnimator.SetBool("drunkTea", true);
                         completeTask(0);
                         RemoveItemFromSlotWithoutDropping("glassOfTeaItem");
                         ResolveEnding(playerData);
@@ -1197,6 +1201,7 @@ public class DialogueManager : MonoBehaviour
                         playerData.enterCutSceneShown = true;
                         playerData.hasAspirin = hasItemInInventory("aspirinItem");
                         playerData.grandMasterSideChosen = false;
+                        GameObject.FindObjectOfType<hunterScript>().npcAnimator.SetBool("drunkBoyaryshnik", true);
                         completeTask(0);
                         RemoveItemFromSlotWithoutDropping("glassOfBoyaryshnikItem");
                         ResolveEnding(playerData);
@@ -1215,6 +1220,7 @@ public class DialogueManager : MonoBehaviour
                         playerData.enterCutSceneShown = true;
                         playerData.hasAspirin = hasItemInInventory("aspirinItem");
                         playerData.grandMasterSideChosen = false;
+                        GameObject.FindObjectOfType<hunterScript>().npcAnimator.SetBool("drunkBoyaryshnik", true);
                         completeTask(0);
                         RemoveItemFromSlotWithoutDropping("glassOfBoyaryshnikItem");
                         ResolveEnding(playerData);

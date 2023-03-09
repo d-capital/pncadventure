@@ -12,6 +12,8 @@ public class CabCrewController : MonoBehaviour
     private float nextFire;
     public float coolDownRate;
 
+    public Animator npcAnimator;
+
     public string Name = "ÏÐÎÂÎÄÍÈÖÀ";
 
     public HealthBarControll HealthBar;
@@ -22,7 +24,7 @@ public class CabCrewController : MonoBehaviour
         if (stamina > 5 && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
-            fireNextBottle();
+            npcAnimator.SetBool("hasToThrow", true);
         } 
         else
         {
@@ -47,6 +49,7 @@ public class CabCrewController : MonoBehaviour
 
         stamina = stamina - 5;
         weapon.Fire(stamina);
+        npcAnimator.SetBool("hasToThrow", false);
 
     }
 

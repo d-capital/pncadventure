@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
 
     void Fire()
     {
-        weapon.Fire(stamina);
+        weapon.PlayerFire(stamina);
     }
 
     bool isMoving()
