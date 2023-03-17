@@ -8,6 +8,7 @@ public class PickUpItem : MonoBehaviour
     {
         Destroy(gameObject);
         GameObject.FindObjectOfType<PlayerController>().GetComponent<PlayerController>().animator.SetBool("hasWeapon", true);
+        GameObject.FindObjectOfType<PlayerController>().GetComponent<PlayerController>().ChangeToWeaponAim();
         Weapon[] weapons = Resources.FindObjectsOfTypeAll<Weapon>();
         foreach (Weapon i in weapons)
         {

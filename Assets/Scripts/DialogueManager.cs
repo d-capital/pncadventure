@@ -551,11 +551,6 @@ public class DialogueManager : MonoBehaviour
                     else if (curResponseTracker == 2)
                     {
                         //right option
-                        IList milfBed = Resources.FindObjectsOfTypeAll<milfBedScript>();
-                        foreach (milfBedScript i in milfBed)
-                        {
-                            i.ShowBed();
-                        }
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt3Done = true;
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfRightAnswer3 = true;
                     }
@@ -686,11 +681,7 @@ public class DialogueManager : MonoBehaviour
                     if(curResponseTracker == 0)
                     {
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wasCrimeReported = true;
-                        IList cardsManBed = Resources.FindObjectsOfTypeAll<cardsManBedScript>();
-                        foreach (cardsManBedScript i in cardsManBed)
-                        {
-                            i.ShowBed();
-                        }
+                        GameObject.FindObjectOfType<cardsManScript>().gameObject.SetActive(false);
                     }
                     else if (curResponseTracker == 1)
                     {

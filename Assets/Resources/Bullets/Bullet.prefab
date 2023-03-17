@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 201075f2e208933459c9e36c24f9dccf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
 --- !u!95 &7011721261062178083
 Animator:
   serializedVersion: 4
@@ -150,7 +151,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 16b0b4ee2edebcf41b0a5f41a0878d07, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 

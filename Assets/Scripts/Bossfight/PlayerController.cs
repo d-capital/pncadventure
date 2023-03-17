@@ -31,10 +31,16 @@ public class PlayerController : MonoBehaviour
 
     public Animator animator;
 
+    public Texture2D cursorTextureNoWeapon;
+    public Texture2D cursorTextureWithWeapon;
+    public CursorMode cursorMode = CursorMode.Auto;
+    public Vector2 hotSpot = Vector2.zero;
+
     // Start is called before the first frame update
     void Start()
     {
         HealthBar.SetMaxHealth(health);
+        Cursor.SetCursor(cursorTextureNoWeapon, hotSpot, cursorMode);
     }
 
     // Update is called once per frame
@@ -125,5 +131,10 @@ public class PlayerController : MonoBehaviour
             || Input.GetKey(KeyCode.DownArrow)
             || Input.GetKey(KeyCode.LeftArrow)
             || Input.GetKey(KeyCode.RightArrow);
+    }
+
+    public void ChangeToWeaponAim()
+    {
+        Cursor.SetCursor(cursorTextureWithWeapon, hotSpot, cursorMode);
     }
 }

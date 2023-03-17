@@ -9,7 +9,7 @@ public class milfBedScript : DialogueTrigger
     // Start is called before the first frame update
     void Start()
     {
-        NpcObject.SetActive(false);
+        //NpcObject.SetActive(false);
     }
 
     // Update is called once per frame

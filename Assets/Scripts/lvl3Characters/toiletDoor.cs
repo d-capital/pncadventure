@@ -7,6 +7,7 @@ public class toiletDoor : MonoBehaviour, IDropHandler
 {
 
     public bool objectReceived = false;
+    public AudioSource audioSource;
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("OnDrop");
@@ -46,5 +47,6 @@ public class toiletDoor : MonoBehaviour, IDropHandler
     public void OpenDoor()
     {
         gameObject.SetActive(false);
+        audioSource.Play();
     }
 }

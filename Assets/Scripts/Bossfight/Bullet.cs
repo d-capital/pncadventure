@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        GameObject.Find("shatteredGlassSound").GetComponent<AudioSource>().Play();
         Destroy(gameObject);
         //check if enemy was hit and register damage
         GameObject target = collision.collider.gameObject;

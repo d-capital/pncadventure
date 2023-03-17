@@ -63,7 +63,7 @@ public class PlumberScript : DialogueTrigger
                         print("Target position BEFORE walking to wc : x - "+ targetPos.x + " y - "+ targetPos.y);
                         //CheckSpriteFlip();
                         currentMission = "goToCorridorNearWc";
-                        CheckSpriteFlip();
+                        //CheckSpriteFlip();
                     } 
                     else if ((corridorNearSit.x == NpcObject.transform.position.x && corridorNearSit.y == NpcObject.transform.position.y)
                         && currentMission == "goToCorridorNearWc")
@@ -75,7 +75,7 @@ public class PlumberScript : DialogueTrigger
                             print("Target position BEFORE walking to wc : x - "+ targetPos.x + " y - "+ targetPos.y);
                             targetPos = corridorNearWc;
                             print("Target position AFTER walking to wc is activated : x - "+ targetPos.x + " y - "+ targetPos.y);
-                            //CheckSpriteFlip();
+                            FlipCharacter();
                             isMoving = true;
                             currentMission = "getToWindow";
                         }

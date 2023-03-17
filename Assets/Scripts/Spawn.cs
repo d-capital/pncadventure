@@ -123,6 +123,7 @@ public class Spawn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
                 GameObject.Destroy(eventData.pointerDrag);
                 GameObject.FindObjectOfType<DialogueManager>().GetComponent<DialogueManager>().RemoveItemFromSlotWithoutDropping("glassOfTeaItem");
                 GameObject.FindObjectOfType<DialogueManager>().GetComponent<DialogueManager>().CraftItemInSlot("glassOfBoyaryshnikButton", slotNumber);
+                GameObject.Find("boyaryshnikSound").GetComponent<AudioSource>().Play();
                 var DroppableItems = GameObject.FindGameObjectsWithTag("droppable");
                 foreach (var i in DroppableItems)
                 {

@@ -22,6 +22,8 @@ public class TaskBar : MonoBehaviour
 
     TasksList tasksList;
 
+    public AudioSource audioSource;
+
     private void Start()
     {
         ClearTasks();
@@ -65,7 +67,7 @@ public class TaskBar : MonoBehaviour
                 break;
             }
         }
-        //TODO: Play some sound
+        audioSource.Play();
     }
 
     public void CloseTaskList()
