@@ -2,27 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
+using static TasksButton;
 
 public class TaskBar : MonoBehaviour
 {
 
-    [System.Serializable]
-    public class Task
-    {
-        public int id { get; set; }
-        public string Content { get; set; }
-        public bool State { get; set; }
-    }
 
-    [System.Serializable]
-    public class TasksList
-    {
-        public List<Task> Tasks { get; set; }
-    }
-
-    TasksList tasksList;
-
-    public AudioSource audioSource;
+    //public AudioSource audioSource;
 
     private void Start()
     {
@@ -31,11 +17,8 @@ public class TaskBar : MonoBehaviour
     }
     public void SetNewTasks()
     {
-        string path = Application.dataPath;
-        string levelName = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().GetCurrentLevel();
-        string pathToDialogue = path + "/StreamingAssets/TasksStorage/" + levelName + ".json";
-        var jsonString = System.IO.File.ReadAllText(pathToDialogue);
-        tasksList = JsonConvert.DeserializeObject<TasksList>(jsonString);
+        ClearTasks();
+        var tasksList = GameObject.FindObjectOfType<TasksButton>().GetComponent<TasksButton>().tasksList;
         Transform Grid = FindObjectOfType<TaskGridControl>().transform;
         foreach (Task i in tasksList.Tasks)
         {
@@ -56,7 +39,7 @@ public class TaskBar : MonoBehaviour
         }
     }
 
-    public void CompleteExistingTask(int taskId)
+    /*public void CompleteExistingTask(int taskId)
     {
         TaskLine[] taskLines = Resources.FindObjectsOfTypeAll<TaskLine>();
         foreach (TaskLine i in taskLines)
@@ -68,7 +51,7 @@ public class TaskBar : MonoBehaviour
             }
         }
         audioSource.Play();
-    }
+    }*/
 
     public void CloseTaskList()
     {

@@ -580,6 +580,7 @@ public class DialogueManager : MonoBehaviour
                     if (curResponseTracker == 0)
                     {
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInTopSpot = true;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot = false;
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = true;
                         string newInfoText = "Провод в верхнем пазе";
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
@@ -587,6 +588,9 @@ public class DialogueManager : MonoBehaviour
                     else if (curResponseTracker == 1)
                     {
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot = true;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInTopSpot = false;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInBottomSpot = false;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = false;
                         string newInfoText = "Провод в среднем пазе";
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
                     }
@@ -594,6 +598,7 @@ public class DialogueManager : MonoBehaviour
                     {
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInBottomSpot = true;
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = true;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot = false;
                         string newInfoText = "Провод в нижнем пазе";
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
                     }
@@ -1360,12 +1365,12 @@ public class DialogueManager : MonoBehaviour
                 lvl1State = "babkaInitial";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl1State);
             }
-            else if (helpedOldWoman == true && windowClosed == false && hasVodka == false && treadmillFixed == false)
+            else if (helpedOldWoman == true && !vodkaGivenToPlumber && windowClosed == false && hasVodka == false && treadmillFixed == false)
             {
                 lvl1State = "babkaWantsToGiveVodka";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl1State);
             }
-            else if (helpedOldWoman == true && ((windowClosed == false && treadmillFixed == true) || (windowClosed == false && treadmillFixed == false)))
+            else if (helpedOldWoman == true && vodkaGivenToPlumber && ((windowClosed == false && treadmillFixed == true) || (windowClosed == false && treadmillFixed == false)))
             {
                 lvl1State = "babkeDuet";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl1State);
@@ -2319,11 +2324,7 @@ public class DialogueManager : MonoBehaviour
 
     public void completeTask (int taskId)
     {
-        TaskBar[] taskBars = Resources.FindObjectsOfTypeAll<TaskBar>();
-        foreach(TaskBar i  in taskBars)
-        {
-            i.CompleteExistingTask(taskId);
-        }
+        GameObject.FindObjectOfType<TasksButton>().GetComponent<TasksButton>().CompleteTask(taskId);
         string newInfoText = "Задание выполнено!";
         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
     }
