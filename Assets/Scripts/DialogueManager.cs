@@ -996,7 +996,6 @@ public class DialogueManager : MonoBehaviour
                 {
                     GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().majorGirlHasShuba = true;
                     RemoveItemFromSlotWithoutDropping("shubaItem");
-                    EndDialogue();
                 }
                 else if (lvl4State == "noShuba")
                 {
@@ -2253,16 +2252,19 @@ public class DialogueManager : MonoBehaviour
     {
         var inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         GameObject itemButton = Resources.Load<GameObject>(itemObjectName);
+        int numberOfItemsAdded = 0;
         for (int i = 0; i < inventory.slots.Length; i++)
         {
             if (inventory.isFull[i] == false)
             {
                 //Add item to inventory
+                numberOfItemsAdded += 1;
                 inventory.isFull[i] = true;
                 Instantiate(itemButton, inventory.slots[i].transform, false);
                 break;
             }
         }
+        Debug.Log("Number of items added " + numberOfItemsAdded);
     }
 
     public void CraftItemInSlot(string itemObjectName, int slotNumber)

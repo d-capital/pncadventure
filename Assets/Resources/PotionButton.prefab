@@ -138,6 +138,8 @@ MonoBehaviour:
   item: {fileID: 7109672189545423399, guid: e710e1359cc0a7f4ca544585cc3955a4, type: 3}
   itemType: PotionItem
   initObjectPos: {x: 0, y: 0, z: 0}
+  objectReceived: 0
+  cursor: {fileID: 2800000, guid: 6846d168a59c2fc4a80e51db68bcad9b, type: 3}
 --- !u!225 &7280641339060126231
 CanvasGroup:
   m_ObjectHideFlags: 0

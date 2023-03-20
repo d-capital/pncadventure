@@ -12,6 +12,7 @@ public class Spawn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
     private CanvasGroup canvasGroup;
     public Vector3 initObjectPos;
     public bool objectReceived = false;
+    public Texture2D cursor;
 
 
     private void Awake()
@@ -35,7 +36,8 @@ public class Spawn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
         canvasGroup.blocksRaycasts = false;
         initObjectPos = rectTransform.position;
         gameObject.GetComponentInParent<Slot>().gameObject.GetComponent<Canvas>().overrideSorting = true;
-        gameObject.GetComponentInParent<Slot>().gameObject.GetComponent<Canvas>().sortingOrder = 20;
+        gameObject.GetComponentInParent<Slot>().gameObject.GetComponent<Canvas>().sortingOrder = 61;
+        Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
     }
     public void OnEndDrag(PointerEventData eventData)
     {
@@ -51,6 +53,7 @@ public class Spawn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
         }
         returnObjectIfNeeded();
         gameObject.GetComponentInParent<Slot>().gameObject.GetComponent<Canvas>().overrideSorting = false;
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
 
     public void returnObjectIfNeeded()
@@ -136,5 +139,6 @@ public class Spawn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
                 eventData.pointerDrag.gameObject.transform.position = eventData.pointerDrag.gameObject.GetComponent<Spawn>().initObjectPos;
             }
         }
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
 }

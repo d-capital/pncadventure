@@ -7,6 +7,7 @@ public class sink : MonoBehaviour, IDropHandler
 {
 
     public bool objectReceived = false;
+    public Texture2D cursor;
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("OnDrop");
@@ -45,5 +46,15 @@ public class sink : MonoBehaviour, IDropHandler
     void Update()
     {
         
+    }
+
+    private void OnMouseOver()
+    {
+        Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
+    }
+
+    private void OnMouseExit()
+    {
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
 }

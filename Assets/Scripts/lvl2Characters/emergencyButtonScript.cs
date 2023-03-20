@@ -6,6 +6,7 @@ public class emergencyButtonScript : DialogueTrigger
 {
     public GameObject NpcObject;
     public Animator npcAnimator;
+
     // Start is called before the first frame update
     void Start()
     {

@@ -137,6 +137,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 2388728756568129747, guid: af55a4913e8cb054aa827b4859f7fb6f, type: 3}
   itemType: ScrewKeyItem
+  initObjectPos: {x: 0, y: 0, z: 0}
+  objectReceived: 0
+  cursor: {fileID: 2800000, guid: 6846d168a59c2fc4a80e51db68bcad9b, type: 3}
 --- !u!225 &-7162504710209829084
 CanvasGroup:
   m_ObjectHideFlags: 0

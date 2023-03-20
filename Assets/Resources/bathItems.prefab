@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemButton: {fileID: 3146919813443056208, guid: 04e558768e9097040b86c15b8c439f2d, type: 3}
+  cursor: {fileID: 2800000, guid: 567efd2ecfdbfa34995c89d9422e46c3, type: 3}
 --- !u!61 &-1195256081519347920
 BoxCollider2D:
   m_ObjectHideFlags: 0

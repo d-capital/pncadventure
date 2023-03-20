@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemButton: {fileID: 8118877398612109822, guid: 39a9407786778014a8efd23667436216, type: 3}
+  cursor: {fileID: 2800000, guid: 567efd2ecfdbfa34995c89d9422e46c3, type: 3}
 --- !u!50 &4338203807028051918
 Rigidbody2D:
   serializedVersion: 4

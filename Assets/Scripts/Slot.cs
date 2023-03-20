@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class Slot : MonoBehaviour
 {
-    private Inventory inventory;
+    public Inventory inventory;
     public int i;
 
     public void DropItem()
@@ -19,7 +19,7 @@ public class Slot : MonoBehaviour
     }
     public void DropItemWithoutSpawn()
     {
-        foreach(Transform child in transform)
+        foreach (Transform child in transform)
         {
             GameObject.Destroy(child.gameObject);
         }
@@ -32,6 +32,11 @@ public class Slot : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+
+    }
+
+    private void FixedUpdate()
     {
         if (transform.childCount <= 0)
         {

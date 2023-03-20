@@ -93,6 +93,8 @@ MonoBehaviour:
   item: {fileID: 8525542053778477760, guid: 8076cdfdf1bcce74f9554c4e0840ab22, type: 3}
   itemType: glassItem
   initObjectPos: {x: 0, y: 0, z: 0}
+  objectReceived: 0
+  cursor: {fileID: 2800000, guid: 6846d168a59c2fc4a80e51db68bcad9b, type: 3}
 --- !u!225 &2743620872491558343
 CanvasGroup:
   m_ObjectHideFlags: 0

@@ -137,6 +137,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 8372772193513563348, guid: b64836be0e9b5474995602ba40688ec4, type: 3}
   itemType: crowbarItem
+  initObjectPos: {x: 0, y: 0, z: 0}
+  objectReceived: 0
+  cursor: {fileID: 2800000, guid: 6846d168a59c2fc4a80e51db68bcad9b, type: 3}
 --- !u!225 &5234574696448024639
 CanvasGroup:
   m_ObjectHideFlags: 0

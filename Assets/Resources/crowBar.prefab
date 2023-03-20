@@ -147,3 +147,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemButton: {fileID: 1580022148935633591, guid: 931dddc8764bc4744922f820832cc960, type: 3}
+  cursor: {fileID: 2800000, guid: 567efd2ecfdbfa34995c89d9422e46c3, type: 3}

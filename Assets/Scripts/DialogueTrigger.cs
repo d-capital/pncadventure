@@ -6,6 +6,7 @@ public class DialogueTrigger : MonoBehaviour {
 
 	public Dialogue dialogue;
 	//public Animator plumberAnimator;
+	public Texture2D cursor;
 
     void Start()
     {
@@ -47,6 +48,16 @@ public class DialogueTrigger : MonoBehaviour {
 			&& GameObject.FindObjectOfType<TasksButton>().areTasksOpen == false;
 		return CanTriggerDialogue;
     }
+
+    private void OnMouseOver()
+    {
+		Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
+	}
+
+    private void OnMouseExit()
+    {
+		Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+	}
 
 
 }

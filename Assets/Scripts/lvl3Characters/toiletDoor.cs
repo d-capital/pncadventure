@@ -8,6 +8,7 @@ public class toiletDoor : MonoBehaviour, IDropHandler
 
     public bool objectReceived = false;
     public AudioSource audioSource;
+    public Texture2D cursor;
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("OnDrop");
@@ -48,5 +49,15 @@ public class toiletDoor : MonoBehaviour, IDropHandler
     {
         gameObject.SetActive(false);
         audioSource.Play();
+    }
+
+    private void OnMouseOver()
+    {
+        Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
+    }
+
+    private void OnMouseExit()
+    {
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
 }

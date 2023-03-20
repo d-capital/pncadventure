@@ -318,14 +318,10 @@ public class AdvScript : MonoBehaviour
                 {
                     //start the dialogue only if the player is close enough:
                     currentDialoguePartner = hit.collider.gameObject.tag;
-                    playerPosition = new Vector2(player.transform.position.x, player.transform.position.y);
-                    distance = Vector2.Distance(playerPosition, mousePosWorld2D);
-                    if(distance <= 3f)
-                    {
-                        ShowDialogueBox();
-                        oldWomanDialogue = GameObject.FindGameObjectWithTag("OldWoman").GetComponent<DialogueTrigger>();
-                        oldWomanDialogue.TriggerDialogue("OldWoman");
-                    }
+                    ShowDialogueBox();
+                    oldWomanDialogue = GameObject.FindGameObjectWithTag("OldWoman").GetComponent<DialogueTrigger>();
+                    oldWomanDialogue.TriggerDialogue("OldWoman");
+
                  
                 }
                 else if(hit.collider.gameObject.tag == "OldWomansBed")
