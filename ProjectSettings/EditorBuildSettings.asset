@@ -44,6 +44,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Bossfight.unity
     guid: 364d554076b50a045a812070e9622157
+  - enabled: 1
+    path: Assets/Scenes/GoodEnding.unity
+    guid: f852fc198fb0a544b9a9280cf249070c
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000

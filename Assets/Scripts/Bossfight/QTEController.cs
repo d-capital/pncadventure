@@ -31,7 +31,7 @@ public class QTEController : MonoBehaviour
             gameObject.SetActive(false);
             PlayerData playerData = SaveSystem.LoadPlayer();
             playerData.currentLevelIndex = 12;
-            GameObject.FindObjectOfType<PlayerController>().GetComponent<PlayerController>().LoadDistinctLevel(playerData,0);
+            GameObject.FindObjectOfType<PlayerController>().GetComponent<PlayerController>().LoadDistinctLevel(playerData,13);
             GameObject.FindObjectOfType<PlayerController>().GetComponent<PlayerController>().rb.constraints
                 = RigidbodyConstraints2D.None;
             GameObject.FindObjectOfType<PlayerController>().GetComponent<PlayerController>().isQteActive = false;
