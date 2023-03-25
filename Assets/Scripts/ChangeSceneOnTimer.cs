@@ -8,6 +8,10 @@ public class ChangeSceneOnTimer : MonoBehaviour
     public float changeTime;
     public string sceneName;
 
+    private void Start()
+    {
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+    }
     // Update is called once per frame
     void Update()
     {

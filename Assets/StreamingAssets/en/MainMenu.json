@@ -1,0 +1,14 @@
+[
+    {
+        "name":"resume",
+        "text":"RESUME"
+    },
+    {
+        "name":"newGame",
+        "text":"NEW GAME"
+    },
+    {
+        "name":"quit",
+        "text":"QUIT"
+    }
+]

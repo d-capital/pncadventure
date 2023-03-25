@@ -11,4 +11,5 @@ public class PlayerData
     public bool cardsManNotCaught = false;
     public bool grandMasterSideChosen = false;
     public bool hasAspirin = false;
+    public string language = "ru";
 }

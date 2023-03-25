@@ -1,0 +1,18 @@
+[
+    {
+        "name":"WastedText",
+        "text":"WASTED"
+    },
+    {
+        "name":"Restart",
+        "text":"Restart"
+    },
+    {
+        "name":"MainMenu",
+        "text":"Main Menu"
+    },
+    {
+        "name":"Quit",
+        "text":"Quit"
+    }
+]

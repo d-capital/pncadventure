@@ -2,13 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
+    string objectName = "MainMenu";
+
+    public Text resumeText;
+    public Text quitText;
+    public Text newGameText;
+
     // Start is called before the first frame update
     void Start()
     {
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        resumeText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "resume");
+        quitText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "quit");
+        newGameText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "newGame");
     }
 
     public void startNewGame()
@@ -18,14 +28,6 @@ public class MenuManager : MonoBehaviour
         {
             OverlayManager Overlay = GameObject.FindObjectOfType<OverlayManager>();
             Overlay.Overlay.gameObject.SetActive(true);
-            //Transform[] trs = canvasObj.GetComponentsInChildren<Transform>(true);
-            //foreach(Transform t in trs)
-           // {
-             //   if(t.tag == "ConfirmationOvelray")
-              //  {
-                //    t.gameObject.SetActive(true);
-              //  }
-           // }
         }
         else
         {

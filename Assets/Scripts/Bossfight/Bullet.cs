@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
             }
             else
             {
-                target.GetComponent<PlayerController>().ReloadLevel();
+                GameObject.FindObjectOfType<GameOver>().GetComponent<GameOver>().ShowGameOverScreen();
                 target.GetComponent<PlayerController>().rb.angularVelocity = 0;
             }
         }

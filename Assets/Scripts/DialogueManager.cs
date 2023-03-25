@@ -180,7 +180,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 else if (lvl1State == "defeat")
                 {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ReloadLevel();
+                    GameObject.FindObjectOfType<GameOver>().GetComponent<GameOver>().ShowGameOverScreen();
                 }
                 else if (lvl1State == "warn")
                 {
@@ -312,7 +312,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     if(curResponseTracker == 0)
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ReloadLevel();
+                        GameObject.FindObjectOfType<GameOver>().GetComponent<GameOver>().ShowGameOverScreen();
                     }
                 }
                 else if (lvl1State == "victory")
@@ -384,8 +384,8 @@ public class DialogueManager : MonoBehaviour
                 else if (lvl2State == "gameOver")
                 {
                     EndDialogue();
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ReloadLevel();
-                    
+                    GameObject.FindObjectOfType<GameOver>().GetComponent<GameOver>().ShowGameOverScreen();
+
                 }
                 else if (lvl2State == "rejectedAfter2ndPlay")
                 {
@@ -883,7 +883,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 else if(lvl3State == "roundTwoFailed")
                 {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ReloadLevel();
+                    GameObject.FindObjectOfType<GameOver>().GetComponent<GameOver>().ShowGameOverScreen();
                 }
                 else if(lvl3State == "roundThree")
                 {
@@ -924,7 +924,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 else if (lvl3State == "fuckOff2")
                 {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ReloadLevel();
+                    GameObject.FindObjectOfType<GameOver>().GetComponent<GameOver>().ShowGameOverScreen();
                 }
                 else if(lvl3State == "success")
                 {

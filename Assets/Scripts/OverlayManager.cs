@@ -2,14 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class OverlayManager : MonoBehaviour
 {
     public GameObject Overlay;
+    public Text yesText;
+    public Text noText;
+    public Text overlayText;
+
+    string objectName = "MainMenuOverlay";
+
     // Start is called before the first frame update
     void Start()
     {
         Overlay.SetActive(false);
+        yesText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "yes");
+        noText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "no");
+        overlayText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "text");
     }
 
     public void ShowOverlay()

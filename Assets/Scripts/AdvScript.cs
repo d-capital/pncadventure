@@ -611,7 +611,7 @@ public class AdvScript : MonoBehaviour
 
     public void Answer(int incomingResponseIndex)
     {
-        if (!GameObject.FindObjectOfType<PauseMenu>().isGamePaused)
+        if (!GameObject.FindObjectOfType<PauseMenu>().isGamePaused && !GameObject.FindObjectOfType<GameOver>().isGameOverScreenShown)
         {
             MapDialogueTrigger(currentDialoguePartner).Answer(currentDialoguePartner, incomingResponseIndex);
         }

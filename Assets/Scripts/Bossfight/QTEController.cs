@@ -40,7 +40,7 @@ public class QTEController : MonoBehaviour
         {
             Time.timeScale = 1f;
             gameObject.SetActive(false);
-            GameObject.FindObjectOfType<PlayerController>().GetComponent<PlayerController>().ReloadLevel();
+            GameObject.FindObjectOfType<GameOver>().GetComponent<GameOver>().ShowGameOverScreen();
             GameObject.FindObjectOfType<PlayerController>().GetComponent<PlayerController>().rb.constraints
                 = RigidbodyConstraints2D.None;
             GameObject.FindObjectOfType<PlayerController>().GetComponent<PlayerController>().isQteActive = false;

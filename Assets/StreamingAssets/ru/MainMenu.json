@@ -1,0 +1,14 @@
+[
+    {
+        "name":"resume",
+        "text":"ПРОДОЛЖИТЬ"
+    },
+    {
+        "name":"newGame",
+        "text":"НОВАЯ ИГРА"
+    },
+    {
+        "name":"quit",
+        "text":"ВЫЙТИ"
+    }
+]
