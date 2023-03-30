@@ -1,0 +1,80 @@
+{
+    "LinesAnswers":
+    [   
+        {
+            "name":"initial",
+            "line":"Don't you see - I'm tired, we had a business with the mayor and hunter last night. What do you need?",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Nothing, I'm just walking around."
+                },
+                {
+                    "id":"1",
+                    "response":"Please, pour me some tea, here's a glass."
+                }
+            ]
+        },
+        {
+            "name":"initialNoGlassNoTask",
+            "line":"Don't you see - I'm tired, we had a business with the mayor and hunter last night. What do you need?",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Nothing, I'm just walking around."
+                }
+            ]
+        },
+        {
+            "name":"asksForPayment",
+            "line":"You need to pay for the tea. Whom should I charge for it?",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"The mayor will pay for it."
+                },
+                {
+                    "id":"1",
+                    "response":"Put it on hunters account."
+                },
+                {
+                    "id":"2",
+                    "response":"Chess playet will pay."
+                },
+                {
+                    "id":"3",
+                    "response":"The girl that is with major will pay."
+                },
+                {
+                    "id":"4",
+                    "response":"I'll pay later."
+                }
+            ]
+        },
+        {
+            "name":"wrongAnswer",
+            "line":"Stop this bullshit, vacate the premises!",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Leave"
+                }
+            ]
+        },
+        {
+            "name":"rightAnswer",
+            "line":"Hmm, okay, here's the tea, I'll put it on the bill.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Thank you!"
+                }
+            ]
+        }
+    ]
+}

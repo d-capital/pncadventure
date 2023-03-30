@@ -17,10 +17,14 @@ public class QTECarpetControll : MonoBehaviour
     private void ActivateQte()
     {
 
+        if (!GameObject.FindObjectOfType<GameOver>().isGameOverScreenShown)
+        {
             QTEController[] qteControllers = Resources.FindObjectsOfTypeAll<QTEController>();
             foreach (QTEController i in qteControllers)
             {
                 i.gameObject.SetActive(true);
             }
+        }  
+
     }
 }

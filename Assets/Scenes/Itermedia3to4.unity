@@ -740,6 +740,20 @@ PlayableDirector:
     value: {fileID: 359701785}
   - key: {fileID: -7075711607180681298, guid: 74d76fd027f4b044aa3000021b48a177, type: 2}
     value: {fileID: 616410853}
+  - key: {fileID: -2549847531996041615, guid: 74d76fd027f4b044aa3000021b48a177, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -1532589010526501112, guid: 74d76fd027f4b044aa3000021b48a177, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4412353411772523451, guid: 74d76fd027f4b044aa3000021b48a177, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -5205536263992490682, guid: 74d76fd027f4b044aa3000021b48a177, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -8739612024494404135, guid: 74d76fd027f4b044aa3000021b48a177, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 4678226318264226249, guid: 74d76fd027f4b044aa3000021b48a177, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 3834828111360755021, guid: 74d76fd027f4b044aa3000021b48a177, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!224 &2037530028
@@ -774,6 +788,7 @@ GameObject:
   - component: {fileID: 2141201537}
   - component: {fileID: 2141201540}
   - component: {fileID: 2141201539}
+  - component: {fileID: 2141201541}
   - component: {fileID: 2141201538}
   m_Layer: 5
   m_Name: Canvas
@@ -865,3 +880,16 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &2141201541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141201536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84561e136a909b6489ec9e12f03c958e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 359701786}

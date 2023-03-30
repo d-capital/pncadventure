@@ -1,0 +1,49 @@
+{
+    "LinesAnswers":
+    [   
+        {
+            "name":"fuckOff1",
+            "line":"Свали-ка отсюда парень, здесь только для наших.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Свалить"
+                }
+            ]
+        },
+        {
+            "name":"fuckOff2",
+            "line":"Ну кто с первого раза не понял, тому уже не помочь! ",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Aaaaaaa!"
+                }
+            ]
+        },
+        {
+            "name":"success",
+            "line":"Похоже всем все равно.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Лечь"
+                }
+            ]
+        },
+        {
+            "name":"notBathed",
+            "line":"Надо зубы почистить сначала.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Уйти"
+                }
+            ]
+        }
+    ]
+}

@@ -137,4 +137,15 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.SetCursor(cursorTextureWithWeapon, hotSpot, cursorMode);
     }
+
+    public void ShowGameOver()
+    {
+        
+        GameOver[] gameOverScreens = Resources.FindObjectsOfTypeAll<GameOver>();
+        foreach (GameOver screen in gameOverScreens)
+        {
+            screen.GetComponent<GameOver>().ShowGameOverScreen();
+        }
+
+    }
 }

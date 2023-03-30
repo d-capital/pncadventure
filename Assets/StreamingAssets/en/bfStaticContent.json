@@ -1,0 +1,14 @@
+[
+    {
+        "name":"instructionText",
+        "text":"Move with W, A, S, D, dash with Space, aim with mouse, shoot with LMB."
+    },
+    {
+        "name":"qteText",
+        "text":"Press button"
+    },
+    {
+        "name":"bfInfoText",
+        "text":"You got a kid's blaster, you can't harm enyone with it but try to make others freak out."
+    }
+]

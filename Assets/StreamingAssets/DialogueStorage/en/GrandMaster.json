@@ -1,0 +1,175 @@
+{
+    "LinesAnswers":
+    [   
+        {
+            "name":"initial",
+            "line":"Young man, I'm glad to see you. You know, I used to play a lot of chess, and now life has turned out that I'm organizing tournaments. Do you know the basics of chess play? How, for example, does a bishop move on a chessboard?",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"I'm a little bored, goodbye."
+                },
+                {
+                    "id":"1",
+                    "response":"Goes to any number of fields diagonally."
+                },
+                {
+                    "id":"2",
+                    "response":"Goes to one field diagonally forward."
+                },
+                {
+                    "id":"3",
+                    "response":"Goes to any number of fields vertically or horizontally."
+                }
+            ]
+        },
+        {
+            "name":"2ndQuestion",
+            "line":"All right, well done, young man. Do you know what is the most valuable piece in the game?",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Queen"
+                },
+                {
+                    "id":"1",
+                    "response":"King"
+                },
+                {
+                    "id":"2",
+                    "response":"Bishop"
+                },
+                {
+                    "id":"3",
+                    "response":"Rook"
+                },
+                {
+                    "id":"4",
+                    "response":"I'm a little bored, goodbye."
+                }
+            ]
+        },
+        {
+            "name":"3rdQuestion",
+            "line":"Отлично, ну тогда порадуйте старика и ответьте на последний вопрос? Какая фигура в начале игры стоит на крайних полях крайних горизонталей доски?",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"King"
+                },
+                {
+                    "id":"1",
+                    "response":"Queen"
+                },
+                {
+                    "id":"2",
+                    "response":"Bishop"
+                },
+                {
+                    "id":"3",
+                    "response":"Rook"
+                },
+                {
+                    "id":"4",
+                    "response":"I'm a little bored, goodbye."
+                }
+            ]
+        },
+        {
+            "name":"thankYou",
+            "line":"Большее спасибо за приятную беседу, Вы ещё приходите, молодой человек, до конца пути – ещё поболтаем.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Great, thank you!"
+                }
+            ]
+        },
+        {
+            "name":"afterTalkingWithMajorNoTea",
+            "line":"Hello again, good to see you! I have some cookies here, let's have a tea and chat. Would you be so kind to bring us tea?",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Sure, just a moment."
+                }
+            ]
+        },
+        {
+            "name":"afterTalkingWithMajorHasTeaNoBoyaryshnikTea",
+            "line":"Hello again, good to see you! I have some cookies here, let's have a tea and chat. Would you be so kind to bring us tea?",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Here is your tea. (Give normal tea.)"
+                },
+                {
+                    "id":"1",
+                    "response":"Sure, just a moment."
+                }
+            ]
+        },
+        {
+            "name":"afterTalkingWithMajorHasTeaHasBoyaryshnikTea",
+            "line":"Hello again, good to see you! I have some cookies here, let's have a tea and chat. Would you be so kind to bring us tea?",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Here is your tea! (Give normal tea.)"
+                },
+                {
+                    "id":"1",
+                    "response":"Here is your tea! (Give tea with hawthorn.)"
+                },
+                {
+                    "id":"2",
+                    "response":"Sure, just a moment."
+                }
+            ]
+        },
+        {
+            "name":"afterTalkingWithMajorNoTeaHasBoyaryshnikTea",
+            "line":"Hello again, good to see you! I have some cookies here, let's have a tea and chat. Would you be so kind to bring us tea?",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Here is your tea! (Give tea with hawthorn.)"
+                },
+                {
+                    "id":"1",
+                    "response":"Sure, just a moment."
+                }
+            ]
+        },
+        {
+            "name":"hasntTalkedWithMajor",
+            "line":"If you even knew what foolishness they showed in 'Queen's Gambit'.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"I didn't watch it, unfortunately."
+                }
+            ]
+        },
+        {
+            "name":"answeredWrong",
+            "line":"Perhaps you need to think a little more.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Let me try again, I'll go for a walk."
+                }
+            ]
+        }
+    ]
+}

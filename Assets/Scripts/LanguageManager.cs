@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 public class LanguageManager : MonoBehaviour
 {
 
-    string language = "ru";
+    public string language = "ru";
 
     [System.Serializable]
     public class StaticTerm

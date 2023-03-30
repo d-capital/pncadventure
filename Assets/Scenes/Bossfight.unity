@@ -3181,10 +3181,10 @@ RectTransform:
   m_Father: {fileID: 823314480}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00008201599, y: -134}
-  m_SizeDelta: {x: 511.96, y: 95.99}
+  m_AnchorMin: {x: 0.37800002, y: 0.34960106}
+  m_AnchorMax: {x: 0.62600005, y: 0.40060106}
+  m_AnchoredPosition: {x: 3, y: 3.6497192}
+  m_SizeDelta: {x: -23.70996, y: -35.640015}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &443313639
 MonoBehaviour:
@@ -3268,7 +3268,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1948836463}
         m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
@@ -3698,11 +3698,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 70
+    m_FontSize: 108
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 70
+    m_MaxSize: 108
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -4846,8 +4846,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00008201599, y: -6}
-  m_SizeDelta: {x: 511.96, y: 95.99}
+  m_AnchoredPosition: {x: 15, y: -236}
+  m_SizeDelta: {x: 1458.29, y: 133.36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &761979610
 MonoBehaviour:
@@ -4931,7 +4931,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1948836463}
         m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
         m_MethodName: ToMainMenu
         m_Mode: 1
@@ -5435,8 +5435,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1305.4604, y: 3312.6008}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -2.3153076, y: -5.444214}
+  m_SizeDelta: {x: 4054.6, y: 2254.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &823314481
 MonoBehaviour:
@@ -7743,10 +7743,10 @@ RectTransform:
   m_Father: {fileID: 823314480}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00012207, y: 375}
-  m_SizeDelta: {x: 960.42, y: 219.44}
+  m_AnchorMin: {x: 0.3508454, y: 0.62049145}
+  m_AnchorMax: {x: 0.6642015, y: 0.75211626}
+  m_AnchoredPosition: {x: -679.68994, y: -89.41998}
+  m_SizeDelta: {x: 1359.4, y: 1456.64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1174402580
 MonoBehaviour:
@@ -7795,12 +7795,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 130.9
+  m_fontSize: 334.4
   m_fontSizeBase: 120.14
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 170.1
+  m_fontSizeMax: 334.4
   m_fontStyle: 17
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -7831,7 +7831,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -148.59172, y: 0, z: -209.86664, w: 0}
+  m_margin: {x: -148.59172, y: -111.72778, z: -1494.732, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -8787,10 +8787,10 @@ RectTransform:
   m_Father: {fileID: 823314480}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00010109, y: 119}
-  m_SizeDelta: {x: 511.96, y: 95.99}
+  m_AnchorMin: {x: 0.37466952, y: 0.46}
+  m_AnchorMax: {x: 0.6328539, y: 0.5095985}
+  m_AnchoredPosition: {x: -7, y: -11.330261}
+  m_SizeDelta: {x: -85.70996, y: -32.64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1386534847
 MonoBehaviour:
@@ -8874,7 +8874,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1948836463}
         m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
         m_MethodName: RestartLevel
         m_Mode: 1
@@ -9068,11 +9068,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 70
+    m_FontSize: 107
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 70
+    m_MaxSize: 157
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -10588,11 +10588,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 70
+    m_FontSize: 108
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 70
+    m_MaxSize: 108
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -11896,6 +11896,7 @@ GameObject:
   - component: {fileID: 1948836459}
   - component: {fileID: 1948836458}
   - component: {fileID: 1948836462}
+  - component: {fileID: 1948836464}
   - component: {fileID: 1948836463}
   m_Layer: 5
   m_Name: Canvas
@@ -12005,6 +12006,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e06b0da47114b04bab0b22de5fc8630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ResumeButtonText: {fileID: 1080295345}
+  MainMenuButtonText: {fileID: 671641583}
+  QuitButtonText: {fileID: 594072771}
   isGamePaused: 0
   pauseMenuUI: {fileID: 783606436}
 --- !u!114 &1948836463
@@ -12025,6 +12029,21 @@ MonoBehaviour:
   MainMenuButtonText: {fileID: 1410383612}
   QuitButtonText: {fileID: 1681674708}
   isGameOverScreenShown: 0
+--- !u!114 &1948836464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948836457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2898744c894bfcd4ba50575ea8f1552c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instructionText: {fileID: 1106212777}
+  qteText: {fileID: 1762657929}
+  bfInfoText: {fileID: 1991446167}
 --- !u!1 &1955987613
 GameObject:
   m_ObjectHideFlags: 0

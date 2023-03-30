@@ -19,7 +19,7 @@ public class sink : MonoBehaviour, IDropHandler
                 GameObject.Destroy(eventData.pointerDrag);
                 AdvScript PlayerObject = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>();
                 PlayerObject.bathed = true;
-                string InfoText = "Умытым быть гораздо лучше";
+                string InfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "bathedInSink");
                 PlayerObject.ShowInfoText(InfoText);
                 var DroppableItems = GameObject.FindGameObjectsWithTag("droppable");
                 foreach (var i in DroppableItems)

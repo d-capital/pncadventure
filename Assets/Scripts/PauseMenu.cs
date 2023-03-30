@@ -2,16 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-    
+    string objectName = "PauseMenu";
+
+    public Text ResumeButtonText;
+    public Text MainMenuButtonText;
+    public Text QuitButtonText;
+
     public bool isGamePaused = false;
     public GameObject pauseMenuUI;
     // Start is called before the first frame update
     void Start()
     {
-        
+        ResumeButtonText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "Resume");
+        MainMenuButtonText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "MainMenu");
+        QuitButtonText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "Quit");
     }
 
     // Update is called once per frame

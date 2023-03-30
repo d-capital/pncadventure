@@ -582,7 +582,7 @@ public class DialogueManager : MonoBehaviour
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInTopSpot = true;
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot = false;
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = true;
-                        string newInfoText = "Провод в верхнем пазе";
+                        string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInTopSpot");
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
                     }
                     else if (curResponseTracker == 1)
@@ -591,7 +591,7 @@ public class DialogueManager : MonoBehaviour
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInTopSpot = false;
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInBottomSpot = false;
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = false;
-                        string newInfoText = "Провод в среднем пазе";
+                        string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInMiddleSpot");
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
                     }
                     else if (curResponseTracker == 2)
@@ -599,7 +599,7 @@ public class DialogueManager : MonoBehaviour
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInBottomSpot = true;
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = true;
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot = false;
-                        string newInfoText = "Провод в нижнем пазе";
+                        string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInBottomSpot");
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
                     }
                     else if (curResponseTracker == 3)
@@ -643,20 +643,20 @@ public class DialogueManager : MonoBehaviour
                     {
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInTopSpot = true;
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = true;
-                        string newInfoText = "Провод в верхнем пазе";
+                        string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInTopSpot");
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
                     }
                     else if (curResponseTracker == 1)
                     {
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot = true;
-                        string newInfoText = "Провод в среднем пазе";
+                        string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInMiddleSpot");
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
                     }
                     else if (curResponseTracker == 2)
                     {
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInBottomSpot = true;
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = true;
-                        string newInfoText = "Провод в нижнем пазе";
+                        string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInBottomSpot");
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
                     }
                     else if (curResponseTracker == 3)
@@ -1310,7 +1310,8 @@ public class DialogueManager : MonoBehaviour
         ClearLinesAnswers(dialogue);
         //calc the state on the 1st level
         string path = Application.dataPath;
-        string pathToDialogue = path + "/StreamingAssets/DialogueStorage/"+currDialogueActor+".json";
+        string currLanguage = GameObject.FindObjectOfType<LanguageManager>().language;
+        string pathToDialogue = path + "/StreamingAssets/DialogueStorage/" + currLanguage + "/" + currDialogueActor+".json";
         var jsonString = System.IO.File.ReadAllText(pathToDialogue);
         LinesAnswersList characterLinesAnswers =  JsonConvert.DeserializeObject<LinesAnswersList>(jsonString);
         if (currDialogueActor == "Plumber")
@@ -1492,7 +1493,8 @@ public class DialogueManager : MonoBehaviour
         ClearLinesAnswers(dialogue);
         //calc the state on the 2nd level
         string path = Application.dataPath;
-        string pathToDialogue = path + "/StreamingAssets/DialogueStorage/"+currDialogueActor+".json";
+        string currLanguage = GameObject.FindObjectOfType<LanguageManager>().language;
+        string pathToDialogue = path + "/StreamingAssets/DialogueStorage/" + currLanguage + "/" + currDialogueActor + ".json";
         var jsonString = System.IO.File.ReadAllText(pathToDialogue);
         LinesAnswersList characterLinesAnswers =  JsonConvert.DeserializeObject<LinesAnswersList>(jsonString);
         if (currDialogueActor == "cardsMan")
@@ -1808,7 +1810,8 @@ public class DialogueManager : MonoBehaviour
         ClearLinesAnswers(dialogue);
         //calc the state on the 2nd level
         string path = Application.dataPath;
-        string pathToDialogue = path + "/StreamingAssets/DialogueStorage/" + currDialogueActor + ".json";
+        string currLanguage = GameObject.FindObjectOfType<LanguageManager>().language;
+        string pathToDialogue = path + "/StreamingAssets/DialogueStorage/" + currLanguage + "/" + currDialogueActor + ".json";
         var jsonString = System.IO.File.ReadAllText(pathToDialogue);
         LinesAnswersList characterLinesAnswers = JsonConvert.DeserializeObject<LinesAnswersList>(jsonString);
         if (currDialogueActor == "SemenLvl3Intro")
@@ -1993,7 +1996,8 @@ public class DialogueManager : MonoBehaviour
         ClearLinesAnswers(dialogue);
         //calc the state on the 2nd level
         string path = Application.dataPath;
-        string pathToDialogue = path + "/StreamingAssets/DialogueStorage/" + currDialogueActor + ".json";
+        string currLanguage = GameObject.FindObjectOfType<LanguageManager>().language;
+        string pathToDialogue = path + "/StreamingAssets/DialogueStorage/" + currLanguage + "/" + currDialogueActor + ".json";
         var jsonString = System.IO.File.ReadAllText(pathToDialogue);
         LinesAnswersList characterLinesAnswers = JsonConvert.DeserializeObject<LinesAnswersList>(jsonString);
         if (currDialogueActor == "SemenLvl4Intro")
@@ -2327,7 +2331,7 @@ public class DialogueManager : MonoBehaviour
     public void completeTask (int taskId)
     {
         GameObject.FindObjectOfType<TasksButton>().GetComponent<TasksButton>().CompleteTask(taskId);
-        string newInfoText = "Задание выполнено!";
+        string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "TaskCompleted");
         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
     }
     

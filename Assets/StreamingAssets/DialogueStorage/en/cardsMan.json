@@ -1,0 +1,84 @@
+{
+    "LinesAnswers":
+    [   
+        {
+            "name":"initial",
+            "line":"Good evening, passenger passing through. Tell me where are you going in such a hurry? Ah, well, that's not important, I guess. It's a long ride for all for all of us, let's spend some time playing cards, shall we? Have a seat, it's all right here, 'according to concepts'.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Great idea, it's been a while since I played, but no big deal."
+                },
+                {
+                    "id":"1",
+                    "response":"No, I'd rather go."
+                }
+            ]
+        },
+        {
+            "name":"won1stTime",
+            "line":"Here was a game, I lost, but we're fair - here are the winnings. Well, we warmed up a bit, let's play another game. We're having a good rest, and who's to say I'm wrong? Ha-ha...",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Wow, it's amazing, let's keep playing."
+                },
+                {
+                    "id":"1",
+                    "response":"We've played enough, I don't like the atmosphere here, it's time to move on."
+
+                }
+            ]
+        },
+        {
+            "name":"lost2ndTime",
+            "line":"That time - I'll tell you, I just had a good card. In short, it's a fancy morning. Give me the money back, and let's move on. You're about to get lucky, boy!",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"No thanks, I'm sick of it."
+                },
+                {
+                    "id":"1",
+                    "response":"Eh, I want to win back, give up the cards."
+                }
+            ]
+        },
+        {
+            "name":"gameOver",
+            "line":"Oh, boy! It's my lucky day, boy. Give me the cash! What do you mean, no money?! Why did you sit down to play? You're gonna pay for this, you little punk!",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Oops!"
+                }
+            ]
+        },
+        {
+            "name":"rejectedAfter2ndPlay",
+            "line":"Tired of it? Go away, kid, and don't mess around.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Leave."
+                }
+            ]
+        },
+        {
+            "name":"rejectedAfter1stPlay",
+            "line":"You are in trouble! Pretzel on a stick, you think you've got the wheels rolling? Don't dare to speak to me again!",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Leave"
+                }
+            ]
+        }
+    ]
+}

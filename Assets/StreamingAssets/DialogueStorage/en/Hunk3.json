@@ -1,0 +1,65 @@
+{
+    "LinesAnswers":
+    [   
+        {
+            "name":"hunksInitial",
+            "line":"Boy, what are you doing here, can't you see we have some serious business here? I and the guys are going to Novosibirsk for a training camp, future champions. Everything was fine until the treadmill got banged up on the wagon when we were dragging it in. I can't seem to shake my biceps any more, it's no good. The only good thing is the breeze, or we would have been completely exhausted on the trip.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Leave"
+                }
+            ]
+        },
+        {
+            "name":"plumberGood",
+            "line":"Boy, what are you doing here, can't you see we have some serious business here? I and the guys are going to Novosibirsk for a training camp, future champions. Everything was fine until the treadmill got banged up on the wagon when we were dragging it in. I can't seem to shake my biceps any more, it's no good. The only good thing is the breeze, or we would have been completely exhausted on the trip.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"LEave."
+                },
+                {
+                    "id":"1",
+                    "response":"Guys, train hard, your treadmill is working now."
+
+                }
+            ]
+        },
+        {
+            "name":"warn",
+            "line":"And why did you close the window? It's stuffy as hell, the guys are all soapy. Get out of here before you get in trouble!",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Leave."
+                }
+            ]
+        },
+        {
+            "name":"defeat",
+            "line":"Don't you have a job to do?! Hey, fellas, let's go kick this сowboy's ass!",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Ox, ouch... Looks like that is it for me."
+                }
+            ]
+        },
+        {
+            "name":"victory",
+            "line":"You turned out to be a nice guy, kudos to you, and we'll put the treadmill on babushka's bed to make it easier for us here. You, if you want, sit down, your company is welcome!",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Thanks, fellas!"
+                }
+            ]
+        }
+    ]
+}

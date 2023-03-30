@@ -274,7 +274,7 @@ public class AdvScript : MonoBehaviour
                     var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
                     collectibleItem.onClick();
                     //newInfoText.ClearMesh();
-                    string newInfoText = "Что это? Гаечный ключ? Штука нужная, может пригодится.";
+                    string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "ScrewKey");
                     ShowInfoText(newInfoText);
                     key = true;
                     hasScrewKey = true;
@@ -293,7 +293,7 @@ public class AdvScript : MonoBehaviour
                     var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
                     collectibleItem.onClick();
                     //newInfoText.ClearMesh();
-                    string newInfoText = "Xo6a, водка!";
+                    string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "Vodka");
                     ShowInfoText(newInfoText);
                     //key = true;
                     //hasScrewKey = true;
@@ -307,7 +307,7 @@ public class AdvScript : MonoBehaviour
                     var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
                     collectibleItem.onClick();
                     //newInfoText.ClearMesh();
-                    string newInfoText = "Копейка рубль бережет!";
+                    string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "coins");
                     ShowInfoText(newInfoText);
                     //key = true;
                     //hasScrewKey = true;
@@ -374,12 +374,12 @@ public class AdvScript : MonoBehaviour
                     string newInfoText;
                     if (windowClosed == false)
                     {
-                        newInfoText = "Сломалась, так просто не закрыть.";
+                        newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "WindowBroken");
                         ShowInfoText(newInfoText);
                     } 
                     else
                     {
-                        newInfoText = "Окно закрыто, не дует.";
+                        newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "WindowFixed");
                         ShowInfoText(newInfoText);
                     }
                     
@@ -478,12 +478,12 @@ public class AdvScript : MonoBehaviour
                     string newInfoText;
                     if (!gotCrowbar)
                     {
-                        newInfoText = "Замок закрыт, чтобы открыть, нужен инструмент или отмычка.";
+                        newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "ToiletDoorNoCrowbar");
                         ShowInfoText(newInfoText);
                     }
                     else
                     {
-                        newInfoText = "Надо посмотреть, есть ли у меня что-то, что откроет эту дверь";
+                        newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "ToiletDoorHasCrowbar");
                         ShowInfoText(newInfoText);
                     }
                 }
@@ -493,12 +493,12 @@ public class AdvScript : MonoBehaviour
                     string newInfoText;
                     if (!gotBathItems)
                     {
-                        newInfoText = "Просто водой не умыться, я уже знатно запаршивел.";
+                        newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "sinkNoBathItems");
                         ShowInfoText(newInfoText);
                     }
                     else
                     {
-                        newInfoText = "Надо достать зубную щетку, мыло ...";
+                        newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "sinkHasBathItems");
                         ShowInfoText(newInfoText);
                     }
                 }
@@ -507,7 +507,7 @@ public class AdvScript : MonoBehaviour
                     hit.collider.gameObject.SetActive(false);
                     var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
                     collectibleItem.onClick();
-                    string newInfoText = "О, это мне пригодится в будущем!";
+                    string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "aspirin");
                     ShowInfoText(newInfoText);
                     collectSound.Play();
                 }
@@ -516,7 +516,7 @@ public class AdvScript : MonoBehaviour
                     hit.collider.gameObject.SetActive(false);
                     var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
                     collectibleItem.onClick();
-                    string newInfoText = "Проснитесь, мистер Семен.";
+                    string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "crowBar");
                     ShowInfoText(newInfoText);
                     collectSound.Play();
                 }
@@ -525,7 +525,7 @@ public class AdvScript : MonoBehaviour
                     hit.collider.gameObject.SetActive(false);
                     var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
                     collectibleItem.onClick();
-                    string newInfoText = "Какое же оно фиолетовое.";
+                    string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "potion");
                     ShowInfoText(newInfoText);
                     collectSound.Play();
                 }
@@ -534,7 +534,7 @@ public class AdvScript : MonoBehaviour
                     hit.collider.gameObject.SetActive(false);
                     var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
                     collectibleItem.onClick();
-                    string newInfoText = "Свежее полотенце, мм, как пахнет!";
+                    string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "bathItems");
                     ShowInfoText(newInfoText);
                     collectSound.Play();
                 }
@@ -579,7 +579,7 @@ public class AdvScript : MonoBehaviour
                     hit.collider.gameObject.SetActive(false);
                     var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
                     collectibleItem.onClick();
-                    string newInfoText = "Пригодится, наверное";
+                    string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "boyaryshnik");
                     ShowInfoText(newInfoText);
                     collectSound.Play();
                 }
@@ -588,7 +588,7 @@ public class AdvScript : MonoBehaviour
                     hit.collider.gameObject.SetActive(false);
                     var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
                     collectibleItem.onClick();
-                    string newInfoText = "Граненый!";
+                    string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "glass");
                     ShowInfoText(newInfoText);
                     collectSound.Play();
                 }
@@ -597,7 +597,7 @@ public class AdvScript : MonoBehaviour
                     hit.collider.gameObject.SetActive(false);
                     var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
                     collectibleItem.onClick();
-                    string newInfoText = "Надеюсь мне за нее никто не предъявит.";
+                    string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "shuba");
                     ShowInfoText(newInfoText);
                     collectSound.Play();
                 }

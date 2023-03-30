@@ -1,0 +1,122 @@
+{
+    "LinesAnswers":
+    [   
+        {
+            "name":"initial",
+            "line":"The mechanism is old and dirty, the wire is still sticking out. It wasn't used for years.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Insert the wire into the top slot."
+                },
+                {
+                    "id":"1",
+                    "response":"Insert the wire into the middle slot."
+                },
+                {
+                    "id":"2",
+                    "response":"Insert the wire into the bottom slot."
+                },
+                {
+                    "id":"3",
+                    "response":"Push the button."
+                },
+                {
+                    "id":"4",
+                    "response":"Leave."
+                }
+            ]
+        },
+        {
+            "name":"nothingHappens",
+            "line":"Nothing happens.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Pull out the wire and inspect the button again."
+                }
+            ]
+        },
+        {
+            "name":"onTheRightWay",
+            "line":"The mechanism is old and dirty. It wasn't used for years. It sparkles now.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Insert the wire into the top slot."
+                },
+                {
+                    "id":"1",
+                    "response":"Insert the wire into the middle slot."
+                },
+                {
+                    "id":"2",
+                    "response":"Insert the wire into the bottom slot."
+                },
+                {
+                    "id":"3",
+                    "response":"Push the button."
+                },
+                {
+                    "id":"4",
+                    "response":"Leave."
+                }
+            ]
+        },
+        {
+            "name":"fixedButton",
+            "line":"The wire is connected. Emergency button gloves with red and you can here some sounds from it.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Hello..."
+                },
+                {
+                    "id":"1",
+                    "response":"Leave."
+                }
+            ]
+        },
+        {
+            "name":"call",
+            "line":"Railroad police department, junior lieutenant Bitvenko listening.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Comrade lieutenant, here is a fraud in the car, he plays cards with people for money, hides the cards in his sleeve and threatens everyone."
+                },
+                {
+                    "id":"1",
+                    "response":"Uh... Sorry..."
+                }
+            ]
+        },
+        {
+            "name":"answeredLeutenant",
+            "line":"Fraudulent gambler, you say? We will punish him to the fullest extent of the law. Wait a minute ... (Sounds of a hanged-up phone are heard from the loudspeaker.)",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Leave."
+                }
+            ]
+        },
+        {
+            "name":"allDone",
+            "line":"Now the button is pressed in, it seems that nothing more can be done with it.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Leave."
+                }
+            ]
+        }
+    ]
+}

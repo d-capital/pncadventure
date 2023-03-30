@@ -1,0 +1,137 @@
+{
+    "LinesAnswers":
+    [   
+        {
+            "name":"initialNoMoney",
+            "line":"Hello, boy, you look frail somehow. A good person should be a lot, haha. I would share pies with you, but my pockets are empty, and I still have a couple of days to go home. Eh, there, at home, my mother will feed me. Her borscht is much better than food at 5-star restaurants. Do you know why? For vegetables, soil is the most important thing, the earth, but not the atmosphere and all sorts of other ephemeral gizmos.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"You are saying interesting things, but I have to go."
+                }
+            ]
+        },
+        {
+            "name":"initialHasMoney",
+            "line":"Hello, boy, you look frail somehow. A good person should be a lot, haha. I would share pies with you, but my pockets are empty, and I still have a couple of days to go home. Eh, there, at home, my mother will feed me. Her borscht is much better than food at 5-star restaurants. Do you know why? For vegetables, soil is the most important thing, the earth, but not the atmosphere and all sorts of other ephemeral gizmos.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"I have some money, let me buy pies."
+                },
+                {
+                    "id":"1",
+                    "response":"You are saying interesting things, but I have to go."
+                }
+            ]
+        },
+        {
+            "name":"cardsManCought",
+            "line":"Did you see how that crook was taken out? Did you crack him?! Well done, boy. Since this is the case, I will share the pies with you, but first guess the riddle. My uncle spent half of his life in places not as remote as this gambler will be soon apparently. Therefore I know some kind of riddles. Tell me what kind of bars won't keep a prisoner in jail?",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Bars which he attended"
+                },
+                {
+                    "id":"1",
+                    "response":"Bars of foil"
+                },
+                {
+                    "id":"2",
+                    "response":"Chocolate bars."
+                },
+                {
+                    "id":"3",
+                    "response":"I don't know."
+                },
+                {
+                    "id": "4",
+                    "response": "I need a bit of time."
+                }
+            ]
+        },
+        {
+            "name":"1stRiddleSolved",
+            "line":"You are right, here - take the pies.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Thanks, dude!"
+                }
+            ]
+        },
+        {
+            "name":"1stRiddleLost",
+            "line":"You've got it wrong, the answer was: chocolate bars. All right, I'll give you another riddle. What can you share only once?",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"A pie."
+                },
+                {
+                    "id":"1",
+                    "response":"A riddle."
+                },
+                {
+                    "id":"2",
+                    "response":"A secret."
+                },
+                {
+                    "id":"3",
+                    "response":"I don't know."
+                },
+                {
+                    "id":"4",
+                    "response":"I need a bit of time."
+                }
+            ]
+        },
+        {
+            "name":"2ndRiddleSolved",
+            "line":"You are right, here - take the pies.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Thanks, dude!"
+                }
+            ]
+        },
+        {
+            "name":"hint",
+            "line":"Well, let's do it again! I'll give you a hint, there's a proverb: Don't let the cat out of the bag. What can you share only once?",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Secrete."
+                },
+                {
+                    "id":"1",
+                    "response":"Pie"
+                },
+                {
+                    "id":"2",
+                    "response":"I need a bit of time."
+                }
+            ]
+        },
+        {
+            "name":"boughtPirogiOrSharedWithYoy",
+            "line":"SIMON:'Looks like fat man sleeps, I'll leave him like that.'",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Leave."
+                }
+            ]
+        }
+    ]
+}

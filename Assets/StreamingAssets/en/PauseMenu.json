@@ -1,0 +1,14 @@
+[
+    {
+        "name":"Resume",
+        "text":"RESUME"
+    },
+    {
+        "name":"MainMenu",
+        "text":"MAIN MENU"
+    },
+    {
+        "name":"Quit",
+        "text":"QUIT"
+    }
+]

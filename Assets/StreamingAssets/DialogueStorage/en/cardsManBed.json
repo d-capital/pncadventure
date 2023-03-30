@@ -1,0 +1,27 @@
+{
+    "LinesAnswers":
+    [   
+        {
+            "name":"hungry",
+            "line":"SIMON: 'I'm hungry, I can't sleep with an empty stomach.'",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Leave"
+                }
+            ]
+        },
+        {
+            "name":"win",
+            "line":"SIMON: 'It smells like a crook, but I have no choise.'",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Lie down and sleep."
+                }
+            ]
+        }
+    ]
+}

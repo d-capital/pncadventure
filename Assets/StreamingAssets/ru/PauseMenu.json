@@ -1,0 +1,14 @@
+[
+    {
+        "name":"Resume",
+        "text":"ПРОДОЛЖИТЬ"
+    },
+    {
+        "name":"MainMenu",
+        "text":"ГЛАВНОЕ МЕНЮ"
+    },
+    {
+        "name":"Quit",
+        "text":"ВЫЙТИ"
+    }
+]

@@ -1,0 +1,86 @@
+[
+    {
+        "name":"ScrewKey",
+        "text":"What is this? A wrench? The thing is necessary, might be helpful."
+    },
+    {
+        "name":"Vodka",
+        "text":"Aha, vodka!"
+    },
+    {
+        "name":"coins",
+        "text":"A penny saved is a penny gained."
+    },
+    {
+        "name":"WindowBroken",
+        "text":"It's broken, I can't close it with bare hands."
+    },
+    {
+        "name":"WindowFixed",
+        "text":"The window is closed, the wind is not blowing."
+    },
+    {
+        "name":"ToiletDoorNoCrowbar",
+        "text":"The lock is closed. I need a tool or a master key to open it."
+    },
+    {
+        "name":"ToiletDoorHasCrowbar",
+        "text":"I'll have to see if I have something that will open that door."
+    },
+    {
+        "name":"sinkNoBathItems",
+        "text":"I can't wash myself only with water, I have already notably scabbed."
+    },
+    {
+        "name":"sinkHasBathItems",
+        "text":"Gotta get a toothbrush, soap..."
+    },
+    {
+        "name":"aspirin",
+        "text":"Oh, I might use that in the future!"
+    },
+    {
+        "name":"crowBar",
+        "text":"Wake up, Mr. Simon."
+    },
+    {
+        "name":"potion",
+        "text":"What a purple drink!"
+    },
+    {
+        "name":"bathItems",
+        "text":"Fresh towel, uh, how good it smells!"
+    },
+    {
+        "name":"boyaryshnik",
+        "text":"This will probably come in handy."
+    },
+    {
+        "name":"glass",
+        "text":"Right size for tea or something stronger."
+    },
+    {
+        "name":"shuba",
+        "text":"I hope there will be no aftermath for it."
+    },
+    {
+        "name":"TaskCompleted",
+        "text":"Task completed!"
+    },
+    {
+        "name":"bathedInSink",
+        "text":"It is much better to be washed!"
+    },
+    {
+        "name":"wireInTopSpot",
+        "text":"Wire is in the top slot."
+    },
+    {
+        "name":"wireInMiddleSpot",
+        "text":"Wire is in the middle slot."
+    },
+    {
+        "name":"wireInBottomSpot",
+        "text":"Wire is in the bottom slot."
+    }
+]
