@@ -9,7 +9,7 @@ public class meMomScript : DialogueTrigger
     // Start is called before the first frame update
     void Start()
     {
-
+        base.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("MeMom");
     }
 
     // Update is called once per frame

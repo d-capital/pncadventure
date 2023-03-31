@@ -17,6 +17,10 @@ public class MajorControll : MonoBehaviour
 
     public HealthBarControll HealthBar;
 
+    private void Start()
+    {
+        Name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("BfMajor");
+    }
     // Update is called once per frame
     void Update()
     {

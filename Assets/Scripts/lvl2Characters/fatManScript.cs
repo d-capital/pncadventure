@@ -9,7 +9,7 @@ public class fatManScript : DialogueTrigger
     // Start is called before the first frame update
     void Start()
     {
-        
+        base.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("FatMan");
     }
 
     // Update is called once per frame

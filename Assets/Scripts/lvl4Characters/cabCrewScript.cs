@@ -9,7 +9,7 @@ public class cabCrewScript : DialogueTrigger
     // Start is called before the first frame update
     void Start()
     {
-        
+        base.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("CabCrew");
     }
 
     // Update is called once per frame

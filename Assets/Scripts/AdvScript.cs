@@ -192,6 +192,7 @@ public class AdvScript : MonoBehaviour
             ShowDialogueBox();
             currentDialoguePartner = "SemenLvl1Intro";
             semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
+            semenDialogue.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen");
             semenDialogue.TriggerDialogue("SemenLvl1Intro");
         }
         else if (GetCurrentLevel() == "Level 2")
@@ -199,6 +200,7 @@ public class AdvScript : MonoBehaviour
             ShowDialogueBox();
             currentDialoguePartner = "SemenLvl2Intro";
             semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
+            semenDialogue.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen");
             semenDialogue.TriggerDialogue("SemenLvl2Intro");
         }
         else if (GetCurrentLevel() == "Level 3")
@@ -206,6 +208,7 @@ public class AdvScript : MonoBehaviour
             ShowDialogueBox();
             currentDialoguePartner = "SemenLvl3Intro";
             semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
+            semenDialogue.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen");
             semenDialogue.TriggerDialogue("SemenLvl3Intro");    
         }
         else if (GetCurrentLevel() == "Level 4")
@@ -213,6 +216,7 @@ public class AdvScript : MonoBehaviour
             ShowDialogueBox();
             currentDialoguePartner = "SemenLvl4Intro";
             semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
+            semenDialogue.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen");
             semenDialogue.TriggerDialogue("SemenLvl4Intro");
         }
 
@@ -224,6 +228,7 @@ public class AdvScript : MonoBehaviour
             ShowDialogueBox();
             currentDialoguePartner = "SemenLvl1Outro";
             semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
+            semenDialogue.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen");
             semenDialogue.TriggerDialogue("SemenLvl1Outro");
         }
         else if (GetCurrentLevel() == "Level 2")
@@ -231,6 +236,7 @@ public class AdvScript : MonoBehaviour
             ShowDialogueBox();
             currentDialoguePartner = "SemenLvl2Outro";
             semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
+            semenDialogue.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen");
             semenDialogue.TriggerDialogue("SemenLvl2Outro");
         }
         else if (GetCurrentLevel() == "Level 3")
@@ -238,6 +244,7 @@ public class AdvScript : MonoBehaviour
             ShowDialogueBox();
             currentDialoguePartner = "SemenLvl3Outro";
             semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
+            semenDialogue.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen");
             semenDialogue.TriggerDialogue("SemenLvl3Outro");
         }
     }

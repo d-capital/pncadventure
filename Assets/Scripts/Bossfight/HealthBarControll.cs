@@ -13,7 +13,7 @@ public class HealthBarControll : MonoBehaviour
 
     private void Start()
     {
-        characterName.text = Name;
+        characterName.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen");
     }
     public void SetMaxHealth(int health)
     {

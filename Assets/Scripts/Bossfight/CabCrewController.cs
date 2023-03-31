@@ -18,6 +18,10 @@ public class CabCrewController : MonoBehaviour
 
     public HealthBarControll HealthBar;
 
+    private void Start()
+    {
+        Name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("BfCabCrew");
+    }
     // Update is called once per frame
     void Update()
     {

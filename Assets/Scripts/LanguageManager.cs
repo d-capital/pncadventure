@@ -42,4 +42,15 @@ public class LanguageManager : MonoBehaviour
         return correctTerm;
     }
 
+    public string getCorrectName(string characterTerm)
+    {
+        string path = Application.dataPath;
+        string pathToFile = path + "/StreamingAssets/" + language + "/" + "CharacterNames" + ".json";
+        var jsonString = System.IO.File.ReadAllText(pathToFile);
+        List<StaticTerm> characterNames = JsonConvert.DeserializeObject<List<StaticTerm>>(jsonString);
+        StaticTerm displayedCharacterName = characterNames.Find(s => s.name == characterTerm);
+        string correctName = displayedCharacterName.text;
+        return correctName;
+    }
+
 }

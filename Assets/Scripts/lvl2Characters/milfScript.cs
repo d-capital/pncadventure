@@ -26,6 +26,7 @@ public class milfScript : DialogueTrigger
     // Start is called before the first frame update
     void Start()
     {
+        base.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Milf");
         npcAnimator.SetBool("hasToStandUp", false);
         npcAnimator.SetBool("hasToWalk", false);
     }

@@ -9,7 +9,7 @@ public class grandMasterScript : DialogueTrigger
     // Start is called before the first frame update
     void Start()
     {
-        
+        base.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Grandmaster");
     }
 
     // Update is called once per frame
