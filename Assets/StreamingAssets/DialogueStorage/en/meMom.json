@@ -3,49 +3,49 @@
     [   
         {
             "name":"shahtarsAmok",
-            "line":"(Плач ребёнка) Парень, что тебе нужно? Хватит по вагону без дела шататься, грязный ещё какой! Лучше помоги мне доброй женщине, моё дитятко никак не уснёт из-за этих шумных горняков. Они не просыхают всю дорогу и орут в пьяном угаре! (Плач ребёнка)",
+            "line":"(Baby cries) Boy, what do you need? Stop messing around here, you dirty punk! Better help a nice woman, my baby can't sleep because of those loud miners over there. They drink all the way and scream in a drunken rage! (Baby continues crying.)",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Не сегодня, мадам."
+                    "response":"Not today, ma-am."
                 }
             ]
         },
         {
             "name":"shahtarsHigh",
-            "line":"(Плач ребёнка) Парень, что тебе нужно? Хватит по вагону без дела шататься, грязный ещё какой! Лучше помоги мне доброй женщине, моё дитятко никак не уснёт из-за этих шумных горняков. Они не просыхают всю дорогу и орут в пьяном угаре! (Плач ребёнка)",
+            "line":"(Baby cries) Boy, what do you need? Stop messing around here, you dirty punk! Better help a nice woman, my baby can't sleep because of those loud miners over there. They drink all the way and scream in a drunken rage! (Baby continues crying.)",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Не сегодня, мадам."
+                    "response":"Not today, ma-am."
                 },
                 {
                     "id":"1",
-                    "response":"Мужики уснули, видимо отварчик крепкий был. "                    
+                    "response":"The men fell asleep, apparently, the potion was strong."
                 }
             ]  
         },
         {
             "name":"meMomThankfull",
-            "line":"Спасибо, тебе паренёк. Возьми мыло и вот эти штуки тоже, умоешься, будешь красив и душой, и телом.",
+            "line":"Thank you, kid. Take the soap and these things too, wash your face, and you'll be beautiful in body and soul.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Спасибо, мадмуазель!"
+                    "response":"Merci, mademoiselle!"
                 }
             ]  
         },
         {
             "name":"leaveMeMomAlone",
-            "line":"СЕМЕН: Ребенок молчит, мать не бурчит.",
+            "line":"SIMON: The child is silent, the mother does not mutter.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Оставлю их в покое"
+                    "response":"I'll leave them alone"
                 }
             ]  
         }

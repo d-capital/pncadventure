@@ -3,12 +3,12 @@
     [   
         {
             "name":"intro",
-            "line":"Вот чёрт! Поезд уже тронулся… Это я начудил, конечно, но раз такие дела надо найти место где переночевать.",
+            "line":"Oh, shit! The train had already started... I messed up, of course, but since this is the case, I have to find a place to sleep overnight.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Поехали"
+                    "response":"Let's go."
                 }
             ]
         }

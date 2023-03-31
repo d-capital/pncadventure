@@ -3,45 +3,45 @@
     [   
         {
             "name":"fuckOff1",
-            "line":"Свали-ка отсюда парень, здесь только для наших.",
+            "line":"Get the hell out of here boy, this bed is just for us.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Свалить"
+                    "response":"Leave."
                 }
             ]
         },
         {
             "name":"fuckOff2",
-            "line":"Ну кто с первого раза не понял, тому уже не помочь! ",
+            "line":"Well, I can't help those who did not get it the first time!",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Aaaaaaa!"
+                    "response":"Aaaaa!"
                 }
             ]
         },
         {
             "name":"success",
-            "line":"Похоже всем все равно.",
+            "line":"Looks like nobody cares.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Лечь"
+                    "response":"Lie down"
                 }
             ]
         },
         {
             "name":"notBathed",
-            "line":"Надо зубы почистить сначала.",
+            "line":"I have to brush my teeth first.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Уйти"
+                    "response":"Leave."
                 }
             ]
         }

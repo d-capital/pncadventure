@@ -3,12 +3,12 @@
     [   
         {
             "name":"outro",
-            "line":"Первый день прошел удачно, посмотрим, что ждёт меня завтра - утро вечера мудренее. Место для ночевки я нашёл, потом правда пахнет, но ничего, потерплю!",
+            "line":"The first day went well, let's see what awaits me tomorrow. I found a place to spend the night, it smells, but that's okay, I'll bear it!",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Уснуть"
+                    "response":"Go to sleep."
                 }
             ]
         }

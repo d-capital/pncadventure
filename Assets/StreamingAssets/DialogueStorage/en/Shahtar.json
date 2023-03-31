@@ -3,116 +3,116 @@
     [   
         {
             "name":"initial",
-            "line":"Привет, малой, у нас тут разговоры серьёзные с мужиками. Вот смотри-ка, мэр наш в Углеблагодарске великий человек. Он поставил скамейки в парке и на центральной площади. Ну точнее, одну скамейку там и там. По будням в парке, по выходным в центре. Говорит бюджет не резиновый, да и вам горянкам нечего жопы просиживать. Талантище он, мэр наш!",
+            "line":"Hey, kid, we're having some serious conversations with the men here. Look, the mayor of Ugleblagodarsk is a great man. He put benches in the park and on the central square. Well, more precisely, one bench. On weekdays it is in the park and on weekends it is in the center. He says the budget's tight, and there's no need for us to sit on our asses. He's a talent, our mayor!",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Мэр ваш, похоже, все деньги себе в карман положил!"
+                    "response":"Your mayor seems to have put all the money in his pocket!"
                 },
                 {
                     "id":"1",
-                    "response":"Эээ… Да, истинный гений и философ нашего времени!"
+                    "response":"Uh... Yes, a true genius and philosopher of our time!"
                 },
                 {
                     "id":"2",
-                    "response":"Я уже ухожу."
+                    "response":"I'm just leaving now."
                 }
             ]
         },
         {
             "name":"initialFailed",
-            "line":"Ты ничего не понимаешь молокосос, дверь там!",
+            "line":"You don't understand anything, the door is there!",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Уйти"
+                    "response":"Leave."
                 }
             ]  
         },
         {
             "name":"roundTwo",
-            "line":"Согласен! Вот ещё, недавно показали по телевизору, по главному каналу, что скоро будут роботы-шахтеры. Сами копают, сами грузят, а ты только сиди и на кнопочки нажимай. Эх, осталось только пару лет подождать, и как заживем! (Шахтер достает лом и держит в руках)",
+            "line":"I agree! Also, recently they showed on TV, on the main channel, that soon there will be robot miners. They will dig and load on their own, and all you have to do is sit there and press the buttons. Eh, just a couple of years to wait, and we all will live in the dream! (Miner takes out a crowbar and holds it in his hands)",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Мужики, неужели вы верите этим балаболам на телевидении! Дурят они вас! А уж если какая-то техника перепадёт вам на промышленность, то поверьте половину из вас сократят из-за этого!"
+                    "response":"Men, do you really believe those jabbering TV people? They're fooling you! And if you get any machinery in the industry, believe me, half of you will be laid off because of it!"
                 },
                 {
                     "id":"1",
-                    "response":"Вот чудо-то какое, счастье всем шахтерам. Завидую вам белой завистью!"
+                    "response":"What a miracle, the happiness of all miners."
                 },
                 {
                     "id":"2",
-                    "response":"Мне надо подумать…"                   
+                    "response":"I need to think about it..."                   
                 }
             ]  
         },
         {
             "name":"roundTwoFailed",
-            "line":"У меня от твоего трёпа боли в голове, как будто что-то там зашевелилось внутри. Ты так к нам в доверие втереться хотел, а? Пора тебе ответить за душонку гнилую!",
+            "line":"Your talk made my head hurt, like something was stirring inside of me. That's how you wanted to gain our trust, huh? It's time for you to answer for your rotten soul!",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Пападос!"
+                    "response":"Shit!"
                 }
             ]  
         },
         {
             "name":"roundThree",
-            "line":"Это верно, это по-нашему, ты наш человек! Прямо как наш земляк, наш родной! Держи от всего сердца наш подарочек, парень. (Семен получает ЛОМ в инвентарь)",
+            "line":"That's right, that's our way, you're our man! Just like our fellow countryman, our native one! Here's our present from the bottom of my heart, boy. (Miner gives you a crowbar.)",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Взять лом"
+                    "response":"Take crowbar"
                 }
             ]  
         },
         {
             "name":"happyShahtars",
-            "line":"Ах, какой был вкусный раньше пломбир, но щас бы бахнуть ...",
+            "line":"Ah, what delicious ice cream we had back in the days, but I'd rather drink some booze now ...",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Уйти"
+                    "response":"Leave."
                 }
             ]  
         },
         {
             "name":"semenGotPotion",
-            "line":"Ах, какой был вкусный раньше пломбир, но щас бы бахнуть ...",
+            "line":"Ah, what delicious ice cream we had back in the days, but I'd rather drink some booze now ...",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Товарищи, у меня для вас есть чудо напиток, дед, что в вагоне, говорит, не каждый богатырь такое пойло осилит! (Семён отдает ОТВАР)"
+                    "response":"Comrades, I have a miracle drink for you, the grandpa says that not every hero can drink such a drink! (Simon gives potion to miners.)"
                 }
             ]  
         },
         {
             "name":"semenGavePotionToShahtars",
-            "line":"Давай сюда парень, это по нашей части!",
+            "line":"Give it to us, kid, this is our kind of thing!",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Дать шахтерам заснуть."
+                    "response":"Let miners nap."
                 }
             ]  
         },
         {
             "name":"shahtarsHigh",
-            "line":"Похоже спят они.",
+            "line":"It seems like they sleep.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Уйти"
+                    "response":"Leave."
                 }
             ]  
         }

@@ -3,98 +3,98 @@
     [   
         {
             "name":"initial",
-            "line":"Духи леса и земли скоротают наши дни! Ты - молодой росток, хочешь что-то от меня, уже пожившего старого пня? Ун-дааа, ун-дааа, слава духам!",
+            "line":"The spirits of the forest and of the earth will pass our days! You are a young sprout, do you want something from me, an old stump already aged? Un-daaa, un-daaa, thank the spirits!",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Нет, дед, тебе бы таблеточки какие попить."
+                    "response":"No, grandpa, you should take some pills."
                 },
                 {
                     "id":"1",
-                    "response":"Ого, это магия такая? Как там было? Сим-салабим, ахалай-махалай…"
+                    "response":"Wow, is that magic? What was it like? Sim-salabim, ahalai-mahalai..."
                 },
                 {
                     "id":"2",
-                    "response":"Мать земля, реки родные! Помоги мне дед с мужиками шальными!"
+                    "response":"Mother earth, native rivers! Help me grandfather with the stray men!"
                 }
             ]
         },
         {
             "name":"initialNoMeMomAsk",
-            "line":"Духи леса и земли скоротают наши дни! Ты - молодой росток, хочешь что-то от меня, уже пожившего старого пня? Ун-дааа, ун-дааа, слава духам!",
+            "line":"The spirits of the forest and of the earth will pass our days! You are a young sprout, do you want something from me, an old stump already aged? Un-daaa, un-daaa, thank the spirits!",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Нет, дед, тебе бы таблеточки какие попить."
+                    "response":"No, grandpa, you should take some pills."
                 },
                 {
                     "id":"1",
-                    "response":"Ого, это магия такая? Как там было? Сим-салабим, ахалай-махалай…"
+                    "response":"Wow, is that magic? What was it like? Sim-salabim, ahalai-mahalai..."
                 }
             ]
         },
         {
             "name":"initialFailed",
-            "line":"Иди лесом юный росток, солнце светит на восток!",
+            "line":"Walk through the woods young sprout, the sun is shining in the east!",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Уйти"
+                    "response":"Leave"
                 }
             ]  
         },
         {
             "name":"initialSuccess",
-            "line":"Вижу помыслу твои, но зло иль добро за тобою стоит? Парам-парапам…",
+            "line":"I see your thoughts, but is evil or good behind you? Parampas, parampas...",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Можно выйти подышать? Здесь кумар от непонятных трав…"
+                    "response":"Can I go out for a breath? There is a smoke of incomprehensible herbs in here..."
                 },
                 {
                     "id":"1",
-                    "response":"Эх, сейчас проучу тех горняков и спать завалюсь, что ещё нужно."                    
+                    "response":"Eh, now I'll teach those miners and go to sleep, what more do I need."                    
                 },
                 {
                     "id":"2",
-                    "response":"Энергии буйные нужно нам обуздать, чтобы в вагоне была благодать!"                    
+                    "response":"We need to curb those unbridled energies so that there will be grace in the carriage!"                    
                 }
             ]  
         },
         {
             "name":"2ndFailed",
-            "line":"Не верю тебе, мальчишка, иди-ка собирать в тайге шишки!",
+            "line":"I don't believe you, boy, go gather cones in the taiga!",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Уйти"
+                    "response":"Leave."
                 }
             ]  
         },
         {
             "name":"2ndSuccess",
-            "line":"Вижу, душа твоя почти чиста, получи отвар от праотца!",
+            "line":"I see your soul is almost pure, get a potion from your forefathers!",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Ура!"
+                    "response":"Huray!"
                 }
             ]  
         },
         {
             "name":"shamanNirvana",
-            "line":"СЕМЕН: Дед говорит с праотцами, не буди лихо, пока оно тихо",
+            "line":"SIMON: Grandfather talks to the forefathers, don't wake up trouble while it's still quiet.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Уйти"
+                    "response":"Leave."
                 }
             ]  
         }

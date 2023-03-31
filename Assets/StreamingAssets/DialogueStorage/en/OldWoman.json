@@ -3,49 +3,49 @@
     [   
         {
             "name":"babkaInitial",
-            "line":"Эй, внучок, ты чего потерянный какой? A, неважно, помоги-ка старой женщине сумки поднять наверх. Мне уже 89 лет, совсем старая бабка стала, спина не разгибается совсем, a если разогнуться, то потом полдня сидеть не могу - стою как солдат по стойке смирно.",
+            "line":"Hey, kid, why are you so lost? Ah, never mind, please, help an old woman to put her bags under the bed. I'm 89 years old now, I'm a very old grandmother, my back can't bend at all, and if I bend, I can't sit for half a day - I stand like a soldier at attention.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Хорошо, милая женщина, давайте я Вам подсоблю… (Поднять сумки на верхнюю полку)"
+                    "response":"Okay, dear woman, let me help you ... (Push the bag under the bed)"
                 },
                 {
                     "id": "1",
-                    "response": "Эм, не знаю, мне надо подумать, может позже."
+                    "response": "Um, I don't know, I'll have to think about it, maybe later."
                 }
             ]
         },
         {
             "name":"babkaWantsToGiveVodka",
-            "line":"Спасибо тебе, милок, помог бабушке. И погоди-ка, y меня для тебя есть кое-что, настоечка от деда моего, только не злоупотребляй смотри.",
+            "line":"Thank you, honey, you helped Grandma. And wait a minute, I have something for you, a drink from my grandfather, just don't overuse it.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Oгo, спасибо, бабушка. Штука, кажись, очень крепкая, воняет даже закрытая. He знаю, что c ней делать пока, но, авось, пригодится."
+                    "response":"Wow, thanks, Grandma. The thing seems to be very strong, it smells even when closed. I don't know what to do with it yet, but it might be useful."
                 }
             ]
         },
         {
             "name":"babkeDuet",
-            "line":"Еду я сама в Омск, племяшку повидать. Он уже совсем большой стал - спортсмен известный, на руках борется, не помню уже как этот чудо-спорт называется. A всё почему так? Вареньице и соленья тёткины кушал, когда маленький был. Ладно, не буду тебя отвлекать, молодой человек… Сквозняк какой сильный в вагоне… ужас, так и не уснуть мне, бабке-то…",
+            "line":"I go to Omsk myself, to see my nephew. He has become quite big - he is a famous athlete, he wrestles with his hands, I don't remember what this miracle sport is called. And do you know why? It is because he used to eat his aunt's jam and pickles when he was little. Well, I won't distract you, young man... The wind in the carriage is so strong... it's terrible, grandma can't sleep...",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Уйти"
+                    "response":"Leave."
                 }
             ]
         },
         {
             "name":"babkaSpit",
-            "line":"Лариса Борисовна спит.",
+            "line":"Grandma is asleep.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Уйти"
+                    "response":"Leave."
                 }
             ]
         }

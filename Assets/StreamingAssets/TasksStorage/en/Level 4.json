@@ -1,0 +1,10 @@
+{
+    "Tasks":
+    [   
+        {
+            "id":0,
+            "Content":"We'll be arriving soon, maybe I can make some useful connections until we reach the terminal station.",
+            "State": false
+        }
+    ]
+}

@@ -3,45 +3,45 @@
     [   
         {
             "name":"victory",
-            "line":"CЕМЕН: 'Место-то освободилось, может тут я и переночую.'",
+            "line":"SIMON: 'These place is free now, maybe I'll sleep here.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Лечь спать на койку"
+                    "response":"Lie down"
                 }
             ]
         },
         {
             "name":"defeat",
-            "line":"БАБА НЮРА: Опять ты?! Подозрительный какой, чего тебе от бабки надо? Hy всё, зову проводника!",
+            "line":"BABUSHKA: Oh, it's you again?! It's suspecious, what do you need from me? I'll call stewardess now!",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Ой, что-то я не подумал…"
+                    "response":"Oops, I haven't thought about it. "
                 }
             ]
         },
         {
             "name":"warn",
-            "line":"БАБА НЮРА: Так это твоё место, a чего-сразу-то не сказал? Что-то мне непонятно…  A билет y тебя, мил человек, есть? ..Дует еще откуда-то, никак не улечься.",
+            "line":"BABUSHKA: Ah, you say that is your place? I don't understand.  Do you have a ticket? ..Wind blows from somewhere, I can't sleep like that.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Ухожу, ухожу."
+                    "response":"Ok, I am leaving."
                 }
             ]
         },
         {
             "name":"helpReminder",
-            "line":"БАБА НЮРА: Ой, сумок-то набрала, a сама убрать не могу, и никто не помогает",
+            "line":"BABUSHKA: Oh, this bag is so big, I can't put it under the bed myself.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Уйти"
+                    "response":"Leave."
                 }
             ]
         }

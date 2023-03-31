@@ -3,114 +3,114 @@
     [   
         {
             "name":"initial",
-            "line":"Привет. Я тебе видела, ходишь по вагону туда-сюда, сюда-туда! Я занятой человек вообще-то, и чего вдруг я должна с тобой разговаривать? Послушай меня, я никому ничего не должна! Семён: 'Эта дамочка явно напряжена, если я хочу с ней поговорить, то стоит очень аккуратно подбирать слова, чтобы не вызывать агрессию.'",
+            "line":"Hi. I saw you, walking back and forth in the carriage, here and there! I'm a busy person, why do I have to talk to you all of a sudden? Listen to me, I don't owe anybody anything! Semyon: 'This lady is obviously tense, if I want to talk to her, I should choose my words very carefully, so as not to cause aggression.'",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Женщина, будьте повежливее, я хотел узнать, есть ли тут свободные места в пролёте."
+                    "response":"Hi, be polite, madam, I wanted to know if there were any empty seats in the cabin."
                 },
                 {
                     "id":"1",
-                    "response":"Ты чего раскричалась? Успокойся, давай просто поболтаем."
+                    "response":"Why are you yelling? Calm down, let's just talk."
                 },
                 {
                     "id":"2",
-                    "response":"Извиняюсь, я просто мимо проходил, уже ухожу."
+                    "response":"Sorry, I was just passing by, I was on my way out."
                 },
                 {
                     "id":"3",
-                    "response":"Здравствуйте, я с Вами совершенно согласен, я просто хотел здесь постоять минутку в приятной компании."
+                    "response":"Hello, I totally agree with you, I just wanted to stand here for a moment in pleasant company."
                 }
             ]
         },
         {
             "name":"failedInitial",
-            "line":"Мимо пошёл!",
+            "line":"Go away!",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Уйти"
+                    "response":"Leave."
                 }
             ]
         },
         {
             "name":"Step1",
-            "line":"А ты довольно вежливый парень, знаешь я так устала, мне всё время звонят по работе, эти лапти ничего без меня не могут, впрочем как всегда! Я в отпуске и хочу отдыхать и наслаждаться жизнью, а от этих надоедливых подчинённых у меня только новые морщины.",
+            "line":"You're a pretty polite guy, you know I'm so tired, I keep getting calls for work, these noodles can't do anything without me, as always! I'm on vacation and I want to rest and enjoy life, and these annoying subordinates only give me new wrinkles.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Возможно Вам стоит расслабиться, эти бездари сами разберутся."
+                    "response":"Perhaps you should relax, these amateurs will figure it out for themselves."
                 },
                 {
                     "id":"1",
-                    "response":"Вы просто взвалили на себя слишком много обязанностей, чувачкам на работе стоит поднапрячься."
+                    "response":"You've just taken on too many responsibilities, the dudes at work need to step it up."
                 },
                 {
                     "id":"2",
-                    "response":"Отпуск – это здорово, смотрите какая погода замечательная, а дела потихоньку будут делаться, Вы о себе тоже подумайте, отдыхать надо."
+                    "response":"Vacation - it's great, look what a great weather, and things will slowly get done, you need to think about yourself too, you need to rest."
                 },
                 {
                     "id":"3",
-                    "response":"Эээ, мне пора."                   
+                    "response":"Mm, I should probably go."                   
                 }
             ]
         },
         {
             "name":"Step1Failed",
-            "line":"Не хочу дальше разговаривать.",
+            "line":"I don't want to talk anymore.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Уйти"
+                    "response":"Leave."
                 }
             ]
         },
         {
             "name":"Step1Passed",
-            "line":"Хм... Да возможно, они справятся и без некоторых моих советов. В этом поезде так скучно, такая гнетущая обстановка, где здесь можно достойно провести время?",
+            "line":"Hmm... Yes, perhaps they can manage without some of my advice. This train is so boring, so oppressive, where can one have a decent time?",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"В предыдущем вагоне есть компания качков, можешь с ними поразвлечься, они протеином угощают."
+                    "response":"There's a bunch of hunks in the previous car, you can have fun with them, they can give you protein."
                 },
                 {
                     "id":"1",
-                    "response":"Мне кажется, есть шанс уговорить того парня поделиться пирогами."
+                    "response":"I think there's a chance to get that guy to share the pies."
                 },
                 {
                     "id":"2",
-                    "response":"Я слышал, что в этом поезде есть вагон ресторан, там вкусная изысканная кухня и отличный сервис."
+                    "response":"I've heard that this train has a restaurant car, it has delicious gourmet food and great service."
                 },
                 {
                     "id":"3",
-                    "response":"Я ничего не знаю."
+                    "response":"I don't know."
                 }
             ]
         },
         {
             "name":"Step2Failed",
-            "line":"Вот что ты несёшь?! Отдохнуть надо тебе.",
+            "line":"What are you talking about?! The one who really needs a rest is you.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Уйти"
+                    "response":"Leave."
                 }
             ]
         },
         {
             "name":"Step2Passed",
-            "line":"Это то, что мне нужно! Сразу настроение появилось. Всё, я пошла, главное хотя бы к завтрашнему утру вернуться, а не засидеться до полудня.",
+            "line":"That's just what I needed! That is it, I am going there, the main thing is to be back at least by tomorrow morning, not to sit there until noon next day.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Отлично!"
+                    "response":"Great!"
                 }
             ]
         }

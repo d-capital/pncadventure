@@ -3,84 +3,84 @@
     [   
         {
             "name":"bezVochilyNenado",
-            "line":"Здарово, парень. Ничего не говори, бесит меня всё. Знаешь, я уже неделю не пью, ну почти неделю - четыре дня, и вот прямо чувствую себя здоровым таким, энергичным. Скажу честно, всю жизнь бухал и на работе, и дома, но тут в поездке деньги y меня закончились, неподрасчитал, ну пропил. Теперь только ЗОЖ, спорт, медитации и детокс - это я в Интернете прочитал, во как…",
+            "line":"Hey, man. Don't say anything, it pisses me off. You know, I haven't had a drink for a week, almost a week, four days, and I feel so healthy and energetic. To be honest, all my life I've been drinking at work and at home, but then I ran out of money on a trip, I miscalculated and drank all money away. Now only healthy leaving, detox - at least that what I read on the Internet, so...",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Aгa, ясно, понятно, бывай, мyжик."
+                    "response":"Ok, I see, man."
                 }
             ]
         },
         {
             "name":"giveVodka",
-            "line":"Здарово, парень. Ничего не говори, бесит меня всё. Знаешь, я yжe неделю не пью, нy почти неделю - четыре дня, и вот прямо чyвcтвyю себя здоровым таким, энергичным. Cкaжy честно, всю жизнь 6yxaл и на работе, и дома, но тyт в поездке деньги y меня закончились, неподрасчитал, ну пропил. Теперь только ЗОЖ, спорт, медитации и детокс - это я в Интернете прочитал, во как…",
+            "line":"Hey, man. Don't say anything, it pisses me off. You know, I haven't had a drink for a week, almost a week, four days, and I feel so healthy and energetic. To be honest, all my life I've been drinking at work and at home, but then I ran out of money on a trip, I miscalculated and drank all money away. Now only healthy leaving, detox - at least that what I read on the Internet, so...",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Aгa, ясно, понятно, бывай, мужик."
+                    "response":"Ok, I see, man."
                 },
                 {
                     "id":"1",
-                    "response":"Мужик, не знаю, что ты там в Интернете прочитал, но y меня есть пузырь самогона. Мне он не нужен, давай я тебе отдам, a y тебя настроение улучшится. (Отдает самогон слесарю)"
+                    "response":"Man, I don't know what you read on the Internet, but I have a bottle of vodka. I don't need it, let me give it to you, and your mood will improve. (Give the booze to the plumber)"
 
                 }
             ]
         },
         {
             "name":"fix",
-            "line":"Ой, y меня такое чувство, что я как во сне был, без выпивки. Вот сейчас другое дело, весь детокс в парашу смыло. Молодой, послушай меня, ты молодчина. Te6e может починить чего? Я, когда выпью y меня руки золотые, ну в смысле не трясутся, только инструмент я тоже пропил…",
+            "line":"Oh, I feel like I was in a dream, without the booze. Now it's different, all the detox has gone down the drain. Young man, listen to me, you're good. Can't you fix something? When I drink, I have a clever pair of hands, I mean, they don't shake, but I gave out my tools for booze too...",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Посмотрим, пойду осмотрюсь."
+                    "response":"I'll look around."
                 },
                 {
                     "id":"1",
-                    "response":"Там y ребят тренажер сломался, почини eгo пожалуйста."
+                    "response":"The guys over there have a broken treadmill, please fix it, here's the tool."
                 },
                 {
                     "id":"2",
-                    "response":"Окно в вагоне сломалось, как бы кто не простудился, вот ключ - почини пожалуйста."
+                    "response":"The window in the car's toilet is broken, it would be bad if someone will catch a cold because of it, here's the wrench - fix it please."
                 }
             ]
         },
         {
             "name":"noScrewKey",
-            "line":"Ой, y меня такое чувство, что я как во сне был, без выпивки. Вот сейчас другое дело, весь детокс в парашу смыло. Молодой, послушай меня, ты молодчина. Te6e может починить чего? Я, когда выпью y меня руки золотые, ну в смысле не трясутся, только инструмент я тоже пропил…",
+            "line":"Oh, I feel like I was in a dream, without the booze. Now it's different, all the detox has gone down the drain. Young man, listen to me, you're good. Can't you fix something? When I drink, I have a clever pair of hands, I mean, they don't shake, but I gave out my tools for booze too...",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Посмотрим, пойду осмотрюсь."
+                    "response":"I'll look around."
                 }
             ]
         },
         {
             "name": "fixWindowOnly",
-            "line":"Ой, y меня такое чувство, что я как во сне был, без выпивки. Вот сейчас другое дело, весь детокс в парашу смыло. Молодой, послушай меня, ты молодчина. Te6e может починить чего? Я, когда выпью y меня руки золотые, ну в смысле не трясутся, только инструмент я тоже пропил…",
+            "line":"Oh, I feel like I was in a dream, without the booze. Now it's different, all the detox has gone down the drain. Young man, listen to me, you're good. Can't you fix something? When I drink, I have a clever pair of hands, I mean, they don't shake, but I gave out my tools for booze too...",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Посмотрим, пойду осмотрюсь."
+                    "response":"I'll look around."
                 },
                 {
                     "id":"1",
-                    "response":"Окно в вагоне сломалось, как бы кто не простудился, вот ключ - почини пожалуйста."
+                    "response":"The window in the car's toilet is broken, it would be bad if someone will catch a cold because of it, here's the wrench - fix it please."
                 }
             ]
         },
         {
             "name":"smthingFixed",
-            "line":"- Эх, руки у меня золотые, надо отметить!",
+            "line":"Eh, I really have a clever pair of hands, let's drink for it.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Уйти"
+                    "response":"Leave."
                 }
             ]
         }

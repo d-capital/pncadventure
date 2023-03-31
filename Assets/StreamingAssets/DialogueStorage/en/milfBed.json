@@ -3,23 +3,23 @@
     [   
         {
             "name":"hungry",
-            "line":"CЕМЕН: 'Есть хочется, на пустой желудок не уснуть.'",
+            "line":"SIMON: 'I'm hungry, I can't sleep with an empty stomach.'",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Уйти"
+                    "response":"Leave."
                 }
             ]
         },
         {
             "name":"win",
-            "line":"СЕМЕН: 'Аромат парфюма на любителя, но сейчас это не так важно.'",
+            "line":"SIMON: 'The fragrance of the perfume is specific, but it's not that important right now.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Лечь спать на койку"
+                    "response":"Lie down and sleep."
                 }
             ]
         }

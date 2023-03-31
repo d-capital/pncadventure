@@ -3,112 +3,112 @@
     [   
         {
             "name":"initial",
-            "line":"Подойди сюда, зёма. Вижу ты из наших, живущих за Уралом. Сам-то я охотник п-р-о-ф-е-с-с-и-о-н-а-ль-н-ы-й! О, как! Могу любое животное подстрелить так, чтобы шкуру не попортить, в глаз, например, или ещё куда… Только сейчас я не в форме, вчера с мэром сидели допоздна. Ох, моя головушка. У тебя есть может что-то от похмелья?",
+            "line":"Come here, sonny. I see you're one of ours, living beyond the Urals. I myself am a hunter, p-r-o-f-e-s-s-i-o-n-a-l one! Yep, that's how! I can shoot any animal so as not to ruin its hide, in the eye, for example, or anywhere else... But I'm not quite in shape now, we had a long conversation with mayor last night. Oh, my head. Do you have anything for a man with hangover?",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Нет, я сам не пью и тебе не советую."
+                    "response":"No, I don't drink myself and I don't advise you to."
                 }
             ]
         },
         {
             "name":"initialWithAspirin",
-            "line":"Подойди сюда, зёма. Вижу ты из наших, живущих за Уралом. Сам-то я охотник п-р-о-ф-е-с-с-и-о-н-а-ль-н-ы-й! О, как! Могу любое животное подстрелить так, чтобы шкуру не попортить, в глаз, например, или ещё куда… Только сейчас я не в форме, вчера с мэром сидели допоздна. Ох, моя головушка. У тебя есть может что-то от похмелья?",
+            "line":"Come here, sonny. I see you're one of ours, living beyond the Urals. I myself am a hunter, p-r-o-f-e-s-s-i-o-n-a-l one! Yep, that's how! I can shoot any animal so as not to ruin its hide, in the eye, for example, or anywhere else... But I'm not quite in shape now, we had a long conversation with mayor last night. Oh, my head. Do you have anything for a man with hangover?",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Не поверишь, есть таблетки как раз на такой случай!"
+                    "response":"You won't believe it, I have some pills for just such a case!"
                 },
                 {
                     "id":"1",
-                    "response":"Нет, я сам не пью и тебе не советую."
+                    "response":"No, I don't drink myself and I don't advise you to."
                 }
             ]
         },
         {
             "name":"asksForTeaNoTea",
-            "line":"Есть у меня идейка одна, принеси чайку мне, должно взбодрить.",
+            "line":"I have an idea, bring me some tea, it should cheer me up.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Пойду за чаем"
+                    "response":"I'll go get you tea."
                 }
             ]
         },
         {
             "name":"asksForTeaHasTea",
-            "line":"Есть у меня идейка одна, принеси чайку мне, должно взбодрить.",
+            "line":"I have an idea, bring me some tea, it should cheer me up.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Я подумаю"
+                    "response":"Let me think about it."
                 },
                 {
                     "id":"1",
-                    "response":"Пожалуйста чай, надеюсь не слишком горячий."
+                    "response":"Here is your tea, I hope it is not too hot."
                 }
             ]
         },
         {
             "name":"semenGotTea",
-            "line":"Ну что, принес?",
+            "line":"Did you bring it?",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Еще нет"
+                    "response":"Not yet."
                 },
                 {
                     "id":"1",
-                    "response":"Пожалуйста чай, надеюсь не слишком горячий."
+                    "response":"Here is your tea, I hope it is not too hot."
                 }
             ]
         },
         {
             "name":"noTeaAfterAsk",
-            "line":"Ну что, принес?",
+            "line":"Did you bring it?",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Еще нет"
+                    "response":"Not yet."
                 }
             ]
         },
         {
             "name":"hunterWantsToGiveShuba",
-            "line":"Ура, это то, что мне нужно. Возьми эту шубку эту за труды.",
+            "line":"Yay, that's just what I need. Take this fur coat for the service.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Спасибо!"
+                    "response":"Thanks!"
                 }
             ]
         },
         {
             "name":"hunterWantsToGiveShubaAfterAspirin",
-            "line":"Спасибо тебе земляк, помощь твоя дорогого стоит. Возьми эту шубку эту за труды. (Семён получает полушубок)",
+            "line":"Thank you, compatriot, your help is worth a lot. Take this fur coat for your hard work.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Спасибо!"
+                    "response":"Thanks!"
                 }
             ]
         },
         {
             "name":"hunterDrinksTeaOrGotAspirin",
-            "line":"Ээээх! Мохнатый ... хмель! На душистый мн-ээ ... или пушистый ...  как же там было... ",
+            "line":"Ehhh! Stalinka - malinka, stalinka moja! mn-eh... or it was kalinka there... ",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Может, когтистый? Впрочем, не важно, отдыхайте!"
+                    "response":"Khrushtshevka, maybe? Anyway, doesn't matter, have a rest!"
                 }
             ]
         }

@@ -3,12 +3,12 @@
     [   
         {
             "name":"outro",
-            "line":"Отлично, с каждым днём и приближаюсь к своей цели ",
+            "line":"Great, every day I get closer to my goal.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Заснуть"
+                    "response":"Go to sleep."
                 }
             ]
         }

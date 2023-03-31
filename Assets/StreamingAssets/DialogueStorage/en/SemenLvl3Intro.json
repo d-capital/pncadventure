@@ -3,12 +3,12 @@
     [   
         {
             "name":"intro",
-            "line":"С добрым утром меня! Полпути уже позади, и даже не верится, что Москва уже близко. Сегодня мне точно нужно умыться, зубы почистить, а то свиньей в новую жизнь не хочу двигать. Так, надеюсь всё выйдет…",
+            "line":"Good morning! I'm already halfway there, and I can't even believe that Moscow is near. Today I definitely need to wash my face and brush my teeth, because I don't want to move into a new life as a pig. So, I hope it all works out...",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Хрю-хрю"
+                    "response":"Ok."
                 }
             ]
         }

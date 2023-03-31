@@ -3,16 +3,16 @@
     [   
         {
             "name":"initial",
-            "line":"И? Ты по какому-то вопросу? А так-то, если хочешь говорить, докажи, что не деревенщина! Какое самое вайбовое чтиво для элит?",
+            "line":"What? Do you have something for me? If you want to talk to me, prove that you are not a redneck! What is the most vibe reading for the elite these days?",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Банальная шавуха"
+                    "response":"Shawrma today."
                 },
                 {
                     "id":"1",
-                    "response":"Штукатур"
+                    "response":"Word Down Magazine"
                 },
                 {
                     "id":"2",
@@ -20,88 +20,88 @@
                 },
                 {
                     "id":"3",
-                    "response":"Золотой вождь"
+                    "response":"Golden Chief"
                 }
             ]
         },
         {
             "name":"wrongAnswer",
-            "line":"Криинж!",
+            "line":"Cringe!",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Крипово!"
+                    "response":"Crippy!"
                 }
             ]
         },
         {
             "name":"rightAnswer",
-            "line":"Ого, да ты продвинутый парень, не самый потерянный! Давай так сделаем, ты добудешь для меня что-то супер-нью-стайл-фэшн-бэст, а я скажу своему пупсику, что с тобой можно иметь дело.",
+            "line":"Wow, you are an neat guy, not the most lost! Let's do this, you'll get me some super new style fashion best and I'll tell my baby girl you're good to deal with.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Хорошо"
+                    "response":"Ok."
                 }
             ]
         },
         {
             "name":"noShuba",
-            "line":"Нашел для меня что-то?",
+            "line":"Do you have something for me?",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Я ничего не нашел, пойду погуляю…"
+                    "response":"No, still seaking."
                 }
             ]
         },
         {
             "name":"readyToGiveShuba",
-            "line":"Нашел для меня что-то?",
+            "line":"Do you have something for me?",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Я ничего не нашел, пойду погуляю…"
+                    "response":"No, still seaking."
                 },
                 {
                     "id":"1",
-                    "response":"А вот этот полушубок подойдет? "
+                    "response":"How about this fur coat? "
                 }
             ]
         },
         {
             "name":"shubaGiven",
-            "line":"Ого, как ты достал такой мех?! Это же нью-смайл-тренди-арт-стайл! Ты рили кул, я расскажу моему манимейкеру о тебе.",
+            "line":"Wow, how did you get fur like that?! It's new-smile-trendy-art-style! You're really cool, I'll tell my many maker about you.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Спасибо!"
+                    "response":"Thank you!"
                 }
             ]
         },
         {
             "name":"shubaFromBeginning",
-            "line":"Ого, да ты продвинутый парень, не самый потерянный! Давай так сделаем, ты добудешь для меня что-то супер-нью-стайл-фэшн-бэст, а я скажу своему пупсику, что с тобой можно иметь дело.",
+            "line":"Wow, you're an neat guy! Let's do the following - you will get me something super-new-stylish-fashion-best, and I'll tell my honey that you're good to do business with.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Как насчет полушубка?"
+                    "response":"What about this fur coat?"
                 }
             ]
         },
         {
             "name":"majorInformed",
-            "line":"Сходи к папику, у него есть к тебе дело.",
+            "line":"Go to my daddy, he has a deal for you.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Хорошо"
+                    "response":"Ok."
                 }
             ]
         }

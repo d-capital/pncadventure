@@ -3,12 +3,12 @@
     [   
         {
             "name":"intro",
-            "line":"Поезд проехал уже несколько крупных городов, стало быть сегодня вечером будем в столице. Моя дорога в Москву откроется как дорога полная возможностей. Стоит подумать о том, что делать дальше, возможно мне стоит с кем-то познакомиться, кто поможет с работой и расскажет, как жить в этом большом городе. Но, конечно, не стоит забывать о принципах моего дома – на чужом горе счастья не построишь. Я ищу лучшей жизни для себя, но не буду ради этого подставлять других людей.",
+            "line":"The train has already passed through several major cities, so tonight we will be in the capital. My road to Moscow will reveal itself as a road full of opportunities. It is worth thinking about what to do next, perhaps I should meet someone who can help me with my job and tell me how to live in this big city. But, of course, I should not forget the principles of my home - you can't build happiness on other people's pain. I'm looking for a better life for myself, but I won't set other people up for it.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Начнем"
+                    "response":"Let's start."
                 }
             ]
         }

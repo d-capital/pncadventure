@@ -3,12 +3,12 @@
     [   
         {
             "name":"intro",
-            "line":"С добрым утром меня, пейзаж в окне уже поменялся, интересно, как далеко я от дома? Впрочем, назад всё меньше и меньше хочется возвращаться – билет в один конец, так сказать, хотя у меня и билета нет. (Урр...урр...Бубурр… Живот урчит). Так, надо что-то перекусить и место для сна найти в новом вагоне.",
+            "line":"Good morning to me, the landscape in the window has already changed, I wonder how far I am from home. However, I am less and less eager to go back - a one-way ticket, so to say, although I don't even have a ticket. (Urr...urr...urr...Buburr...my stomach rumbles). Okay, I need something to eat and a place to sleep in the new car.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Ок"
+                    "response":"Ok."
                 }
             ]
         }

@@ -3,12 +3,12 @@
     [   
         {
             "name":"outro",
-            "line":"Половина пути пройдена, ещё немного и меня встретят огни столицы.",
+            "line":"Halfway there, I'm about to be greeted by the lights of the capital.",
             "responses":
             [
                 {
                     "id":"0",
-                    "response":"Уснуть"
+                    "response":"Go to sleep."
                 }
             ]
         }
