@@ -330,6 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 791daf882b8d86e4091623099eae6283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  language: ru
 --- !u!4 &23677900
 Transform:
   m_ObjectHideFlags: 0
@@ -518,6 +519,7 @@ GameObject:
   - component: {fileID: 164877939}
   - component: {fileID: 164877938}
   - component: {fileID: 164877937}
+  - component: {fileID: 164877940}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -611,6 +613,24 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 21
   m_TargetDisplay: 0
+--- !u!114 &164877940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164877935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b55b80d27386e846917c8b8e51692ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartTitle: {fileID: 1900389488}
+  GameName: {fileID: 1474629216}
+  Text1: {fileID: 1659406757}
+  Text3: {fileID: 1472169087}
+  Text4: {fileID: 364379873}
+  TextS: {fileID: 2041186618}
 --- !u!1 &178285546 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7005737238281255916, guid: fcbb95b8f5a4a1248a9e8e03c1ee5e37, type: 3}
@@ -723,7 +743,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: e68a4607acca1d24c9142c0fcc3a2de6, type: 3}
     m_FontSize: 19
-    m_FontStyle: 3
+    m_FontStyle: 1
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
@@ -1734,7 +1754,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: e68a4607acca1d24c9142c0fcc3a2de6, type: 3}
     m_FontSize: 19
-    m_FontStyle: 3
+    m_FontStyle: 1
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
@@ -2204,7 +2224,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: e68a4607acca1d24c9142c0fcc3a2de6, type: 3}
     m_FontSize: 19
-    m_FontStyle: 3
+    m_FontStyle: 1
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
@@ -2609,6 +2629,26 @@ PrefabInstance:
     - target: {fileID: 4257508509235537429, guid: 109e7dfa5add0f34fb2693c02da4b3cc, type: 3}
       propertyPath: m_LocalPosition.y
       value: 11.892046
+      objectReference: {fileID: 0}
+    - target: {fileID: 4788691361302858131, guid: 109e7dfa5add0f34fb2693c02da4b3cc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4788691361302858131, guid: 109e7dfa5add0f34fb2693c02da4b3cc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4788691361302858131, guid: 109e7dfa5add0f34fb2693c02da4b3cc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4788691361302858131, guid: 109e7dfa5add0f34fb2693c02da4b3cc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.000000110594556
+      objectReference: {fileID: 0}
+    - target: {fileID: 4788691361302858131, guid: 109e7dfa5add0f34fb2693c02da4b3cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6594074206647689048, guid: 109e7dfa5add0f34fb2693c02da4b3cc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3163,7 +3203,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: e68a4607acca1d24c9142c0fcc3a2de6, type: 3}
     m_FontSize: 19
-    m_FontStyle: 3
+    m_FontStyle: 1
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40

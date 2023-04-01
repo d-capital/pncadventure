@@ -53,4 +53,14 @@ public class LanguageManager : MonoBehaviour
         return correctName;
     }
 
+    public int getCorrectDropDownValue()
+    {
+        int languageValue = 0;
+        if (language == "en") 
+        {
+            languageValue = 1;
+        }
+        return languageValue;
+    }
+
 }

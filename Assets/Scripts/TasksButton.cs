@@ -66,7 +66,7 @@ public class TasksButton : MonoBehaviour
     {
         string path = Application.dataPath;
         string levelName = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().GetCurrentLevel();
-        string currLanguage = GameObject.FindObjectOfType<LanguageManager>().language;
+        string currLanguage = SaveSystem.LoadPlayer().language;
         string pathToTasks = path + "/StreamingAssets/TasksStorage/" +currLanguage+"/" + levelName + ".json";
         var jsonString = System.IO.File.ReadAllText(pathToTasks);
         tasksList = JsonConvert.DeserializeObject<TasksList>(jsonString);

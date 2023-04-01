@@ -1,0 +1,26 @@
+[
+    {
+        "name":"StartTitle",
+        "text":"Kitchen Games presents"
+    },
+    {
+        "name":"GameName",
+        "text":"The Train Games"
+    },
+    {
+        "name":"Text1",
+        "text":"Boarding on the Moscow-Petushki train ends!"
+    },
+    {
+        "name":"Text3",
+        "text":"The train is nout your, it is a public property. Why are you so late, young man!"
+    },
+    {
+        "name":"Text4",
+        "text":"All right, come in, I'll check your ticket in the car."
+    },
+    {
+        "name":"TextS",
+        "text":"Hey! Wait, that's my train!"
+    }
+]
