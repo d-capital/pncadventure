@@ -131,7 +131,9 @@ public class DialogueManager : MonoBehaviour
                     {
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().helpedOldWoman = true;
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().talkedToOldWoman = true;
-                        GameObject.FindGameObjectWithTag("Bags").SetActive(false);
+                        GameObject.FindGameObjectWithTag("Bags").gameObject.transform.position = new Vector3(-22.24f, -2.76f);
+                        GameObject.FindGameObjectWithTag("Bags").gameObject.transform.rotation = Quaternion.Euler(0, 0, -85.043f);
+                        GameObject.FindGameObjectWithTag("Bags").GetComponent<SpriteRenderer>().sortingOrder = 1;
 
                     }
                     else if (curResponseTracker == 1)
