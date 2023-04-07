@@ -11,6 +11,9 @@ public class CabCrewController : MonoBehaviour
     public float fireRate;
     private float nextFire;
     public float coolDownRate;
+    public bool hasToRun = false;
+    public bool isDestinationSet = false;
+    Vector3 targetPos;
 
     public Animator npcAnimator;
 
@@ -25,27 +28,57 @@ public class CabCrewController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (stamina > 5 && Time.time > nextFire)
+        if (!hasToRun)
         {
-            nextFire = Time.time + fireRate;
-            npcAnimator.SetBool("hasToThrow", true);
-        } 
-        else
-        {
-            if(Time.time > coolDownRate)
+            if (stamina > 5 && Time.time > nextFire)
             {
-                stamina = 30;
+                nextFire = Time.time + fireRate;
+                npcAnimator.SetBool("hasToThrow", true);
+            }
+            else
+            {
+                if (Time.time > coolDownRate)
+                {
+                    stamina = 30;
+                }
             }
         }
+        else
+        {
+            if (!isDestinationSet)
+            {
+                targetPos = GameObject.Find("cabCrewDestination").gameObject.transform.position;
+                npcAnimator.SetBool("hasToRun", true);
+                isDestinationSet = true;
+            }
+            else
+            {
+                if(targetPos.x == gameObject.transform.position.x && targetPos.y == gameObject.transform.position.y)
+                {
+                    gameObject.SetActive(false);
+                    GameObject.FindObjectOfType<PlayerController>().isCabCrewDead = true;
+                }
+            }
+
+        }        
 
     }
 
     private void FixedUpdate()
     {
-        Vector2 semenPosition = GameObject.FindObjectOfType<PlayerController>().gameObject.transform.position;
-        Vector2 aimDirection = semenPosition - rb.position;
-        float aimAngel = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
-        rb.rotation = aimAngel;
+        if (!hasToRun)
+        {
+            Vector2 semenPosition = GameObject.FindObjectOfType<PlayerController>().gameObject.transform.position;
+            Vector2 aimDirection = semenPosition - rb.position;
+            float aimAngel = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
+            rb.rotation = aimAngel;
+        }
+        else
+        {
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, 0.2f);
+            rb.rotation = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg - 90f;
+        }
+
     }
 
     void fireNextBottle()

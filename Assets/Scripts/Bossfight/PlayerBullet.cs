@@ -24,8 +24,8 @@ public class PlayerBullet : MonoBehaviour
             }
             else
             {
-                Destroy(target.GetComponent<CabCrewController>().gameObject);
-                GameObject.FindObjectOfType<PlayerController>().GetComponent<PlayerController>().isCabCrewDead = true;
+                target.GetComponent<CabCrewController>().hasToRun = true;
+                //GameObject.FindObjectOfType<PlayerController>().GetComponent<PlayerController>().isCabCrewDead = true;
                 HideEnemyHealthBar();
             }
         }
