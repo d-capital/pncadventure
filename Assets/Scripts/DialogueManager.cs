@@ -79,23 +79,29 @@ public class DialogueManager : MonoBehaviour
         nameText.text = dialogue.name;
         //nameText2.text = dialogue.name;
         var currentLevel = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().GetCurrentLevel();
-        if(currentLevel == "Level 1")
+        if(currDialogueActor == "npc")
         {
-            lvl1stateCalculator(currDialogueActor,dialogue);
+            npcStateCalculator(currDialogueActor, dialogue);
         }
-        else if(currentLevel == "Level 2")
+        else
         {
-            lvl2stateCalculator(currDialogueActor, dialogue);
+            if (currentLevel == "Level 1")
+            {
+                lvl1stateCalculator(currDialogueActor, dialogue);
+            }
+            else if (currentLevel == "Level 2")
+            {
+                lvl2stateCalculator(currDialogueActor, dialogue);
+            }
+            else if (currentLevel == "Level 3")
+            {
+                lvl3stateCalculator(currDialogueActor, dialogue);
+            }
+            else if (currentLevel == "Level 4")
+            {
+                lvl4stateCalculator(currDialogueActor, dialogue);
+            }
         }
-        else if (currentLevel == "Level 3")
-        {
-            lvl3stateCalculator(currDialogueActor, dialogue);
-        }
-        else if (currentLevel == "Level 4")
-        {
-            lvl4stateCalculator(currDialogueActor, dialogue);
-        }
-
     }
     public void StartDialogueWithOldWomansBed(Dialogue dialogue, string dialogueActor)
     {
@@ -120,1171 +126,1180 @@ public class DialogueManager : MonoBehaviour
     { 
         curResponseTracker = incomingResponseIndex;
         var currentLevel = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().GetCurrentLevel();
-        if(currentLevel == "Level 1")
+        if(currDialogueActor == "npc")
         {
-            if (currDialogueActor == "OldWoman")
+            npcStateCalculator(currDialogueActor, dialogue);
+            EndDialogue();
+        }
+        else
+        {
+            if (currentLevel == "Level 1")
             {
-                lvl1stateCalculator(currDialogueActor, dialogue);
-                if (lvl1State == "babkaInitial")
+                if (currDialogueActor == "OldWoman")
                 {
-                    if (curResponseTracker == 0)
+                    lvl1stateCalculator(currDialogueActor, dialogue);
+                    if (lvl1State == "babkaInitial")
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().helpedOldWoman = true;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().talkedToOldWoman = true;
-                        GameObject.FindGameObjectWithTag("Bags").gameObject.transform.position = new Vector3(-22.24f, -2.76f);
-                        GameObject.FindGameObjectWithTag("Bags").gameObject.transform.rotation = Quaternion.Euler(0, 0, -85.043f);
-                        GameObject.FindGameObjectWithTag("Bags").GetComponent<SpriteRenderer>().sortingOrder = 1;
+                        if (curResponseTracker == 0)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().helpedOldWoman = true;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().talkedToOldWoman = true;
+                            GameObject.FindGameObjectWithTag("Bags").gameObject.transform.position = new Vector3(-22.24f, -2.76f);
+                            GameObject.FindGameObjectWithTag("Bags").gameObject.transform.rotation = Quaternion.Euler(0, 0, -85.043f);
+                            GameObject.FindGameObjectWithTag("Bags").GetComponent<SpriteRenderer>().sortingOrder = 1;
 
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().talkedToOldWoman = true;
+                            EndDialogue();
+                        }
                     }
-                    else if (curResponseTracker == 1)
+                    if (lvl1State == "babkaWantsToGiveVodka")
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().talkedToOldWoman = true;
-                        EndDialogue();
+                        if (curResponseTracker == 0)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasVodka = true;
+                            //add vodka to inventory
+                            GetItemToInventory("VodkaButton");
+                            EndDialogue();
+                        }
                     }
-                }
-                if (lvl1State == "babkaWantsToGiveVodka")
-                {
-                    if (curResponseTracker == 0)
+                    if (lvl1State == "babkeDuet")
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasVodka = true;
-                        //add vodka to inventory
-                        GetItemToInventory("VodkaButton");
-                        EndDialogue();
+                        if (curResponseTracker == 0)
+                        {
+                            EndDialogue();
+                        }
                     }
-                }
-                if (lvl1State == "babkeDuet")
-                {
-                    if (curResponseTracker == 0)
+                    if (lvl1State == "babkaSpit")
                     {
-                        EndDialogue();
+                        if (curResponseTracker == 0)
+                        {
+                            EndDialogue();
+                        }
                     }
-                }
-                if (lvl1State == "babkaSpit")
-                {
-                    if (curResponseTracker == 0)
-                    {
-                        EndDialogue();
-                    }
-                }
 
-            }
-            else if (currDialogueActor == "OldWomansBed")
-            {
-                lvl1stateCalculator(currDialogueActor, dialogue);
-                if (lvl1State == "victory")
-                {
-                    playerData.helpedOldWoman = true;
-                    playerData.enterCutSceneShown = true;
-                    playerData.currentLevelIndex = 4;
-                    EndDialogue();
-                    completeTask(0);
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
                 }
-                else if (lvl1State == "defeat")
+                else if (currDialogueActor == "OldWomansBed")
                 {
-                    GameObject.FindObjectOfType<GameOver>().GetComponent<GameOver>().ShowGameOverScreen();
-                }
-                else if (lvl1State == "warn")
-                {
-                    EndDialogue();
-                }
-                else if (lvl1State == "helpReminder")
-                {
-                    EndDialogue();
-                }
-            }
-            else if (currDialogueActor == "Plumber")
-            {
-                lvl1stateCalculator(currDialogueActor, dialogue);
-                if (lvl1State == "bezVochilyNenado")
-                {
-                    if (curResponseTracker == 0)
+                    lvl1stateCalculator(currDialogueActor, dialogue);
+                    if (lvl1State == "victory")
                     {
-                        EndDialogue();
-                    }
-                }
-                else if(lvl1State == "giveVodka")
-                {
-                    if (curResponseTracker == 1)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().vodkaGivenToPlumber = true;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasVodka = false;
-                        RemoveItemFromSlotWithoutDropping("VodkaItem");
-                        GameObject.FindGameObjectWithTag("Plumber").GetComponent<PlumberScript>().changePlumberAnimationToHappy();
-                        lvl1stateCalculator(currDialogueActor, dialogue);
-                    }
-                    else if (curResponseTracker == 0)
-                    {
-                        EndDialogue();
-                    }
-                }
-                else if(lvl1State == "fix")
-                {
-                    if (curResponseTracker == 0)
-                    {
-                        //show option to leave[0]
-                        EndDialogue();
-                    }
-                    else if (curResponseTracker == 1)
-                    {
-                        //option to ask to fix treadMill[1]
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().treadmillFixed = true;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasScrewKey = false;
-                        //remove screwkey from inventory
-                        RemoveItemFromSlotWithoutDropping("ScrewKeyItem");
-                        GameObject.FindGameObjectWithTag("Plumber").GetComponent<PlumberScript>().plumberFixesTreadmill();
-                        EndDialogue();
-                    }
-                    else if (curResponseTracker == 2)
-                    {
-                        //option to close window [2]
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().windowClosed = true;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasScrewKey = false;
-                        //remove screwkey from inventory
-                        RemoveItemFromSlotWithoutDropping("ScrewKeyItem");
-                        EndDialogue();
-                        GameObject.FindGameObjectWithTag("Plumber").GetComponent<PlumberScript>().plumberFixesWindow();
-                        GameObject.FindGameObjectWithTag("OldWoman").GetComponent<OldWomanScript>().changeOldWomanAnimationToSleeping();
-                        
-                    }
-                }
-                else if (lvl1State == "noScrewKey")
-                {
-                    if (curResponseTracker == 0)
-                    {
-                        //set dialogue line plumber has no screw key
-                        //TimeoutCorutine();
-                        EndDialogue();
-                    }
-                }
-                else if (lvl1State == "fixWindowOnly")
-                {
-                    if (curResponseTracker == 0)
-                    {
-                        TimeoutCorutine();
-                        EndDialogue();                    
-                    }
-                    else if (curResponseTracker == 1)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().windowClosed = true;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasScrewKey = false;
-                        //remove screwkey from inventory
-                        RemoveItemFromSlotWithoutDropping("ScrewKeyItem");
-                        EndDialogue();
-                        GameObject.FindGameObjectWithTag("Plumber").GetComponent<PlumberScript>().plumberFixesWindow();
-                        GameObject.FindGameObjectWithTag("OldWoman").GetComponent<OldWomanScript>().changeOldWomanAnimationToSleeping();
-                    }
-                }
-                else if (lvl1State == "smthingFixed")
-                {
-                    if (curResponseTracker == 0)
-                    {
-                        EndDialogue();
-                    }
-                }
-            }
-            else if (currDialogueActor == "Hunk" || currDialogueActor == "Hunk2" || currDialogueActor == "Hunk3")
-            {
-                if(lvl1State == "hunksInitial")
-                {
-                    if(curResponseTracker == 0)
-                    {
-                        EndDialogue();
-                    }
-                }
-                else if (lvl1State == "plumberGood")
-                {
-                    if(curResponseTracker == 0)
-                    {
-                        EndDialogue();
-                    }
-                    else if(curResponseTracker == 1)
-                    {
-                        treadmillFixed = true;
-                    }
-                }
-                else if (lvl1State == "warn")
-                {
-                    if(curResponseTracker == 0)
-                    {
-                        EndDialogue();
-                    }
-                }
-                else if (lvl1State == "defeat")
-                {
-                    if(curResponseTracker == 0)
-                    {
-                        GameObject.FindObjectOfType<GameOver>().GetComponent<GameOver>().ShowGameOverScreen();
-                    }
-                }
-                else if (lvl1State == "victory")
-                {
-                    if(curResponseTracker == 0)
-                    {
-                        playerData.helpedOldWoman = false;
+                        playerData.helpedOldWoman = true;
                         playerData.enterCutSceneShown = true;
                         playerData.currentLevelIndex = 4;
                         EndDialogue();
+                        completeTask(0);
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
                     }
-                }
-            }
-            else if (currDialogueActor == "SemenLvl1Intro")
-            {
-                EndDialogue();
-                indicateThereAreUnredTasks();
-            }
-            else if (currDialogueActor == "SemenLvl1Outro")
-            {
-                GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
-            }
-            lvl1stateCalculator(currDialogueActor, dialogue);
-        }
-        else if(currentLevel == "Level 2")
-        {
-            if (currDialogueActor == "cardsMan")
-            {
-                lvl2stateCalculator(currDialogueActor, dialogue);
-                if (lvl2State == "initial")
-                {
-                    if (curResponseTracker == 0)
+                    else if (lvl1State == "defeat")
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().talkedToCardsMan = true;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wonCardsMan = true;
-                        GetItemToInventory("CoinsButton");
+                        GameObject.FindObjectOfType<GameOver>().GetComponent<GameOver>().ShowGameOverScreen();
                     }
-                    else if (curResponseTracker == 1)
+                    else if (lvl1State == "warn")
+                    {
+                        EndDialogue();
+                    }
+                    else if (lvl1State == "helpReminder")
                     {
                         EndDialogue();
                     }
                 }
-                else if(lvl2State == "won1stTime")
+                else if (currDialogueActor == "Plumber")
                 {
-                    if(curResponseTracker == 0)
+                    lvl1stateCalculator(currDialogueActor, dialogue);
+                    if (lvl1State == "bezVochilyNenado")
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().lostToCardsMan1stTime = true;
-                        RemoveItemFromSlotWithoutDropping("CoinsItem");
+                        if (curResponseTracker == 0)
+                        {
+                            EndDialogue();
+                        }
                     }
-                    else if (curResponseTracker == 1)
+                    else if (lvl1State == "giveVodka")
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rejectedToPlay2ndTime = true;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasMoney = true;
+                        if (curResponseTracker == 1)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().vodkaGivenToPlumber = true;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasVodka = false;
+                            RemoveItemFromSlotWithoutDropping("VodkaItem");
+                            GameObject.FindGameObjectWithTag("Plumber").GetComponent<PlumberScript>().changePlumberAnimationToHappy();
+                            lvl1stateCalculator(currDialogueActor, dialogue);
+                        }
+                        else if (curResponseTracker == 0)
+                        {
+                            EndDialogue();
+                        }
                     }
-                }
-                else if (lvl2State == "lost2ndTime")
-                {
-                    if(curResponseTracker == 0)
+                    else if (lvl1State == "fix")
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rejectedToPlay3rdTime = true;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().lostToCardsMan2ndTime = true;
-                    }
-                    else if(curResponseTracker == 1)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().lostToCardsMan2ndTime = true;
-                    }
-                }
-                else if (lvl2State == "gameOver")
-                {
-                    EndDialogue();
-                    GameObject.FindObjectOfType<GameOver>().GetComponent<GameOver>().ShowGameOverScreen();
+                        if (curResponseTracker == 0)
+                        {
+                            //show option to leave[0]
+                            EndDialogue();
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            //option to ask to fix treadMill[1]
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().treadmillFixed = true;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasScrewKey = false;
+                            //remove screwkey from inventory
+                            RemoveItemFromSlotWithoutDropping("ScrewKeyItem");
+                            GameObject.FindGameObjectWithTag("Plumber").GetComponent<PlumberScript>().plumberFixesTreadmill();
+                            EndDialogue();
+                        }
+                        else if (curResponseTracker == 2)
+                        {
+                            //option to close window [2]
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().windowClosed = true;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasScrewKey = false;
+                            //remove screwkey from inventory
+                            RemoveItemFromSlotWithoutDropping("ScrewKeyItem");
+                            EndDialogue();
+                            GameObject.FindGameObjectWithTag("Plumber").GetComponent<PlumberScript>().plumberFixesWindow();
+                            GameObject.FindGameObjectWithTag("OldWoman").GetComponent<OldWomanScript>().changeOldWomanAnimationToSleeping();
 
+                        }
+                    }
+                    else if (lvl1State == "noScrewKey")
+                    {
+                        if (curResponseTracker == 0)
+                        {
+                            //set dialogue line plumber has no screw key
+                            //TimeoutCorutine();
+                            EndDialogue();
+                        }
+                    }
+                    else if (lvl1State == "fixWindowOnly")
+                    {
+                        if (curResponseTracker == 0)
+                        {
+                            TimeoutCorutine();
+                            EndDialogue();
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().windowClosed = true;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasScrewKey = false;
+                            //remove screwkey from inventory
+                            RemoveItemFromSlotWithoutDropping("ScrewKeyItem");
+                            EndDialogue();
+                            GameObject.FindGameObjectWithTag("Plumber").GetComponent<PlumberScript>().plumberFixesWindow();
+                            GameObject.FindGameObjectWithTag("OldWoman").GetComponent<OldWomanScript>().changeOldWomanAnimationToSleeping();
+                        }
+                    }
+                    else if (lvl1State == "smthingFixed")
+                    {
+                        if (curResponseTracker == 0)
+                        {
+                            EndDialogue();
+                        }
+                    }
                 }
-                else if (lvl2State == "rejectedAfter2ndPlay")
+                else if (currDialogueActor == "Hunk" || currDialogueActor == "Hunk2" || currDialogueActor == "Hunk3")
                 {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rejectedToPlay3rdTime = false;
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().lostToCardsMan2ndTime = false;
-                    EndDialogue();
+                    if (lvl1State == "hunksInitial")
+                    {
+                        if (curResponseTracker == 0)
+                        {
+                            EndDialogue();
+                        }
+                    }
+                    else if (lvl1State == "plumberGood")
+                    {
+                        if (curResponseTracker == 0)
+                        {
+                            EndDialogue();
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            treadmillFixed = true;
+                        }
+                    }
+                    else if (lvl1State == "warn")
+                    {
+                        if (curResponseTracker == 0)
+                        {
+                            EndDialogue();
+                        }
+                    }
+                    else if (lvl1State == "defeat")
+                    {
+                        if (curResponseTracker == 0)
+                        {
+                            GameObject.FindObjectOfType<GameOver>().GetComponent<GameOver>().ShowGameOverScreen();
+                        }
+                    }
+                    else if (lvl1State == "victory")
+                    {
+                        if (curResponseTracker == 0)
+                        {
+                            playerData.helpedOldWoman = false;
+                            playerData.enterCutSceneShown = true;
+                            playerData.currentLevelIndex = 4;
+                            EndDialogue();
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
+                        }
+                    }
                 }
-                else if (lvl2State == "rejectedAfter1stPlay")
+                else if (currDialogueActor == "SemenLvl1Intro")
                 {
                     EndDialogue();
+                    indicateThereAreUnredTasks();
                 }
+                else if (currDialogueActor == "SemenLvl1Outro")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
+                }
+                lvl1stateCalculator(currDialogueActor, dialogue);
             }
-            else if(currDialogueActor == "fatMan")
+            else if (currentLevel == "Level 2")
             {
-                if(lvl2State == "initialNoMoney")
+                if (currDialogueActor == "cardsMan")
                 {
-                    if(curResponseTracker == 0)
+                    lvl2stateCalculator(currDialogueActor, dialogue);
+                    if (lvl2State == "initial")
+                    {
+                        if (curResponseTracker == 0)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().talkedToCardsMan = true;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wonCardsMan = true;
+                            GetItemToInventory("CoinsButton");
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            EndDialogue();
+                        }
+                    }
+                    else if (lvl2State == "won1stTime")
+                    {
+                        if (curResponseTracker == 0)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().lostToCardsMan1stTime = true;
+                            RemoveItemFromSlotWithoutDropping("CoinsItem");
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rejectedToPlay2ndTime = true;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasMoney = true;
+                        }
+                    }
+                    else if (lvl2State == "lost2ndTime")
+                    {
+                        if (curResponseTracker == 0)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rejectedToPlay3rdTime = true;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().lostToCardsMan2ndTime = true;
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().lostToCardsMan2ndTime = true;
+                        }
+                    }
+                    else if (lvl2State == "gameOver")
+                    {
+                        EndDialogue();
+                        GameObject.FindObjectOfType<GameOver>().GetComponent<GameOver>().ShowGameOverScreen();
+
+                    }
+                    else if (lvl2State == "rejectedAfter2ndPlay")
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rejectedToPlay3rdTime = false;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().lostToCardsMan2ndTime = false;
+                        EndDialogue();
+                    }
+                    else if (lvl2State == "rejectedAfter1stPlay")
                     {
                         EndDialogue();
                     }
                 }
-                else if(lvl2State == "initialHasMoney")
+                else if (currDialogueActor == "fatMan")
                 {
-                    if(curResponseTracker == 0)
+                    if (lvl2State == "initialNoMoney")
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().boughtPirogi = true;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasMoney = false;
-                        RemoveItemFromSlotWithoutDropping("CoinsItem");
+                        if (curResponseTracker == 0)
+                        {
+                            EndDialogue();
+                        }
+                    }
+                    else if (lvl2State == "initialHasMoney")
+                    {
+                        if (curResponseTracker == 0)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().boughtPirogi = true;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasMoney = false;
+                            RemoveItemFromSlotWithoutDropping("CoinsItem");
+                            EndDialogue();
+                            completeTask(0);
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            EndDialogue();
+                        }
+                    }
+                    else if (lvl2State == "cardsManCought")
+                    {
+                        if (curResponseTracker == 0
+                            || curResponseTracker == 1
+                            || curResponseTracker == 3)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().is1stRiddleAttempted = true;
+                        }
+                        else if (curResponseTracker == 2)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().is1stRiddleAttempted = true;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().is1stRiddleSolved = true;
+                        }
+                        else if (curResponseTracker == 4)
+                        {
+                            EndDialogue();
+                        }
+                    }
+                    else if (lvl2State == "1stRiddleSolved")
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().sharedPirogyWithYou = true;
                         EndDialogue();
                         completeTask(0);
                     }
-                    else if (curResponseTracker == 1)
+                    else if (lvl2State == "1stRiddleLost")
                     {
-                        EndDialogue();
-                    }
-                }
-                else if (lvl2State == "cardsManCought")
-                {
-                    if(curResponseTracker == 0 
-                        || curResponseTracker == 1
-                        || curResponseTracker == 3)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().is1stRiddleAttempted = true;
-                    }
-                    else if (curResponseTracker == 2)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().is1stRiddleAttempted = true;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().is1stRiddleSolved = true;
-                    }
-                    else if (curResponseTracker == 4)
-                    {
-                        EndDialogue();
-                    }
-                }
-                else if (lvl2State == "1stRiddleSolved")
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().sharedPirogyWithYou = true;
-                    EndDialogue();
-                    completeTask(0);
-                }
-                else if (lvl2State == "1stRiddleLost")
-                {
-                    if(curResponseTracker == 0 
-                        || curResponseTracker == 1
-                        || curResponseTracker == 3)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().is2ndRiddleAttempted = true;
-                    }
-                    else if (curResponseTracker == 2)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().is2ndRiddleSolved = true;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().is2ndRiddleAttempted = true;
-                    }
-                    else if (curResponseTracker == 4)
-                    {
-                        EndDialogue();
-                    }
-
-                }
-                else if (lvl2State == "2ndRiddleSolved")
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().sharedPirogyWithYou = true;
-                    EndDialogue();
-                    completeTask(0);
-                }
-                else if(lvl2State == "hint")
-                {
-                    if(curResponseTracker == 0)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wasHintHelpful = true;
-                    }
-                    else if(curResponseTracker == 1)
-                    {
-                        //nothing happens here because fatMan gives player another try
-                    }
-                    else if(curResponseTracker == 2)
-                    {
-                        EndDialogue();
-                    }
-                }
-                else if(lvl2State == "boughtPirogiOrSharedWithYoy")
-                {
-                    EndDialogue();
-                }
-            }
-            else if(currDialogueActor == "milf")
-            {
-                if (lvl2State == "initial")
-                {
-                    if (curResponseTracker == 0 || curResponseTracker == 1)
-                    {
-                        //wrong option
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt1Done = true;
-                    }
-                    else if (curResponseTracker == 2)
-                    {
-                        EndDialogue();
-                    }
-                    else if (curResponseTracker == 3)
-                    {
-                        //right option
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt1Done = true;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfRightAnswer1 = true;
-
-                    }
-                }
-                else if (lvl2State == "failedInitial")
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt1Done = false;
-                    EndDialogue();
-                }
-                else if (lvl2State == "Step1")
-                {
-                    if (curResponseTracker == 0 || curResponseTracker == 1)
-                    {
-                        //wrong option
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt2Done = true;
-                    }
-                    else if (curResponseTracker == 2)
-                    {
-                        //right option
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt2Done = true;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfRightAnswer2 = true;
-
-                    }
-                    else if (curResponseTracker == 3)
-                    {
-                        EndDialogue();
-                    }
-                }
-                else if (lvl2State == "Step1Failed")
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt2Done = false;
-                    EndDialogue();
-                }
-                else if (lvl2State == "Step1Passed")
-                {
-                    if (curResponseTracker == 0 || curResponseTracker == 1)
-                    {
-                        //wrong option
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt3Done = true;
-                    }
-                    else if (curResponseTracker == 2)
-                    {
-                        //right option
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt3Done = true;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfRightAnswer3 = true;
-                    }
-                    else if (curResponseTracker == 3)
-                    {
-                        EndDialogue();
-                    }
-                }
-                else if (lvl2State == "Step2Failed")
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt3Done = false;
-                    EndDialogue();
-                }
-                else if (lvl2State == "Step2Passed")
-                {
-                    //dono if there is something to set
-                    EndDialogue();
-                    GameObject.FindObjectOfType<milfScript>().GetComponent<milfScript>().MilfGoesToRestourant();
-
-                }
-            }
-            else if(currDialogueActor == "emergencyButton")
-            {
-                lvl2stateCalculator(currDialogueActor, dialogue);
-                if (lvl2State == "initial")
-                {
-                    if (curResponseTracker == 0)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInTopSpot = true;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot = false;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = true;
-                        string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInTopSpot");
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
-                    }
-                    else if (curResponseTracker == 1)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot = true;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInTopSpot = false;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInBottomSpot = false;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = false;
-                        string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInMiddleSpot");
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
-                    }
-                    else if (curResponseTracker == 2)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInBottomSpot = true;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = true;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot = false;
-                        string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInBottomSpot");
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
-                    }
-                    else if (curResponseTracker == 3)
-                    {
-                        if (GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot)
+                        if (curResponseTracker == 0
+                            || curResponseTracker == 1
+                            || curResponseTracker == 3)
                         {
-                            //dirty hack:
-                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonFixed = true;
-                            // >> "fixedButton"
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().is2ndRiddleAttempted = true;
                         }
-                        else
+                        else if (curResponseTracker == 2)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().is2ndRiddleSolved = true;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().is2ndRiddleAttempted = true;
+                        }
+                        else if (curResponseTracker == 4)
+                        {
+                            EndDialogue();
+                        }
+
+                    }
+                    else if (lvl2State == "2ndRiddleSolved")
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().sharedPirogyWithYou = true;
+                        EndDialogue();
+                        completeTask(0);
+                    }
+                    else if (lvl2State == "hint")
+                    {
+                        if (curResponseTracker == 0)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wasHintHelpful = true;
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            //nothing happens here because fatMan gives player another try
+                        }
+                        else if (curResponseTracker == 2)
+                        {
+                            EndDialogue();
+                        }
+                    }
+                    else if (lvl2State == "boughtPirogiOrSharedWithYoy")
+                    {
+                        EndDialogue();
+                    }
+                }
+                else if (currDialogueActor == "milf")
+                {
+                    if (lvl2State == "initial")
+                    {
+                        if (curResponseTracker == 0 || curResponseTracker == 1)
+                        {
+                            //wrong option
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt1Done = true;
+                        }
+                        else if (curResponseTracker == 2)
+                        {
+                            EndDialogue();
+                        }
+                        else if (curResponseTracker == 3)
+                        {
+                            //right option
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt1Done = true;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfRightAnswer1 = true;
+
+                        }
+                    }
+                    else if (lvl2State == "failedInitial")
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt1Done = false;
+                        EndDialogue();
+                    }
+                    else if (lvl2State == "Step1")
+                    {
+                        if (curResponseTracker == 0 || curResponseTracker == 1)
+                        {
+                            //wrong option
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt2Done = true;
+                        }
+                        else if (curResponseTracker == 2)
+                        {
+                            //right option
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt2Done = true;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfRightAnswer2 = true;
+
+                        }
+                        else if (curResponseTracker == 3)
+                        {
+                            EndDialogue();
+                        }
+                    }
+                    else if (lvl2State == "Step1Failed")
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt2Done = false;
+                        EndDialogue();
+                    }
+                    else if (lvl2State == "Step1Passed")
+                    {
+                        if (curResponseTracker == 0 || curResponseTracker == 1)
+                        {
+                            //wrong option
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt3Done = true;
+                        }
+                        else if (curResponseTracker == 2)
+                        {
+                            //right option
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt3Done = true;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfRightAnswer3 = true;
+                        }
+                        else if (curResponseTracker == 3)
+                        {
+                            EndDialogue();
+                        }
+                    }
+                    else if (lvl2State == "Step2Failed")
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().milfAttempt3Done = false;
+                        EndDialogue();
+                    }
+                    else if (lvl2State == "Step2Passed")
+                    {
+                        //dono if there is something to set
+                        EndDialogue();
+                        GameObject.FindObjectOfType<milfScript>().GetComponent<milfScript>().MilfGoesToRestourant();
+
+                    }
+                }
+                else if (currDialogueActor == "emergencyButton")
+                {
+                    lvl2stateCalculator(currDialogueActor, dialogue);
+                    if (lvl2State == "initial")
+                    {
+                        if (curResponseTracker == 0)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInTopSpot = true;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot = false;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = true;
+                            string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInTopSpot");
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot = true;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInTopSpot = false;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInBottomSpot = false;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = false;
+                            string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInMiddleSpot");
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
+                        }
+                        else if (curResponseTracker == 2)
                         {
                             GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInBottomSpot = true;
                             GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = true;
-                            // >> "nothingHappens"
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot = false;
+                            string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInBottomSpot");
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
+                        }
+                        else if (curResponseTracker == 3)
+                        {
+                            if (GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot)
+                            {
+                                //dirty hack:
+                                GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonFixed = true;
+                                // >> "fixedButton"
+                            }
+                            else
+                            {
+                                GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInBottomSpot = true;
+                                GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = true;
+                                // >> "nothingHappens"
+                            }
+                        }
+                        else if (curResponseTracker == 4)
+                        {
+                            EndDialogue();
+                        }
+                        //wrong [0] >> change position
+                        //right [1] >> change position
+                        //wrong [2] >> change position
+                        //push button [3] "nothingHappens" or "fixedButton"
+                        //quit [0]
+                    }
+                    else if (lvl2State == "nothingHappens")
+                    {
+
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = false;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInTopSpot = false;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot = false;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInBottomSpot = false;
+
+                        //return back to "initial" [0]
+                    }
+                    else if (lvl2State == "onTheRightWay")
+                    {
+                        if (curResponseTracker == 0)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInTopSpot = true;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = true;
+                            string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInTopSpot");
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot = true;
+                            string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInMiddleSpot");
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
+                        }
+                        else if (curResponseTracker == 2)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInBottomSpot = true;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = true;
+                            string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInBottomSpot");
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
+                        }
+                        else if (curResponseTracker == 3)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonFixed = true;
+                        }
+                        else if (curResponseTracker == 4)
+                        {
+                            EndDialogue();
                         }
                     }
-                    else if (curResponseTracker == 4)
+                    else if (lvl2State == "fixedButton")
                     {
+                        if (curResponseTracker == 0)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = true;
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            EndDialogue();
+                        }
+                        //click button [0] >> "call"
+                        //quit [1]
+                    }
+                    else if (lvl2State == "call")
+                    {
+                        if (curResponseTracker == 0)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wasCrimeReported = true;
+                            GameObject.FindObjectOfType<cardsManScript>().gameObject.SetActive(false);
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wasCrimeReported = false;
+                            EndDialogue();
+                        }
+                    }
+                    else if (lvl2State == "answeredLeutenant")
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().allDone = true;
                         EndDialogue();
                     }
-                    //wrong [0] >> change position
-                    //right [1] >> change position
-                    //wrong [2] >> change position
-                    //push button [3] "nothingHappens" or "fixedButton"
-                    //quit [0]
-                }
-                else if (lvl2State == "nothingHappens")
-                {
-                    
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = false;
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInTopSpot = false;
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot = false;
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInBottomSpot = false;
-                    
-                    //return back to "initial" [0]
-                }
-                else if (lvl2State == "onTheRightWay")
-                {
-                    if (curResponseTracker == 0)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInTopSpot = true;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = true;
-                        string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInTopSpot");
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
-                    }
-                    else if (curResponseTracker == 1)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot = true;
-                        string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInMiddleSpot");
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
-                    }
-                    else if (curResponseTracker == 2)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInBottomSpot = true;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = true;
-                        string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInBottomSpot");
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
-                    }
-                    else if (curResponseTracker == 3)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonFixed = true;
-                    }
-                    else if (curResponseTracker == 4)
+                    else if (lvl2State == "allDone")
                     {
                         EndDialogue();
                     }
                 }
-                else if (lvl2State == "fixedButton")
+                else if (currDialogueActor == "cardsManBed")
                 {
-                    if (curResponseTracker == 0)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = true;
-                    }
-                    else if (curResponseTracker == 1)
+                    if (lvl2State == "hungry")
                     {
                         EndDialogue();
                     }
-                    //click button [0] >> "call"
-                    //quit [1]
-                }
-                else if (lvl2State == "call")
-                {
-                    if(curResponseTracker == 0)
+                    else if (lvl2State == "win")
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wasCrimeReported = true;
-                        GameObject.FindObjectOfType<cardsManScript>().gameObject.SetActive(false);
-                    }
-                    else if (curResponseTracker == 1)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wasCrimeReported = false;
+                        playerData.cardsManNotCaught = false;
+                        playerData.enterCutSceneShown = true;
+                        playerData.currentLevelIndex = 6;
                         EndDialogue();
+                        completeTask(1);
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
+                        //GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
                     }
                 }
-                else if (lvl2State == "answeredLeutenant")
+                else if (currDialogueActor == "milfBed")
                 {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().allDone = true;
-                    EndDialogue();
-                }
-                else if (lvl2State == "allDone")
-                {
-                    EndDialogue();
-                }
-            }
-            else if(currDialogueActor == "cardsManBed")
-            {
-                if (lvl2State == "hungry")
-                {
-                    EndDialogue();
-                }
-                else if (lvl2State == "win")
-                {
-                    playerData.cardsManNotCaught = false;
-                    playerData.enterCutSceneShown = true;
-                    playerData.currentLevelIndex = 6;
-                    EndDialogue();
-                    completeTask(1);
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
-                    //GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
-                }
-            }
-            else if(currDialogueActor == "milfBed")
-            {
-                if (lvl2State == "hungry")
-                {
-                    EndDialogue();
-                }
-                else if (lvl2State == "win")
-                {
-                    playerData.cardsManNotCaught = true;
-                    playerData.enterCutSceneShown = true;
-                    playerData.currentLevelIndex = 6;
-                    EndDialogue();
-                    completeTask(1);
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
-                    //GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
-                }
-            }
-            else if(currDialogueActor == "SemenLvl2Intro")
-            {
-                EndDialogue();
-                indicateThereAreUnredTasks();
-            }
-            else if (currDialogueActor == "SemenLvl2Outro")
-            {
-                GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
-            }
-            lvl2stateCalculator(currDialogueActor, dialogue);
-        }
-        else if(currentLevel == "Level 3")
-        {
-            if (currDialogueActor == "SemenLvl3Intro")
-            {
-                EndDialogue();
-                indicateThereAreUnredTasks();
-            }
-            else if (currDialogueActor == "SemenLvl3Outro")
-            {
-                GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
-            }
-            else if (currDialogueActor == "Shaman")
-            {
-                if (lvl3State == "initial")
-                {
-                    if(curResponseTracker == 0 || curResponseTracker == 1)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().initialFailed = true;
-                    }
-                    else if ( curResponseTracker == 2)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().initialSuccess = true;
-                    }
-                }
-                else if (lvl3State == "initialNoMeMomAsk")
-                {
-                    if (curResponseTracker == 0 || curResponseTracker == 1)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().initialFailed = true;
-                    }
-                }
-                else if (lvl3State == "initialFailed")
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().initialFailed = false;
-                    EndDialogue();
-                }
-                else if (lvl3State == "initialSuccess")
-                {
-                    if (curResponseTracker == 0 || curResponseTracker == 1)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().secondFailed = true;
-                    }
-                    else if(curResponseTracker == 2)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().secondSuccess = true;
-                    }
-                }
-                else if (lvl3State == "2ndFailed")
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().secondFailed = false;
-                    EndDialogue();
-                }
-                else if (lvl3State == "2ndSuccess")
-                {
-                    EndDialogue();
-                    //get potion into inventory;
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().potionGiven = true;
-                    GameObject.FindObjectOfType<shamanScript>().GetComponent<shamanScript>().npcAnimator.SetBool("gavePotion", true);
-                    GetItemToInventory("PotionButton");
-                }
-                else if (lvl3State == "shamanNirvana")
-                {
-                    EndDialogue();
-                }
-            }
-            else if (currDialogueActor == "meMom")
-            {
-                if (lvl3State == "shahtarsAmok")
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().semenTalkedToMeMom = true;
-                    EndDialogue();
-                }
-                else if (lvl3State == "shahtarsHigh")
-                {
-                    if (curResponseTracker == 0)
+                    if (lvl2State == "hungry")
                     {
                         EndDialogue();
                     }
-                    else if (curResponseTracker == 1)
+                    else if (lvl2State == "win")
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().informedMeMomShahtarsAreHigh = true;
+                        playerData.cardsManNotCaught = true;
+                        playerData.enterCutSceneShown = true;
+                        playerData.currentLevelIndex = 6;
+                        EndDialogue();
+                        completeTask(1);
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
+                        //GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
                     }
                 }
-                else if(lvl3State == "meMomThankfull")
-                {
-                    GetItemToInventory("BathItemsButton");
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotBathItems = true;
-                    GameObject.FindObjectOfType<meMomScript>().GetComponent<meMomScript>().npcAnimator.SetBool("isHappy", true);
-                    EndDialogue();
-                }
-                else if(lvl3State == "leaveMeMomAlone")
+                else if (currDialogueActor == "SemenLvl2Intro")
                 {
                     EndDialogue();
+                    indicateThereAreUnredTasks();
                 }
+                else if (currDialogueActor == "SemenLvl2Outro")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
+                }
+                lvl2stateCalculator(currDialogueActor, dialogue);
             }
-            else if (currDialogueActor == "Shahtar")
+            else if (currentLevel == "Level 3")
             {
-                if(lvl3State == "initial")
+                if (currDialogueActor == "SemenLvl3Intro")
                 {
-                    if (curResponseTracker == 0)
+                    EndDialogue();
+                    indicateThereAreUnredTasks();
+                }
+                else if (currDialogueActor == "SemenLvl3Outro")
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadNextLevel(playerData);
+                }
+                else if (currDialogueActor == "Shaman")
+                {
+                    if (lvl3State == "initial")
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().shahtarInitialFailed = true;
+                        if (curResponseTracker == 0 || curResponseTracker == 1)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().initialFailed = true;
+                        }
+                        else if (curResponseTracker == 2)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().initialSuccess = true;
+                        }
                     }
-                    else if (curResponseTracker == 1)
+                    else if (lvl3State == "initialNoMeMomAsk")
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().timeForRound2 = true;
+                        if (curResponseTracker == 0 || curResponseTracker == 1)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().initialFailed = true;
+                        }
                     }
-                    else if (curResponseTracker == 2)
+                    else if (lvl3State == "initialFailed")
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().initialFailed = false;
+                        EndDialogue();
+                    }
+                    else if (lvl3State == "initialSuccess")
+                    {
+                        if (curResponseTracker == 0 || curResponseTracker == 1)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().secondFailed = true;
+                        }
+                        else if (curResponseTracker == 2)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().secondSuccess = true;
+                        }
+                    }
+                    else if (lvl3State == "2ndFailed")
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().secondFailed = false;
+                        EndDialogue();
+                    }
+                    else if (lvl3State == "2ndSuccess")
+                    {
+                        EndDialogue();
+                        //get potion into inventory;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().potionGiven = true;
+                        GameObject.FindObjectOfType<shamanScript>().GetComponent<shamanScript>().npcAnimator.SetBool("gavePotion", true);
+                        GetItemToInventory("PotionButton");
+                    }
+                    else if (lvl3State == "shamanNirvana")
                     {
                         EndDialogue();
                     }
                 }
-                else if(lvl3State == "initialFailed")
+                else if (currDialogueActor == "meMom")
                 {
-                    EndDialogue();
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().shahtarInitialFailed = false;
-                }
-                else if(lvl3State == "roundTwo")
-                {
-                    if(curResponseTracker == 0)
+                    if (lvl3State == "shahtarsAmok")
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().failedRound2 = true;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().semenTalkedToMeMom = true;
+                        EndDialogue();
                     }
-                    else if (curResponseTracker == 1)
+                    else if (lvl3State == "shahtarsHigh")
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().timeForRound3 = true;
+                        if (curResponseTracker == 0)
+                        {
+                            EndDialogue();
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().informedMeMomShahtarsAreHigh = true;
+                        }
                     }
-                    else if(curResponseTracker == 2)
+                    else if (lvl3State == "meMomThankfull")
+                    {
+                        GetItemToInventory("BathItemsButton");
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotBathItems = true;
+                        GameObject.FindObjectOfType<meMomScript>().GetComponent<meMomScript>().npcAnimator.SetBool("isHappy", true);
+                        EndDialogue();
+                    }
+                    else if (lvl3State == "leaveMeMomAlone")
                     {
                         EndDialogue();
                     }
                 }
-                else if(lvl3State == "roundTwoFailed")
+                else if (currDialogueActor == "Shahtar")
                 {
-                    GameObject.FindObjectOfType<GameOver>().GetComponent<GameOver>().ShowGameOverScreen();
-                }
-                else if(lvl3State == "roundThree")
-                {
-                    GetItemToInventory("crowBarButton");
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotCrowbar = true;
+                    if (lvl3State == "initial")
+                    {
+                        if (curResponseTracker == 0)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().shahtarInitialFailed = true;
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().timeForRound2 = true;
+                        }
+                        else if (curResponseTracker == 2)
+                        {
+                            EndDialogue();
+                        }
+                    }
+                    else if (lvl3State == "initialFailed")
+                    {
+                        EndDialogue();
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().shahtarInitialFailed = false;
+                    }
+                    else if (lvl3State == "roundTwo")
+                    {
+                        if (curResponseTracker == 0)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().failedRound2 = true;
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().timeForRound3 = true;
+                        }
+                        else if (curResponseTracker == 2)
+                        {
+                            EndDialogue();
+                        }
+                    }
+                    else if (lvl3State == "roundTwoFailed")
+                    {
+                        GameObject.FindObjectOfType<GameOver>().GetComponent<GameOver>().ShowGameOverScreen();
+                    }
+                    else if (lvl3State == "roundThree")
+                    {
+                        GetItemToInventory("crowBarButton");
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotCrowbar = true;
 
-                }
-                else if(lvl3State == "happyShahtars")
-                {
-                    EndDialogue();
-                }
-                else if(lvl3State == "semenGotPotion")
-                {
-                    RemoveItemFromSlotWithoutDropping("PotionItem");
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().shahtarsGotPotion = true;
-                }
-                else if(lvl3State == "semenGavePotionToShahtars")
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().shahtarsHigh = true;
-                    shahtarScript[] shahtars = GameObject.FindObjectsOfType<shahtarScript>();
-                    foreach(shahtarScript shahtar in shahtars)
-                    {
-                        shahtar.GetComponent<shahtarScript>().npcAnimator.SetBool("isDrunk", true);
                     }
-                    EndDialogue();
-                }
-                else if(lvl3State == "shahtarsHigh")
-                {
-                    EndDialogue();
-                }
-            }
-            else if (currDialogueActor == "shahtarBed")
-            {
-                if (lvl3State == "fuckOff1")
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().fuckedOff1 = true;
-                    EndDialogue();
-                }
-                else if (lvl3State == "fuckOff2")
-                {
-                    GameObject.FindObjectOfType<GameOver>().GetComponent<GameOver>().ShowGameOverScreen();
-                }
-                else if(lvl3State == "success")
-                {
-                    playerData.enterCutSceneShown = true;
-                    playerData.currentLevelIndex = 8;
-                    if (hasItemInInventory("aspirinItem"))
-                    {
-                        playerData.hasAspirin = true;
-                    }
-                    EndDialogue();
-                    completeTask(1);
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
-                }
-                else if (lvl3State == "notBathed")
-                {
-                    EndDialogue();
-                }
-            }
-            lvl3stateCalculator(currDialogueActor, dialogue);
-        }
-        else if (currentLevel == "Level 4")
-        {
-            if (currDialogueActor == "SemenLvl4Intro")
-            {
-                EndDialogue();
-                indicateThereAreUnredTasks();
-            }
-            else if (currDialogueActor == "Major")
-            {
-                if(lvl4State == "initial")
-                {
-                    EndDialogue();
-                }
-                else if(lvl4State == "majorGirlHasShuba")
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotQuestFromMajor = true;
-                    EndDialogue();
-                }
-                else if (lvl4State == "majorReasksAboutQuest")
-                {
-                    EndDialogue();
-                }
-            }
-            else if (currDialogueActor == "MajorGirl")
-            {
-                if(lvl4State == "initial")
-                {
-                    if(curResponseTracker == 0 || curResponseTracker == 1 || curResponseTracker == 3)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wrongAnswer = true;
-                    }
-                    else if (curResponseTracker == 2)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rightAnswer = true;
-                    }
-                }
-                else if(lvl4State == "wrongAnswer")
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wrongAnswer = false;
-                    EndDialogue();
-                }
-                else if (lvl4State == "rightAnswer")
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().girlAskedForShuba = true;
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().girlReasked = true;
-                    EndDialogue();
-                }
-                else if (lvl4State == "shubaFromBeginning")
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().majorGirlHasShuba = true;
-                    RemoveItemFromSlotWithoutDropping("shubaItem");
-                }
-                else if (lvl4State == "noShuba")
-                {
-                    EndDialogue();
-                }
-                else if (lvl4State == "readyToGiveShuba")
-                {
-                    if (curResponseTracker == 0)
+                    else if (lvl3State == "happyShahtars")
                     {
                         EndDialogue();
                     }
-                    else if (curResponseTracker == 1)
+                    else if (lvl3State == "semenGotPotion")
                     {
-                        RemoveItemFromSlotWithoutDropping("shubaItem");
+                        RemoveItemFromSlotWithoutDropping("PotionItem");
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().shahtarsGotPotion = true;
+                    }
+                    else if (lvl3State == "semenGavePotionToShahtars")
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().shahtarsHigh = true;
+                        shahtarScript[] shahtars = GameObject.FindObjectsOfType<shahtarScript>();
+                        foreach (shahtarScript shahtar in shahtars)
+                        {
+                            shahtar.GetComponent<shahtarScript>().npcAnimator.SetBool("isDrunk", true);
+                        }
+                        EndDialogue();
+                    }
+                    else if (lvl3State == "shahtarsHigh")
+                    {
+                        EndDialogue();
+                    }
+                }
+                else if (currDialogueActor == "shahtarBed")
+                {
+                    if (lvl3State == "fuckOff1")
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().fuckedOff1 = true;
+                        EndDialogue();
+                    }
+                    else if (lvl3State == "fuckOff2")
+                    {
+                        GameObject.FindObjectOfType<GameOver>().GetComponent<GameOver>().ShowGameOverScreen();
+                    }
+                    else if (lvl3State == "success")
+                    {
+                        playerData.enterCutSceneShown = true;
+                        playerData.currentLevelIndex = 8;
+                        if (hasItemInInventory("aspirinItem"))
+                        {
+                            playerData.hasAspirin = true;
+                        }
+                        EndDialogue();
+                        completeTask(1);
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowOutro();
+                    }
+                    else if (lvl3State == "notBathed")
+                    {
+                        EndDialogue();
+                    }
+                }
+                lvl3stateCalculator(currDialogueActor, dialogue);
+            }
+            else if (currentLevel == "Level 4")
+            {
+                if (currDialogueActor == "SemenLvl4Intro")
+                {
+                    EndDialogue();
+                    indicateThereAreUnredTasks();
+                }
+                else if (currDialogueActor == "Major")
+                {
+                    if (lvl4State == "initial")
+                    {
+                        EndDialogue();
+                    }
+                    else if (lvl4State == "majorGirlHasShuba")
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotQuestFromMajor = true;
+                        EndDialogue();
+                    }
+                    else if (lvl4State == "majorReasksAboutQuest")
+                    {
+                        EndDialogue();
+                    }
+                }
+                else if (currDialogueActor == "MajorGirl")
+                {
+                    if (lvl4State == "initial")
+                    {
+                        if (curResponseTracker == 0 || curResponseTracker == 1 || curResponseTracker == 3)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wrongAnswer = true;
+                        }
+                        else if (curResponseTracker == 2)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rightAnswer = true;
+                        }
+                    }
+                    else if (lvl4State == "wrongAnswer")
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wrongAnswer = false;
+                        EndDialogue();
+                    }
+                    else if (lvl4State == "rightAnswer")
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().girlAskedForShuba = true;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().girlReasked = true;
+                        EndDialogue();
+                    }
+                    else if (lvl4State == "shubaFromBeginning")
+                    {
                         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().majorGirlHasShuba = true;
+                        RemoveItemFromSlotWithoutDropping("shubaItem");
                     }
-                }
-                else if (lvl4State == "shubaGiven")
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().majorInformed = true;
-                    EndDialogue();
-                }
-                else if (lvl4State == "majorInformed")
-                {
-                    EndDialogue();
-                }
-            }
-            else if (currDialogueActor == "Hunter")
-            {
-                if (lvl4State == "initial")
-                {
-                    if (curResponseTracker == 0)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().firstTalk = false;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hunterAsksForTea = true;
-                    }
-                }
-                else if (lvl4State == "initialWithAspirin")
-                {
-                    if(curResponseTracker == 0)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().firstTalk = false;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().aspirinGivenToHunter = true;
-                        RemoveItemFromSlotWithoutDropping("aspirinItem");
-                    }
-                    else if(curResponseTracker == 1)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().firstTalk = false;
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hunterAsksForTea = true;
-                    }
-                }
-                else if (lvl4State == "asksForTeaNoTea")
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hunterReasksTea = true;
-                    EndDialogue();
-                }
-                else if (lvl4State == "asksForTeaHasTea")
-                {
-                    if (curResponseTracker == 0)
+                    else if (lvl4State == "noShuba")
                     {
                         EndDialogue();
                     }
-                    else if (curResponseTracker == 1)
+                    else if (lvl4State == "readyToGiveShuba")
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().teaGivenToHunter = true;
+                        if (curResponseTracker == 0)
+                        {
+                            EndDialogue();
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            RemoveItemFromSlotWithoutDropping("shubaItem");
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().majorGirlHasShuba = true;
+                        }
                     }
-                }
-                else if (lvl4State == "semenGotTea")
-                {
-                    if (curResponseTracker == 0)
+                    else if (lvl4State == "shubaGiven")
                     {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().majorInformed = true;
                         EndDialogue();
                     }
-                    else if (curResponseTracker == 1)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().teaGivenToHunter = true;
-                        RemoveItemFromSlotWithoutDropping("glassOfTeaItem");
-                        //remove tea from inventory
-                    }
-                }
-                else if (lvl4State == "noTeaAfterAsk")
-                {
-                    EndDialogue();
-                }
-                else if (lvl4State == "hunterWantsToGiveShuba")
-                {
-                    GetItemToInventory("shubaButton");
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotShubaFromHunter = true;
-                    EndDialogue();
-                    GameObject.FindObjectOfType<hunterScript>().npcAnimator.SetBool("isHunterHappy", true);
-                }
-                else if (lvl4State == "hunterWantsToGiveShubaAfterAspirin")
-                {
-                    GetItemToInventory("shubaButton");
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotShubaFromHunter = true;
-                    EndDialogue();
-                    GameObject.FindObjectOfType<hunterScript>().npcAnimator.SetBool("isHunterHappy", true);
-                }
-                else if (lvl4State == "hunterDrinksTeaOrGotAspirin")
-                {
-                    EndDialogue();
-                }
-            }
-            else if (currDialogueActor == "GrandMaster")
-            {
-                if (lvl4State == "initial")
-                {
-                    if (curResponseTracker == 3 || curResponseTracker == 2)
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessWrongAnswer = true;
-                    }
-                    else if (curResponseTracker == 1 )
-                    {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessAnswerOne = true;
-                    }
-                    else if (curResponseTracker == 0)
+                    else if (lvl4State == "majorInformed")
                     {
                         EndDialogue();
                     }
                 }
-                else if (lvl4State == "2ndQuestion")
+                else if (currDialogueActor == "Hunter")
                 {
-                    if (curResponseTracker == 0 || curResponseTracker == 2 || curResponseTracker == 3)
+                    if (lvl4State == "initial")
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessWrongAnswer = true;
+                        if (curResponseTracker == 0)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().firstTalk = false;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hunterAsksForTea = true;
+                        }
                     }
-                    else if (curResponseTracker == 1)
+                    else if (lvl4State == "initialWithAspirin")
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessAnswerTwo = true;
+                        if (curResponseTracker == 0)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().firstTalk = false;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().aspirinGivenToHunter = true;
+                            RemoveItemFromSlotWithoutDropping("aspirinItem");
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().firstTalk = false;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hunterAsksForTea = true;
+                        }
                     }
-                    else if (curResponseTracker == 4)
+                    else if (lvl4State == "asksForTeaNoTea")
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hunterReasksTea = true;
+                        EndDialogue();
+                    }
+                    else if (lvl4State == "asksForTeaHasTea")
+                    {
+                        if (curResponseTracker == 0)
+                        {
+                            EndDialogue();
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().teaGivenToHunter = true;
+                        }
+                    }
+                    else if (lvl4State == "semenGotTea")
+                    {
+                        if (curResponseTracker == 0)
+                        {
+                            EndDialogue();
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().teaGivenToHunter = true;
+                            RemoveItemFromSlotWithoutDropping("glassOfTeaItem");
+                            //remove tea from inventory
+                        }
+                    }
+                    else if (lvl4State == "noTeaAfterAsk")
+                    {
+                        EndDialogue();
+                    }
+                    else if (lvl4State == "hunterWantsToGiveShuba")
+                    {
+                        GetItemToInventory("shubaButton");
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotShubaFromHunter = true;
+                        EndDialogue();
+                        GameObject.FindObjectOfType<hunterScript>().npcAnimator.SetBool("isHunterHappy", true);
+                    }
+                    else if (lvl4State == "hunterWantsToGiveShubaAfterAspirin")
+                    {
+                        GetItemToInventory("shubaButton");
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().gotShubaFromHunter = true;
+                        EndDialogue();
+                        GameObject.FindObjectOfType<hunterScript>().npcAnimator.SetBool("isHunterHappy", true);
+                    }
+                    else if (lvl4State == "hunterDrinksTeaOrGotAspirin")
                     {
                         EndDialogue();
                     }
                 }
-                else if (lvl4State == "3rdQuestion")
+                else if (currDialogueActor == "GrandMaster")
                 {
-                    if (curResponseTracker == 0 || curResponseTracker == 1 || curResponseTracker == 2)
+                    if (lvl4State == "initial")
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessWrongAnswer = true;
+                        if (curResponseTracker == 3 || curResponseTracker == 2)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessWrongAnswer = true;
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessAnswerOne = true;
+                        }
+                        else if (curResponseTracker == 0)
+                        {
+                            EndDialogue();
+                        }
                     }
-                    else if (curResponseTracker == 3)
+                    else if (lvl4State == "2ndQuestion")
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessAnswerThree = true;
+                        if (curResponseTracker == 0 || curResponseTracker == 2 || curResponseTracker == 3)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessWrongAnswer = true;
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessAnswerTwo = true;
+                        }
+                        else if (curResponseTracker == 4)
+                        {
+                            EndDialogue();
+                        }
                     }
-                    else if (curResponseTracker == 4)
+                    else if (lvl4State == "3rdQuestion")
                     {
+                        if (curResponseTracker == 0 || curResponseTracker == 1 || curResponseTracker == 2)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessWrongAnswer = true;
+                        }
+                        else if (curResponseTracker == 3)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessAnswerThree = true;
+                        }
+                        else if (curResponseTracker == 4)
+                        {
+                            EndDialogue();
+                        }
+                    }
+                    else if (lvl4State == "thankYou")
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().grandMasterThanked = true;
                         EndDialogue();
                     }
-                }
-                else if (lvl4State == "thankYou")
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().grandMasterThanked = true;
-                    EndDialogue();
-                }
-                else if (lvl4State == "afterTalkingWithMajorNoTea")
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().grandmasterAsksForTea = true;
-                    EndDialogue();
-                }
-                else if (lvl4State == "afterTalkingWithMajorHasTeaNoBoyaryshnikTea")
-                {
-                    if(curResponseTracker == 0)
+                    else if (lvl4State == "afterTalkingWithMajorNoTea")
                     {
-                        //chai
-                        playerData.currentLevelIndex = 9;
-                        playerData.enterCutSceneShown = true;
-                        playerData.hasAspirin = hasItemInInventory("aspirinItem");
-                        playerData.grandMasterSideChosen = true;
-                        completeTask(0);
-                        GameObject.FindObjectOfType<hunterScript>().npcAnimator.SetBool("drunkTea", true);
-                        RemoveItemFromSlotWithoutDropping("glassOfTeaItem");
-                        ResolveEnding(playerData);
-                    }
-                    else if (curResponseTracker == 1)
-                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().grandmasterAsksForTea = true;
                         EndDialogue();
                     }
-                }
-                else if (lvl4State == "afterTalkingWithMajorHasTeaHasBoyaryshnikTea")
-                {
-                    if (curResponseTracker == 0)
+                    else if (lvl4State == "afterTalkingWithMajorHasTeaNoBoyaryshnikTea")
                     {
-                        //chai
-                        playerData.currentLevelIndex = 9;
-                        playerData.enterCutSceneShown = true;
-                        playerData.hasAspirin = hasItemInInventory("aspirinItem");
-                        playerData.grandMasterSideChosen = true;
-                        GameObject.FindObjectOfType<hunterScript>().npcAnimator.SetBool("drunkTea", true);
-                        completeTask(0);
-                        RemoveItemFromSlotWithoutDropping("glassOfTeaItem");
-                        ResolveEnding(playerData);
+                        if (curResponseTracker == 0)
+                        {
+                            //chai
+                            playerData.currentLevelIndex = 9;
+                            playerData.enterCutSceneShown = true;
+                            playerData.hasAspirin = hasItemInInventory("aspirinItem");
+                            playerData.grandMasterSideChosen = true;
+                            completeTask(0);
+                            GameObject.FindObjectOfType<hunterScript>().npcAnimator.SetBool("drunkTea", true);
+                            RemoveItemFromSlotWithoutDropping("glassOfTeaItem");
+                            ResolveEnding(playerData);
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            EndDialogue();
+                        }
                     }
-                    else if (curResponseTracker == 1)
+                    else if (lvl4State == "afterTalkingWithMajorHasTeaHasBoyaryshnikTea")
                     {
-                        //boyaryshnik
-                        playerData.currentLevelIndex = 11;
-                        playerData.enterCutSceneShown = true;
-                        playerData.hasAspirin = hasItemInInventory("aspirinItem");
-                        playerData.grandMasterSideChosen = false;
-                        GameObject.FindObjectOfType<hunterScript>().npcAnimator.SetBool("drunkBoyaryshnik", true);
-                        completeTask(0);
-                        RemoveItemFromSlotWithoutDropping("glassOfBoyaryshnikItem");
-                        ResolveEnding(playerData);
+                        if (curResponseTracker == 0)
+                        {
+                            //chai
+                            playerData.currentLevelIndex = 9;
+                            playerData.enterCutSceneShown = true;
+                            playerData.hasAspirin = hasItemInInventory("aspirinItem");
+                            playerData.grandMasterSideChosen = true;
+                            GameObject.FindObjectOfType<hunterScript>().npcAnimator.SetBool("drunkTea", true);
+                            completeTask(0);
+                            RemoveItemFromSlotWithoutDropping("glassOfTeaItem");
+                            ResolveEnding(playerData);
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            //boyaryshnik
+                            playerData.currentLevelIndex = 11;
+                            playerData.enterCutSceneShown = true;
+                            playerData.hasAspirin = hasItemInInventory("aspirinItem");
+                            playerData.grandMasterSideChosen = false;
+                            GameObject.FindObjectOfType<hunterScript>().npcAnimator.SetBool("drunkBoyaryshnik", true);
+                            completeTask(0);
+                            RemoveItemFromSlotWithoutDropping("glassOfBoyaryshnikItem");
+                            ResolveEnding(playerData);
+                        }
+                        else if (curResponseTracker == 2)
+                        {
+                            EndDialogue();
+                        }
                     }
-                    else if (curResponseTracker == 2)
+                    else if (lvl4State == "afterTalkingWithMajorNoTeaHasBoyaryshnikTea")
                     {
-                        EndDialogue();
-                    }
-                }
-                else if (lvl4State == "afterTalkingWithMajorNoTeaHasBoyaryshnikTea")
-                {
-                    if(curResponseTracker == 0)
-                    {
-                        //boyaryshnik
-                        playerData.currentLevelIndex = 11;
-                        playerData.enterCutSceneShown = true;
-                        playerData.hasAspirin = hasItemInInventory("aspirinItem");
-                        playerData.grandMasterSideChosen = false;
-                        GameObject.FindObjectOfType<hunterScript>().npcAnimator.SetBool("drunkBoyaryshnik", true);
-                        completeTask(0);
-                        RemoveItemFromSlotWithoutDropping("glassOfBoyaryshnikItem");
-                        ResolveEnding(playerData);
+                        if (curResponseTracker == 0)
+                        {
+                            //boyaryshnik
+                            playerData.currentLevelIndex = 11;
+                            playerData.enterCutSceneShown = true;
+                            playerData.hasAspirin = hasItemInInventory("aspirinItem");
+                            playerData.grandMasterSideChosen = false;
+                            GameObject.FindObjectOfType<hunterScript>().npcAnimator.SetBool("drunkBoyaryshnik", true);
+                            completeTask(0);
+                            RemoveItemFromSlotWithoutDropping("glassOfBoyaryshnikItem");
+                            ResolveEnding(playerData);
 
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            EndDialogue();
+                        }
                     }
-                    else if (curResponseTracker == 1)
+                    else if (lvl4State == "hasntTalkedWithMajor")
                     {
                         EndDialogue();
                     }
+                    else if (lvl4State == "answeredWrong")
+                    {
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessWrongAnswer = false;
+                        EndDialogue();
+                    }
                 }
-                else if (lvl4State == "hasntTalkedWithMajor")
+                else if (currDialogueActor == "CabCrew")
                 {
-                    EndDialogue();
-                }
-                else if (lvl4State == "answeredWrong")
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().chessWrongAnswer = false;
-                    EndDialogue();
-                }
-            }
-            else if (currDialogueActor == "CabCrew")
-            {
-                if(lvl4State == "initial")
-                {
-                    if (curResponseTracker == 0)
+                    if (lvl4State == "initial")
+                    {
+                        if (curResponseTracker == 0)
+                        {
+                            EndDialogue();
+                        }
+                        else if (curResponseTracker == 1)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().semenAskedForPayment = true;
+                        }
+                    }
+                    else if (lvl4State == "initialNoGlassNoTask")
                     {
                         EndDialogue();
                     }
-                    else if (curResponseTracker == 1)
+                    else if (lvl4State == "asksForPayment")
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().semenAskedForPayment = true;
+                        if (curResponseTracker == 0 || curResponseTracker == 3 || curResponseTracker == 4)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wrongRecipient = true;
+                        }
+                        else if (curResponseTracker == 1 || curResponseTracker == 2)
+                        {
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rightPaymentRecipient = true;
+                        }
                     }
-                }
-                else if (lvl4State == "initialNoGlassNoTask")
-                {
-                    EndDialogue();
-                }
-                else if (lvl4State == "asksForPayment")
-                {
-                    if (curResponseTracker == 0 || curResponseTracker == 3 || curResponseTracker == 4)
+                    else if (lvl4State == "wrongAnswer")
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wrongRecipient = true;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().semenAskedForPayment = false;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wrongRecipient = false;
+                        EndDialogue();
                     }
-                    else if (curResponseTracker == 1 || curResponseTracker == 2)
+                    else if (lvl4State == "rightAnswer")
                     {
-                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rightPaymentRecipient = true;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasTea = true;
+                        RemoveItemFromSlotWithoutDropping("glassItem");
+                        GetItemToInventory("glassOfTeaButton");
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rightPaymentRecipient = false;
+                        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().semenAskedForPayment = false;
+                        EndDialogue();
                     }
-                }
-                else if (lvl4State == "wrongAnswer")
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().semenAskedForPayment = false;
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wrongRecipient = false;
-                    EndDialogue();
-                }
-                else if (lvl4State == "rightAnswer")
-                {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasTea = true;
-                    RemoveItemFromSlotWithoutDropping("glassItem");
-                    GetItemToInventory("glassOfTeaButton");
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rightPaymentRecipient = false;
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().semenAskedForPayment = false;
-                    EndDialogue();
-                }
 
+                }
+                lvl4stateCalculator(dialogueActor, dialogue);
             }
-            lvl4stateCalculator(dialogueActor, dialogue);
         }
+
         curResponseTracker = 0;
     }
     void EndDialogue()
@@ -1294,7 +1309,18 @@ public class DialogueManager : MonoBehaviour
         GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().dialougeBoxOpen = false;
         UnblockTasksAndInventory();
     }
-
+    void npcStateCalculator(string currDialogueActor, Dialogue dialogue)
+    {
+        ClearLinesAnswers(dialogue);
+        //calc the state on the 1st level
+        string path = Application.dataPath;
+        string currLanguage = GameObject.FindObjectOfType<LanguageManager>().language;
+        string pathToDialogue = path + "/StreamingAssets/DialogueStorage/" + currLanguage + "/" + currDialogueActor + ".json";
+        var jsonString = System.IO.File.ReadAllText(pathToDialogue);
+        LinesAnswersList characterLinesAnswers = JsonConvert.DeserializeObject<LinesAnswersList>(jsonString);
+        string npcState = Random.Range(1, 5).ToString();
+        SetNewLinesAnswers(dialogue, characterLinesAnswers, npcState);
+    }
     void lvl1stateCalculator (string currDialogueActor, Dialogue dialogue)
     {
         hasVodka = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasVodka;

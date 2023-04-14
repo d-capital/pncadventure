@@ -138,6 +138,7 @@ public class AdvScript : MonoBehaviour
     DialogueTrigger hunkDialogue;
     DialogueTrigger hunk1Dialogue;
     DialogueTrigger hunk2Dialogue;
+    DialogueTrigger npcDialogue;
     //-----------------------------------------------//
 
     //-----------------Dialogues Level 2-------------//
@@ -320,6 +321,14 @@ public class AdvScript : MonoBehaviour
                     //hasScrewKey = true;
                     collectSound.Play();
                     // save the number of the objects of the same type
+                }
+                else if (hit.collider.gameObject.GetComponent<npc>())
+                {
+                    print("found npc");
+                    currentDialoguePartner = "npc";
+                    npcDialogue = hit.collider.gameObject.GetComponent<DialogueTrigger>();
+                    ShowDialogueBox();
+                    npcDialogue.TriggerDialogue(currentDialoguePartner);
                 }
                 else if (hit.collider.gameObject.tag == "OldWoman")
                 {
@@ -767,6 +776,10 @@ public class AdvScript : MonoBehaviour
             else if (currentDialoguePartner == "CabCrew")
             {
                 currentDialogueTrigger = GameObject.FindObjectOfType<cabCrewScript>().GetComponent<DialogueTrigger>();
+            }
+            else if (currentDialoguePartner == "npc")
+            {
+                currentDialogueTrigger = GameObject.FindObjectOfType<npc>().GetComponent<DialogueTrigger>();
             }
         }
         return currentDialogueTrigger;

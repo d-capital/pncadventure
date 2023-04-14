@@ -1,0 +1,60 @@
+{
+    "LinesAnswers":
+    [   
+        {
+            "name":"1",
+            "line":"It’s good that I managed to catch the train, I would have missed it - I would have to wait a whole day.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Leave"
+                }
+            ]
+        },
+        {
+            "name":"2",
+            "line":"Now I would like to eat - 12 burgers, chicken wings, french fries, a sweet pie, and cola light.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Leave"
+                }
+            ]
+        },
+        {
+            "name":"3",
+            "line":"I don’t like trains, especially the shaking, and this trip costs almost like a plane ticket.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Leave"
+                }
+            ]
+        },
+        {
+            "name":"4",
+            "line":"I would never ride a train any more.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Leave"
+                }
+            ]
+        },
+        {
+            "name":"5",
+            "line":"And I like trains, at least I get time to read.",
+            "responses":
+            [
+                {
+                    "id":"0",
+                    "response":"Leave"
+                }
+            ]
+        }
+    ]
+}

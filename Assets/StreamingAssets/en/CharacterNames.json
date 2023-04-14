@@ -94,5 +94,9 @@
     {
         "name":"MinersBed",
         "text":"MINERS' BED"
+    },
+    {
+        "name":"npc",
+        "text":"PASSANGER"
     }
 ]
