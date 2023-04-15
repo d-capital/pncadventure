@@ -1,0 +1,50 @@
+[
+    {
+        "name":"aspirinItem",
+        "text":"Painkiller"
+    },
+    {
+        "name":"BathItemsItem",
+        "text":"Bath Items"
+    },
+    {
+        "name":"boyaryshnikItem",
+        "text":"Don't add it to drinks"
+    },
+    {
+        "name":"CoinsItem",
+        "text":"Money"
+    },
+    {
+        "name":"crowbarItem",
+        "text":"Universal opener"
+    },
+    {
+        "name":"glassItem",
+        "text":"Empty glass"
+    },
+    {
+        "name":"glassOfBoyaryshnikItem",
+        "text":"Poisoned tea"
+    },
+    {
+        "name":"glassOfTeaItem",
+        "text":"Tea"
+    },
+    {
+        "name":"PotionItem",
+        "text":"Strange magical spirit"
+    },
+    {
+        "name":"ScrewKeyItem",
+        "text":"Ideal for fixing"
+    },
+    {
+        "name":"shubaItem",
+        "text":"Pimp fur"
+    },
+    {
+        "name":"VodkaItem",
+        "text":"Vodka"
+    }
+]

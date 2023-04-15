@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class sink : MonoBehaviour, IDropHandler
 {
@@ -16,6 +17,7 @@ public class sink : MonoBehaviour, IDropHandler
             if (eventData.pointerDrag.GetComponent<Spawn>().item.name == "bathItems")
             {
                 objectReceived = true;
+                eventData.pointerDrag.GetComponent<Spawn>().GetComponentInParent<Slot>().GetComponentInChildren<TMP_Text>().text = "";
                 GameObject.Destroy(eventData.pointerDrag);
                 AdvScript PlayerObject = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>();
                 PlayerObject.bathed = true;

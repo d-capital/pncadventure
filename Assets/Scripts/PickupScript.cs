@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PickupScript : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class PickupScript : MonoBehaviour
                 //Add item to inventory
                 inventory.isFull[i] = true;
                 Instantiate(itemButton, inventory.slots[i].transform, false);
+                string hint = itemButton.GetComponentInChildren<Spawn>().itemType;
+                inventory.slots[i].transform.GetComponentInChildren<TMP_Text>().text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("inventoryHints", hint);
                 Destroy(gameObject);
                 break;
             }

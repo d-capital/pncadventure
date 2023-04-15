@@ -2293,6 +2293,8 @@ public class DialogueManager : MonoBehaviour
                 numberOfItemsAdded += 1;
                 inventory.isFull[i] = true;
                 Instantiate(itemButton, inventory.slots[i].transform, false);
+                string hint = itemButton.GetComponentInChildren<Spawn>().itemType;
+                inventory.slots[i].transform.GetComponentInChildren<TMP_Text>().text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("inventoryHints", hint);
                 break;
             }
         }
@@ -2310,6 +2312,8 @@ public class DialogueManager : MonoBehaviour
                 //Add item to inventory
                 inventory.isFull[i] = true;
                 Instantiate(itemButton, inventory.slots[i].transform, false);
+                string hint = itemButton.GetComponentInChildren<Spawn>().itemType;
+                inventory.slots[i].transform.GetComponentInChildren<TMP_Text>().text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("inventoryHints", hint);
                 break;
             }
         }

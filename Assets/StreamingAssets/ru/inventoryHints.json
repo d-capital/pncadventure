@@ -1,0 +1,50 @@
+[
+    {
+        "name":"aspirinItem",
+        "text":"Болеутоляющее"
+    },
+    {
+        "name":"BathItemsItem",
+        "text":"Полотенце, мыло ..."
+    },
+    {
+        "name":"boyaryshnikItem",
+        "text":"Не наливай в напитки"
+    },
+    {
+        "name":"CoinsItem",
+        "text":"Деньги"
+    },
+    {
+        "name":"crowbarItem",
+        "text":"Откроет что угодно"
+    },
+    {
+        "name":"glassItem",
+        "text":"Пустой стакан"
+    },
+    {
+        "name":"glassOfBoyaryshnikItem",
+        "text":"Отравленный чай"
+    },
+    {
+        "name":"glassOfTeaItem",
+        "text":"Чай"
+    },
+    {
+        "name":"PotionItem",
+        "text":"Магический спирт"
+    },
+    {
+        "name":"ScrewKeyItem",
+        "text":"Чини не хочу"
+    },
+    {
+        "name":"shubaItem",
+        "text":"Шуба сутенера"
+    },
+    {
+        "name":"VodkaItem",
+        "text":"Водка"
+    }
+]

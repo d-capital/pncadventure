@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class toiletDoor : MonoBehaviour, IDropHandler
 {
@@ -18,6 +19,7 @@ public class toiletDoor : MonoBehaviour, IDropHandler
             {
                 objectReceived = true;
                 OpenDoor();
+                eventData.pointerDrag.GetComponent<Spawn>().GetComponentInParent<Slot>().GetComponentInChildren<TMP_Text>().text = "";
                 GameObject.Destroy(eventData.pointerDrag);
                 var DroppableItems = GameObject.FindGameObjectsWithTag("droppable");
                 foreach (var i in DroppableItems)

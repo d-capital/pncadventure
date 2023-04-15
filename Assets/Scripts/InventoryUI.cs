@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -29,6 +30,15 @@ public class InventoryUI : MonoBehaviour
                 foreach (Slot i in slots)
                 {
                     i.gameObject.SetActive(true);
+                    if(i.GetComponentsInChildren<Spawn>().Length > 0)
+                    {
+                        string hint = i.GetComponentInChildren<Spawn>().itemType;
+                        i.gameObject.GetComponentInChildren<TMP_Text>().text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("inventoryHints", hint);
+                    }
+                    else
+                    {
+                        i.gameObject.GetComponentInChildren<TMP_Text>().text = "";
+                    }
                 }
 
                 foreach (Cross i in crosses)
