@@ -2339,15 +2339,15 @@ public class DialogueManager : MonoBehaviour
         List<bool> countOfTrueEndingConditions = EndingConditions.FindAll(x => x == true);
         if (countOfTrueEndingConditions.Count == 3)
         {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 9);//good
+            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 10);//good
         }
         else if (countOfTrueEndingConditions.Count == 2)
         {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 10);//common
+            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 11);//common
         }
         else if (countOfTrueEndingConditions.Count < 2)
         {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 11);//bad
+            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 12);//bad
         }
     }
 

@@ -575,6 +575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 791daf882b8d86e4091623099eae6283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  language: ru
 --- !u!4 &1132419292
 Transform:
   m_ObjectHideFlags: 0

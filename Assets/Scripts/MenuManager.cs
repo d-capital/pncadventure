@@ -52,7 +52,7 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene("Cut Scene 1");
+            SceneManager.LoadScene("Cut Scene 0");
             playerData.currentLevelIndex = 1;
             playerData.enterCutSceneShown = false;
             SaveSystem.SavePlayer(playerData);
