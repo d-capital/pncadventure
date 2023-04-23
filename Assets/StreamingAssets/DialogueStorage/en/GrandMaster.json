@@ -53,7 +53,7 @@
         },
         {
             "name":"3rdQuestion",
-            "line":"Отлично, ну тогда порадуйте старика и ответьте на последний вопрос? Какая фигура в начале игры стоит на крайних полях крайних горизонталей доски?",
+            "line":"Great, well then please the old man and answer the last question. Which piece at the beginning of the game is on the extreme squares of the extreme horizontals of the board?",
             "responses":
             [
                 {
@@ -80,7 +80,7 @@
         },
         {
             "name":"thankYou",
-            "line":"Большее спасибо за приятную беседу, Вы ещё приходите, молодой человек, до конца пути – ещё поболтаем.",
+            "line":"Thank you very much for the pleasant conversation, come by to chat, young man.",
             "responses":
             [
                 {

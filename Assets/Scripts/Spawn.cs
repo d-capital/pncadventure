@@ -137,6 +137,7 @@ public class Spawn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
             else
             {
                 eventData.pointerDrag.gameObject.transform.position = eventData.pointerDrag.gameObject.GetComponent<Spawn>().initObjectPos;
+                eventData.pointerDrag.GetComponentInParent<Slot>().gameObject.GetComponent<Canvas>().overrideSorting = false;
             }
         }
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);

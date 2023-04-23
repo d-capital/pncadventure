@@ -9,6 +9,7 @@ public class LineAnswer : MonoBehaviour
     public GameObject LineAnswerPrefab;
     public string curResponseIndex;
     public Text responseText;
+    public Texture2D cursor;
     //private Transform player;
     public void CreateNewResponse()
     {
@@ -39,5 +40,15 @@ public class LineAnswer : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnMouseOver()
+    {
+        Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
+    }
+
+    private void OnMouseExit()
+    {
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
 }

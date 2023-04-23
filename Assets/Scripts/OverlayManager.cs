@@ -16,7 +16,7 @@ public class OverlayManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Overlay.SetActive(false);
+        //Overlay.SetActive(false);
         yesText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "yes");
         noText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "no");
         overlayText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "text");

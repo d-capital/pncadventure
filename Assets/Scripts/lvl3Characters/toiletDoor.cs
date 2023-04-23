@@ -26,12 +26,14 @@ public class toiletDoor : MonoBehaviour, IDropHandler
                 {
                     i.layer = 0;
                 }
+                eventData.pointerDrag.GetComponentInParent<Slot>().gameObject.GetComponent<Canvas>().overrideSorting = false;
                 //show message
                 //set bool variable
             }
             else
             {
                 eventData.pointerDrag.gameObject.transform.position = eventData.pointerDrag.gameObject.GetComponent<Spawn>().initObjectPos;
+                eventData.pointerDrag.GetComponentInParent<Slot>().gameObject.GetComponent<Canvas>().overrideSorting = false;
             }
         }
     }

@@ -1282,6 +1282,8 @@ GameObject:
   - component: {fileID: 630811203}
   - component: {fileID: 630811202}
   - component: {fileID: 630811201}
+  - component: {fileID: 630811205}
+  - component: {fileID: 630811204}
   m_Layer: 5
   m_Name: Yes
   m_TagString: Untagged
@@ -1404,6 +1406,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 630811199}
   m_CullTransparentMesh: 1
+--- !u!114 &630811204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630811199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!223 &630811205
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630811199}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1001 &654201628
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1819,6 +1859,8 @@ GameObject:
   - component: {fileID: 775720719}
   - component: {fileID: 775720718}
   - component: {fileID: 775720717}
+  - component: {fileID: 775720721}
+  - component: {fileID: 775720720}
   m_Layer: 5
   m_Name: ExitBtn
   m_TagString: Untagged
@@ -1941,6 +1983,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 775720715}
   m_CullTransparentMesh: 1
+--- !u!114 &775720720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775720715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!223 &775720721
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775720715}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &778678489
 GameObject:
   m_ObjectHideFlags: 0
@@ -2497,6 +2577,8 @@ GameObject:
   - component: {fileID: 1116479206}
   - component: {fileID: 1116479205}
   - component: {fileID: 1116479208}
+  - component: {fileID: 1116479210}
+  - component: {fileID: 1116479209}
   m_Layer: 5
   m_Name: ResumeBtn
   m_TagString: ResumBtnMainMenu
@@ -2632,6 +2714,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resumeBtn: {fileID: 1116479203}
+--- !u!114 &1116479209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116479203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!223 &1116479210
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116479203}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &1181498507
 GameObject:
   m_ObjectHideFlags: 0
@@ -2665,10 +2785,10 @@ RectTransform:
   m_Father: {fileID: 1116479204}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -1, y: 23}
-  m_SizeDelta: {x: 0, y: 45}
+  m_AnchorMin: {x: 0.018767582, y: 0.11552855}
+  m_AnchorMax: {x: 0.9793029, y: 0.88450575}
+  m_AnchoredPosition: {x: 1.1280212, y: 1.7425003}
+  m_SizeDelta: {x: -2.255001, y: -5.49}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1181498509
 MonoBehaviour:
@@ -3089,6 +3209,8 @@ GameObject:
   - component: {fileID: 1327131007}
   - component: {fileID: 1327131006}
   - component: {fileID: 1327131005}
+  - component: {fileID: 1327131009}
+  - component: {fileID: 1327131008}
   m_Layer: 5
   m_Name: No
   m_TagString: Untagged
@@ -3211,6 +3333,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1327131003}
   m_CullTransparentMesh: 1
+--- !u!114 &1327131008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327131003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!223 &1327131009
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327131003}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &1329422960
 GameObject:
   m_ObjectHideFlags: 0
@@ -3817,8 +3977,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1608059883}
-        m_TargetAssemblyTypeName: NewGameBtnBehavior, Assembly-CSharp
+      - m_Target: {fileID: 394340026}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: startNewGame
         m_Mode: 1
         m_Arguments:
@@ -3896,7 +4056,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2147483647
 --- !u!223 &1608059885
 Canvas:
   m_ObjectHideFlags: 0

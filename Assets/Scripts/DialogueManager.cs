@@ -1398,7 +1398,7 @@ public class DialogueManager : MonoBehaviour
                 lvl1State = "babkaWantsToGiveVodka";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl1State);
             }
-            else if (helpedOldWoman == true && vodkaGivenToPlumber && ((windowClosed == false && treadmillFixed == true) || (windowClosed == false && treadmillFixed == false)))
+            else if (helpedOldWoman == true && (hasVodka||vodkaGivenToPlumber) && ((windowClosed == false && treadmillFixed == true) || (windowClosed == false && treadmillFixed == false)))
             {
                 lvl1State = "babkeDuet";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl1State);

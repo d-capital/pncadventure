@@ -33,6 +33,7 @@ public class LanguageManager : MonoBehaviour
 
     public string getCorrectTerm(string objectName, string textName)
     {
+        ResolveLanguage();
         string path = Application.dataPath;
         string pathToFile = path + "/StreamingAssets/" + language + "/" + objectName + ".json";
         var jsonString = System.IO.File.ReadAllText(pathToFile);
@@ -44,6 +45,7 @@ public class LanguageManager : MonoBehaviour
 
     public string getCorrectName(string characterTerm)
     {
+        ResolveLanguage();
         string path = Application.dataPath;
         string pathToFile = path + "/StreamingAssets/" + language + "/" + "CharacterNames" + ".json";
         var jsonString = System.IO.File.ReadAllText(pathToFile);

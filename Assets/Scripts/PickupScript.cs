@@ -8,7 +8,7 @@ public class PickupScript : MonoBehaviour
     
     private Inventory inventory;
     public GameObject itemButton;
-    public Texture2D cursor;
+    //public Texture2D cursor;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +41,7 @@ public class PickupScript : MonoBehaviour
 
     private void OnMouseOver()
     {
-        Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
 
     private void OnMouseExit()

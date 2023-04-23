@@ -10,7 +10,12 @@ public class NewGameBtnBehavior : MonoBehaviour
         PlayerData playerData = SaveSystem.LoadPlayer();
         if(playerData != null)
         {
-            GameObject canvasObj = GameObject.FindGameObjectWithTag("Canvas");
+            OverlayManager[] OverlayManagers =  Resources.FindObjectsOfTypeAll<OverlayManager>();
+            foreach(OverlayManager om in OverlayManagers)
+            {
+                om.gameObject.SetActive(true);
+            }
+            /*GameObject canvasObj = GameObject.FindGameObjectWithTag("Canvas");
             Transform[] trs = canvasObj.GetComponentsInChildren<Transform>(true);
             foreach(Transform t in trs)
             {
@@ -19,7 +24,7 @@ public class NewGameBtnBehavior : MonoBehaviour
                     t.gameObject.SetActive(true);
                     break;
                 }
-            }
+            }*/
         }
         else
         {

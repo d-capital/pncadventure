@@ -36,7 +36,7 @@ public class MenuManager : MonoBehaviour
 
     public void Update()
     {
-        if (Time.timeSinceLevelLoad > 0.5 && !wasLanguageSet)
+        if (Time.timeSinceLevelLoad > 0.1 && !wasLanguageSet)
         {
             OnLevelFinishedLoading();
         }
@@ -44,19 +44,7 @@ public class MenuManager : MonoBehaviour
 
     public void startNewGame()
     {
-        PlayerData playerData = SaveSystem.LoadPlayer();
-        if(playerData != null)
-        {
-            OverlayManager Overlay = GameObject.FindObjectOfType<OverlayManager>();
-            Overlay.Overlay.gameObject.SetActive(true);
-        }
-        else
-        {
-            SceneManager.LoadScene("Cut Scene 0");
-            playerData.currentLevelIndex = 1;
-            playerData.enterCutSceneShown = false;
-            SaveSystem.SavePlayer(playerData);
-        }
+        GameObject.FindObjectOfType<NewGameBtnBehavior>().startNewGame();
 
     }
 
