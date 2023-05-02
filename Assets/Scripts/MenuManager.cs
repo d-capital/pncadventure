@@ -66,10 +66,23 @@ public class MenuManager : MonoBehaviour
     public void SetNewLanguage()
     {
         PlayerData pd1 = SaveSystem.LoadPlayer();
-        string prevLan = pd1.language;
-        if(languageDropdown.value == 0)
+        string prevLan = "";
+        if (pd1 != null)
         {
-            PlayerData pd = SaveSystem.LoadPlayer();
+            prevLan = pd1.language;
+        }
+        else
+        {
+            prevLan = "ru";
+        }
+        PlayerData pd = SaveSystem.LoadPlayer();
+        if (pd == null)
+        {
+            pd = new PlayerData();
+        }
+        if (languageDropdown.value == 0)
+        {
+            
             pd.language = "ru";
             SaveSystem.SavePlayer(pd);
             if(prevLan != "ru")
@@ -80,7 +93,6 @@ public class MenuManager : MonoBehaviour
         }
         else if(languageDropdown.value == 1)
         {
-            PlayerData pd = SaveSystem.LoadPlayer();
             pd.language = "en";
             SaveSystem.SavePlayer(pd);
             if (prevLan != "en")

@@ -10,13 +10,13 @@ public class ResumeBtnBehavior : MonoBehaviour
     {
         
         PlayerData playerData = SaveSystem.LoadPlayer();
-        if(playerData != null)
+        if (playerData == null || playerData.currentLevelIndex == 0)
         {
-            resumeBtn.SetActive(true);
+            resumeBtn.SetActive(false);
         }
         else
         {
-            resumeBtn.SetActive(false);
+            resumeBtn.SetActive(true);
         }
 
     }

@@ -33,10 +33,12 @@ public class OverlayManager : MonoBehaviour
 
     public void AcceptOverlay()
     {
+        PlayerData prevPlayerData = SaveSystem.LoadPlayer();
         PlayerData playerData = new PlayerData();
-        SceneManager.LoadScene("Cut Scene 0");
+        playerData.language = prevPlayerData.language;
         playerData.currentLevelIndex = 1;
         playerData.enterCutSceneShown = false;
         SaveSystem.SavePlayer(playerData);
+        SceneManager.LoadScene("Cut Scene 0");
     }
 }

@@ -4382,15 +4382,15 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e0722755088f7c140802049e22a5efa0, type: 3}
+  m_audioClip: {fileID: 8300000, guid: aa210e1783f6709428eca1554b41085b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.408
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 97
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -6307,7 +6307,7 @@ SpriteRenderer:
   m_Size: {x: 1.97, y: 1.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1013238754
