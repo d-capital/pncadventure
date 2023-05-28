@@ -270,3 +270,4 @@ MonoBehaviour:
   LineAnswerPrefab: {fileID: 2853404504051517111}
   curResponseIndex: 0
   responseText: {fileID: 2853404503676773621}
+  cursor: {fileID: 0}

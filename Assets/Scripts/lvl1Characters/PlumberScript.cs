@@ -100,6 +100,7 @@ public class PlumberScript : DialogueTrigger
                         npcAnimator.SetBool("onTarget", true);
                         fromWindowToSit = true;
                         targetWindow = false;
+                        GameObject.Find("wind").gameObject.SetActive(false);
                         currentMission = "moveOutOfWc";
                     }
                     

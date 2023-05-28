@@ -57,11 +57,17 @@ public class toiletDoor : MonoBehaviour, IDropHandler
 
     private void OnMouseOver()
     {
-        Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
+        if (!FindObjectOfType<AdvScript>().dialougeBoxOpen)
+        {
+            Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
+        }
     }
 
     private void OnMouseExit()
     {
-        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        if (!FindObjectOfType<AdvScript>().dialougeBoxOpen)
+        {
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        }
     }
 }

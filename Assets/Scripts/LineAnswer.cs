@@ -44,7 +44,7 @@ public class LineAnswer : MonoBehaviour
 
     private void OnMouseOver()
     {
-        Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
 
     private void OnMouseExit()
