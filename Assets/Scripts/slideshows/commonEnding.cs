@@ -16,7 +16,7 @@ public class commonEnding : MonoBehaviour
     {
         text1.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "text1");
         text2.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "text2");
-        text3.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "text2");
+        text3.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "text3");
     }
 
     // Update is called once per frame
