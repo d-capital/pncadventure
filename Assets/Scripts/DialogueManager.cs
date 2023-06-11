@@ -2275,6 +2275,9 @@ public class DialogueManager : MonoBehaviour
             if (i.itemType == itemTypeToRemove)
             {
                 GameObject slotWithItemToRemove  = i.transform.parent.gameObject;
+                Inventory inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+                int slotNumber = slotWithItemToRemove.GetComponent<Slot>().i;
+                inventory.isFull[slotNumber] = false;
                 slotWithItemToRemove.GetComponent<Slot>().DropItemWithoutSpawn();
                 break;
             }
