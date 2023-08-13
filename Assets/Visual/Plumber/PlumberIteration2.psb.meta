@@ -21,11 +21,13 @@ ScriptedImporter:
     convertToNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
     isReadable: 0
     streamingMipmaps: 1
     streamingMipmapsPriority: 0
     vTOnly: 0
-    ignoreMasterTextureLimit: 0
+    ignoreMipmapLimit: 0
     nPOTScale: 1
     sRGBTexture: 1
     spriteMode: 2
@@ -88,7 +90,6 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 0, y: 0}
     spritePosition: {x: 0, y: 0}
   mosaicSpriteImportData: []
@@ -440,7 +441,6 @@ ScriptedImporter:
     - {x: 26, y: 27}
     - {x: 27, y: 28}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: -31, y: 481}
     spritePosition: {x: 1271, y: 268}
   - name: Plumber backHead.png
@@ -768,7 +768,6 @@ ScriptedImporter:
     - {x: 24, y: 25}
     - {x: 25, y: 26}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 2, y: 975}
     spritePosition: {x: 1306, y: 600}
   - name: Plumber RightArm.png
@@ -1127,7 +1126,6 @@ ScriptedImporter:
     - {x: 26, y: 27}
     - {x: 27, y: 28}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 626, y: 422}
     spritePosition: {x: 407, y: 368}
   - name: Plumber vodka2.png
@@ -1422,7 +1420,6 @@ ScriptedImporter:
     - {x: 21, y: 22}
     - {x: 22, y: 23}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 666, y: -20}
     spritePosition: {x: 223, y: 650}
   - name: Plumber Sad Face.png
@@ -1750,7 +1747,6 @@ ScriptedImporter:
     - {x: 24, y: 25}
     - {x: 25, y: 26}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 3, y: 1460}
     spritePosition: {x: 934, y: 594}
   - name: Plumber Happy Face.png
@@ -2078,7 +2074,6 @@ ScriptedImporter:
     - {x: 24, y: 25}
     - {x: 25, y: 26}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 462, y: 2}
     spritePosition: {x: 535, y: 598}
   - name: Plumber Bottom.png
@@ -2428,7 +2423,6 @@ ScriptedImporter:
     - {x: 26, y: 27}
     - {x: 27, y: 28}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 463, y: 884}
     spritePosition: {x: 505, y: 204}
   - name: Plumber LeftArm.png
@@ -2776,7 +2770,6 @@ ScriptedImporter:
     - {x: 25, y: 26}
     - {x: 26, y: 27}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 366, y: 1031}
     spritePosition: {x: 870, y: 353}
   - name: Plumber Body.png
@@ -3115,7 +3108,6 @@ ScriptedImporter:
     - {x: 25, y: 26}
     - {x: 26, y: 27}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 4, y: 4}
     spritePosition: {x: 480, y: 291}
   - name: Plumber LeftBoot.png
@@ -3432,7 +3424,6 @@ ScriptedImporter:
     - {x: 23, y: 24}
     - {x: 24, y: 25}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 613, y: 1214}
     spritePosition: {x: 694, y: 116}
   - name: Plumber RightBoot.png
@@ -3749,7 +3740,6 @@ ScriptedImporter:
     - {x: 23, y: 24}
     - {x: 24, y: 25}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 613, y: 1083}
     spritePosition: {x: 462, y: 114}
   - name: Plumber screwkey 2.png
@@ -4110,7 +4100,6 @@ ScriptedImporter:
     - {x: 27, y: 28}
     - {x: 28, y: 29}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 425, y: 463}
     spritePosition: {x: 946, y: 26}
   characterData:
@@ -4352,6 +4341,7 @@ ScriptedImporter:
       order: 0
     dimension: {x: 0, y: 0}
     characterGroups: []
+    pivot: {x: 0, y: 0}
     boneReadOnly: 0
   sharedRigSpriteImportData: []
   sharedRigCharacterData:
@@ -4359,10 +4349,12 @@ ScriptedImporter:
     parts: []
     dimension: {x: 0, y: 0}
     characterGroups: []
+    pivot: {x: 0, y: 0}
     boneReadOnly: 0
   platformSettings:
   - name: DefaultTexturePlatform
     overridden: 0
+    ignorePlatformSupport: 0
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -4374,6 +4366,7 @@ ScriptedImporter:
     androidETC2FallbackOverride: 0
   - name: Standalone
     overridden: 0
+    ignorePlatformSupport: 0
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -4385,6 +4378,7 @@ ScriptedImporter:
     androidETC2FallbackOverride: 0
   - name: Server
     overridden: 0
+    ignorePlatformSupport: 0
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -4404,6 +4398,8 @@ ScriptedImporter:
   paperDollMode: 0
   keepDupilcateSpriteName: 1
   skeletonAssetReferenceID: 
+  padding: 4
+  spriteSizeExpand: 0
   spriteCategoryList:
     categories: []
   spritePackingTag: 
@@ -4532,6 +4528,9 @@ ScriptedImporter:
     isVisible: 1
   sharedRigPSDLayers: []
   pSDLayerImportSetting: []
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  spriteSizeExpandChanged: 0
   generateGOHierarchy: 0
   textureAssetName: 
   prefabAssetName: 

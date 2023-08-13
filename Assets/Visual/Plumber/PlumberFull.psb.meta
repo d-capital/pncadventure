@@ -21,11 +21,13 @@ ScriptedImporter:
     convertToNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
     isReadable: 0
     streamingMipmaps: 1
     streamingMipmapsPriority: 0
     vTOnly: 0
-    ignoreMasterTextureLimit: 0
+    ignoreMipmapLimit: 0
     nPOTScale: 1
     sRGBTexture: 1
     spriteMode: 2
@@ -88,7 +90,6 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 0, y: 0}
     spritePosition: {x: 0, y: 0}
   mosaicSpriteImportData: []
@@ -449,7 +450,6 @@ ScriptedImporter:
     - {x: 26, y: 27}
     - {x: 27, y: 28}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 264, y: 1505}
     spritePosition: {x: 32, y: 253}
   - name: vodka.png
@@ -755,7 +755,6 @@ ScriptedImporter:
     - {x: 22, y: 23}
     - {x: 23, y: 24}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 695, y: -20}
     spritePosition: {x: 1097, y: 41}
   - name: PlumberHappyFace.png
@@ -1083,7 +1082,6 @@ ScriptedImporter:
     - {x: 24, y: 25}
     - {x: 25, y: 26}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 3, y: 1026}
     spritePosition: {x: 675, y: 511}
   - name: PlumberSadFace.png
@@ -1400,7 +1398,6 @@ ScriptedImporter:
     - {x: 23, y: 24}
     - {x: 24, y: 25}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 472, y: 2}
     spritePosition: {x: 161, y: 503}
   - name: PlumberBottom.png
@@ -1739,7 +1736,6 @@ ScriptedImporter:
     - {x: 25, y: 26}
     - {x: 26, y: 27}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 473, y: 945}
     spritePosition: {x: 136, y: 140}
   - name: PlumberArmL.png
@@ -2078,7 +2074,6 @@ ScriptedImporter:
     - {x: 25, y: 26}
     - {x: 26, y: 27}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 358, y: 468}
     spritePosition: {x: 516, y: 266}
   - name: PlumberBody.png
@@ -2428,7 +2423,6 @@ ScriptedImporter:
     - {x: 26, y: 27}
     - {x: 27, y: 28}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 4, y: 4}
     spritePosition: {x: 121, y: 236}
   - name: PlumberBackHead.png
@@ -2767,7 +2761,6 @@ ScriptedImporter:
     - {x: 25, y: 26}
     - {x: 26, y: 27}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 1, y: 512}
     spritePosition: {x: 1125, y: 509}
   - name: PlumberBootL.png
@@ -3084,7 +3077,6 @@ ScriptedImporter:
     - {x: 23, y: 24}
     - {x: 24, y: 25}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 677, y: 672}
     spritePosition: {x: 103, y: 43}
   - name: PlumberBootR
@@ -3401,7 +3393,6 @@ ScriptedImporter:
     - {x: 23, y: 24}
     - {x: 24, y: 25}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: 676, y: 516}
     spritePosition: {x: 339, y: 37}
   - name: ScrewKey
@@ -3773,7 +3764,6 @@ ScriptedImporter:
     - {x: 28, y: 29}
     - {x: 29, y: 30}
     tessellationDetail: 0
-    parentGroupIndex: -1
     uvTransform: {x: -36, y: 1543}
     spritePosition: {x: 1410, y: 0}
   characterData:
@@ -3979,6 +3969,7 @@ ScriptedImporter:
       order: 0
     dimension: {x: 0, y: 0}
     characterGroups: []
+    pivot: {x: 0, y: 0}
     boneReadOnly: 0
   sharedRigSpriteImportData: []
   sharedRigCharacterData:
@@ -3986,6 +3977,7 @@ ScriptedImporter:
     parts: []
     dimension: {x: 0, y: 0}
     characterGroups: []
+    pivot: {x: 0, y: 0}
     boneReadOnly: 0
   platformSettings: []
   mosaicLayers: 1
@@ -3998,6 +3990,8 @@ ScriptedImporter:
   paperDollMode: 0
   keepDupilcateSpriteName: 1
   skeletonAssetReferenceID: 
+  padding: 4
+  spriteSizeExpand: 0
   spriteCategoryList:
     categories: []
   spritePackingTag: 
@@ -4116,6 +4110,9 @@ ScriptedImporter:
     isVisible: 1
   sharedRigPSDLayers: []
   pSDLayerImportSetting: []
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  spriteSizeExpandChanged: 0
   generateGOHierarchy: 0
   textureAssetName: 
   prefabAssetName: 
