@@ -13,13 +13,13 @@ public class MajorControll : MonoBehaviour
     public float coolDownRate;
     public Animator npcAnimator;
 
-    public string Name = "Ìýð";
+    public Dialogue dialogue;
 
     public HealthBarControll HealthBar;
 
     private void Start()
     {
-        Name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("BfMajor");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectName("BfMajor", null, null, dialogue);
     }
     // Update is called once per frame
     void Update()

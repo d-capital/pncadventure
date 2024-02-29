@@ -9,7 +9,7 @@ public class cardsManScript : DialogueTrigger
     // Start is called before the first frame update
     void Start()
     {
-        base.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("CardsMan");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectName("CardsMan", null, null, base.dialogue);
     }
 
     // Update is called once per frame

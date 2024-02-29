@@ -17,9 +17,9 @@ public class OverlayManager : MonoBehaviour
     void Start()
     {
         //Overlay.SetActive(false);
-        yesText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "yes");
-        noText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "no");
-        overlayText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "text");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "yes", yesText, null, "");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "no", noText, null, "");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "text", overlayText, null, "");
     }
 
     public void ShowOverlay()

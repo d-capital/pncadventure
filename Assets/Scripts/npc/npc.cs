@@ -7,7 +7,7 @@ public class npc : DialogueTrigger
     // Start is called before the first frame update
     void Start()
     {
-        base.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("npc");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectName("npc", null, null, base.dialogue);
     }
 
     // Update is called once per frame

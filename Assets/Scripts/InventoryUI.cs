@@ -33,7 +33,8 @@ public class InventoryUI : MonoBehaviour
                     if(i.GetComponentsInChildren<Spawn>().Length > 0)
                     {
                         string hint = i.GetComponentInChildren<Spawn>().itemType;
-                        i.gameObject.GetComponentInChildren<TMP_Text>().text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("inventoryHints", hint);
+                        TMP_Text tmpTextToSet = i.gameObject.GetComponentInChildren<TMP_Text>();
+                        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("inventoryHints", hint, null, tmpTextToSet, "");
                     }
                     else
                     {

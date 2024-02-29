@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
+using System.IO;
+using System.Text;
 
 public class PlayerController : MonoBehaviour
 {
@@ -35,6 +38,8 @@ public class PlayerController : MonoBehaviour
     public Texture2D cursorTextureWithWeapon;
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
+
+    public string jsonString;
 
     // Start is called before the first frame update
     void Start()
@@ -148,4 +153,5 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
 }

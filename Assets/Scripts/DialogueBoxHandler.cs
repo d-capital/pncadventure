@@ -24,4 +24,16 @@ public class DialogueBoxHandler : MonoBehaviour
     {
         dialogueBox.SetActive(false);
     }
+
+    public void SkipVoicover()
+    {
+        GameObject[] voicovers = GameObject.FindGameObjectsWithTag("voicover");
+        if(voicovers.Length > 0)
+        {
+            foreach(GameObject voice in voicovers)
+            {
+                voice.GetComponent<AudioSource>().Stop();
+            }
+        }
+    }
 }

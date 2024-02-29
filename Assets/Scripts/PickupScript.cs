@@ -26,7 +26,8 @@ public class PickupScript : MonoBehaviour
                 inventory.isFull[i] = true;
                 Instantiate(itemButton, inventory.slots[i].transform, false);
                 string hint = itemButton.GetComponentInChildren<Spawn>().itemType;
-                inventory.slots[i].transform.GetComponentInChildren<TMP_Text>().text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("inventoryHints", hint);
+                TMP_Text tmpTextToSet = inventory.slots[i].transform.GetComponentInChildren<TMP_Text>();
+                GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("inventoryHints", hint, null, tmpTextToSet, "");
                 Destroy(gameObject);
                 break;
             }

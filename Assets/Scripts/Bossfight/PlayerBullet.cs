@@ -16,7 +16,7 @@ public class PlayerBullet : MonoBehaviour
             ShowEnemyHealthBar();
             target.GetComponent<CabCrewController>().HealthBar.ResetNameAndHealth(
                 target.GetComponent<CabCrewController>().health, 
-                target.GetComponent<CabCrewController>().Name);
+                target.GetComponent<CabCrewController>().dialogue.name);
             if (target.GetComponent<CabCrewController>().health > 0)
             {
                 target.GetComponent<CabCrewController>().health -= 10;
@@ -34,7 +34,7 @@ public class PlayerBullet : MonoBehaviour
             ShowEnemyHealthBar();
             target.GetComponent<MajorControll>().HealthBar.ResetNameAndHealth(
                 target.GetComponent<MajorControll>().health,
-                target.GetComponent<MajorControll>().Name);
+                target.GetComponent<MajorControll>().dialogue.name);
             if (target.GetComponent<MajorControll>().health > 0)
             {
                 target.GetComponent<MajorControll>().health -= 10;

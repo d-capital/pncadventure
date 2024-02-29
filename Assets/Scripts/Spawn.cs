@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class Spawn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
 {
@@ -122,6 +123,7 @@ public class Spawn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEnd
             if (itemType == "glassOfTeaItem" && eventData.pointerDrag.GetComponent<Spawn>().item.name.Contains("boyaryshnik"))
             {
                 int slotNumber = gameObject.GetComponentInParent<Slot>().GetComponent<Slot>().i;
+                eventData.pointerDrag.GetComponent<Spawn>().GetComponentInParent<Slot>().GetComponentInChildren<TMP_Text>().text = "";
                 objectReceived = true;
                 GameObject.Destroy(eventData.pointerDrag);
                 GameObject.FindObjectOfType<DialogueManager>().GetComponent<DialogueManager>().RemoveItemFromSlotWithoutDropping("glassOfTeaItem");

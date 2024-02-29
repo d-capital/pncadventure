@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using System.Text;
 
 public class MenuManager : MonoBehaviour
 {
@@ -18,6 +20,8 @@ public class MenuManager : MonoBehaviour
 
     public bool wasLanguageSet = false;
 
+    public string jsonString;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,9 +31,9 @@ public class MenuManager : MonoBehaviour
     
     void OnLevelFinishedLoading()
     {
-        resumeText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "resume");
-        quitText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "quit");
-        newGameText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "newGame");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "resume", resumeText, null, "");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "quit", quitText, null, "");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "newGame", newGameText, null, "");
         languageDropdown.value = GameObject.FindObjectOfType<LanguageManager>().getCorrectDropDownValue();
         wasLanguageSet = true;
     }

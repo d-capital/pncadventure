@@ -13,9 +13,9 @@ public class bfStaticContent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        instructionText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "instructionText");
-        qteText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "qteText");
-        bfInfoText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "bfInfoText");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "instructionText", null, instructionText, "");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "qteText", null, qteText, "");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "bfInfoText", null, bfInfoText, "");
     }
 
     // Update is called once per frame

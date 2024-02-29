@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.Networking;
+using System.IO;
+using System.Text;
 
 public class ChangeSceneOnTimer : MonoBehaviour
 {
     public float changeTime;
     public string sceneName;
+
+    public string jsonString;
 
     private void Start()
     {
@@ -22,4 +27,5 @@ public class ChangeSceneOnTimer : MonoBehaviour
         }
         
     }
+
 }

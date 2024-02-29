@@ -9,6 +9,7 @@ public class sink : MonoBehaviour, IDropHandler
 
     public bool objectReceived = false;
     public Texture2D cursor;
+    public string newInfoTextToSet = "";
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("OnDrop");
@@ -21,8 +22,7 @@ public class sink : MonoBehaviour, IDropHandler
                 GameObject.Destroy(eventData.pointerDrag);
                 AdvScript PlayerObject = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>();
                 PlayerObject.bathed = true;
-                string InfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "bathedInSink");
-                PlayerObject.ShowInfoText(InfoText);
+                GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "bathedInSink", null, null, newInfoTextToSet);
                 var DroppableItems = GameObject.FindGameObjectsWithTag("droppable");
                 foreach (var i in DroppableItems)
                 {

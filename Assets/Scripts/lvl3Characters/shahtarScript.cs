@@ -9,7 +9,7 @@ public class shahtarScript : DialogueTrigger
     // Start is called before the first frame update
     void Start()
     {
-        base.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Shahtar");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Shahtar", null, null, base.dialogue);
     }
 
     // Update is called once per frame

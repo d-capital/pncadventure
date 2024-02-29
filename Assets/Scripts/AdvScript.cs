@@ -173,6 +173,8 @@ public class AdvScript : MonoBehaviour
 
     public bool introShown = false;
 
+    public string newInfoTextToSet = "";
+
     //public TextMeshProUGUI newInfoText;
 
     // Use this for initialization if something needs to be defined before the game starts
@@ -193,7 +195,7 @@ public class AdvScript : MonoBehaviour
             ShowDialogueBox();
             currentDialoguePartner = "SemenLvl1Intro";
             semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
-            semenDialogue.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen");
+            GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen", null, null, semenDialogue.dialogue);
             semenDialogue.TriggerDialogue("SemenLvl1Intro");
         }
         else if (GetCurrentLevel() == "Level 2")
@@ -201,7 +203,7 @@ public class AdvScript : MonoBehaviour
             ShowDialogueBox();
             currentDialoguePartner = "SemenLvl2Intro";
             semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
-            semenDialogue.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen");
+            GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen", null, null, semenDialogue.dialogue);
             semenDialogue.TriggerDialogue("SemenLvl2Intro");
         }
         else if (GetCurrentLevel() == "Level 3")
@@ -209,7 +211,7 @@ public class AdvScript : MonoBehaviour
             ShowDialogueBox();
             currentDialoguePartner = "SemenLvl3Intro";
             semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
-            semenDialogue.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen");
+            GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen", null, null, semenDialogue.dialogue);
             semenDialogue.TriggerDialogue("SemenLvl3Intro");    
         }
         else if (GetCurrentLevel() == "Level 4")
@@ -217,7 +219,7 @@ public class AdvScript : MonoBehaviour
             ShowDialogueBox();
             currentDialoguePartner = "SemenLvl4Intro";
             semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
-            semenDialogue.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen");
+            GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen", null, null, semenDialogue.dialogue);
             semenDialogue.TriggerDialogue("SemenLvl4Intro");
         }
 
@@ -229,7 +231,7 @@ public class AdvScript : MonoBehaviour
             ShowDialogueBox();
             currentDialoguePartner = "SemenLvl1Outro";
             semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
-            semenDialogue.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen");
+            GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen", null, null, semenDialogue.dialogue);
             semenDialogue.TriggerDialogue("SemenLvl1Outro");
         }
         else if (GetCurrentLevel() == "Level 2")
@@ -237,7 +239,7 @@ public class AdvScript : MonoBehaviour
             ShowDialogueBox();
             currentDialoguePartner = "SemenLvl2Outro";
             semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
-            semenDialogue.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen");
+            GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen", null, null, semenDialogue.dialogue);
             semenDialogue.TriggerDialogue("SemenLvl2Outro");
         }
         else if (GetCurrentLevel() == "Level 3")
@@ -245,7 +247,7 @@ public class AdvScript : MonoBehaviour
             ShowDialogueBox();
             currentDialoguePartner = "SemenLvl3Outro";
             semenDialogue = GameObject.Find("Player").GetComponent<DialogueTrigger>();
-            semenDialogue.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen");
+            GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen", null, null, semenDialogue.dialogue);
             semenDialogue.TriggerDialogue("SemenLvl3Outro");
         }
     }
@@ -282,8 +284,7 @@ public class AdvScript : MonoBehaviour
                     var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
                     collectibleItem.onClick();
                     //newInfoText.ClearMesh();
-                    string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "ScrewKey");
-                    ShowInfoText(newInfoText);
+                    GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "ScrewKey", null, null, newInfoTextToSet);
                     key = true;
                     hasScrewKey = true;
                     collectSound.Play();
@@ -301,8 +302,7 @@ public class AdvScript : MonoBehaviour
                     var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
                     collectibleItem.onClick();
                     //newInfoText.ClearMesh();
-                    string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "Vodka");
-                    ShowInfoText(newInfoText);
+                    GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "Vodka", null, null, newInfoTextToSet);
                     //key = true;
                     //hasScrewKey = true;
                     collectSound.Play();
@@ -315,8 +315,8 @@ public class AdvScript : MonoBehaviour
                     var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
                     collectibleItem.onClick();
                     //newInfoText.ClearMesh();
-                    string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "coins");
-                    ShowInfoText(newInfoText);
+                    GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "coins", null, null, newInfoTextToSet);
+                    //ShowInfoText(newInfoText);
                     //key = true;
                     //hasScrewKey = true;
                     collectSound.Play();
@@ -387,16 +387,15 @@ public class AdvScript : MonoBehaviour
                 else if(hit.collider.gameObject.tag == "Window")
                 {
                     //show hint
-                    string newInfoText;
                     if (windowClosed == false)
                     {
-                        newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "WindowBroken");
-                        ShowInfoText(newInfoText);
+                        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "WindowBroken", null, null, newInfoTextToSet);
+                        //ShowInfoText(newInfoText);
                     } 
                     else
                     {
-                        newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "WindowFixed");
-                        ShowInfoText(newInfoText);
+                        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "WindowFixed", null, null, newInfoTextToSet);
+                        //ShowInfoText(newInfoText);
                     }
                     
                 }
@@ -491,31 +490,29 @@ public class AdvScript : MonoBehaviour
                 else if (hit.collider.gameObject.GetComponent<toiletDoor>())
                 {
                     //show hint
-                    string newInfoText;
                     if (!gotCrowbar)
                     {
-                        newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "ToiletDoorNoCrowbar");
-                        ShowInfoText(newInfoText);
+                        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "ToiletDoorNoCrowbar", null, null, newInfoTextToSet);
+                        //ShowInfoText(newInfoText);
                     }
                     else
                     {
-                        newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "ToiletDoorHasCrowbar");
-                        ShowInfoText(newInfoText);
+                        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "ToiletDoorHasCrowbar", null, null, newInfoTextToSet);
+                        //ShowInfoText(newInfoText);
                     }
                 }
                 else if (hit.collider.gameObject.GetComponent<sink>())
                 {
                     //show hint
-                    string newInfoText;
                     if (!gotBathItems)
                     {
-                        newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "sinkNoBathItems");
-                        ShowInfoText(newInfoText);
+                        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "sinkNoBathItems", null, null, newInfoTextToSet);
+                        //ShowInfoText(newInfoText);
                     }
                     else
                     {
-                        newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "sinkHasBathItems");
-                        ShowInfoText(newInfoText);
+                        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "sinkHasBathItems", null, null,newInfoTextToSet);
+                        //ShowInfoText(newInfoText);
                     }
                 }
                 else if (hit.collider.gameObject.tag == "aspirin")
@@ -523,8 +520,8 @@ public class AdvScript : MonoBehaviour
                     hit.collider.gameObject.SetActive(false);
                     var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
                     collectibleItem.onClick();
-                    string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "aspirin");
-                    ShowInfoText(newInfoText);
+                    GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "aspirin", null, null, newInfoTextToSet);
+                    //ShowInfoText(newInfoText);
                     collectSound.Play();
                 }
                 else if (hit.collider.gameObject.name.Contains("crowBar"))
@@ -532,8 +529,8 @@ public class AdvScript : MonoBehaviour
                     hit.collider.gameObject.SetActive(false);
                     var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
                     collectibleItem.onClick();
-                    string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "crowBar");
-                    ShowInfoText(newInfoText);
+                    GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "crowBar", null, null, newInfoTextToSet);
+                    //ShowInfoText(newInfoText);
                     collectSound.Play();
                 }
                 else if (hit.collider.gameObject.name.Contains("potion"))
@@ -541,8 +538,8 @@ public class AdvScript : MonoBehaviour
                     hit.collider.gameObject.SetActive(false);
                     var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
                     collectibleItem.onClick();
-                    string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "potion");
-                    ShowInfoText(newInfoText);
+                    GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "potion", null, null, newInfoTextToSet);
+                    //ShowInfoText(newInfoText);
                     collectSound.Play();
                 }
                 else if (hit.collider.gameObject.name.Contains("bathItems"))
@@ -550,8 +547,8 @@ public class AdvScript : MonoBehaviour
                     hit.collider.gameObject.SetActive(false);
                     var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
                     collectibleItem.onClick();
-                    string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "bathItems");
-                    ShowInfoText(newInfoText);
+                    GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "bathItems", null, null, newInfoTextToSet);
+                    //ShowInfoText(newInfoText);
                     collectSound.Play();
                 }
                 //----------------Level 4 interactions------------------------//
@@ -595,8 +592,8 @@ public class AdvScript : MonoBehaviour
                     hit.collider.gameObject.SetActive(false);
                     var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
                     collectibleItem.onClick();
-                    string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "boyaryshnik");
-                    ShowInfoText(newInfoText);
+                    GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "boyaryshnik", null, null, newInfoTextToSet);
+                    //ShowInfoText(newInfoText);
                     collectSound.Play();
                 }
                 else if (hit.collider.gameObject.name.Contains("glass"))
@@ -604,8 +601,8 @@ public class AdvScript : MonoBehaviour
                     hit.collider.gameObject.SetActive(false);
                     var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
                     collectibleItem.onClick();
-                    string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "glass");
-                    ShowInfoText(newInfoText);
+                    GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "glass", null, null, newInfoTextToSet);
+                    //ShowInfoText(newInfoText);
                     collectSound.Play();
                 }
                 else if (hit.collider.gameObject.name.Contains("shuba"))
@@ -613,8 +610,8 @@ public class AdvScript : MonoBehaviour
                     hit.collider.gameObject.SetActive(false);
                     var collectibleItem = hit.collider.gameObject.GetComponent<PickupScript>();
                     collectibleItem.onClick();
-                    string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "shuba");
-                    ShowInfoText(newInfoText);
+                    GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "shuba", null, null, newInfoTextToSet);
+                    //ShowInfoText(newInfoText);
                     collectSound.Play();
                 }
             }

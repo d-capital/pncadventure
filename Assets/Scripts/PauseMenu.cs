@@ -17,9 +17,9 @@ public class PauseMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ResumeButtonText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "Resume");
-        MainMenuButtonText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "MainMenu");
-        QuitButtonText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "Quit");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "Resume", ResumeButtonText, null, "");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "MainMenu", MainMenuButtonText, null, "");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "Quit", QuitButtonText, null, "");
     }
 
     // Update is called once per frame
@@ -51,6 +51,14 @@ public class PauseMenu : MonoBehaviour
 
     void Pause()
     {
+        GameObject[] voicovers = GameObject.FindGameObjectsWithTag("voicover");
+        if (voicovers.Length > 0)
+        {
+            foreach (GameObject voice in voicovers)
+            {
+                voice.GetComponent<AudioSource>().Stop();
+            }
+        }
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         isGamePaused = true;

@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 using TMPro;
 using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System.IO;
+using System.Text;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -39,6 +42,12 @@ public class DialogueManager : MonoBehaviour
     private string lvl2State;
     private string lvl3State;
     private string lvl4State;
+
+    public string jsonString;
+
+    public string newInfoTextToSet = "";
+
+    public LinesAnswersList characterLinesAnswers;
 
     PlayerData playerData = new PlayerData ();
 
@@ -123,7 +132,15 @@ public class DialogueManager : MonoBehaviour
     }
 
     public void Answer(Dialogue dialogue, string dialogueActor, int incomingResponseIndex)
-    { 
+    {
+        GameObject[] voicovers = GameObject.FindGameObjectsWithTag("voicover");
+        if(voicovers.Length > 0)
+        {
+            foreach (GameObject voice in voicovers)
+            {
+                voice.GetComponent<AudioSource>().Stop();
+            }
+        }
         curResponseTracker = incomingResponseIndex;
         var currentLevel = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().GetCurrentLevel();
         if(currDialogueActor == "npc")
@@ -137,7 +154,7 @@ public class DialogueManager : MonoBehaviour
             {
                 if (currDialogueActor == "OldWoman")
                 {
-                    lvl1stateCalculator(currDialogueActor, dialogue);
+                    //lvl1stateCalculator(currDialogueActor, dialogue);
                     if (lvl1State == "babkaInitial")
                     {
                         if (curResponseTracker == 0)
@@ -183,7 +200,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 else if (currDialogueActor == "OldWomansBed")
                 {
-                    lvl1stateCalculator(currDialogueActor, dialogue);
+                    //lvl1stateCalculator(currDialogueActor, dialogue);
                     if (lvl1State == "victory")
                     {
                         playerData.helpedOldWoman = true;
@@ -208,7 +225,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 else if (currDialogueActor == "Plumber")
                 {
-                    lvl1stateCalculator(currDialogueActor, dialogue);
+                    //lvl1stateCalculator(currDialogueActor, dialogue);
                     if (lvl1State == "bezVochilyNenado")
                     {
                         if (curResponseTracker == 0)
@@ -224,7 +241,7 @@ public class DialogueManager : MonoBehaviour
                             GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasVodka = false;
                             RemoveItemFromSlotWithoutDropping("VodkaItem");
                             GameObject.FindGameObjectWithTag("Plumber").GetComponent<PlumberScript>().changePlumberAnimationToHappy();
-                            lvl1stateCalculator(currDialogueActor, dialogue);
+                            //lvl1stateCalculator(currDialogueActor, dialogue);
                         }
                         else if (curResponseTracker == 0)
                         {
@@ -357,7 +374,7 @@ public class DialogueManager : MonoBehaviour
             {
                 if (currDialogueActor == "cardsMan")
                 {
-                    lvl2stateCalculator(currDialogueActor, dialogue);
+                    //lvl2stateCalculator(currDialogueActor, dialogue);
                     if (lvl2State == "initial")
                     {
                         if (curResponseTracker == 0)
@@ -589,7 +606,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 else if (currDialogueActor == "emergencyButton")
                 {
-                    lvl2stateCalculator(currDialogueActor, dialogue);
+                    //lvl2stateCalculator(currDialogueActor, dialogue);
                     if (lvl2State == "initial")
                     {
                         if (curResponseTracker == 0)
@@ -597,8 +614,7 @@ public class DialogueManager : MonoBehaviour
                             GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInTopSpot = true;
                             GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot = false;
                             GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = true;
-                            string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInTopSpot");
-                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
+                            GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInTopSpot",null, null, newInfoTextToSet);
                         }
                         else if (curResponseTracker == 1)
                         {
@@ -606,16 +622,14 @@ public class DialogueManager : MonoBehaviour
                             GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInTopSpot = false;
                             GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInBottomSpot = false;
                             GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = false;
-                            string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInMiddleSpot");
-                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
+                            GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInMiddleSpot", null, null, newInfoTextToSet);
                         }
                         else if (curResponseTracker == 2)
                         {
                             GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInBottomSpot = true;
                             GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = true;
                             GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot = false;
-                            string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInBottomSpot");
-                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
+                            GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInBottomSpot", null, null, newInfoTextToSet);
                         }
                         else if (curResponseTracker == 3)
                         {
@@ -658,21 +672,18 @@ public class DialogueManager : MonoBehaviour
                         {
                             GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInTopSpot = true;
                             GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = true;
-                            string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInTopSpot");
-                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
+                            GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInTopSpot", null, null, newInfoTextToSet);
                         }
                         else if (curResponseTracker == 1)
                         {
                             GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot = true;
-                            string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInMiddleSpot");
-                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
+                            GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInMiddleSpot", null, null, newInfoTextToSet);
                         }
                         else if (curResponseTracker == 2)
                         {
                             GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInBottomSpot = true;
                             GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().isButtonPushed = true;
-                            string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInBottomSpot");
-                            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
+                            GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "wireInBottomSpot", null, null, newInfoTextToSet);
                         }
                         else if (curResponseTracker == 3)
                         {
@@ -1313,16 +1324,326 @@ public class DialogueManager : MonoBehaviour
     {
         ClearLinesAnswers(dialogue);
         //calc the state on the 1st level
-        string path = Application.dataPath;
+        //string path = Application.dataPath;
         string currLanguage = GameObject.FindObjectOfType<LanguageManager>().language;
-        string pathToDialogue = path + "/StreamingAssets/DialogueStorage/" + currLanguage + "/" + currDialogueActor + ".json";
-        var jsonString = System.IO.File.ReadAllText(pathToDialogue);
-        LinesAnswersList characterLinesAnswers = JsonConvert.DeserializeObject<LinesAnswersList>(jsonString);
-        string npcState = Random.Range(1, 5).ToString();
-        SetNewLinesAnswers(dialogue, characterLinesAnswers, npcState);
+        //string pathToDialogue = path + "/StreamingAssets/DialogueStorage/" + currLanguage + "/" + currDialogueActor + ".json";
+        //var jsonString = System.IO.File.ReadAllText(pathToDialogue);
+        string folder = "DialogueStorage";
+        string pathToDialogue = Path.Combine(Application.streamingAssetsPath, folder, currLanguage, currDialogueActor + ".json");
+        GetTextFromCorrectPlaceForDialogue(pathToDialogue, characterLinesAnswers, currDialogueActor, dialogue, "");
+
     }
     void lvl1stateCalculator (string currDialogueActor, Dialogue dialogue)
     {
+        
+        string lvlName = "lvl1";
+        ClearLinesAnswers(dialogue);
+        //calc the state on the 1st level
+        //string path = Application.dataPath;
+        //string pathToDialogue = path + "/StreamingAssets/DialogueStorage/" + currLanguage + "/" + currDialogueActor+".json";
+        string currLanguage = GameObject.FindObjectOfType<LanguageManager>().language;
+        string folder = "DialogueStorage";
+        string pathToDialogue = Path.Combine(Application.streamingAssetsPath, folder, currLanguage, currDialogueActor + ".json");
+        GetTextFromCorrectPlaceForDialogue(pathToDialogue, characterLinesAnswers, currDialogueActor, dialogue, lvlName);
+    }
+    void lvl2stateCalculator (string currDialogueActor, Dialogue dialogue)
+    {
+        //----------------------//
+        ClearLinesAnswers(dialogue);
+        //calc the state on the 2nd level
+        string path = Application.dataPath;
+        string currLanguage = GameObject.FindObjectOfType<LanguageManager>().language;
+        //string pathToDialogue = path + "/StreamingAssets/DialogueStorage/" + currLanguage + "/" + currDialogueActor + ".json";
+        string folder = "DialogueStorage";
+        string pathToDialogue = Path.Combine(Application.streamingAssetsPath, folder, currLanguage, currDialogueActor + ".json");
+        string lvlName = "lvl2";
+        GetTextFromCorrectPlaceForDialogue(pathToDialogue, characterLinesAnswers, currDialogueActor, dialogue, lvlName);
+
+    }
+
+    void lvl3stateCalculator(string currDialogueActor, Dialogue dialogue)
+    {
+        ClearLinesAnswers(dialogue);
+        //calc the state on the 2nd level
+        //string path = Application.dataPath;
+        string currLanguage = GameObject.FindObjectOfType<LanguageManager>().language;
+        //string pathToDialogue = path + "/StreamingAssets/DialogueStorage/" + currLanguage + "/" + currDialogueActor + ".json";
+        //var jsonString = System.IO.File.ReadAllText(pathToDialogue);
+        string folder = "DialogueStorage";
+        string pathToDialogue = Path.Combine(Application.streamingAssetsPath, folder, currLanguage, currDialogueActor + ".json");
+        string lvlName = "lvl3";
+        GetTextFromCorrectPlaceForDialogue(pathToDialogue, characterLinesAnswers, currDialogueActor, dialogue, lvlName);
+    }
+
+    void lvl4stateCalculator(string currDialogueActor, Dialogue dialogue)
+    {
+
+        //----------------------------------//
+        ClearLinesAnswers(dialogue);
+        //calc the state on the 2nd level
+        //string path = Application.dataPath;
+        string currLanguage = GameObject.FindObjectOfType<LanguageManager>().language;
+        //string pathToDialogue = path + "/StreamingAssets/DialogueStorage/" + currLanguage + "/" + currDialogueActor + ".json";
+        //var jsonString = System.IO.File.ReadAllText(pathToDialogue);
+        string folder = "DialogueStorage";
+        string pathToDialogue = Path.Combine(Application.streamingAssetsPath, folder, currLanguage, currDialogueActor + ".json");
+        string lvlName = "lvl4";
+        GetTextFromCorrectPlaceForDialogue(pathToDialogue, characterLinesAnswers, currDialogueActor, dialogue, lvlName);
+
+    }
+
+    void SetNewLinesAnswers(Dialogue dialogue, LinesAnswersList linesAnswersList, string lvl1State)
+    {
+        Debug.Log("What da hell is going on here?");
+        Debug.Log(dialogue);
+        Debug.Log(linesAnswersList.LinesAnswers[0]);
+        Debug.Log(lvl1State);
+        LinesAnswer lineResponse = linesAnswersList.LinesAnswers.Find(l => l.name == lvl1State);
+        Debug.Log("borke when trying to find line");
+        //udpate character dialogue line
+        dialogText.text = lineResponse.line;
+        //TODO: Play sound here:
+        string currLanguage = GameObject.FindObjectOfType<LanguageManager>().language;
+        string voiceName = GameObject.FindObjectOfType<AdvScript>().GetComponent<AdvScript>().currentDialoguePartner + "Voice";
+        string stateAndLanguage = lvl1State + "-" + currLanguage;
+        if (GameObject.Find(voiceName))
+        {
+            AudioSource[] voicovers = GameObject.Find(voiceName).GetComponentsInChildren<AudioSource>();
+            if (voicovers.Length > 0)
+            {
+                foreach (AudioSource v in voicovers)
+                {
+                    if (v.gameObject.name == stateAndLanguage)
+                    {
+                        v.Play();
+                    }
+                }
+            }
+        }
+
+        Transform Grid = FindObjectOfType<AnswerGridControl>().transform;
+        //adding prefabs to grid
+        foreach(Response i in lineResponse.responses)
+        {
+            LineAnswer responseLine = Resources.Load<LineAnswer>("AnswerButtonPrefab");
+            LineAnswer hello = Instantiate<LineAnswer>(responseLine, new Vector3 (0,0,0), Quaternion.identity, Grid);
+            hello.curResponseIndex = i.id;
+            hello.responseText.text = i.response;
+            //dialogue.playerResponses.Add(i.response);
+        }
+        foreach(Response i in lineResponse.responses)
+        {
+            dialogue.playerResponses.Add(i.response);
+        }
+        //response.text = dialogue.playerResponses[0];
+    }
+    IEnumerator TimeoutCorutine()
+    {
+        yield return new WaitForSeconds(5);
+    }
+    void ClearLinesAnswers(Dialogue dialogue)
+    {
+        dialogue.playerResponses.Clear();
+        dialogue.sentences.Clear();
+        //TODO: clear all prefabs
+        var responsesGrid = GameObject.FindGameObjectWithTag("ResponseGrid");
+        responsesGrid.GetComponent<AnswerGridControl>().removeAllAnswers();
+    }
+    public void RemoveItemFromSlotWithoutDropping(string itemTypeToRemove)
+    {
+        Object[] slotsWithItemToRemove = Resources.FindObjectsOfTypeAll(typeof(Spawn)); //GameObject.FindGameObjectWithTag("Vodka").transform.parent.gameObject;
+        foreach (Spawn i in slotsWithItemToRemove)
+        {
+            if (i.itemType == itemTypeToRemove)
+            {
+                GameObject slotWithItemToRemove  = i.transform.parent.gameObject;
+                Inventory inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+                int slotNumber = slotWithItemToRemove.GetComponent<Slot>().i;
+                inventory.isFull[slotNumber] = false;
+                slotWithItemToRemove.GetComponent<Slot>().DropItemWithoutSpawn();
+                break;
+            }
+        }
+    }
+    public void GetItemToInventory(string itemObjectName)
+    {
+        var inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        GameObject itemButton = Resources.Load<GameObject>(itemObjectName);
+        int numberOfItemsAdded = 0;
+        for (int i = 0; i < inventory.slots.Length; i++)
+        {
+            if (inventory.isFull[i] == false)
+            {
+                //Add item to inventory
+                numberOfItemsAdded += 1;
+                inventory.isFull[i] = true;
+                Instantiate(itemButton, inventory.slots[i].transform, false);
+                string hint = itemButton.GetComponentInChildren<Spawn>().itemType;
+                TMP_Text tmpTextToSet = inventory.slots[i].transform.GetComponentInChildren<TMP_Text>();
+                GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("inventoryHints", hint, null, tmpTextToSet, "");
+                break;
+            }
+        }
+        Debug.Log("Number of items added " + numberOfItemsAdded);
+    }
+
+    public void CraftItemInSlot(string itemObjectName, int slotNumber)
+    {
+        var inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        GameObject itemButton = Resources.Load<GameObject>(itemObjectName);
+        for (int i = 0; i < inventory.slots.Length; i++)
+        {
+            if (inventory.slots[i].gameObject.GetComponent<Slot>().i == slotNumber)
+            {
+                //Add item to inventory
+                inventory.isFull[i] = true;
+                Instantiate(itemButton, inventory.slots[i].transform, false);
+                string hint = itemButton.GetComponentInChildren<Spawn>().itemType;
+                TMP_Text tmpTextToSet = inventory.slots[i].transform.GetComponentInChildren<TMP_Text>();
+                GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("inventoryHints", hint, null, tmpTextToSet, "");
+                break;
+            }
+        }
+    }
+
+    public bool hasItemInInventory(string itemObjectName)
+    {
+        var inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        List<bool> hasItem = new List<bool>();
+        for (int i = 0; i < inventory.slots.Length; i++)
+        {
+            if (inventory.slots[i].gameObject.GetComponentInChildren<Spawn>()?.itemType == itemObjectName)
+            {
+                hasItem.Add(true);
+            }
+        }
+        return hasItem.Count > 0;
+    }
+
+    public void ResolveEnding(PlayerData playerData)
+    {
+        List<bool> EndingConditions = new List<bool> {playerData.grandMasterSideChosen, playerData.helpedOldWoman, playerData.cardsManNotCaught};
+        List<bool> countOfTrueEndingConditions = EndingConditions.FindAll(x => x == true);
+        if (countOfTrueEndingConditions.Count == 3)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 10);//good
+        }
+        else if (countOfTrueEndingConditions.Count == 2)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 11);//common
+        }
+        else if (countOfTrueEndingConditions.Count < 2)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 12);//bad
+        }
+    }
+
+    public void indicateThereAreUnredTasks()
+    {
+        newIconControll[] newIcons = Resources.FindObjectsOfTypeAll<newIconControll>();
+        foreach (newIconControll b in newIcons)
+        {
+            b.indicateThereAreUnredTasks();
+        }
+    }
+
+    public void completeTask (int taskId)
+    {
+        GameObject.FindObjectOfType<TasksButton>().GetComponent<TasksButton>().CompleteTask(taskId);
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "TaskCompleted", null, null, newInfoTextToSet);
+    }
+    
+    public void BlockTasksAndInventory()
+    {
+        if (GameObject.FindObjectOfType<InventoryUI>().isOpened)
+        {
+            GameObject.FindObjectOfType<InventoryUI>().OpenCloseInventory();
+        }
+        GameObject.FindObjectOfType<InventoryUI>().canOpenInventory = false;
+        if (GameObject.FindObjectOfType<TasksButton>().areTasksOpen)
+        {
+            GameObject.FindObjectOfType<TaskBar>().CloseTaskList();
+        }
+        GameObject.FindObjectOfType<TasksButton>().canOpenTaskList = false;
+    }
+
+    public void UnblockTasksAndInventory()
+    {
+        GameObject.FindObjectOfType<InventoryUI>().canOpenInventory = true;
+        GameObject.FindObjectOfType<TasksButton>().canOpenTaskList = true;
+    }
+
+    public void GetTextFromCorrectPlaceForDialogue(string path, LinesAnswersList linesAnswersList, string currDialogueActor, Dialogue dialogue, string lvlName)
+    {
+        Debug.Log(path);
+        if (path.Contains("://") || path.Contains(":///"))
+        {
+            Debug.Log("in the Url Resolver");
+            StartCoroutine(GetAssetsFromUrlForDialogue(path, dialogue, linesAnswersList, lvlName));
+        }
+        else
+        {
+            jsonString = System.IO.File.ReadAllText(path);
+            linesAnswersList = JsonConvert.DeserializeObject<LinesAnswersList>(jsonString);
+            Debug.Log("here are line answers " + linesAnswersList);
+            ResolveWhichLinesToSet(dialogue, linesAnswersList, lvlName);
+        }
+    }
+    IEnumerator GetAssetsFromUrlForDialogue(string path, Dialogue dialogue, LinesAnswersList linesAnswersList, string lvlName)
+    {
+        Debug.Log("in the Unity Web Function");
+        using (UnityWebRequest www = UnityWebRequest.Get(path))
+        {
+            yield return www.SendWebRequest();
+            if (www.result == UnityWebRequest.Result.ConnectionError)
+            {
+                Debug.Log("something went wrong with connection");
+            }
+            else
+            {
+                jsonString = ASCIIEncoding.UTF8.GetString(www.downloadHandler.data);
+                //TODO: resolve state here
+                linesAnswersList = JsonConvert.DeserializeObject<LinesAnswersList>(jsonString);
+                Debug.Log("here is the string " + jsonString);
+                ResolveWhichLinesToSet(dialogue, linesAnswersList, lvlName);
+                yield return jsonString;
+            }
+        }
+
+    }
+
+    public void ResolveWhichLinesToSet(Dialogue dialogue, LinesAnswersList characterLineAnswers, string lvlName)
+    {
+        if(lvlName == "lvl1")
+        {
+            Set1lvlLines(dialogue, characterLineAnswers);
+        }
+        else if(lvlName == "lvl2")
+        {
+            Set2ndlvlLines(dialogue, characterLineAnswers);
+        }
+        else if(lvlName == "lvl3")
+        {
+            Set3rdlvlLines(dialogue, characterLineAnswers);
+        }
+        else if (lvlName == "lvl4")
+        {
+            Set4thlvlLines(dialogue, characterLineAnswers);
+        }
+        else
+        {
+            SetNpcLines(dialogue, characterLineAnswers);
+        }
+    }
+
+    public void SetNpcLines(Dialogue dialogue, LinesAnswersList characterLinesAnswers)
+    {
+        string npcState = Random.Range(1, 5).ToString();
+        SetNewLinesAnswers(dialogue, characterLinesAnswers, npcState);
+    }
+    public void Set1lvlLines(Dialogue dialogue, LinesAnswersList characterLinesAnswers)
+    {
+        Debug.Log(characterLinesAnswers);
         hasVodka = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().hasVodka;
         helpedOldWoman = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().helpedOldWoman;
         talkedToOldWoman = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().talkedToOldWoman;
@@ -1335,13 +1656,6 @@ public class DialogueManager : MonoBehaviour
         clicksOnOldWomanBed = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().clicksOnOldWomanBed;
         clickedOnHunks = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().clickedOnHunks;
         informedHunksTreadmillIsFixed = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().informedHunksTreadmillIsFixed;
-        ClearLinesAnswers(dialogue);
-        //calc the state on the 1st level
-        string path = Application.dataPath;
-        string currLanguage = GameObject.FindObjectOfType<LanguageManager>().language;
-        string pathToDialogue = path + "/StreamingAssets/DialogueStorage/" + currLanguage + "/" + currDialogueActor+".json";
-        var jsonString = System.IO.File.ReadAllText(pathToDialogue);
-        LinesAnswersList characterLinesAnswers =  JsonConvert.DeserializeObject<LinesAnswersList>(jsonString);
         if (currDialogueActor == "Plumber")
         {
 
@@ -1369,7 +1683,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 else if ((talkedToHunks == true && hasScrewKey == false) || (talkedToHunks == false && hasScrewKey == false))
                 {
-                     lvl1State = "noScrewKey";
+                    lvl1State = "noScrewKey";
                     // plumber says he could fix something but no instrument
                     //show option to leave [0]
                     SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl1State);
@@ -1388,7 +1702,7 @@ public class DialogueManager : MonoBehaviour
         }
         else if (currDialogueActor == "OldWoman")
         {
-            if(helpedOldWoman == false && windowClosed == false && hasVodka == false)
+            if (helpedOldWoman == false && windowClosed == false && hasVodka == false)
             {
                 lvl1State = "babkaInitial";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl1State);
@@ -1398,7 +1712,7 @@ public class DialogueManager : MonoBehaviour
                 lvl1State = "babkaWantsToGiveVodka";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl1State);
             }
-            else if (helpedOldWoman == true && (hasVodka||vodkaGivenToPlumber) && ((windowClosed == false && treadmillFixed == true) || (windowClosed == false && treadmillFixed == false)))
+            else if (helpedOldWoman == true && (hasVodka || vodkaGivenToPlumber) && ((windowClosed == false && treadmillFixed == true) || (windowClosed == false && treadmillFixed == false)))
             {
                 lvl1State = "babkeDuet";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl1State);
@@ -1409,17 +1723,17 @@ public class DialogueManager : MonoBehaviour
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl1State);
             }
         }
-        else if(currDialogueActor == "OldWomansBed")
+        else if (currDialogueActor == "OldWomansBed")
         {
-            if (windowClosed == true && helpedOldWoman == true) 
+            if (windowClosed == true && helpedOldWoman == true)
             {
                 lvl1State = "victory";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl1State);
             }
-            else if(windowClosed == false && helpedOldWoman == true)
+            else if (windowClosed == false && helpedOldWoman == true)
             {
                 clicksOnOldWomanBed = clicksOnOldWomanBed + 1;
-                if(clicksOnOldWomanBed > 2)
+                if (clicksOnOldWomanBed > 2)
                 {
                     lvl1State = "defeat";
                     SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl1State);
@@ -1473,16 +1787,17 @@ public class DialogueManager : MonoBehaviour
         }
         else if (currDialogueActor == "SemenLvl1Intro")
         {
-            lvl2State = "intro";
-            SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+            lvl1State = "intro";
+            SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl1State);
         }
         else if (currDialogueActor == "SemenLvl1Outro")
         {
-            lvl2State = "outro";
-            SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
+            lvl1State = "outro";
+            SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl1State);
         }
+
     }
-    void lvl2stateCalculator (string currDialogueActor, Dialogue dialogue)
+    public void Set2ndlvlLines(Dialogue dialogue, LinesAnswersList characterLinesAnswers)
     {
         //----cardsMan---//
         bool talkedToCardsMan = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().talkedToCardsMan;
@@ -1517,14 +1832,6 @@ public class DialogueManager : MonoBehaviour
         bool wireInBottomSpot = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInBottomSpot;
         bool wireInMiddleSpot = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wireInMiddleSpot;
         bool allDone = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().allDone;
-        //----------------------//
-        ClearLinesAnswers(dialogue);
-        //calc the state on the 2nd level
-        string path = Application.dataPath;
-        string currLanguage = GameObject.FindObjectOfType<LanguageManager>().language;
-        string pathToDialogue = path + "/StreamingAssets/DialogueStorage/" + currLanguage + "/" + currDialogueActor + ".json";
-        var jsonString = System.IO.File.ReadAllText(pathToDialogue);
-        LinesAnswersList characterLinesAnswers =  JsonConvert.DeserializeObject<LinesAnswersList>(jsonString);
         if (currDialogueActor == "cardsMan")
         {
             if (talkedToCardsMan == false)
@@ -1811,8 +2118,7 @@ public class DialogueManager : MonoBehaviour
             SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
         }
     }
-
-    void lvl3stateCalculator(string currDialogueActor, Dialogue dialogue)
+    public void Set3rdlvlLines(Dialogue dialogue, LinesAnswersList characterLinesAnswers)
     {
         //----Shaman---//
         bool initialSuccess = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().initialSuccess;
@@ -1835,13 +2141,6 @@ public class DialogueManager : MonoBehaviour
         //-------shahtarsBed------------------//
         bool fuckedOff1 = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().fuckedOff1;
         bool bathed = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().bathed;
-        ClearLinesAnswers(dialogue);
-        //calc the state on the 2nd level
-        string path = Application.dataPath;
-        string currLanguage = GameObject.FindObjectOfType<LanguageManager>().language;
-        string pathToDialogue = path + "/StreamingAssets/DialogueStorage/" + currLanguage + "/" + currDialogueActor + ".json";
-        var jsonString = System.IO.File.ReadAllText(pathToDialogue);
-        LinesAnswersList characterLinesAnswers = JsonConvert.DeserializeObject<LinesAnswersList>(jsonString);
         if (currDialogueActor == "SemenLvl3Intro")
         {
             lvl2State = "intro";
@@ -1852,7 +2151,7 @@ public class DialogueManager : MonoBehaviour
             lvl2State = "outro";
             SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl2State);
         }
-        else if (currDialogueActor == "Shaman") 
+        else if (currDialogueActor == "Shaman")
         {
             if (!initialSuccess && !initialFailed && semenTalkedToMeMom)
             {
@@ -1913,7 +2212,7 @@ public class DialogueManager : MonoBehaviour
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
             }
         }
-        else if(currDialogueActor == "Shahtar")
+        else if (currDialogueActor == "Shahtar")
         {
             if (!shahtarInitialFailed && !timeForRound2)
             {
@@ -1973,7 +2272,7 @@ public class DialogueManager : MonoBehaviour
                 lvl3State = "fuckOff2";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
             }
-            else if(shahtarsHigh && bathed)
+            else if (shahtarsHigh && bathed)
             {
                 lvl3State = "success";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl3State);
@@ -1985,8 +2284,7 @@ public class DialogueManager : MonoBehaviour
             }
         }
     }
-
-    void lvl4stateCalculator(string currDialogueActor, Dialogue dialogue)
+    public void Set4thlvlLines(Dialogue dialogue, LinesAnswersList characterLinesAnswers)
     {
         //----Major---//
         bool majorGirlHasShuba = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().majorGirlHasShuba;
@@ -2020,14 +2318,6 @@ public class DialogueManager : MonoBehaviour
         bool rightPaymentRecipient = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().rightPaymentRecipient;
         bool wrongRecipient = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().wrongRecipient;
         bool hasGlass = hasItemInInventory("glassItem");
-        //----------------------------------//
-        ClearLinesAnswers(dialogue);
-        //calc the state on the 2nd level
-        string path = Application.dataPath;
-        string currLanguage = GameObject.FindObjectOfType<LanguageManager>().language;
-        string pathToDialogue = path + "/StreamingAssets/DialogueStorage/" + currLanguage + "/" + currDialogueActor + ".json";
-        var jsonString = System.IO.File.ReadAllText(pathToDialogue);
-        LinesAnswersList characterLinesAnswers = JsonConvert.DeserializeObject<LinesAnswersList>(jsonString);
         if (currDialogueActor == "SemenLvl4Intro")
         {
             lvl4State = "intro";
@@ -2096,7 +2386,7 @@ public class DialogueManager : MonoBehaviour
         }
         else if (currDialogueActor == "Hunter")
         {
-            if(firstTalk && !hasAspirin)
+            if (firstTalk && !hasAspirin)
             {
                 lvl4State = "initial";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
@@ -2164,15 +2454,15 @@ public class DialogueManager : MonoBehaviour
                 lvl4State = "thankYou";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
             }
-            else if (chessAnswerOne && chessAnswerTwo && chessAnswerThree 
-                && grandMasterThanked && !hasTea && !hasBoyaryshnikTea && gotQuestFromMajor 
+            else if (chessAnswerOne && chessAnswerTwo && chessAnswerThree
+                && grandMasterThanked && !hasTea && !hasBoyaryshnikTea && gotQuestFromMajor
                 && !chessWrongAnswer)
             {
                 lvl4State = "afterTalkingWithMajorNoTea";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
             }
-            else if (chessAnswerOne && chessAnswerTwo && chessAnswerThree && grandMasterThanked 
-                && hasTea && !hasBoyaryshnikTea && gotQuestFromMajor 
+            else if (chessAnswerOne && chessAnswerTwo && chessAnswerThree && grandMasterThanked
+                && hasTea && !hasBoyaryshnikTea && gotQuestFromMajor
                 && !chessWrongAnswer)
             {
                 lvl4State = "afterTalkingWithMajorHasTeaNoBoyaryshnikTea";
@@ -2190,7 +2480,7 @@ public class DialogueManager : MonoBehaviour
                 lvl4State = "afterTalkingWithMajorNoTeaHasBoyaryshnikTea";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
             }
-            else if (chessAnswerOne && chessAnswerTwo && chessAnswerThree && grandMasterThanked 
+            else if (chessAnswerOne && chessAnswerTwo && chessAnswerThree && grandMasterThanked
                 && !gotQuestFromMajor && !chessWrongAnswer)
             {
                 lvl4State = "hasntTalkedWithMajor";
@@ -2209,7 +2499,7 @@ public class DialogueManager : MonoBehaviour
                 lvl4State = "initial";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
             }
-            else if((!hunterAsksForTea && !grandmasterAsksForTea) || !hasGlass)
+            else if ((!hunterAsksForTea && !grandmasterAsksForTea) || !hasGlass)
             {
                 lvl4State = "initialNoGlassNoTask";
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
@@ -2230,163 +2520,5 @@ public class DialogueManager : MonoBehaviour
                 SetNewLinesAnswers(dialogue, characterLinesAnswers, lvl4State);
             }
         }
-
-    }
-
-    void SetNewLinesAnswers(Dialogue dialogue, LinesAnswersList linesAnswersList, string lvl1State)
-    {
-        LinesAnswer lineResponse = linesAnswersList.LinesAnswers.Find(l => l.name == lvl1State);
-        //udpate character dialogue line
-        dialogText.text = lineResponse.line;
-        //dialogueText2.text = lineResponse.line;
-        Transform Grid = FindObjectOfType<AnswerGridControl>().transform;
-        //adding prefabs to grid
-        foreach(Response i in lineResponse.responses)
-        {
-            LineAnswer responseLine = Resources.Load<LineAnswer>("AnswerButtonPrefab");
-            LineAnswer hello = Instantiate<LineAnswer>(responseLine, new Vector3 (0,0,0), Quaternion.identity, Grid);
-            hello.curResponseIndex = i.id;
-            hello.responseText.text = i.response;
-            //dialogue.playerResponses.Add(i.response);
-        }
-        foreach(Response i in lineResponse.responses)
-        {
-            dialogue.playerResponses.Add(i.response);
-        }
-        //response.text = dialogue.playerResponses[0];
-    }
-    IEnumerator TimeoutCorutine()
-    {
-        yield return new WaitForSeconds(5);
-    }
-    void ClearLinesAnswers(Dialogue dialogue)
-    {
-        dialogue.playerResponses.Clear();
-        dialogue.sentences.Clear();
-        //TODO: clear all prefabs
-        var responsesGrid = GameObject.FindGameObjectWithTag("ResponseGrid");
-        responsesGrid.GetComponent<AnswerGridControl>().removeAllAnswers();
-    }
-    public void RemoveItemFromSlotWithoutDropping(string itemTypeToRemove)
-    {
-        Object[] slotsWithItemToRemove = Resources.FindObjectsOfTypeAll(typeof(Spawn)); //GameObject.FindGameObjectWithTag("Vodka").transform.parent.gameObject;
-        foreach (Spawn i in slotsWithItemToRemove)
-        {
-            if (i.itemType == itemTypeToRemove)
-            {
-                GameObject slotWithItemToRemove  = i.transform.parent.gameObject;
-                Inventory inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
-                int slotNumber = slotWithItemToRemove.GetComponent<Slot>().i;
-                inventory.isFull[slotNumber] = false;
-                slotWithItemToRemove.GetComponent<Slot>().DropItemWithoutSpawn();
-                break;
-            }
-        }
-    }
-    public void GetItemToInventory(string itemObjectName)
-    {
-        var inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
-        GameObject itemButton = Resources.Load<GameObject>(itemObjectName);
-        int numberOfItemsAdded = 0;
-        for (int i = 0; i < inventory.slots.Length; i++)
-        {
-            if (inventory.isFull[i] == false)
-            {
-                //Add item to inventory
-                numberOfItemsAdded += 1;
-                inventory.isFull[i] = true;
-                Instantiate(itemButton, inventory.slots[i].transform, false);
-                string hint = itemButton.GetComponentInChildren<Spawn>().itemType;
-                inventory.slots[i].transform.GetComponentInChildren<TMP_Text>().text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("inventoryHints", hint);
-                break;
-            }
-        }
-        Debug.Log("Number of items added " + numberOfItemsAdded);
-    }
-
-    public void CraftItemInSlot(string itemObjectName, int slotNumber)
-    {
-        var inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
-        GameObject itemButton = Resources.Load<GameObject>(itemObjectName);
-        for (int i = 0; i < inventory.slots.Length; i++)
-        {
-            if (inventory.slots[i].gameObject.GetComponent<Slot>().i == slotNumber)
-            {
-                //Add item to inventory
-                inventory.isFull[i] = true;
-                Instantiate(itemButton, inventory.slots[i].transform, false);
-                string hint = itemButton.GetComponentInChildren<Spawn>().itemType;
-                inventory.slots[i].transform.GetComponentInChildren<TMP_Text>().text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("inventoryHints", hint);
-                break;
-            }
-        }
-    }
-
-    public bool hasItemInInventory(string itemObjectName)
-    {
-        var inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
-        List<bool> hasItem = new List<bool>();
-        for (int i = 0; i < inventory.slots.Length; i++)
-        {
-            if (inventory.slots[i].gameObject.GetComponentInChildren<Spawn>()?.itemType == itemObjectName)
-            {
-                hasItem.Add(true);
-            }
-        }
-        return hasItem.Count > 0;
-    }
-
-    public void ResolveEnding(PlayerData playerData)
-    {
-        List<bool> EndingConditions = new List<bool> {playerData.grandMasterSideChosen, playerData.helpedOldWoman, playerData.cardsManNotCaught};
-        List<bool> countOfTrueEndingConditions = EndingConditions.FindAll(x => x == true);
-        if (countOfTrueEndingConditions.Count == 3)
-        {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 10);//good
-        }
-        else if (countOfTrueEndingConditions.Count == 2)
-        {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 11);//common
-        }
-        else if (countOfTrueEndingConditions.Count < 2)
-        {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().LoadDistinctLevel(playerData, 12);//bad
-        }
-    }
-
-    public void indicateThereAreUnredTasks()
-    {
-        newIconControll[] newIcons = Resources.FindObjectsOfTypeAll<newIconControll>();
-        foreach (newIconControll b in newIcons)
-        {
-            b.indicateThereAreUnredTasks();
-        }
-    }
-
-    public void completeTask (int taskId)
-    {
-        GameObject.FindObjectOfType<TasksButton>().GetComponent<TasksButton>().CompleteTask(taskId);
-        string newInfoText = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm("infoTexts", "TaskCompleted");
-        GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().ShowInfoText(newInfoText);
-    }
-    
-    public void BlockTasksAndInventory()
-    {
-        if (GameObject.FindObjectOfType<InventoryUI>().isOpened)
-        {
-            GameObject.FindObjectOfType<InventoryUI>().OpenCloseInventory();
-        }
-        GameObject.FindObjectOfType<InventoryUI>().canOpenInventory = false;
-        if (GameObject.FindObjectOfType<TasksButton>().areTasksOpen)
-        {
-            GameObject.FindObjectOfType<TaskBar>().CloseTaskList();
-        }
-        GameObject.FindObjectOfType<TasksButton>().canOpenTaskList = false;
-    }
-
-    public void UnblockTasksAndInventory()
-    {
-        GameObject.FindObjectOfType<InventoryUI>().canOpenInventory = true;
-        GameObject.FindObjectOfType<TasksButton>().canOpenTaskList = true;
     }
 }

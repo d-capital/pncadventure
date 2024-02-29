@@ -9,7 +9,7 @@ public class hunterScript : DialogueTrigger
     // Start is called before the first frame update
     void Start()
     {
-        base.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Hunter");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Hunter", null, null, base.dialogue);
     }
 
     // Update is called once per frame

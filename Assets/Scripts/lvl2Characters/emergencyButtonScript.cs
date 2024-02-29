@@ -10,7 +10,7 @@ public class emergencyButtonScript : DialogueTrigger
     // Start is called before the first frame update
     void Start()
     {
-        base.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("EmergencyButton");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectName("EmergencyButton", null, null, base.dialogue);
     }
 
     // Update is called once per frame

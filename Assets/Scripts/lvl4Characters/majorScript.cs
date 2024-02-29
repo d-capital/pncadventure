@@ -9,7 +9,7 @@ public class majorScript : DialogueTrigger
     // Start is called before the first frame update
     void Start()
     {
-        base.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Major");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Major", null, null, base.dialogue);
     }
 
     // Update is called once per frame

@@ -17,13 +17,13 @@ public class CabCrewController : MonoBehaviour
 
     public Animator npcAnimator;
 
-    public string Name = "œ–Œ¬ŒƒÕ»÷¿";
+    public Dialogue dialogue;
 
     public HealthBarControll HealthBar;
 
     private void Start()
     {
-        Name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("BfCabCrew");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectName("BfCabCrew", null,null, dialogue);
     }
     // Update is called once per frame
     void Update()

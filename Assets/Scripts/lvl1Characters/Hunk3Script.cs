@@ -8,7 +8,7 @@ public class Hunk3Script : DialogueTrigger
     // Start is called before the first frame update
     void Start()
     {
-        base.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Hunk3");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Hunk3", null, null, base.dialogue);
     }
 
     // Update is called once per frame

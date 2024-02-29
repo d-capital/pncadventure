@@ -13,7 +13,7 @@ public class Intermedia : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        text.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "text");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "text", text, null, "");
     }
 
     // Update is called once per frame

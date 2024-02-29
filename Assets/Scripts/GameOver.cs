@@ -21,10 +21,10 @@ public class GameOver : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        WastedText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "WastedText");
-        RestartButtonText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "Restart");
-        MainMenuButtonText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "MainMenu");
-        QuitButtonText.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "Quit");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "WastedText", null, WastedText, "");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "Restart", RestartButtonText, null, "");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "MainMenu", MainMenuButtonText, null, "");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectTerm(objectName, "Quit", QuitButtonText, null, "");
     }
 
     public void RestartLevel()

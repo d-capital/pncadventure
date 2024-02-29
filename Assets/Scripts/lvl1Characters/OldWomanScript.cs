@@ -8,7 +8,7 @@ public class OldWomanScript : DialogueTrigger
     // Start is called before the first frame update
     void Start()
     {
-        base.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("OldWoman");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectName("OldWoman", null, null, base.dialogue);
         npcAnimator.SetBool("isSleeping", false);
     }
 

@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using Newtonsoft.Json;
+using UnityEngine.Networking;
+using System.Text;
 
 public class TasksButton : MonoBehaviour
 {
@@ -27,6 +30,8 @@ public class TasksButton : MonoBehaviour
     public bool areTasksOpen = false;
 
     public AudioSource audioSource;
+
+    public string jsonString;
 
     private void Start()
     {
@@ -64,12 +69,11 @@ public class TasksButton : MonoBehaviour
 
     public void SetNewTasks()
     {
-        string path = Application.dataPath;
+        //string path = Application.dataPath;
         string levelName = GameObject.FindGameObjectWithTag("Player").GetComponent<AdvScript>().GetCurrentLevel();
         string currLanguage = SaveSystem.LoadPlayer().language;
-        string pathToTasks = path + "/StreamingAssets/TasksStorage/" +currLanguage+"/" + levelName + ".json";
-        var jsonString = System.IO.File.ReadAllText(pathToTasks);
-        tasksList = JsonConvert.DeserializeObject<TasksList>(jsonString);
+        string pathToName = Path.Combine(Application.streamingAssetsPath, "TasksStorage",currLanguage, levelName + ".json");
+        GetTextFromCorrectPlaceForTasks(pathToName, tasksList);
     }
 
     public void CompleteTask(int taskId)
@@ -84,4 +88,40 @@ public class TasksButton : MonoBehaviour
         audioSource.Play();
         Debug.Log(tasksList);
     }
+    //------------------------------------------FOR TASK---------------------------------------------------------------------------------//
+    public void GetTextFromCorrectPlaceForTasks(string path, TasksList tasks)
+    {
+        Debug.Log(path);
+        if (path.Contains("://") || path.Contains(":///"))
+        {
+            Debug.Log("in the Url Resolver");
+            StartCoroutine(GetAssetsFromUrlForTasks(path, tasks));
+        }
+        else
+        {
+            jsonString = System.IO.File.ReadAllText(path);
+            tasksList = JsonConvert.DeserializeObject<TasksList>(jsonString);
+        }
+    }
+    IEnumerator GetAssetsFromUrlForTasks(string path, TasksList tasksList)
+    {
+        Debug.Log("in the Unity Web Function");
+        using (UnityWebRequest www = UnityWebRequest.Get(path))
+        {
+            yield return www.SendWebRequest();
+            if (www.result == UnityWebRequest.Result.ConnectionError)
+            {
+                Debug.Log("something went wrong with connection");
+            }
+            else
+            {
+                jsonString = ASCIIEncoding.UTF8.GetString(www.downloadHandler.data);
+                tasksList = JsonConvert.DeserializeObject<TasksList>(jsonString);
+                Debug.Log("here is the string " + jsonString);
+                yield return jsonString;
+            }
+        }
+
+    }
+    //-----------------------------------------------------------------------------------------------------------------------------------//
 }

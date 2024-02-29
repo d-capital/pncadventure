@@ -19,7 +19,7 @@
             [
                 {
                     "id":"0",
-                    "response":"LEave."
+                    "response":"Leave."
                 },
                 {
                     "id":"1",
@@ -46,7 +46,7 @@
             [
                 {
                     "id":"0",
-                    "response":"Ox, ouch... Looks like that is it for me."
+                    "response":"Oh, ouch... Looks like that is it for me."
                 }
             ]
         },

@@ -9,7 +9,7 @@ public class milfBedScript : DialogueTrigger
     // Start is called before the first frame update
     void Start()
     {
-        base.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("MilfBed");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectName("MilfBed", null, null, base.dialogue);
     }
 
     // Update is called once per frame

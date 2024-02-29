@@ -8,12 +8,12 @@ public class HealthBarControll : MonoBehaviour
     public Slider slider;
     public Gradient gradient;
     public Image fill;
-    public string Name;
+    public Dialogue dialogue;
     public Text characterName;
 
     private void Start()
     {
-        characterName.text = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Semen", characterName, null, null);
     }
     public void SetMaxHealth(int health)
     {

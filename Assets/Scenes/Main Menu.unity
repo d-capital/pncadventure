@@ -918,6 +918,7 @@ MonoBehaviour:
   newGameText: {fileID: 203918537}
   languageDropdown: {fileID: 1001863295}
   wasLanguageSet: 0
+  jsonString: 
 --- !u!1001 &419458341
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4790,7 +4791,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 791daf882b8d86e4091623099eae6283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  language: ru
+  language: en
+  jsonString: 
+  isWebRequestDone: 0
 --- !u!4 &2002201617
 Transform:
   m_ObjectHideFlags: 0

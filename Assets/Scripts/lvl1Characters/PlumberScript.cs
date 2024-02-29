@@ -34,7 +34,7 @@ public class PlumberScript : DialogueTrigger
     // Start is called before the first frame update
     void Start()
     {
-        base.dialogue.name = GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Plumber");
+        GameObject.FindObjectOfType<LanguageManager>().getCorrectName("Plumber", null, null, base.dialogue);
         npcAnimator.SetBool("isHappy", false);
     }
 
